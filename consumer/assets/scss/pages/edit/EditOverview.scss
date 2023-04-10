@@ -1,0 +1,242 @@
+.edit-overview-page {
+  padding: 0 60px;
+
+  @include max-width(lg) {
+    padding: 0;
+  }
+
+  .group-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 24px;
+
+    .btn {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 16px;
+      height: 56px;
+    }
+
+    @include max-width(md) {
+      width: 90%;
+    }
+
+    .btn-true {
+      max-width: 320px;
+      color: #ffffff;
+      background-color: #466cb0;
+      padding: 16px 0;
+      border: unset;
+      border-radius: 4px;
+      margin-right: 24px;
+
+      @include max-width(md) {
+        margin-right: 16px;
+      }
+    }
+
+    .btn-fall {
+      max-width: 320px;
+      color: #466cb0;
+      background-color: #ffffff;
+      padding: 16px 0;
+      border: 2px solid #bbbbbb;
+      border-radius: 4px;
+
+      @include max-width(md) {
+        width: 90%;
+      }
+    }
+  }
+
+  .head-colapse {
+    font-size: 24px;
+    font-weight: bold;
+    color: #466cb0;
+    margin-bottom: 25px;
+  }
+
+  .card-body {
+    margin: 0 140px;
+
+    @include max-width(lg) {
+      margin: 0;
+    }
+
+    form {
+      width: 100%;
+      margin: auto;
+
+      .form-group {
+        margin-bottom: 20px;
+
+        .input-title {
+          position: relative;
+          padding: 0;
+          width: 100%;
+
+          textarea {
+            width: 100%;
+
+            &.form-control {
+              height: auto;
+              font-size: 13px;
+              color: black;
+              padding: 15px 27px 23px 15px;
+              background-color: $gray-01;
+              border: none;
+
+              &::placeholder {
+                color: $gray-02;
+                font-size: 13px;
+              }
+            }
+          }
+
+          .quatily {
+            position: absolute;
+            right: 10px;
+            color: black;
+            bottom: 5px;
+            font-size: 13px;
+            font-weight: 500;
+          }
+
+          .chose {
+            border-radius: 5px;
+            height: 56px;
+            background-color: #efefef;
+            width: 200px;
+            font-size: 13px;
+
+            .custom-select {
+              font-size: 13px;
+              border: none;
+              border-radius: 5px;
+              background-color: #efefef;
+              background: #efefef url("@/assets/img/btn-updown.png") right
+                0.75rem center/8px 10px no-repeat;
+            }
+          }
+
+          .lengthen {
+            width: 280px;
+          }
+        }
+
+        .sub-title {
+          color: #989898;
+          font-size: 11px;
+          white-space: pre-line;
+        }
+      }
+    }
+  }
+
+  .upload-image {
+    padding: 0px 30px;
+
+    .card-upload-small {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      height: 426px;
+      padding: 0px 30px;
+      background: #f6fcff 0% 0% no-repeat padding-box;
+      border: 2px dashed #cccccc;
+
+      .card-upload {
+        position: absolute;
+        top: 25%;
+        left: 12%;
+        height: auto;
+        background: transparent;
+        border: none;
+
+        @include max-width(lg) {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: auto;
+        }
+
+        svg {
+          width: 64px;
+          height: 52px;
+          margin-top: 12px;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .form-text {
+    border: 2px solid #759bdf;
+    border-radius: 4px;
+
+    .menu-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 10px;
+
+      .quill-editor {
+        border: 1px solid white;
+      }
+
+      .icon-text {
+        height: 36px;
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 4px;
+        background-color: #d8f2ff;
+      }
+    }
+
+    .group-text {
+      padding: 0 19px;
+
+      .title-head {
+        font-size: 18px;
+      }
+
+      .text-style {
+        font-size: 14px;
+        color: #333333;
+      }
+    }
+  }
+
+  .form-group {
+    margin: auto;
+
+    label {
+      color: $primary;
+      font-size: 13px;
+      padding-bottom: 10px;
+
+      .ic-required {
+        color: $red;
+        padding-left: 5px;
+      }
+
+      .required {
+        color: white;
+        background-color: $red;
+        line-height: 20px;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 0 5px;
+        border-radius: 2px;
+        margin-left: 6px;
+      }
+    }
+  }
+}

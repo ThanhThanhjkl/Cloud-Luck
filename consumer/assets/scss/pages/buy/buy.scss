@@ -1,0 +1,199 @@
+@import "./BuyComfirm.scss";
+@import "./BuyOption.scss";
+.page-buy {
+  @include min-width(lg) {
+    padding: 0 60px;
+  }
+  .card-option {
+    border: 3px solid white;
+    padding: 70px 140px;
+    background-color: #ffffff;
+    @include max-width(lg) {
+      padding: 0;
+    }
+  }
+  .amount-support {
+    .header-tickit {
+      font: normal normal bold 16px/20px Noto Sans JP;
+      letter-spacing: 0px;
+      color: #333333;
+      margin-bottom: 16px;
+      margin-left: 16px;
+      .notion {
+        background-color: #d84646;
+        font: normal normal bold 10px/20px Noto Sans JP;
+        letter-spacing: 0px;
+        color: #ffffff;
+        border-radius: 2px;
+        padding: 4px 8px;
+      }
+    }
+    .card {
+      .card-body {
+        padding: 50px 0;
+        .head-change {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-right: 1px solid $gray-03;
+          .money-back {
+            font: normal normal bold 16px/20px Noto Sans JP;
+            letter-spacing: 0px;
+            color: #466cb0;
+          }
+          .change {
+            padding-top: 15px;
+            font: normal normal bold 40px/40px Noto Sans JP;
+            letter-spacing: 0px;
+            color: #333333;
+          }
+        }
+        .hold-back {
+          p {
+            font-size: 12px;
+          }
+        }
+        .up-down {
+          display: flex;
+          justify-content: center;
+          input {
+            border: unset;
+            background-color: #efefef;
+            padding: 10px 15px;
+          }
+          .down {
+            font-size: 30px;
+            color: #ffffff;
+            background-color: #466cb0;
+            border-radius: 50%;
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+            margin-top: auto;
+            margin-bottom: auto;
+            position: relative;
+            span {
+              position: absolute;
+              left: 6px;
+              bottom: -6px;
+            }
+          }
+          .up {
+            position: relative;
+            font-size: 30px;
+            color: #ffffff;
+            background-color: #466cb0;
+            border-radius: 50%;
+            margin-left: 10px;
+            width: 24px;
+            height: 24px;
+            margin-top: auto;
+            margin-bottom: auto;
+            span {
+              position: absolute;
+              right: 4px;
+              bottom: -10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .explanation {
+    p {
+      color: $gray-05;
+      font-size: 13px;
+      text-align: center;
+      padding: 78px 0;
+      border: none;
+    }
+  }
+  .transport {
+    text-align: center;
+    font: normal normal bold 20px/29px Noto Sans JP;
+    letter-spacing: 0px;
+    color: #333333;
+  }
+  #textarea-default {
+    font-size: 13px;
+    color: $black;
+    background-color: $gray-08;
+    border: none;
+    margin: auto;
+    @include min-width(md) {
+      width: 75%;
+    }
+  }
+  hr.line {
+    margin: 20px 0 32px 0;
+  }
+  .btn-submit {
+    display: block;
+    width: 320px;
+    margin: auto;
+    background: #466cb0 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    border: unset;
+    padding: 15px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .sub-submit {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #989898;
+    padding: 0 50px;
+  }
+  .last {
+    margin-top: 30px;
+    p {
+      text-align: left;
+      font: normal normal bold 14px/20px Noto Sans JP;
+      letter-spacing: 0px;
+      color: #333333;
+    }
+    span {
+      text-align: left;
+      font-size: 9px;
+      color: #989898;
+    }
+    .note-content {
+      p {
+        color: $gray-05;
+        font-size: 11px;
+        font-weight: normal;
+        margin-bottom: 15px;
+      }
+    }
+  }
+  @include max-width(md) {
+    .amount-support {
+      .card {
+        .card-body {
+          .head-change {
+            flex-direction: row;
+            justify-content: space-around;
+            padding-bottom: 15px;
+
+            .money-back {
+              font-size: 13px;
+            }
+            .change {
+              font-size: 24px;
+              padding-top: 0;
+            }
+          }
+          .hold-back {
+            border-top: 1px solid $gray-03;
+            p {
+              margin: 20px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+.list-project {
+  margin-top: 24px;
+  .card {
+    margin-top: 24px;
+    .form-title {
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .product-list:first-child {
+      border-top: 1px solid #cccccc;
+    }
+    .product-list:not(:first-child)::after {
+      content: "";
+      background-color: #cccccc;
+      width: 90%;
+      height: 1px;
+      position: absolute;
+      top: 0;
+      @include max-width(md) {
+        width: 100%;
+      }
+    }
+    .list-form {
+      width: 100%;
+      .product-list {
+        position: relative;
+        padding: 32px 49px;
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+        @include max-width(md) {
+          padding: 24px 0px;
+        }
+      }
+      .product-img {
+        img {
+          aspect-ratio: 4 / 3;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .list-btn {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 11px;
+        font-size: 16px;
+      }
+      .list-btn-sp {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        .campaigns-btn {
+          margin-top: 16px;
+        }
+        @include min-width(md) {
+          display: none;
+        }
+      }
+      .campaigns-btn {
+        height: 56px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .view-project {
+        color: $primary;
+        background-color: white;
+        border: 2px solid $gray-02;
+      }
+      .product-info {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        @include max-width(md) {
+          grid-template-columns: 45% 55%;
+        }
+        .product-info-right {
+          margin-left: 18px;
+          .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 20px;
+            text-align: left;
+            color: #466cb0;
+            padding-bottom: 12px;
+            @include max-width(md) {
+              font-size: 14px;
+            }
+          }
+          .list-btn-pc {
+            margin-top: 24px;
+          }
+          @include max-width(md) {
+            margin-left: 11px;
+            .list-btn-pc {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

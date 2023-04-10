@@ -1,0 +1,57 @@
+{
+  "name": "consumer",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt --port 4300",
+    "build": "nuxt build --spa",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "dev:generate": "nuxt generate",
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "lintfix": "prettier --write --list-different . && npm run lint:js --fix"
+  },
+  "dependencies": {
+    "@mdi/font": "^6.7.96",
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/style-resources": "^1.2.0",
+    "@nuxtjs/toast": "^3.3.1",
+    "bootstrap": "^4.6.1",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.19.3",
+    "jp-postalcode-lookup": "^0.0.2",
+    "jp-prefectures": "^1.0.5",
+    "js-cookie": "^2.2.1",
+    "moment": "2.29.3",
+    "nuxt": "^2.13.3",
+    "qs": "^6.11.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^10.3.1",
+    "vue": "^2.6.14",
+    "vue-quill-editor": "^3.0.6",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "vue2-datepicker": "^3.11.0",
+    "vuelidate": "^0.7.7",
+    "vuex": "^3.0",
+    "vuex-map-fields": "^1.4.1",
+    "vuex-persistedstate": "^4.0.0-beta.3",
+    "yubinbango-core": "^0.6.3"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "babel-eslint": "^10.1.0",
+    "cookie": "^0.5.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.1"
+  },
+  "engines": {
+    "node": "16.19.1"
+  }
+}

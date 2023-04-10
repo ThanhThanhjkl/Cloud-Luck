@@ -1,0 +1,168 @@
+.edit-establish-page {
+  padding: 0 60px;
+
+  @include max-width(lg) {
+    padding: 0;
+  }
+
+  .group-btn {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+
+    .btn {
+      max-width: 320px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 16px;
+      height: 56px;
+    }
+
+    @include max-width(md) {
+      width: 90%;
+    }
+
+    .btn-true {
+      max-width: 320px;
+      color: #ffffff;
+      background-color: #466cb0;
+      padding: 16px 0;
+      border: unset;
+      border-radius: 4px;
+      margin-right: 24px;
+
+      @include max-width(md) {
+        margin-right: 16px;
+      }
+    }
+
+    .btn-fall {
+      max-width: 320px;
+      color: #466cb0;
+      background-color: #ffffff;
+      padding: 16px 0;
+      border: 2px solid #bbbbbb;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+  }
+
+  .head-colapse {
+    font-size: 24px;
+    font-weight: bold;
+    color: #466cb0;
+    margin-bottom: 25px;
+  }
+
+  .card-body {
+    margin: 0 140px;
+
+    @include max-width(lg) {
+      margin: 0;
+    }
+
+    padding: 24px 16px 37px 16px;
+
+    form {
+      width: 100%;
+      margin: auto;
+      padding-top: 22px;
+
+      .note-description {
+        font-size: 13px;
+        color: $gray-04;
+        line-height: 20px;
+        padding-bottom: 17px;
+      }
+
+      .form-group {
+        .date-picker {
+          width: 280px !important;
+
+          @include max-width(md) {
+            width: 200px !important;
+          }
+        }
+
+        margin-bottom: 20px;
+
+        .input-money {
+          margin-bottom: 10px;
+
+          input {
+            &.form-control {
+              width: 200px;
+              height: auto;
+              font-size: 13px;
+              color: black;
+              padding: 15px;
+              background-color: $gray-01;
+              border: none;
+
+              &::placeholder {
+                color: $gray-02;
+                font-size: 13px;
+              }
+
+              &:focus {
+                background-color: white;
+              }
+            }
+          }
+
+          span {
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: auto;
+            margin-left: 10px;
+          }
+        }
+
+        span {
+          color: #989898;
+          font-size: 11px;
+        }
+
+        .recruit {
+          border: 2px solid #cccccc;
+          padding: 20px;
+          border-radius: 4px;
+          margin-bottom: 10px;
+
+          .custom-control-label {
+            margin-left: 20px;
+          }
+
+          .right-content {
+            .head-box {
+              color: #333333;
+              font-size: 13px;
+              font-weight: 500;
+            }
+
+            .description {
+              color: #333333;
+              font-size: 11px;
+              margin-top: 7px;
+              margin-bottom: 5px;
+            }
+
+            span {
+              color: #d84646;
+              font-size: 10px;
+            }
+          }
+
+          &.isSelected {
+            background: #f6fcff 0% 0% no-repeat padding-box;
+            border: 2px solid $primary-05;
+          }
+        }
+      }
+    }
+  }
+}

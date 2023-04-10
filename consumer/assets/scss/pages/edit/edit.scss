@@ -1,0 +1,321 @@
+@import "./EditBack.scss";
+@import "./EditEstablish.scss";
+@import "./EditIntuitive.scss";
+@import "./EditOverview.scss";
+@import "./EditVerification.scss";
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2px solid #cccccc;
+}
+
+.edit-note {
+  font-size: 13px;
+  color: $gray-04;
+  padding-top: 7px;
+}
+
+.form-title {
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 16px;
+}
+
+.edit-info {
+  margin-top: 20px;
+
+  @include max-width(md) {
+    margin-top: 0;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: row;
+
+    @include max-width(lg) {
+      display: unset;
+    }
+
+    border: none;
+  }
+
+  .head-edit {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 20%;
+    color: #466cb0;
+    font-size: 12px;
+    font-weight: bold;
+
+    @include max-width(lg) {
+      width: 100%;
+    }
+  }
+
+  .edit-info-form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    @include max-width(lg) {
+      display: unset;
+    }
+
+    .group-btn-2 {
+      margin-left: 20px;
+      width: 20%;
+      flex-direction: column;
+
+      @include max-width(lg) {
+        flex-direction: unset;
+        padding-top: 20px;
+        border-top: 2px solid #ceddf8;
+        gap: 16px;
+        justify-content: center !important;
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .item-submit {
+        margin-bottom: 8px;
+        width: 100%;
+
+        @include max-width(lg) {
+          width: 40%;
+          margin-bottom: 0;
+        }
+
+        @include max-width(lg) {
+          margin-bottom: 0;
+        }
+
+        button {
+          width: 100%;
+          height: 100%;
+          font-size: 13px;
+          color: #efefef;
+          background-color: #cccccc;
+          border: none;
+          padding: 15px;
+
+          &:focus {
+            box-shadow: none;
+          }
+
+          &.active {
+            color: white;
+            background-color: #d84646;
+            box-shadow: none;
+          }
+        }
+      }
+
+      button.not-collapsed {
+        color: white;
+        background-color: #d84646;
+        box-shadow: none;
+      }
+
+      .item-eyes {
+        margin-bottom: 8px;
+
+        @include max-width(lg) {
+          width: 40%;
+          margin-bottom: 0;
+        }
+
+        width: 100%;
+
+        a {
+          width: 100%;
+          height: 100%;
+          font-size: 13px;
+          color: $primary;
+          background-color: #ffffff;
+          border: 2px solid #bbbbbb;
+          padding: 15px;
+          white-space: nowrap;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    .group-btn-1 {
+      width: 80%;
+      margin: 0;
+
+      @include max-width(lg) {
+        margin-bottom: 15px;
+        width: 100%;
+      }
+
+      .item-info {
+        width: 32%;
+        margin-bottom: 8px;
+        box-sizing: border-box;
+        height: auto;
+        font-size: 13px;
+        color: $primary;
+        background-color: $gray-01;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 4px;
+        text-align: center;
+        white-space: nowrap;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        &.active {
+          color: white;
+          background-color: $primary;
+          box-shadow: none;
+        }
+      }
+
+      .note-info {
+        font-size: 11px;
+        color: $gray-04;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.collapse {
+  margin-top: 20px;
+}
+
+.group-img {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.card-upload-small {
+  // margin-top: 20px;
+  width: 45%;
+  max-width: 228px;
+
+  .card-upload {
+    margin: 0;
+    background: #f6fcff 0% 0% no-repeat padding-box;
+    border: 2px dashed #cccccc;
+    border-radius: 4px;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100px;
+
+    @include min-width(md) {
+      min-height: 152px;
+      padding: 20px;
+    }
+
+    svg {
+      width: 32px;
+      height: 26px;
+      margin-top: 12px;
+    }
+
+    .card-body {
+      padding-top: 5px;
+      padding-bottom: 12px;
+
+      .card-title {
+        font-size: 10px;
+        color: #466cb0;
+        margin-bottom: 0;
+      }
+
+      button {
+        font-size: 10px;
+        padding: 5px 20px;
+        color: #466cb0;
+        background-color: #ffffff;
+        border: 1px solid #ceddf8;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.group-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 24px;
+
+  .btn-true {
+    max-width: 320px;
+    color: #ffffff;
+    background-color: #466cb0;
+    padding: 16px 0;
+    border: unset;
+    border-radius: 4px;
+    margin-right: 16px;
+  }
+
+  .btn-fall {
+    max-width: 320px;
+    color: #466cb0;
+    background-color: #ffffff;
+    padding: 16px 0;
+    border: 2px solid #bbbbbb;
+    border-radius: 4px;
+  }
+}
+
+.edit-story-page {
+  padding: 0 60px;
+
+  @include max-width(lg) {
+    padding: 0;
+  }
+
+  .card {
+    .card-body {
+      margin: 0 100px;
+
+      @include max-width(lg) {
+        margin: 0;
+      }
+
+      .head-add {
+        display: flex;
+        color: #d84646;
+        margin-bottom: 15px;
+
+        p {
+          color: #466cb0;
+          font-size: 13px;
+          margin: 0;
+          margin-top: auto;
+          margin-bottom: auto;
+          font-weight: bold;
+        }
+
+        span {
+          color: #ffffff;
+          background-color: #d84646;
+          font-size: 10px;
+          font-weight: bold;
+          margin-top: auto;
+          margin-bottom: auto;
+          padding: 0 5px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

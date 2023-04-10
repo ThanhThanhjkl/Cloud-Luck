@@ -1,0 +1,162 @@
+.detail-article-report {
+  .date {
+    padding-top: 10px;
+    font-size: 13px;
+    color: $gray-04;
+  }
+  .card {
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    padding: 32px 16px 0 16px;
+    margin-bottom: 0;
+  }
+
+  .card-header {
+    border-bottom: 2px $primary solid;
+    background: white;
+    padding: 0 0 20px;
+    margin-bottom: 28px;
+    .card-title {
+      line-height: 26px;
+    }
+  }
+
+  .card-body {
+    padding: 0 0 30px 0;
+  }
+
+  figure {
+    position: relative;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+    }
+
+    > figcaption {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 13px;
+      color: #999999;
+    }
+  }
+
+  .card-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .card-text {
+    font-size: 1em;
+    line-height: 30px;
+  }
+  .sns {
+    svg {
+      width: 32px;
+      &.svg-twitter {
+        color: $primary-09;
+        margin-right: 25px;
+      }
+      &.svg-facebook {
+        color: $primary-10;
+      }
+    }
+  }
+  .share-report {
+    &.card {
+      padding: 25px 16px 0 16px;
+    }
+    margin: 24px 0;
+    .card-body {
+      padding: 0 0 15px 0;
+      .card-title {
+        text-align: center;
+        font-size: 13px;
+        line-height: 20px;
+        margin-bottom: 20px;
+      }
+      .btn-share-sns {
+        display: flex;
+        justify-content: center;
+        margin: 12px 0;
+        button {
+          min-width: 144px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          border: none;
+          padding: 14px 20px 14px 60px;
+          &.btn-twitter {
+            background-color: $primary-09;
+            margin-right: 16px;
+          }
+          &.btn-facebook {
+            background-color: $primary-10;
+          }
+          svg {
+            width: 24px;
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
+  }
+  .carousel-list {
+    font-size: 12px;
+    text-align: center;
+    a {
+      color: black;
+      text-decoration: underline;
+      width: 45%;
+    }
+    .next {
+      transform: rotate(180deg);
+    }
+  }
+  .btn-submit {
+    width: 100%;
+    margin: auto;
+    margin-top: 32px;
+    background: none !important;
+    display: flex;
+    gap: 24px;
+    justify-content: space-evenly;
+    button {
+      width: 45%;
+      border: none;
+      padding: 15px 0;
+      &.view-project {
+        color: $primary;
+        background-color: white;
+        border: solid #bbbbbb 2px;
+        margin: 0;
+      }
+    }
+    a {
+      width: 45%;
+      border: none;
+      padding: 15px 0;
+      &.view-project {
+        color: $primary;
+        background-color: white;
+        border: solid #bbbbbb 2px;
+        margin: 0;
+      }
+    }
+  }
+  @include max-width(md) {
+    .share-report {
+      .card-title {
+        max-width: 182px;
+        margin: auto;
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+.project-report {
+  .product-info {
+    position: relative;
+    padding: 26px 60px 17px 60px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 18px;
+
+    @include max-width(md) {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 25px 0;
+      gap: 11px;
+    }
+
+    .product-img {
+      position: relative;
+      overflow: hidden;
+      padding-top: 68%;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .product-info-right {
+      width: 100%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 35px;
+      width: calc(100% - 70px);
+      height: 2px;
+      background-color: $gray-03;
+      @include max-width(md) {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    .product-title {
+      color: $primary;
+      padding-left: 13px;
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 30px;
+    }
+
+    .list-btn {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .list-sp-btn {
+      width: 200%;
+    }
+
+    .product-item {
+      padding-top: 20px;
+      font-weight: bold;
+      div {
+        padding-bottom: 5px;
+        span {
+          color: $gray-05;
+          font-weight: lighter;
+          &.paid {
+            color: $primary-05;
+          }
+          &.unpaid {
+            color: $red;
+          }
+        }
+      }
+    }
+  }
+
+  .edit-overview-page {
+    .card-upload-small {
+      @include max-width(md) {
+        height: 250px;
+      }
+      .card-uploaded {
+        top: 0;
+        left: 0px;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        transform: unset;
+      }
+    }
+  }
+}

@@ -1,0 +1,201 @@
+.edit-intuitive-page {
+  padding: 0 60px;
+
+  @include max-width(lg) {
+    padding: 0;
+  }
+
+  .group-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include max-width(md) {
+      width: 100%;
+    }
+
+    .btn-true {
+      max-width: 320px;
+      color: #ffffff;
+      background-color: #466cb0;
+      padding: 16px 0;
+      border: unset;
+      border-radius: 4px;
+      margin-right: 16px;
+    }
+
+    .btn-fall {
+      max-width: 320px;
+      color: #466cb0;
+      background-color: #ffffff;
+      padding: 16px 0;
+      border: 2px solid #bbbbbb;
+      border-radius: 4px;
+    }
+  }
+
+  .head-colapse {
+    font-size: 24px;
+    font-weight: bold;
+    color: #466cb0;
+    margin-bottom: 25px;
+  }
+
+  .card-body {
+    padding: 24px 16px 37px 16px;
+    margin: 0 140px;
+
+    @include max-width(lg) {
+      margin: 0;
+    }
+
+    form {
+      width: 100%;
+      margin: auto;
+      padding-top: 22px;
+
+      .form-group {
+        margin-bottom: 0;
+
+        .sub-about {
+          color: #989898;
+          font-size: 11px;
+        }
+
+        .group-img {
+          justify-content: left;
+
+          @include max-width(lg) {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+          }
+
+          .card-upload-small {
+            width: 32%;
+
+            @include max-width(lg) {
+              width: 45%;
+              height: auto;
+            }
+
+            .card-upload {
+              height: 114px;
+              position: relative;
+              margin: 0;
+
+              .notification {
+                background-color: #466cb0;
+                color: #ffffff;
+                border-radius: 50%;
+                font-size: 10px;
+                font-weight: bold;
+                top: 10px;
+                left: 10px;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+              }
+
+              .icon-close {
+                display: none;
+              }
+
+              svg {
+                width: 32px;
+                height: 26px;
+                opacity: 0.5;
+              }
+
+              .card-body {
+                margin: 0 !important;
+                padding-top: 5px;
+                padding-bottom: 12px;
+
+                .card-title {
+                  font-size: 10px;
+                  margin-bottom: 10px;
+                  margin-top: 5px;
+                }
+
+                button {
+                  font-size: 10px;
+                  padding: 5px 20px;
+                }
+
+                .closed {
+                  width: 100%;
+                  height: 100%;
+
+                  .icon-close {
+                    position: absolute;
+                    right: 6px;
+                    top: 6px;
+                    display: block;
+                    width: 12px;
+                    height: 12px;
+                    margin: 0;
+                    z-index: 10;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .form-control {
+          background-color: #efefef;
+          border: none;
+          font-size: 13px;
+          border-radius: 5px;
+          padding: 15px;
+          background-color: #efefef;
+          margin-bottom: 15px;
+
+          &::placeholder {
+            font-size: 13px;
+            white-space: inherit;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+
+  .card-upload-big {
+    width: 100% !important;
+    max-width: unset !important;
+    margin-bottom: 15px;
+
+    .card-upload {
+      padding: 30px 0;
+      min-height: 400px;
+      background-size: cover;
+      position: relative;
+      background-position: top;
+      display: grid;
+
+      svg {
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .card-body {
+        .closed {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+        }
+      }
+    }
+  }
+}

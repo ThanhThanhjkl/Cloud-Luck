@@ -1,0 +1,56 @@
+.article-section {
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+  padding: 32px 16px 0 16px;
+  margin-bottom: 0;
+
+  .card-header {
+    background: white;
+    padding: 0;
+  }
+
+  .card-body {
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid $gray-03;
+  }
+
+  figure {
+    position: relative;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+    }
+
+    > figcaption {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 13px;
+      color: #999999;
+    }
+  }
+
+  .card-title {
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 26px;
+    margin-bottom: 0;
+
+    border-bottom: 2px $primary solid;
+    background: white;
+    padding: 0 0 20px;
+    margin-bottom: 28px;
+  }
+
+  .card-text {
+    font-size: 1em;
+    line-height: 30px;
+    margin-bottom: 40px;
+  }
+
+  .img-detail {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}

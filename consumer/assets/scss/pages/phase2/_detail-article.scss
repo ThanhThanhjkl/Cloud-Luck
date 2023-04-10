@@ -1,0 +1,77 @@
+.detail-article {
+  &.card {
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    padding: 39px 36px;
+    margin-bottom: 0;
+    &.last-article {
+      padding-bottom: 18px;
+      margin-bottom: 46px;
+    }
+  }
+
+  .card-header {
+    border-bottom: 2px $primary solid;
+    background: white;
+    padding: 0 0 20px;
+    margin-bottom: 28px !important;
+  }
+
+  .card-body {
+    padding: 0;
+  }
+
+  figure {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 36px;
+
+    > img {
+      width: 100%;
+    }
+
+    > figcaption {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 13px;
+      color: #999999;
+    }
+  }
+
+  .card-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .card-text {
+    font-size: 1em;
+    line-height: 30px;
+    margin-bottom: 40px;
+    padding: 0;
+  }
+
+  p {
+    letter-spacing: 0.18rem;
+  }
+  @include max-width(md) {
+    &.card {
+      padding: 33px 18px 24px 18px;
+      .card-title {
+        font-size: 16px;
+      }
+      .card-body {
+        figure {
+          margin-bottom: 22px;
+          figcaption {
+            font-size: 13px;
+          }
+        }
+        .card-text {
+          margin-bottom: 22px;
+        }
+      }
+    }
+  }
+}

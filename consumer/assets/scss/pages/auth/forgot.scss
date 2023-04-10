@@ -1,0 +1,72 @@
+.forgot-pass-form {
+  .form-title {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 16px;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 2px;
+      background-color: $gray-03;
+    }
+  }
+  .card-body {
+    padding: 24px 16px 50px 16px;
+  }
+  form {
+    width: 80%;
+    margin: auto;
+    padding-top: 17px;
+    @include max-width(lg) {
+      width: 100%;
+      padding-top: 40px;
+    }
+
+    .note-description {
+      width: 85%;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      white-space: pre-line;
+      font-size: 13px;
+      color: $gray-04;
+      line-height: 20px;
+      padding-bottom: 17px;
+      @include max-width(md) {
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    .form-group {
+      margin: auto;
+      margin-bottom: 16px;
+      @include min-width(md) {
+        margin-bottom: 32px;
+      }
+      input {
+        &.form-control {
+          height: auto;
+          font-size: 13px;
+          padding: 18px 0 19px 19px;
+          background-color: $gray-01;
+          border: none;
+          &::placeholder {
+            color: $gray-02;
+          }
+        }
+      }
+    }
+
+    .btn {
+      font-size: 18px;
+      padding: 15px 0;
+      border: none;
+    }
+  }
+}

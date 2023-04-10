@@ -1,0 +1,73 @@
+<template>
+  <div class="changeinfo detail">
+    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
+
+    <FormAddress
+      v-if="address && address.id"
+      :address="address"
+      prefix="editAddressRequest"
+      @submit="onUpdateAddress"
+    ></FormAddress>
+  </div>
+</template>
+<script>
+import { createNamespacedHelpers } from "vuex";
+import { cloneDeep } from "lodash";
+
+import FormAddress from "@/components/profile/changeinfo/FormAddress";
+import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
+
+const { mapState, mapActions } = createNamespacedHelpers("account/address");
+const accountMapper = createNamespacedHelpers("account");
+
+export default {
+  components: {
+    FormAddress,
+    AuthRegisterInfo,
+  },
+
+  layout: "auth",
+
+  data() {
+    return {
+      address: null,
+    };
+  },
+  computed: {
+    ...mapState(["accountAddress"]),
+    ...accountMapper.mapState(["account"]),
+  },
+  async mounted() {
+    if (this.$route.params.address) {
+      this.address = cloneDeep(this.$route.params.address);
+    } else {
+      await this.getAccountAddress(this.$route.params.id);
+
+      const detailAddress = this.accountAddress.find((item) => {
+        return item.id === this.$route.params.addressId;
+      });
+
+      this.address = cloneDeep(detailAddress);
+    }
+  },
+
+  methods: {
+    ...mapActions(["updateAccountAddress", "getAccountAddress"]),
+    async onUpdateAddress(payload) {
+      try {
+        await this.updateAccountAddress({
+          accountId: this.account.id,
+          payload,
+        });
+        this.$toast.success("成功");
+        this.$router.push(`/account/${this.$route.params.id}/address`);
+      } catch (error) {}
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+.container-xl {
+  margin-bottom: 60px;
+}
+</style>

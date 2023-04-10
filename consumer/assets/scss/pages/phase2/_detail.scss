@@ -1,0 +1,123 @@
+@import "./_detail-card";
+@import "./_detail-article";
+@import "./_detail-carousel";
+
+.page-detail {
+  .detail-title {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    padding: 45px 0;
+  }
+  .alert-message {
+    display: flex;
+    justify-content: center;
+    .box-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      max-width: 160px;
+      padding: 10px 36px;
+      font-size: 16px;
+      border-radius: none;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -16px;
+        transform: translate(0, -50%);
+
+        width: 16px;
+        height: 14px;
+        border-left: solid 16px $primary-08;
+        border-bottom: solid 16px transparent;
+        border-top: solid 16px transparent;
+      }
+    }
+    .box-body {
+      width: 800px;
+      @include max-width(lg) {
+        width: 100%;
+      }
+      padding: 17px 25px;
+    }
+  }
+  .support-project {
+    border: none;
+    .card-body {
+      padding: 25px 23px;
+      .box {
+        &.likes {
+          margin: 0;
+          padding-bottom: 0;
+          svg {
+            width: 23px;
+          }
+          b {
+            font-size: 14px;
+          }
+          .badge {
+            background-color: $red;
+          }
+        }
+      }
+      button.support {
+        width: 100%;
+        padding: 14px 0;
+        font-size: 14px;
+      }
+    }
+  }
+  .project-section {
+    margin: 40px 0 32px 0;
+    .section-title {
+      font-size: 16px;
+    }
+    .section-subtitle {
+      font-size: 10px;
+    }
+  }
+  .section-plan {
+    .section-header {
+      margin-bottom: 20px;
+      .section-title {
+        font-size: 16px;
+      }
+      .section-subtitle {
+        font-size: 10px;
+      }
+    }
+  }
+}
+@include max-width(md) {
+  .page-detail {
+    .alert-message {
+      display: block;
+      margin-top: 30px;
+      .box-header {
+        font-size: 11px;
+        padding: 4px 13px;
+        &::before {
+          display: none;
+        }
+      }
+      .box-body {
+        width: auto;
+      }
+    }
+    .detail-info {
+      .section-header {
+        &.d-block {
+          margin-bottom: 22px;
+        }
+      }
+    }
+    .project-section {
+      margin: 67px 0 50px 0;
+      .section-header {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

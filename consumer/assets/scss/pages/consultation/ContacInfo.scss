@@ -1,0 +1,85 @@
+.card-contac {
+  border: none;
+  margin-bottom: 16px;
+  .card-body {
+    padding: 24px 16px;
+    .form-title {
+      position: relative;
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 16px;
+    }
+    .form-group {
+      margin: auto;
+      margin-top: 25px;
+      label {
+        color: $primary;
+        font-size: 13px;
+        padding-bottom: 10px;
+        .ic-required {
+          color: $red;
+          padding-left: 5px;
+        }
+        .required {
+          color: white;
+          background-color: $red;
+          line-height: 20px;
+          font-size: 10px;
+          font-weight: bold;
+          padding: 0 5px;
+          border-radius: 2px;
+          margin-left: 6px;
+        }
+      }
+      input {
+        &.form-control {
+          height: auto;
+          font-size: 13px;
+          color: black;
+          padding: 18px 0 19px 19px;
+          background-color: $gray-01;
+          border: none;
+          &::placeholder {
+            color: $gray-02;
+          }
+        }
+        &.error {
+          background: #f9dddd;
+          border: 2px solid #d84646;
+        }
+      }
+      .validation {
+        color: #d84646;
+        font-size: 13px;
+        margin-top: 20px;
+      }
+      .select-item {
+        width: 30%;
+        font-size: 13px;
+        select {
+          height: auto;
+          padding: 18px;
+          border: none;
+          font-size: 13px;
+          background-color: $gray-01;
+        }
+      }
+
+      .input-note {
+        color: $gray-04;
+        padding: 8px 0;
+        font-size: 11px;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.title-input {
+  padding: 0px 40px 0px 40px;
+  @include max-width(lg) {
+    padding: 0px;
+  }
+}

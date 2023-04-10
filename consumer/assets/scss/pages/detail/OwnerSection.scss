@@ -1,0 +1,163 @@
+.owner-section {
+  padding: 30px 80px;
+  border: none;
+  font-size: 14px;
+  @include max-width(md) {
+    padding: 0;
+  }
+
+  .card-header {
+    border-radius: 8px 8px 0 0;
+    border: none;
+    background: white;
+    padding: 30px 16px 0;
+    display: flex;
+    align-items: center;
+
+    .b-avatar {
+      width: 56px;
+      height: 56px;
+      border: 2px solid $primary;
+      margin-right: 16px;
+    }
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .card-title {
+    @include text-ellipsis;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+
+    @include max-width(md) {
+      @include line-clamp(2);
+      white-space: normal;
+    }
+  }
+
+  .card-subtitle {
+    font-size: inherit;
+    padding: 0 5px;
+
+    strong {
+      font-size: 0.75em;
+      font-weight: normal;
+      color: #000000;
+    }
+  }
+
+  .profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .profile-address {
+    @include flex-center-y;
+    font-size: 12px;
+
+    .icon {
+      font-size: 16px;
+      margin-right: 4px;
+      color: #999;
+    }
+  }
+
+  .send-question {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 40%;
+    max-width: 320px;
+    text-align: center;
+    @include max-width(md) {
+      width: 100%;
+    }
+    a {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      margin: auto;
+      padding: 18px 0;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+
+  .link-website {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    a,
+    div {
+      display: flex;
+      margin-bottom: 5px;
+      svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+      }
+    }
+  }
+  .svg-fb {
+    svg {
+      color: $primary;
+    }
+  }
+
+  @include max-width(md) {
+    .send-question {
+      a {
+        width: 90%;
+      }
+    }
+
+    .link-website {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.modal-open {
+  #modal-popup {
+    top: 25%;
+    .modal-dialog {
+      max-width: 657px !important;
+      .modal-content {
+        .modal-header {
+          display: none;
+        }
+        .modal-footer {
+          display: none;
+        }
+        .modal-body {
+          padding: 20px;
+          .header-popup {
+            border-bottom: 1px solid #cccccc;
+            text-align: center;
+            h4 {
+              font-size: 20px;
+              font-weight: bold;
+            }
+            p {
+              font-size: 13px;
+              span {
+                font-size: 13px;
+                color: #1d9afb;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

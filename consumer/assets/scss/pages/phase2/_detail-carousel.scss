@@ -1,0 +1,201 @@
+.detail-carousel {
+  &.card {
+    margin-top: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    @include max-width(md) {
+      background-color: white;
+    }
+  }
+
+  .card-photo {
+    padding-top: 66%;
+    position: relative;
+    overflow: hidden;
+
+    > img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .card-header {
+    padding: 0;
+    border-radius: 0;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+  }
+
+  .card-body {
+    padding: 16px 0;
+  }
+
+  .card-title {
+    @include text-ellipsis;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 1em;
+
+    @include max-width(md) {
+      @include line-clamp(2);
+      white-space: normal;
+    }
+  }
+
+  .card-subtitle {
+    display: grid;
+    row-gap: 0.75em;
+    font-size: inherit;
+    margin-bottom: 30px;
+
+    svg {
+      font-size: 1.25em;
+      color: $primary;
+      margin-right: 0.3125em;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+      font-size: 0.75em;
+      color: $primary;
+      margin-right: 0.3125em;
+    }
+
+    .price {
+      span {
+        font-size: 24px;
+        font-weight: normal;
+        color: #000000;
+      }
+    }
+
+    .card-info {
+      display: flex;
+      align-items: center;
+      strong {
+        font-size: 20px;
+      }
+    }
+
+    .divider {
+      font-size: 0.875em;
+      padding: 0 0.625em;
+      color: #cccccc;
+    }
+
+    .author {
+      align-items: center;
+      svg {
+        width: 10px;
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .card-text {
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  .progress {
+    background: #dcdcdc;
+    border-radius: 30px;
+    overflow: visible;
+    height: 1.25em;
+    font-size: inherit;
+    position: relative;
+
+    .progress-bar {
+      background: $primary;
+      border-radius: 30px;
+
+      &::after {
+        content: attr(aria-valuenow) "%";
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        color: white;
+        font-size: 1em;
+      }
+    }
+  }
+
+  .small {
+    color: #999999;
+    font-size: 0.75em;
+
+    svg {
+      color: inherit;
+      font-size: 1.5em;
+    }
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 32px;
+    height: 32px;
+    background-color: $primary;
+    background-size: 12px;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 48px;
+  }
+
+  .carousel-indicators {
+    position: unset;
+    margin: 16px 0 0;
+
+    li {
+      background-color: $primary;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      box-sizing: border-box;
+      margin: 0 6px;
+      background-clip: unset;
+      border: none;
+    }
+  }
+  @include max-width(md) {
+    .box {
+      &.likes {
+        svg {
+          width: 23px;
+          .primary {
+            color: white;
+          }
+          .secondary {
+            color: $gray-04;
+          }
+        }
+        span {
+          font-size: 14px;
+          color: $gray-04;
+        }
+      }
+    }
+    .card-text {
+      font-size: 16px;
+      line-height: 30px;
+    }
+    .card-body {
+      padding: 0;
+    }
+  }
+}

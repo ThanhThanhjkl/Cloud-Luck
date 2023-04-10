@@ -1,0 +1,398 @@
+.edit-verification-page {
+  padding: 0 60px;
+
+  @include max-width(lg) {
+    padding: 0;
+  }
+
+  .tabs {
+    .tab-content {
+      border: 2px solid #ceddf8;
+      padding: 22px;
+      border-top: 0;
+    }
+
+    .nav-tabs {
+      padding-left: 0 !important;
+      justify-content: space-between;
+
+      .nav-item {
+        width: 33%;
+        text-align: center;
+        padding-bottom: 0;
+        background-color: #eeeeee;
+
+        p {
+          font-size: 12px;
+          font-weight: bold;
+          color: #333333;
+          margin-bottom: 0;
+          height: 40px;
+
+          @include max-width(lg) {
+            height: 50px;
+          }
+        }
+
+        .nav-link {
+          padding: 0.5rem;
+          border-bottom: 2px solid #ceddf8 !important;
+          border-top: 0;
+          border-left: 0;
+          border-right: 0;
+
+          &.active {
+            border: 2px solid #ceddf8 !important;
+            border-bottom: 0 !important;
+          }
+        }
+      }
+    }
+  }
+
+  .group-text {
+    margin-bottom: 25px;
+
+    h3 {
+      font-size: 13px;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    p {
+      font-size: 13px;
+      color: #333333;
+      white-space: pre-wrap;
+    }
+  }
+
+  .head-colapse {
+    font-size: 24px;
+    font-weight: bold;
+    color: #466cb0;
+    margin-bottom: 25px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 22px;
+    margin-bottom: 0;
+
+    li {
+      font-size: 13px;
+      padding-bottom: 10px;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .card {
+    margin-top: 16px;
+
+    .card-body {
+      margin: 0 140px;
+      padding: 24px 16px 37px 16px;
+
+      @include max-width(lg) {
+        margin: 0;
+      }
+
+      .details-title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .identification-notice {
+        // background-color: $primary-04;
+        padding: 20px 0;
+
+        .identification-list {
+          // padding-right: 20px;
+          padding-left: 0;
+          margin-bottom: 0;
+          font-size: 14px;
+          list-style: none;
+          border-radius: 4px;
+        }
+      }
+
+      .bg-blue {
+        background-color: $primary-04 !important;
+        padding: 20px;
+      }
+
+      .precautions-section {
+        margin-bottom: 40px;
+        padding: 20px 20px 20px 0;
+        margin-top: 12px;
+        background-color: #f6ffd1;
+        font-size: 13px;
+        border-radius: 4px;
+
+        .precautions-title {
+          padding-left: 22px;
+          font-weight: bold;
+          padding-bottom: 11px;
+        }
+      }
+
+      .last-about {
+        margin-top: 25px;
+
+        h3 {
+          font-size: 13px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 13px;
+        }
+      }
+
+      .form-group {
+        .box-radio {
+          margin-left: 20px;
+          padding: 25px 20px;
+          text-align: center;
+          background: #ffffff 0% 0% no-repeat padding-box;
+          border: 2px solid #bbbbbb;
+          border-radius: 4px;
+
+          .input-group {
+            margin: 0 !important;
+
+            .checkbox-agree {
+              width: 20px;
+              height: 20px;
+            }
+
+            p {
+              margin: 0;
+              color: #466cb0;
+              font-size: 16px;
+              margin-top: auto;
+              margin-bottom: auto;
+              font-weight: 500;
+            }
+          }
+        }
+
+        // .active {
+        //   background-color: #f6fcff;
+        //   border: 2px solid #1d9afb;
+        // }
+        span {
+          color: #999999;
+          font-size: 11px;
+          letter-spacing: -0.25px;
+        }
+
+        .group-chose {
+          display: grid;
+          grid-auto-flow: column;
+          gap: 15px;
+        }
+
+        .group-img {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 15px;
+          justify-content: left;
+
+          .card-upload-small {
+            width: 45%;
+
+            @include max-width(md) {
+              width: 100%;
+            }
+
+            .card-upload {
+              position: relative;
+              margin: 0;
+
+              .icon-close {
+                display: none;
+              }
+
+              svg {
+                width: 32px;
+                height: 26px;
+                margin-top: 12px;
+                opacity: 0.5;
+              }
+
+              .card-body {
+                margin: 0 !important;
+                padding-top: 5px;
+                padding-bottom: 12px;
+
+                .card-title {
+                  font-size: 10px;
+                  margin-bottom: 10px;
+                  margin-top: 5px;
+                }
+
+                button {
+                  font-size: 10px;
+                  padding: 5px 20px;
+                }
+
+                .closed {
+                  width: 100%;
+                  height: 100%;
+
+                  .icon-close {
+                    position: absolute;
+                    right: 6px;
+                    top: 6px;
+                    display: block;
+                    width: 12px;
+                    height: 12px;
+                    margin: 0;
+                    z-index: 10;
+                  }
+                }
+              }
+            }
+
+            .card-uploaded {
+              border: unset;
+              display: block;
+              cursor: pointer;
+              background-position: center center;
+              background-size: cover;
+            }
+          }
+        }
+
+        .head-add {
+          display: flex;
+          color: #d84646;
+          margin-bottom: 10px;
+
+          p {
+            color: #466cb0;
+            font-size: 13px;
+            margin: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+            font-weight: bold;
+          }
+
+          span {
+            color: #ffffff;
+            background-color: #d84646;
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: auto;
+            margin-bottom: auto;
+            padding: 0 5px;
+            margin-left: 10px;
+          }
+        }
+
+        .choses {
+          font-size: 13px;
+          font-weight: 500;
+        }
+
+        .input-money {
+          width: 100%;
+          margin-bottom: 10px;
+
+          .choses {
+            font-size: 13px;
+            font-weight: 500;
+          }
+
+          input {
+            width: 100%;
+
+            &.form-control {
+              height: auto;
+              font-size: 13px;
+              color: black;
+              padding: 19px;
+              background-color: $gray-01;
+              border: none;
+
+              &::placeholder {
+                color: $gray-02;
+              }
+            }
+          }
+
+          span {
+            color: #999999;
+            font-size: 11px;
+          }
+        }
+
+        .input-lg-4 {
+          width: 41.66666667%;
+        }
+
+        .input-md-full {
+          width: 50%;
+
+          @include max-width(md) {
+            width: 100%;
+          }
+        }
+
+        .input-quatity {
+          width: 50%;
+          margin-bottom: 10px;
+        }
+
+        .input-title {
+          display: grid;
+          grid-auto-flow: column;
+          padding: 0;
+          width: 100%;
+          margin-bottom: 10px;
+
+          .chose {
+            border-radius: 5px;
+            min-height: 57.5px;
+
+            .custom-select,
+            input {
+              font-size: 13px;
+              border: none;
+              border-radius: 5px;
+              height: 100%;
+              background: #efefef url("@/assets/img/btn-updown.png") right
+                0.75rem center/8px 10px no-repeat;
+              color: black;
+            }
+          }
+
+          span {
+            color: #333333;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 10px;
+            font-size: 13px;
+          }
+        }
+
+        .input-group {
+          p {
+            color: #333333;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .btn-update {
+    max-width: 320px;
+    margin-top: 25px;
+    padding: 16px 0;
+  }
+}

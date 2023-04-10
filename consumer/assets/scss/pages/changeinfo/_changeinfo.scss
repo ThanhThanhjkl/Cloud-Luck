@@ -1,0 +1,740 @@
+.changeinfo {
+  .uploading-image {
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+    }
+  }
+
+  .addAddressOnBuy {
+    border: none;
+
+    .card-body {
+      width: 100% !important;
+      padding: 0;
+
+      form {
+        width: 100% !important;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .form-title {
+      display: none;
+    }
+  }
+
+  .active {
+    background-color: red;
+  }
+
+  button {
+    font-size: 18px;
+  }
+
+  .form-title {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 16px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $gray-03;
+    }
+  }
+
+  .register-info {
+    .register-info-form {
+      width: 90%;
+      margin: auto;
+      padding-top: 38px;
+
+      @include max-width(md) {
+        width: 90%;
+      }
+
+      .settings-list {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        gap: 16px;
+
+        @include max-width(md) {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 0;
+        }
+      }
+
+      .item-info {
+        width: 48%;
+        margin-bottom: 8px;
+        box-sizing: border-box;
+        text-align: center;
+
+        @include min-width(md) {
+          width: 100%;
+          margin-bottom: 0;
+        }
+
+        .menu-item {
+          width: 100%;
+          height: 100%;
+          font-size: 13px;
+          color: $primary;
+          background-color: $gray-01;
+          border-radius: 4px;
+          border: none;
+          padding: 30px 15px;
+          max-height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          @include max-width(md) {
+            font-size: 13px;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+
+          &.active {
+            color: white;
+            background-color: $primary;
+            box-shadow: none;
+          }
+        }
+
+        &:nth-child(2n) {
+          margin-left: 8px;
+
+          @include min-width(md) {
+            margin-left: 0;
+          }
+        }
+
+        span {
+          white-space: pre-line;
+        }
+      }
+
+      .note-info {
+        font-size: 11px;
+        color: $gray-04;
+        text-align: right;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 24px 16px 37px 16px;
+
+    .submit-area {
+      gap: 10px;
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+
+      @include max-width(md) {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn {
+        max-width: 320px;
+        font-size: 18px;
+        padding: 15px 0;
+        margin: 0;
+      }
+    }
+
+    form {
+      width: 80%;
+      margin: auto;
+      padding-top: 40px;
+
+      @include max-width(lg) {
+        width: 90%;
+        padding-top: 20px;
+      }
+
+      .note-description {
+        font-size: 13px;
+        color: $gray-04;
+        line-height: 20px;
+        padding-bottom: 17px;
+      }
+
+      .form-group {
+        // margin: auto;
+        margin-bottom: 20px;
+
+        label {
+          color: $primary;
+          font-size: 13px;
+          padding-bottom: 8px;
+
+          span {
+            color: $red;
+            padding-left: 5px;
+          }
+        }
+
+        .form-control {
+          font-size: 13px;
+          color: black;
+          padding: 20px;
+          background-color: $gray-01;
+          border: none;
+          height: auto;
+
+          &::placeholder {
+            color: $gray-02;
+          }
+        }
+
+        textarea.form-control {
+          min-height: 200px;
+          max-height: 450px;
+        }
+
+        .pass-note {
+          font-size: 13px;
+          color: $gray-04;
+          padding-top: 7px;
+        }
+      }
+
+      .iframe-avatar {
+        margin: 18px 0 22px 0;
+
+        @include min-width(md) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 32px;
+        }
+
+        .upload-img {
+          display: block;
+          font-size: 13px;
+          color: $primary;
+          line-height: 20px;
+          margin-top: 22px;
+          padding: 12px 0 9px;
+          background-color: $primary-04;
+          border: 2px dashed $gray-03;
+
+          @include min-width(md) {
+            padding: 12px 49px;
+            height: fit-content;
+          }
+
+          svg {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .password-setting {
+    .card-body {
+      form {
+        .form-group {
+          margin-bottom: 0;
+
+          input {
+            &.form-control {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .shipping-address {
+    .card-body {
+      .register-now {
+        cursor: pointer;
+        display: inline-block;
+        color: $primary;
+        font-size: 13px;
+        padding: 15px 27px;
+        border: 2px dashed $gray-03;
+        background-color: $primary-04;
+        margin-bottom: 24px;
+
+        svg {
+          margin-right: 5px;
+        }
+      }
+
+      form {
+        width: 80%;
+
+        @include max-width(md) {
+          width: 100%;
+        }
+
+        table {
+          width: 100%;
+          margin-right: 0;
+
+          tr {
+            th {
+              background-color: $gray-01;
+              font-size: 12px;
+              padding: 7px 10px;
+              white-space: nowrap;
+            }
+
+            td {
+              font-size: 11px;
+              padding: 15px 2px;
+              border-bottom: 1px solid #cccccc;
+
+              &:first-child {
+                font-size: 13px;
+                font-weight: 500;
+              }
+
+              &:nth-child(3) {
+                color: $red;
+              }
+            }
+
+            svg {
+              margin-right: 5px;
+            }
+
+            button {
+              background: transparent;
+              border: none;
+              font-size: 11px;
+              // white-space: nowrap;
+              padding-right: 0;
+              padding-left: 0;
+            }
+
+            .btn-edit {
+              color: $primary-05;
+            }
+
+            .btn-delete {
+              color: #d84646;
+            }
+          }
+        }
+      }
+    }
+
+    .new-address {
+      .card-body {
+        form {
+          width: 90%;
+          margin: auto;
+          padding-top: 23px;
+
+          @include max-width(md) {
+            width: 100%;
+          }
+
+          .form-group {
+            .form-control {
+              font-size: 13px;
+            }
+
+            select {
+              width: 35%;
+              height: auto;
+              padding: 18px;
+              border: none;
+              font-size: 13px;
+              background-color: $gray-01;
+            }
+          }
+
+          .text-muted {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+
+  .email-setting,
+  .email-notification-setting {
+    .setting-title {
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .card-body {
+      padding: 24px 16px 53px 16px;
+
+      .form {
+        position: relative;
+        padding: 22px 0 26px 0;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          width: 100%;
+          height: 2px;
+          background-color: $gray-03;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+
+          width: 100%;
+          height: 2px;
+          background-color: $gray-03;
+        }
+
+        .form-group {
+          margin-bottom: 0;
+        }
+      }
+
+      .toggle-list {
+        position: relative;
+        width: 80%;
+        margin: auto;
+
+        @include max-width(lg) {
+          width: 100%;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+
+          width: 100%;
+          height: 2px;
+          background-color: $gray-03;
+        }
+
+        .toggle-item {
+          width: 90%;
+          margin: auto;
+          font-size: 13px;
+          padding: 24px 0;
+
+          .toggle-title {
+            padding-bottom: 8px;
+          }
+
+          .toggle-description {
+            color: $gray-04;
+          }
+        }
+      }
+
+      .btn-update {
+        padding: 15px 0;
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .purchase_details {
+    font-size: 13px;
+
+    .card-body {
+      padding: 24px 16px 56px 16px;
+
+      .details-title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .form {
+        width: 80%;
+
+        @include max-width(lg) {
+          width: 100%;
+        }
+      }
+
+      form {
+        width: 100%;
+        padding-top: 16px;
+      }
+
+      .result {
+        margin-bottom: 10px;
+
+        .result-title {
+          color: $primary;
+          font-size: 13px;
+          font-weight: bold;
+          padding: 10px 22px 11px 22px;
+          background-color: $primary-06;
+        }
+
+        .result-content {
+          padding: 17px 22px 5px 22px;
+
+          .result-header {
+            display: grid;
+            grid-template-columns: 60% 40%;
+
+            @include max-width(md) {
+              grid-template-columns: auto;
+              gap: 10px;
+            }
+
+            .return-image {
+              width: 70%;
+              margin-right: 93px;
+              height: 100%;
+
+              @include max-width(md) {
+                width: 100%;
+                margin-right: 0px;
+              }
+            }
+
+            img {
+              aspect-ratio: 16/9;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+
+          .result-header-2 {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 10px;
+            line-height: 25px;
+          }
+
+          .result-body {
+            margin-top: 10px;
+            width: 60%;
+            line-height: 25px;
+
+            @include max-width(md) {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .product-detail {
+        flex-direction: column;
+      }
+
+      .product-info {
+        position: relative;
+        padding: 22px 0;
+
+        @include min-width(md) {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        &.item::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: $gray-03;
+        }
+
+        .product-img {
+          width: 40%;
+
+          img {
+            aspect-ratio: 3/2;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+
+        .product-title {
+          width: 60%;
+          color: $primary;
+          padding-left: 13px;
+        }
+
+        .product-item {
+          padding-top: 20px;
+
+          @include min-width(md) {
+            padding-top: 0;
+          }
+
+          div {
+            padding-bottom: 5px;
+
+            span {
+              color: $gray-05;
+              letter-spacing: 0.25px;
+              margin-left: 5px;
+              cursor: pointer;
+
+              &.paid {
+                color: $primary-05;
+              }
+
+              &.unpaid {
+                color: $red;
+              }
+            }
+          }
+        }
+
+        &:last-child {
+          padding: 26px 0 17px 0;
+        }
+      }
+
+      button.btn-payment {
+        padding: 15px 0;
+        background-color: $red;
+        border: none;
+        width: 87%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .card-about-person {
+    margin-top: 17px;
+
+    .card-body {
+      padding: 16px;
+
+      form {
+        @include max-width(md) {
+          width: 100% !important;
+        }
+      }
+    }
+
+    .about-person-detail {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+
+      @include max-width(md) {
+        width: 100%;
+      }
+    }
+  }
+
+  &.detail {
+    @include min-width(lg) {
+      .register-info {
+        .card-body {
+          display: flex;
+          padding: 15px 15px 15px 30px;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 20px;
+
+          .form-title {
+            padding-bottom: 0;
+            margin-top: 8px;
+            width: 10%;
+
+            &::after {
+              display: none;
+            }
+          }
+
+          .register-info-form {
+            padding-top: 0;
+
+            .settings-list {
+              display: flex;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .new-address {
+    .card-body {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  .btn-changeinfo-profile {
+    max-width: 320px;
+    margin: auto;
+
+    @include max-width(md) {
+      width: 100%;
+    }
+  }
+}
+
+.card {
+  @include max-width(lg) {
+    margin-top: 20px;
+  }
+}
+
+.card-projetc-detail {
+  padding: 0 100px;
+
+  @include max-width(md) {
+    padding: 0;
+  }
+}
+
+.checkbox_select {
+  display: flex;
+  gap: 20px;
+}
+
+.select_main {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  gap: 10px;
+
+  @include max-width(sm) {
+    grid-template-columns: repeat(2, 100px);
+  }
+}
+
+.btn-fall {
+  color: #466cb0;
+  background-color: #ffffff;
+  padding: 16px 0;
+  border: 2px solid #bbbbbb;
+  border-radius: 4px;
+  white-space: nowrap;
+}

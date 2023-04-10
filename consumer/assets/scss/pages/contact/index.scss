@@ -1,0 +1,78 @@
+.page-contact {
+  margin-top: 50px;
+  .contact {
+    .contact-title {
+      font-size: 24px;
+    }
+    .card {
+      margin-top: 40px;
+      .card-body {
+        padding: 20px 33px 50px 33px;
+        .contact-description {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .form-contact {
+    padding: 0 70px;
+    .form-control {
+      height: auto;
+      font-size: 14px;
+      color: black;
+      padding: 18px 0 19px 19px;
+      background-color: #efefef;
+      border: none;
+    }
+    .contact-name {
+      max-width: 130px;
+    }
+    .contact-mail {
+      max-width: 400px;
+    }
+    .contact-inquiry {
+      max-width: 280px;
+    }
+
+    .form_caution {
+      line-height: 2;
+      font-size: 13px;
+    }
+
+    .submit-area {
+      text-align: center;
+      margin-top: 20px;
+      .btn {
+        font-size: 14px;
+        max-width: 320px;
+        width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 15px 0;
+      }
+
+      &.confirm {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+    }
+  }
+  @include max-width(md) {
+    .contact {
+      .contact-title {
+        font-size: 20px;
+      }
+      .card {
+        .card-body {
+          .contact-description {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .form-contact {
+      padding: 0;
+    }
+  }
+}

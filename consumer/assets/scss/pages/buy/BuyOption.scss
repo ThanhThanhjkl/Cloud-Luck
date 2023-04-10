@@ -1,0 +1,252 @@
+.buy-option-page {
+  .card {
+    position: relative;
+    padding: 80px 120px;
+    margin-bottom: 60px;
+    @include max-width(lg) {
+      padding: 20px;
+    }
+    &.hidden {
+      .card-body {
+        .users {
+          display: none;
+        }
+        .out-stock {
+          display: block;
+          text-align: center;
+          padding: 10px 0 30px 0;
+        }
+      }
+
+      .chose-size {
+        form {
+          display: none;
+        }
+      }
+    }
+    .card-header {
+      padding: 0;
+      border: none;
+      background: white;
+      margin-bottom: 10px;
+      .btn-select {
+        display: none;
+      }
+    }
+
+    .card-body {
+      padding: 0;
+      display: grid;
+      gap: 20px;
+
+      .no-gutter-title {
+        font-size: 26px;
+        font-weight: bold;
+        padding-bottom: 15px;
+        margin-top: 24px;
+        @include max-width(md) {
+          margin-top: 6px;
+          font-size: 20px;
+        }
+      }
+
+      .users {
+        font-size: 14px;
+        margin: 15px auto 30px auto;
+      }
+
+      .out-stock {
+        display: none;
+      }
+
+      .detail {
+        text-align: left;
+        font-size: 13px;
+      }
+    }
+
+    .card-subtitle {
+      font-size: inherit;
+      @include flex-center-y;
+
+      label {
+        font-size: 16px;
+        color: $primary;
+        margin-right: 8px;
+        margin-bottom: 0;
+      }
+
+      strong {
+        font-size: 1em;
+        font-weight: normal;
+        color: #000000;
+        margin-right: 10px;
+      }
+    }
+
+    .chose-size {
+      text-align: center;
+      border-top: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      padding: 16px 16px 32px;
+
+      .head-chose {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .price {
+          font: normal normal bold 40px/40px Noto Sans JP;
+          color: #333333;
+          margin-bottom: 10px;
+          margin-left: 10px;
+        }
+        .custom-checkbox {
+          .custom-control-input {
+            &:checked ~ .custom-control-label {
+              &::before {
+                background-color: transparent !important;
+              }
+              &::after {
+                background-image: url("@/assets/img/ticked.png");
+                background-size: auto;
+              }
+            }
+          }
+          .custom-control-label {
+            &::before {
+              border: 5px solid #1d9afb;
+              border-radius: 10px;
+              width: 50px;
+              height: 50px;
+              top: -15px;
+              left: -55px;
+            }
+            &::after {
+              width: 50px;
+              height: 50px;
+              top: -20px;
+              left: -55px;
+            }
+          }
+        }
+      }
+
+      form {
+        @include grid(33px);
+
+        label {
+          font-size: 13px;
+        }
+
+        .custom-select {
+          border: none;
+          padding: 18px 16px;
+          border-radius: 5px;
+          background-color: #efefef;
+          min-height: 56px;
+          max-width: 480px;
+          margin: auto;
+          line-height: 1;
+        }
+      }
+
+      .number {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        justify-content: space-between;
+        max-width: 240px;
+        margin: auto;
+        background-color: #efefef;
+        border-radius: 5px;
+        padding: 8px 12px;
+
+        label {
+          font-size: 12px;
+          white-space: nowrap;
+          margin-right: 12px;
+          margin-bottom: 0;
+        }
+
+        select {
+          border: none;
+          font-size: 14px;
+          min-height: unset;
+          padding: 0 20px;
+          background-color: white;
+        }
+        .select-quantity {
+          font-size: 16px;
+          font-weight: bold;
+          margin: 0;
+          width: fit-content;
+        }
+      }
+
+      &.disabled {
+        form {
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  .active {
+    border: 5px solid #1d9afb !important;
+    .card-header {
+      position: relative;
+      padding: 0;
+      border: none;
+      background: white;
+      margin-bottom: 10px;
+      .btn-select {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $primary;
+        background-color: white;
+        border-radius: 4px;
+        border: none;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        height: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $primary;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .btn-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 22px 0;
+    background: #466cb0;
+    opacity: 0.8;
+    z-index: 1;
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  @include max-width(md) {
+    .page-buy {
+      .card {
+        .card-body {
+          .no-gutter-title {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}

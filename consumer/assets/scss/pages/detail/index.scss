@@ -1,0 +1,703 @@
+@import "./DetailCarousel.scss";
+@import "./Article.scss";
+@import "./ArticleSection.scss";
+@import "./ArticleReport.scss";
+@import "./OwnerSection.scss";
+@import "./OwnerCard.scss";
+@import "./ReturnPlan.scss";
+@import "./ListProject.scss";
+@import "./Detailprofile.scss";
+
+.page-detail {
+  .page-detail-content {
+    display: grid;
+    grid-template-columns: 59.37% calc(40.63% - 32px);
+    grid-column-gap: 32px;
+
+    @include max-width(md) {
+      grid-template-columns: 1fr;
+    }
+
+    .left-content {
+      .nav-tabs {
+        .nav-item {
+          a {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+
+      .detail-carousel {
+        .carousel-item {
+          padding-top: 66.71087533%;
+          img,
+          iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+      }
+    }
+
+    .right-content {
+      .return-plan {
+        .section-header {
+          @include max-width(md) {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .card-infor {
+        border: none;
+        display: grid;
+        row-gap: 0.75em;
+        font-size: inherit;
+        margin-top: 0;
+        margin-bottom: 30px;
+        height: fit-content;
+
+        .col {
+          margin-bottom: 7px;
+          svg {
+            width: 20px;
+          }
+        }
+
+        svg {
+          font-size: 1.25em;
+          color: $primary;
+          margin-right: 0.5rem;
+        }
+
+        label {
+          margin-bottom: 0;
+          font-size: 14px;
+          color: $primary;
+          margin-right: 0.5rem;
+          white-space: nowrap;
+          font-weight: 700;
+        }
+
+        .font-36 {
+          font-size: 36px;
+          color: #000000;
+          font-weight: 500;
+        }
+
+        .amount {
+          font-size: 48px;
+          color: #000000;
+          font-weight: 500;
+          @include max-width(lg) {
+            font-size: 30px;
+          }
+
+          @include max-width(md) {
+            font-size: 24px;
+          }
+        }
+
+        .target-amount-sp {
+          font-size: 24px;
+        }
+
+        strong {
+          color: #000000;
+          white-space: nowrap;
+          @include max-width(md) {
+            font-size: 20px;
+          }
+        }
+
+        .divider {
+          font-size: 0.875em;
+          padding: 0 0.625em;
+          color: #cccccc;
+        }
+
+        .author {
+          font-size: 13px;
+          color: #999999;
+          svg {
+            color: #999999;
+          }
+        }
+
+        .progress {
+          border-radius: 50px;
+        }
+
+        .price {
+          &.target {
+            font-size: 48px;
+            @include max-width(md) {
+              font-size: 24px;
+            }
+          }
+
+          &.current {
+            font-size: 24px;
+          }
+        }
+      }
+      .box.likes {
+        margin-bottom: 40px;
+        padding: 25px;
+        @include max-width(md) {
+          padding-top: 17px;
+          padding-bottom: 17px;
+        }
+      }
+
+      .project-owner {
+        margin-bottom: 32px;
+        .card-header {
+          padding: 0;
+          @include max-width(md) {
+            margin-bottom: 18px;
+          }
+        }
+        .owner-section {
+          padding: 36px 25px 14px 25px;
+          @include max-width(md) {
+            padding: 30px 18px 28px 18px;
+          }
+          .card-body {
+            @include max-width(md) {
+              padding: 0;
+            }
+          }
+        }
+      }
+
+      .card-notice {
+        margin: 20px 0 30px 0;
+        border: none;
+        font-size: 13px;
+        border: none;
+
+        .card-body {
+          display: flex;
+          flex-direction: column;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  .container-xl {
+    max-width: 1310px;
+  }
+
+  .campaign-body-list-tab {
+    .nav {
+      flex-wrap: nowrap;
+    }
+    .nav-item {
+      white-space: nowrap;
+      .active {
+        background-color: #466cb0 !important;
+        color: white !important;
+      }
+      .disabled {
+        opacity: 0.5;
+        background-color: #cccccc !important;
+        color: #466cb0 !important;
+      }
+    }
+  }
+
+  section {
+    margin-bottom: 0;
+  }
+
+  .detail-card {
+    .card-subtitle {
+      .current-amount {
+        font-size: 48px;
+      }
+      .target-amount {
+        font-size: 20px;
+      }
+      strong {
+        font-size: 36px;
+      }
+    }
+    @include max-width(md) {
+      .detail-title {
+        color: black;
+        font-size: 20px;
+        text-align: left;
+        padding: 15px 0;
+      }
+      .card-body {
+        padding: 0 16px 25px 16px;
+      }
+      .price {
+        .col {
+          strong {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .comment-box {
+    background-color: #ffffff;
+    padding: 32px 36px;
+
+    @include max-width(md) {
+      padding: 33px 16px;
+    }
+
+    .comment-input {
+      background: #eeeeee 0% 0% no-repeat padding-box;
+      border-radius: 4px;
+      opacity: 1;
+      border: unset;
+      width: 100%;
+      padding-right: 18px;
+      padding-left: 14px;
+      padding-top: 15px;
+      text-align: left;
+      font-size: 13px;
+      &::placeholder {
+        color: #bbbbbb;
+      }
+    }
+    .btn-comment {
+      text-align: center;
+      margin-top: 20px;
+      position: relative;
+      .about-comment-btn {
+        font-size: 10px;
+        top: 20px;
+        position: absolute;
+        right: calc(50% - 183px);
+        @include max-width(md) {
+          right: calc(50% - 170px);
+        }
+      }
+      button {
+        border: unset;
+        background: #466cb0 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+        opacity: 1;
+        padding: 15px 26px;
+        color: white;
+        @include max-width(md) {
+          padding: 15px 20px;
+        }
+      }
+    }
+
+    .line {
+      margin: 0;
+      margin-top: 50px;
+    }
+    .comment-list {
+      display: grid;
+      grid-row-gap: 80px;
+      padding-top: 67px;
+      .comment-thread {
+        display: flex;
+        align-items: center;
+        position: relative;
+        @include max-width(md) {
+          align-items: flex-start;
+        }
+        img {
+          margin-right: 20px;
+          border-radius: 50%;
+          height: 112px;
+          width: 112px;
+          @include max-width(md) {
+            width: 56px;
+            height: 56px;
+          }
+        }
+        .comment-body {
+          font-size: 13px;
+          margin-bottom: 15px;
+          word-break: break-all;
+        }
+        .profile-name {
+          font-size: 14px;
+        }
+        .profile-date {
+          font-size: 11px;
+        }
+      }
+      .commenter {
+        &::after {
+          content: "";
+          position: absolute;
+          width: 1px;
+          background: #cccccc;
+          height: 40px;
+          left: 55px;
+          bottom: -60px;
+          @include max-width(md) {
+            height: 120px;
+            left: 27px;
+          }
+        }
+
+        &:last-child::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .comment-card {
+    border-bottom: 1px solid $gray-03;
+    .card {
+      border: none;
+      .card-body {
+        padding-top: 30px;
+        .comment-section {
+          position: relative;
+          display: flex;
+          margin-bottom: 20px;
+          &.answer-section {
+            margin-bottom: 35px;
+          }
+        }
+        .b-avatar {
+          width: 10%;
+          height: 10%;
+          position: relative;
+          margin-right: 12px;
+          border: 2px solid #466cb0;
+        }
+        .comment-content {
+          font-size: 13px;
+        }
+        .comment-name {
+          font-size: 14px;
+          padding: 10px 0;
+        }
+        .comment-time {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  .box.alert-message {
+    margin-bottom: 30px;
+    width: 100%;
+
+    .box-header {
+      border-radius: 4px 4px 0px 0px;
+      background: #759bdf;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+    }
+
+    .box-body {
+      @include flex-center-y;
+      padding: 10px 12px;
+      background: white;
+
+      .icon {
+        display: flex;
+        font-size: 56px;
+        margin-right: 24px;
+      }
+
+      .box-title {
+        color: $primary;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .g-16 {
+    grid-gap: 16px;
+  }
+
+  .box-eyes {
+    @include flex-center;
+    margin: 0 16px;
+    padding: 16px;
+    font-size: 14px;
+    background: #193f84;
+    border-radius: 8px;
+    opacity: 1;
+    p {
+      font-size: 14px;
+      letter-spacing: 0px;
+      color: #ffffff;
+      margin-bottom: 0;
+      margin-left: 10px;
+    }
+    &.floating {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      margin: 0;
+      border-radius: 0;
+      z-index: 1;
+      border-top: unset !important;
+    }
+  }
+
+  .box.likes {
+    @include flex-center;
+    padding: 16px;
+    font-size: 14px;
+    background: white;
+    border-radius: 8px;
+    .btn-favorite {
+      width: 100%;
+      margin-left: 0 !important;
+      margin-bottom: 30px;
+    }
+    .icon-favorite {
+      cursor: pointer;
+      width: 100%;
+      @include max-width(md) {
+        font-size: 14px;
+      }
+      .liked {
+        .icon {
+          color: red;
+        }
+      }
+    }
+
+    .icon {
+      margin-right: 14px;
+      font-size: 22px;
+      color: #999999;
+      &.liked {
+        color: red !important;
+      }
+    }
+
+    .badge {
+      margin-left: 14px;
+      font-size: 14px;
+      color: white;
+      background: #d84646;
+      border-radius: 50px;
+      padding: 8px 16px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      font-size: 14px;
+      border-radius: 4px;
+      margin-left: 14px;
+    }
+
+    &.floating {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      margin: 0;
+      border-radius: 0;
+      z-index: 1;
+      border-top: 2px solid $primary;
+    }
+  }
+  // ko thấy
+  .actions-section {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .article {
+    .card-body {
+      border-bottom: none !important;
+    }
+  }
+
+  .social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 16px;
+    grid-gap: 10px;
+    button {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      color: white;
+      border: none;
+      padding: 5px 20px 7px 25px;
+      &.btn-twitter {
+        background-color: $primary-09;
+      }
+      &.btn-facebook {
+        background-color: $primary-10;
+      }
+      &.btn-line {
+        background-color: $success-02;
+      }
+      svg {
+        width: 16px;
+        position: absolute;
+        top: 50%;
+        left: 7px;
+        transform: translateY(-50%);
+      }
+
+      span {
+        font-size: 11px;
+        padding-left: 5px;
+      }
+    }
+  }
+  // hết
+
+  .card-body {
+    border: none;
+  }
+
+  .section-tabs {
+    margin-bottom: 60px;
+    display: flex;
+    @include max-width(lg) {
+      display: block;
+    }
+    .campaign-body {
+      @include max-width(md) {
+        padding: 0;
+      }
+    }
+    @include max-width(md) {
+      display: block;
+    }
+    .tabs {
+      ul {
+        grid-gap: 5px;
+        @include max-width(sm) {
+          flex-wrap: nowrap;
+        }
+
+        li.nav-item {
+          position: relative;
+          &:nth-child(3) {
+            @include max-width(sm) {
+              white-space: pre-wrap;
+              display: inline-block;
+              text-align: left;
+              .title-tab {
+                line-height: unset;
+                font-size: 9px;
+              }
+            }
+          }
+          a {
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            border-radius: 0.25rem;
+            color: white;
+            background-color: $primary;
+            padding: 10px 7px;
+            height: 45px;
+            width: 100%;
+
+            &.active {
+              color: $primary;
+              background-color: white;
+            }
+            @include max-width(sm) {
+              white-space: pre-wrap;
+              display: inline-block;
+              text-align: left;
+              padding: 3px 7px;
+            }
+
+            @media (max-width: 400px) {
+              font-size: 10px;
+            }
+
+            .title-tab {
+              margin-right: 25px;
+              @include max-width(sm) {
+                margin-right: 20px;
+                line-height: 30px;
+              }
+
+              @media (max-width: 400px) {
+                margin-right: 13px;
+                line-height: 30px;
+              }
+            }
+            .alert-amount {
+              position: absolute;
+              top: 10px;
+              right: 5px;
+              color: $primary;
+              padding: 0 2px;
+              border-radius: 2px;
+              background-color: $gray-08;
+              height: 22px;
+              width: 36px;
+              font-size: 14px;
+              @include max-width(md) {
+                font-size: 10px;
+                height: 18px;
+                width: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+    section {
+      margin-top: 40px;
+    }
+    .right-content {
+      // position: absolute;
+      // top: 0;
+      // right: -50%;
+      // flex: 0 0 50%;
+      // max-width: 47%;
+      @include max-width(lg) {
+        position: unset;
+        flex: none;
+        max-width: 100%;
+      }
+      .project-owner {
+        a.project-link {
+          color: $black;
+        }
+      }
+    }
+  }
+
+  .font-9px {
+    font-size: 9px;
+  }
+}
+.right-section {
+  padding: 0;
+}

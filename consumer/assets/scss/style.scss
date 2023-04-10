@@ -1,0 +1,219 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-vue/src/index.scss";
+@import "./pages/home/index.scss";
+@import "./pages/detail/index.scss";
+@import "./pages/phase2/home";
+@import "./pages/consultation/consultation";
+@import "./pages/auth/login.scss";
+@import "./pages/edit/edit.scss";
+@import "./pages/changeinfo/changeinfo.scss";
+@import "./pages/report/report.scss";
+@import "vue2-datepicker/scss/index.scss";
+// @import "vue2-datepicker/index.css";
+@import "./pages/buy/buy.scss";
+@import "./pages/contact/index.scss";
+//phase1
+@import "./pages/phase1/lagel.scss";
+@import "./pages/phase1/terms.scss";
+@import "./pages/phase1/privacy_policy.scss";
+// Plugins
+@import "./plugins/datepicker.scss";
+@import "./plugins/quill.scss";
+
+body {
+  background: transparent linear-gradient(119deg, #466cb014 0%, #23365800 100%)
+    0% 0% no-repeat padding-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+a {
+  color: #1d9afb;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.custom-select:focus {
+  box-shadow: none;
+}
+
+.disabled {
+  opacity: 0.7 !important;
+}
+
+.btn-primary {
+  font-size: 18px;
+  padding: 15px 0;
+  border: none;
+}
+
+section {
+  margin-bottom: 60px;
+
+  @include max-width(md) {
+    margin-bottom: 40px;
+  }
+
+  .section-header {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-weight: 800;
+    color: $primary;
+    font-size: 24px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+
+    @include max-width(md) {
+      font-size: 16px;
+    }
+  }
+
+  .section-subtitle {
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0;
+    margin-top: 24px;
+    color: $primary;
+    position: relative;
+
+    @include max-width(md) {
+      font-size: 10px;
+      margin-top: 16px;
+    }
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 4px;
+      background: currentColor;
+      display: block;
+      position: absolute;
+      top: -16px;
+
+      @include max-width(md) {
+        width: 80%;
+        left: 10%;
+        height: 2px;
+        top: -10px;
+      }
+    }
+  }
+}
+
+.d-grid {
+  display: grid;
+}
+
+.submit-area {
+  .btn {
+    max-width: 320px;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.paginations {
+  padding: 40px 0 48px 0;
+
+  .pagination {
+    justify-content: center;
+    gap: 8px;
+
+    .page-item {
+      border-radius: 2px;
+
+      &:first-child {
+        .page-link {
+          background-color: $primary;
+          color: #ffffff;
+        }
+      }
+
+      .page-link {
+        padding: 11px 15px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+    }
+
+    .arrowLine {
+      display: flex;
+      justify-content: center;
+      background-color: #466cb0;
+      border-bottom: 0 solid transparent;
+      border-top: 0 solid transparent;
+      height: 40px;
+      width: 50px;
+      float: left;
+
+      a {
+        margin-top: auto;
+        margin-bottom: auto;
+        color: #ffffff;
+      }
+    }
+
+    .btn-prev {
+      height: 0px;
+      width: 0px;
+      border-left: 25px solid #466cb0;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      float: left;
+      transform: matrix(-1, 0, 0, -1, 0, 0);
+    }
+
+    .btn-next {
+      height: 0px;
+      width: 0px;
+      border-left: 25px solid #466cb0;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      float: left;
+
+      .page-link {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.form-control,
+.form-control:focus {
+  color: black;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.btn-submit-common {
+  max-width: 320px;
+  background: #466cb0;
+  padding: 15px auto;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.mx-200 {
+  max-width: 200px;
+}
+
+.h-100 {
+  height: 100% !important;
+}

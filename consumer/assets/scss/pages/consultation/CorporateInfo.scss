@@ -1,0 +1,155 @@
+.card-corporate {
+  border: none;
+  margin-bottom: 16px;
+  .card-body {
+    padding: 24px 16px;
+    .form-title {
+      position: relative;
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 16px;
+    }
+    .form-group {
+      margin: auto;
+      margin-top: 32px;
+      label {
+        color: $primary;
+        font-size: 13px;
+        padding-bottom: 10px;
+        .ic-required {
+          color: $red;
+          padding-left: 5px;
+        }
+        .required {
+          color: white;
+          background-color: $red;
+          line-height: 20px;
+          font-size: 10px;
+          font-weight: bold;
+          padding: 0 5px;
+          border-radius: 2px;
+          margin-left: 6px;
+        }
+      }
+      input {
+        &.form-control {
+          height: auto;
+          font-size: 13px;
+          color: black;
+          padding: 18px 0 19px 19px;
+          background-color: $gray-01;
+          border: none;
+          &::placeholder {
+            color: $gray-02;
+          }
+        }
+        &.error {
+          background: #f9dddd;
+          border: 2px solid #d84646;
+        }
+      }
+      .validation {
+        color: #d84646;
+        font-size: 13px;
+        margin-top: 20px;
+      }
+      .select-item {
+        width: 30%;
+        font-size: 13px;
+        @include max-width(lg) {
+          width: 30%;
+        }
+        select {
+          height: auto;
+          padding: 18px;
+          border: none;
+          font-size: 13px;
+          background-color: $gray-01;
+        }
+      }
+      .select-pref {
+        width: 40%;
+        background-color: $gray-01;
+        border: none;
+        font-size: 13px;
+        padding: 19px;
+        height: auto;
+      }
+      .post-code {
+        width: 40%;
+      }
+      .input-note {
+        color: $gray-04;
+        padding: 8px 0;
+        font-size: 11px;
+        p {
+          margin-bottom: 0;
+        }
+      }
+      &.certificates {
+        .input-note {
+          padding: 12px 0 8px 0;
+        }
+      }
+
+      .corporate-number {
+        display: flex;
+        gap: 16px;
+        input {
+          width: 50%;
+          padding: 19px;
+          @include max-width(sm) {
+            width: 60%;
+          }
+        }
+        button.corporate-number-search {
+          width: 20%;
+          font-size: 13px;
+          padding: 0;
+          @include max-width(sm) {
+            width: 40%;
+          }
+          svg {
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .coporate-datetime {
+        width: 50%;
+        @include max-width(sm) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.form-des {
+  padding: 0px 40px 0px 40px;
+  @include max-width(lg) {
+    padding: 0px;
+  }
+  .form-group {
+    .certificate-content {
+      .group-img {
+        justify-content: flex-start !important;
+      }
+      .card-uploaded {
+        position: relative;
+        .card-body {
+          .closed {
+            position: absolute;
+            top: 0;
+            right: 0;
+            svg {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.text-gap {
+  gap: 15px;
+}

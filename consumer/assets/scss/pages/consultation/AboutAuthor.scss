@@ -1,0 +1,83 @@
+.card-author {
+  .card-body {
+    padding: 24px 16px 18px 16px;
+    .form-title {
+      position: relative;
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 16px;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 2px;
+        background-color: $gray-03;
+      }
+    }
+    .form-group {
+      margin: auto;
+      margin-top: 32px;
+      label {
+        color: $primary;
+        font-size: 13px;
+        padding-bottom: 10px;
+        .ic-required {
+          color: $red;
+          padding-left: 5px;
+        }
+        .required {
+          color: white;
+          background-color: $red;
+          line-height: 20px;
+          font-size: 10px;
+          font-weight: bold;
+          padding: 0 5px;
+          border-radius: 2px;
+          margin-left: 6px;
+        }
+      }
+      input {
+        &.form-control {
+          height: auto;
+          font-size: 13px;
+          color: black;
+          padding: 18px 0 19px 19px;
+          background-color: $gray-01;
+          border: none;
+          &::placeholder {
+            color: $gray-02;
+          }
+        }
+      }
+      .validation {
+        color: #d84646;
+        font-size: 13px;
+        margin-top: 20px;
+      }
+      textarea {
+        font-size: 13px;
+        background-color: $gray-08;
+        border: none;
+        padding: 15px 19px;
+        &::placeholder {
+          color: $gray-02;
+        }
+        &.error {
+          background: #f9dddd;
+          border: 2px solid #d84646;
+        }
+      }
+      .input-note {
+        color: $gray-04;
+        padding: 8px 0 12px 0;
+        font-size: 11px;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
