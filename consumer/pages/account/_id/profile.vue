@@ -1,30 +1,20 @@
 <template>
   <div class="changeinfo detail">
-    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
+    <!-- <AuthRegisterInfo class="mb-4"></AuthRegisterInfo> -->
     <div class="mx-lg-5">
-      <div v-if="account" id="register-setting-0" class="profile-setting">
+      <div id="register-setting-0" class="profile-setting">
         <b-card>
           <div class="form-title text-center">プロフィール編集</div>
           <form>
-            <FormValidator
-              label="ユーザー名"
-              name="editAccountRequest.name"
-              required
-            >
+            <FormValidator label="ユーザー名" required>
               <b-input
-                v-model="name"
                 type="text"
                 placeholder="exampleexampleexample"
                 required
               ></b-input>
             </FormValidator>
-            <FormValidator
-              label="メールアドレス"
-              name="editAccountRequest.email"
-              required
-            >
+            <FormValidator label="メールアドレス" required>
               <b-input
-                v-model="mail"
                 :class="{ error: error }"
                 value="example@example.com"
                 type="email"
@@ -35,15 +25,11 @@
                 正しいメールアドレスを入力してください
               </span>
             </FormValidator>
-            <FormValidator
-              class="mb-0"
-              label="プロフィール画像"
-              name="editAccountRequest.image.id"
-            >
+            <FormValidator class="mb-0" label="プロフィール画像">
               <div class="iframe-avatar text-center">
                 <div class="d-flex justify-content-center uploading-image">
-                  <b-img v-if="srcAvatar" fluid :src="srcAvatar" />
-                  <b-img v-else fluid src="@/assets/img/avatar-iframe.png" />
+                  <!-- <b-img v-if="srcAvatar" fluid :src="srcAvatar" /> -->
+                  <b-img fluid src="@/assets/img/avatar-iframe.png" />
                 </div>
                 <div class="upload-image-box">
                   <label
@@ -88,7 +74,6 @@
               label="HPやブログなどのURL"
             >
               <input
-                v-model="url"
                 type="text"
                 placeholder="（例）https://www.kobunsha.com/"
                 class="form-control"
@@ -101,7 +86,6 @@
               label="本文"
             >
               <textarea
-                v-model="bio"
                 type="text"
                 placeholder="自己紹介などを記入してください"
                 class="form-control"
@@ -126,7 +110,7 @@
 <script>
 import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
-import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
+// import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import SvgAvatar from "@/components/common/svg/SvgAvatar";
 import FormValidator from "@/components/common/FormValidator";
 import { get, omit } from "lodash";
@@ -136,7 +120,7 @@ const authMapper = createNamespacedHelpers("auth");
 
 export default {
   components: {
-    AuthRegisterInfo,
+    // AuthRegisterInfo,
     SvgAvatar,
     FormValidator,
   },
@@ -160,13 +144,13 @@ export default {
       bio: "account.bio",
     }),
 
-    srcAvatar() {
-      if (this.account.image && this.account.image.id) {
-        return this.$businessRepositories.businessCampaigns.getImage(
-          this.account.image.id
-        );
-      } else return "";
-    },
+    // srcAvatar() {
+    //   if (this.account.image && this.account.image.id) {
+    //     return this.$businessRepositories.businessCampaigns.getImage(
+    //       this.account.image.id
+    //     );
+    //   } else return "";
+    // },
   },
 
   watch: {

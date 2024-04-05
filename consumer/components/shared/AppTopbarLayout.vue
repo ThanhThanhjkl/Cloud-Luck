@@ -31,11 +31,8 @@
                 <li class="second-list">
                   <SvgList class="d-inline-block d-lg-none" />
                   <nuxt-link
-                    :to="
-                      accountId
-                        ? `/account/${accountId}/project`
-                        : '/auth/login'
-                    "
+                    :to="// accountId
+                    `/account/1/project`"
                     @click.native="showMenu = false"
                   >
                     マイプロジェクト
@@ -96,7 +93,7 @@
             </div>
 
             <nuxt-link
-              :to="accountId ? `/account/${accountId}/project` : '/auth/login'"
+              :to="`/account/1/project`"
               class="btn btn-project btn-top-bar"
             >
               マイプロジェクト</nuxt-link

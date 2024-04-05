@@ -1,5 +1,5 @@
 <template>
-  <div v-if="account">
+  <div>
     <b-card class="register-info">
       <div class="form-title text-center">マイページ</div>
       <div class="register-info-form">

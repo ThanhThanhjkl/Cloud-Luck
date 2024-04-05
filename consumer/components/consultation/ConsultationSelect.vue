@@ -172,26 +172,26 @@ export default {
 
   methods: {
     ...mapActions(["postApplication", "getApplication"]),
-    async createApplication(type) {
-      let application = {};
+    createApplication(type) {
+      // let application = {};
 
-      if (!this.user) {
-        return this.$router.push("/auth/login");
-      }
+      // if (!this.user) {
+      //   return this.$router.push("/auth/login");
+      // }
 
-      try {
-        application = await this.getApplication();
-      } catch (error) {
-        application = false;
-      }
+      // try {
+      //   application = await this.getApplication();
+      // } catch (error) {
+      //   application = false;
+      // }
 
-      if (application) {
-        this.redirectToConsultation(type);
-      } else {
-        this.postApplication().then(() => {
-          this.redirectToConsultation(type);
-        });
-      }
+      // if (application) {
+      this.redirectToConsultation(type);
+      // } else {
+      //   this.postApplication().then(() => {
+      //     this.redirectToConsultation(type);
+      //   });
+      // }
     },
 
     redirectToConsultation(type) {

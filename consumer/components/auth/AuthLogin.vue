@@ -148,16 +148,16 @@ export default {
       "getRedirectLine",
     ]),
 
-    async login() {
-      const params = {
-        email: this.email,
-        password: this.password,
-      };
+    login() {
+      // const params = {
+      //   email: this.email,
+      //   password: this.password,
+      // };
       try {
-        const res = await this.accountLogin(params);
-        if (res) {
-          this.$router.push(`/`);
-        }
+        // const res = await this.accountLogin(params);
+        // if (res) {
+        this.$router.push(`/`);
+        // }
       } catch (error) {}
     },
 

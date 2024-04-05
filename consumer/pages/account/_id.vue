@@ -1,7 +1,7 @@
 <template>
   <div :class="{ changeinfo: !route.includes('project') }">
-    <AuthRegisterInfo v-if="isIndex" class="mb-4"></AuthRegisterInfo>
-    <nuxt-child v-if="account"></nuxt-child>
+    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
+    <nuxt-child></nuxt-child>
   </div>
 </template>
 
@@ -29,15 +29,15 @@ export default {
 
   mounted() {
     try {
-      if (this.user) {
-        if (this.user.id !== this.$route.params.id) {
-          this.$router.push(`/account/${this.user.id}`);
-        } else {
-          this.getProfile();
-        }
-      } else {
-        this.$router.push("/auth/login");
-      }
+      // if (this.user) {
+      //   if (this.user.id !== this.$route.params.id) {
+      this.$router.push(`/account/1`);
+      //   } else {
+      //     this.getProfile();
+      //   }
+      // } else {
+      //   this.$router.push("/auth/login");
+      // }
     } catch (error) {
       this.$router.push("/auth/login");
     }
