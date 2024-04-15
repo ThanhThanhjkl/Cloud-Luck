@@ -9,32 +9,32 @@ export default [
   {
     id: 1,
     svg: SvgUser,
-    text: "プロフィール編集",
+    text: "Edit profile",
     url: "profile",
   },
   {
     id: 2,
     svg: SvgLocked,
-    text: " パスワード設定",
+    text: "Password setting",
     url: "password",
   },
   {
     id: 3,
     svg: SvgMap,
-    text: " お届け先の住所",
+    text: "Shipping Address",
     url: "address",
   },
   {
     id: 4,
     svg: SvgMail,
-    text: " メールマガジン受信設定",
+    text: "E-mail magazine reception setting",
     url: "email",
   },
-  { id: 5, svg: SvgMoney, text: " 購入明細", url: "project" },
+  { id: 5, svg: SvgMoney, text: "Purchase details", url: "project" },
   {
     id: 6,
     svg: SvgArlert,
-    text: " クレジットカード情報",
+    text: "Credit card information",
     url: "card",
   },
 ];

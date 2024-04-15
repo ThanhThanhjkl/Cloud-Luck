@@ -64,10 +64,7 @@ import QuillEditor from "@/components/common/QuillEditor";
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 import FileUpload from "@/components/common/FileUpload.vue";
 import MaxLengthIndicator from "@/components/common/MaxLengthIndicator";
-import { mapFields } from "vuex-map-fields";
-
 import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 
 export default {
@@ -83,12 +80,6 @@ export default {
     campaignId() {
       return this.$route.params.projectId;
     },
-    ...mapFields("business/campaign", {
-      report: "report",
-      title: "report.title",
-      body: "report.body",
-      image: "report.image.id",
-    }),
 
     ...accountMapper.mapState(["account"]),
 
@@ -98,7 +89,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["postReport", "resetReport"]),
     onUploadImage(id) {
       this.image = id;
     },

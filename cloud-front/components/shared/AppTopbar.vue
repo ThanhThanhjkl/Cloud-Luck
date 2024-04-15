@@ -23,7 +23,7 @@
               </li>
               <li class="second-list" @click="unlogined = false">
                 <SvgList class="d-inline-block d-lg-none" /><a href="#"
-                  >プロジェクトをはじめる</a
+                  >Create Projects</a
                 >
               </li>
               <li v-for="(item, index) in secondaryMenu" :key="index">
@@ -45,7 +45,7 @@
                 <SvgList class="d-inline-block d-lg-none" /><a
                   href="#"
                   @click="nextClose"
-                  >プロジェクトをはじめる</a
+                  >Create Projects</a
                 >
               </li>
               <li v-for="(item, index) in primaryMenu" :key="'primary' + index">
@@ -104,48 +104,56 @@ export default {
         {
           id: 1,
           svg: SvgUser,
-          text: "プロフィール編集",
+          text: "Edit profile",
           url: "profile",
         },
         {
           id: 2,
           svg: SvgLocked,
-          text: " パスワード設定",
+          text: " Password setting",
           url: "password",
         },
         {
           id: 3,
           svg: SvgMap,
-          text: " お届け先の住所",
+          text: " Shipping Address",
           url: "address",
         },
         {
           id: 4,
           svg: SvgMail,
-          text: " メールマガジン受信設定",
+          text: " E-mail magazine reception setting",
           url: "email",
         },
-        { id: 5, svg: SvgMoney, text: " 購入明細", url: "project" },
+        { id: 5, svg: SvgMoney, text: "Purchase details", url: "project" },
         {
           id: 6,
           svg: SvgArlert,
-          text: " メール通知設定",
+          text: " Email notification settings",
           url: "card",
         },
       ],
       secondaryMenu: [
-        { id: 1, text: "利用規約", link: "/terms" },
-        { id: 2, text: " 個人情報取扱いについて", link: "/privacy_policy" },
-        { id: 3, text: " 特定商取引法に基づく表記", link: "/legal" },
-        { id: 4, text: " ヘルプセンター", link: "/privacy_policy" },
+        { id: 1, text: "terms of service", link: "/terms" },
+        {
+          id: 2,
+          text: " Regarding handling of personal information",
+          link: "/privacy_policy",
+        },
+        {
+          id: 3,
+          text: " Description based on Specified Commercial Transactions Law",
+          link: "/legal",
+        },
+        { id: 4, text: "Help center", link: "/privacy_policy" },
         {
           id: 5,
-          text: " お問合せ",
+          text: " Contact us",
           link: "/contact",
         },
         {
           id: 6,
-          text: " 運営会社について",
+          text: " About the operating company",
           link: "https://www.kobunsha.com",
           blank: true,
         },

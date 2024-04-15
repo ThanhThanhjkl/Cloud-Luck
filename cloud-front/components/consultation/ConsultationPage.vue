@@ -1,7 +1,7 @@
 <template>
   <b-container class="page-consultation" fluid="xl">
     <section>
-      <div class="consultation-title">プロジェクトをはじめる</div>
+      <div class="consultation-title">Create Projects</div>
     </section>
     <ConsultationSelect></ConsultationSelect>
   </b-container>

@@ -34,6 +34,36 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setCost(rs.getInt("cost"));
                 products.setSale_cost(rs.getInt("sale-cost"));
                 products.setSold(rs.getInt("sold"));
+                products.setTitle(rs.getString("title"));
+                String imagesString = rs.getString("images");
+
+                if (imagesString != null) {
+                    List<String> imagesList = Arrays.asList(imagesString.split(","));
+                    products.setImages(imagesList);
+                } else {
+                    products.setImages(new ArrayList<>());
+                }
+
+                return products;
+            }
+        });
+    }
+
+    @Override
+    public Products getProductsById(Long id) {
+        String sql = "SELECT * FROM PRODUCTS WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<Products>() {
+            @Override
+            public Products mapRow(ResultSet rs, int index) throws SQLException {
+                Products products = new Products();
+                products.setId(rs.getInt("id"));
+                products.setName(rs.getString("name"));
+                products.setDescriptions(rs.getString("descriptions"));
+                products.setDate(rs.getDate("date"));
+                products.setCost(rs.getInt("cost"));
+                products.setSale_cost(rs.getInt("sale-cost"));
+                products.setSold(rs.getInt("sold"));
+                products.setTitle(rs.getString("title"));
                 String imagesString = rs.getString("images");
                 if (imagesString != null) {
                     List<String> imagesList = Arrays.asList(imagesString.split(","));

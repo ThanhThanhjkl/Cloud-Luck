@@ -136,8 +136,6 @@ import { required } from "vuelidate/lib/validators";
 // import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
 const accountMapper = createNamespacedHelpers("account");
-const { mapActions, mapState } = createNamespacedHelpers("business/campaign");
-
 export default {
   inject: ["prefix"],
 
@@ -150,8 +148,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     ...accountMapper.mapState(["account"]),
 
     readOnly() {
@@ -218,8 +214,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setLocalCampaign"]),
-
     onSaveStep() {
       this.$v.$touch();
       if (!this.$v.$error) {

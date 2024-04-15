@@ -34,7 +34,7 @@ export default {
 
   methods: {
     imageSource(id) {
-      return `${process.env.businessApiUrl}/file/${id}`;
+      return `${process.env.consumerApiUrl}/file/${id}`;
     },
   },
 };

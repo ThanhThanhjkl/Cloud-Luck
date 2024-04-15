@@ -12,8 +12,17 @@ public class Products {
     private int sale_cost;
     private int sold;
     private List<String> images;
+    private String title;
 
     public Products() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -75,6 +84,7 @@ public class Products {
     public List<String> getImages() {
         return images;
     }
+
     public void setImages(List<String> images) {
         this.images = images;
     }

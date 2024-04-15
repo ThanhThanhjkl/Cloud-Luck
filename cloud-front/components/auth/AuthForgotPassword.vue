@@ -1,30 +1,35 @@
 <template>
   <div>
-    <div v-if="success" class="section-complete">
-      <h4 class="section-title text-primary mx-auto">メールをご確認ください</h4>
-      <div class="section-body">
-        メールに記載されたURLをクリックの上、パスワード再設定を続けてください。
-        もしメールが届かない場合は、メールアドレスが間違っているか、
-        @kokotuku.jpからのメール受信を許可していない可能性があります。
-      </div>
-
-      <div class="btn-service-name">
-        <b-button class="fw-bolder" to="/" type="submit" variant="primary" block
-          >kokodeTUKURU トップ</b-button
-        >
-      </div>
-    </div>
-    <b-card v-else class="forgot-pass-form">
-      <div class="form-title text-center">パスワード再設定</div>
+    <b-card class="forgot-pass-form">
+      <div class="form-title text-center">Resetting a password</div>
       <form @submit.prevent="submitForgot">
         <div id class="note-description">
-          パスワード再設定用URLを送信しますので、ご登録いただいているメールアドレスを入力し「送信する」ボタンを押してください。
+          We will send you a password reset URL, so please enter your registered
+          email address and press the "Send" button.
         </div>
         <FormValidator name="request.email">
           <b-input
             v-model="email"
             type="email"
-            placeholder="メールアドレスを入力してください。"
+            placeholder="Please enter your e-mail address."
+            required
+          ></b-input>
+        </FormValidator>
+
+        <FormValidator name="request.password">
+          <b-input
+            v-model="password"
+            type="password"
+            placeholder="Please enter your password"
+            required
+          ></b-input>
+        </FormValidator>
+
+        <FormValidator name="request.confirmPassword">
+          <b-input
+            v-model="confirmPassword"
+            type="password"
+            placeholder="Please enter your password confirmation"
             required
           ></b-input>
         </FormValidator>
@@ -38,7 +43,7 @@
           class="btn-login"
           :disabled="!email"
           @click="submitForgot"
-          >送信する</b-button
+          >Reset</b-button
         >
       </div>
     </b-card>
@@ -58,13 +63,14 @@ export default {
   data() {
     return {
       email: "",
-      success: false,
+      password: "",
+      confirmPassword: "",
     };
   },
 
   computed: {
     disabled() {
-      if (!this.email) {
+      if (!this.email || !this.password || !this.confirmPassword) {
         return true;
       } else {
         return false;
@@ -80,10 +86,15 @@ export default {
         if (!this.email) {
           return;
         }
-        await this.forgotPassword({ email: this.email });
-        this.$toast.success("メールご確認お願いします");
-        this.success = true;
-        this.email = "";
+        const params = {
+          email: this.email,
+          password: this.password,
+          confirmPassword: this.confirmPassword,
+        };
+        await this.forgotPassword(params).then((res) => {
+          this.$toast.success(res);
+        });
+        this.$router.push("/auth/login");
       } catch (error) {}
     },
   },

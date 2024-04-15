@@ -166,8 +166,6 @@ import DetailSummary from "@/components/preview/DetailSummary";
 import SvgMessage from "@/components/common/svg/SvgMessage";
 import SvgHeart from "@/components/common/svg/SvgHeart";
 import SvgEyeSmall from "@/components/common/svg/SvgEyeSmall.vue";
-import { createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("business/campaign");
 export default {
   components: {
     DetailCarousel,
@@ -185,7 +183,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(["campaign", "report"]),
     url() {
       return this.$route.path;
     },

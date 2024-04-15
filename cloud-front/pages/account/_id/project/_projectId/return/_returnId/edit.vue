@@ -225,7 +225,6 @@ import { required } from "vuelidate/lib/validators";
 import "vue2-datepicker/locale/ja";
 import { createNamespacedHelpers } from "vuex";
 import { cloneDeep } from "lodash";
-const { mapState, mapActions } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 export default {
   components: {
@@ -301,8 +300,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     ...accountMapper.mapState(["account"]),
 
     campaignId() {
@@ -326,8 +323,6 @@ export default {
     this.returnMapper = cloneDeep(this.campaign.returns[this.returnId]);
   },
   methods: {
-    ...mapActions(["updateReturnPlan"]),
-
     disabledRange(date) {
       if (date <= new Date()) {
         return true;

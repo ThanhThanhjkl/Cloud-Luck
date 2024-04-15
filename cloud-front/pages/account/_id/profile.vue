@@ -1,10 +1,9 @@
 <template>
   <div class="changeinfo detail">
-    <!-- <AuthRegisterInfo class="mb-4"></AuthRegisterInfo> -->
     <div class="mx-lg-5">
       <div id="register-setting-0" class="profile-setting">
         <b-card>
-          <div class="form-title text-center">プロフィール編集</div>
+          <div class="form-title text-center">Edit profile</div>
           <form>
             <FormValidator label="ユーザー名" required>
               <b-input
@@ -143,14 +142,6 @@ export default {
       url: "account.url",
       bio: "account.bio",
     }),
-
-    // srcAvatar() {
-    //   if (this.account.image && this.account.image.id) {
-    //     return this.$businessRepositories.businessCampaigns.getImage(
-    //       this.account.image.id
-    //     );
-    //   } else return "";
-    // },
   },
 
   watch: {

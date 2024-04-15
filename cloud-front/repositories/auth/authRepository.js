@@ -1,25 +1,28 @@
-const ENDPOINT = "/authenticate";
+const ENDPOINT = "/account";
 export default ($authApi) => ({
+  // NEW UPDATE
+  accountRegister(params) {
+    return $authApi.post(`${ENDPOINT}`, params);
+  },
+  forgotPassword(params) {
+    return $authApi.put(`${ENDPOINT}/password`, params);
+  },
   accountLogin(params) {
     return $authApi.post(`${ENDPOINT}/login`, params);
   },
+  // getLoggedUser() {
+  //   return $authApi.get(`${ENDPOINT}` + "s");
+  // },
   accountLogout() {
     return $authApi.delete(`${ENDPOINT}/login`);
   },
+
+  // ABCD
   activeAccount(params) {
     return $authApi.put(`${ENDPOINT}/activate`, params);
   },
-  getLoggedUser() {
-    return $authApi.get(`${ENDPOINT}`);
-  },
   resetPassword(params) {
     return $authApi.put(`${ENDPOINT}/password`, params);
-  },
-  forgotPassword(params) {
-    return $authApi.post(`${ENDPOINT}/forgot`, params);
-  },
-  accountRegister(params) {
-    return $authApi.post(`${ENDPOINT}`, params);
   },
   changePassword(params) {
     return $authApi.put(`${ENDPOINT}/password`, params);

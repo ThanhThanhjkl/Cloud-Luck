@@ -1,21 +1,29 @@
-const SET_CAMPAIGNS = "SET_CAMPAIGNS";
+const SET_PRODUCTS = "SET_PRODUCTS";
+const SET_PRODUCTS_DETAIL = "SET_PRODUCTS_DETAIL";
 
 export default {
   state: () => ({
-    campaigns: [],
+    products: [],
+    product: {},
   }),
 
   actions: {
-    async getCampaigns({ commit }, params) {
+    async getProducts({ commit }) {
       try {
         const response =
-          await this.$consumerRepositories.consumerCampaigns.getCampaign({
-            keyword: params.keyword || null,
-            limit: 10,
-            offset: 0,
-          });
-
-        commit(SET_CAMPAIGNS, response.body);
+          await this.$consumerRepositories.consumerCampaigns.getProducts();
+        commit(SET_PRODUCTS, response);
+      } catch (e) {
+        // TODO
+      }
+    },
+    async getProductsDetail({ commit }, params) {
+      try {
+        const response =
+          await this.$consumerRepositories.consumerCampaigns.getProductsDetail(
+            params
+          );
+        commit(SET_PRODUCTS_DETAIL, response);
       } catch (e) {
         // TODO
       }
@@ -23,8 +31,11 @@ export default {
   },
 
   mutations: {
-    SET_CAMPAIGNS(state, payload) {
-      state.campaigns = payload;
+    SET_PRODUCTS(state, payload) {
+      state.products = payload;
+    },
+    SET_PRODUCTS_DETAIL(state, payload) {
+      state.product = payload;
     },
   },
 };

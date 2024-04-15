@@ -51,18 +51,14 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
 import CampaignStatus from "@/helpers/campaignStatus";
 import ListProject from "./ListProject.vue";
-const { mapState, mapActions } = createNamespacedHelpers("business/campaign");
 
 export default {
   components: {
     ListProject,
   },
   computed: {
-    ...mapState(["campaigns"]),
-
     availableCampaigns() {
       return this.campaigns.filter((item) => {
         return (
@@ -78,8 +74,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getCampaigns"]),
-
     getCampaignsList(type) {
       return this.availableCampaigns.filter((item) => {
         return item.status === type;

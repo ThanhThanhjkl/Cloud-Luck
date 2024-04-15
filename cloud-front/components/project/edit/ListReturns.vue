@@ -117,7 +117,6 @@ import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 
 import _ from "lodash";
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 export default {
   components: {
@@ -132,7 +131,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(["campaignReturn", "campaign"]),
     ...accountMapper.mapState(["account"]),
 
     readOnly() {
@@ -153,8 +151,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["deleteReturnPlan", "setLocalCampaign"]),
-
     showModal(index) {
       this.indexSelected = index;
       this.$refs.confirmModal.show();
@@ -172,7 +168,7 @@ export default {
     },
 
     imageSource(id) {
-      return `${process.env.businessApiUrl}/file/${id}`;
+      return `${process.env.consumerApiUrl}/file/${id}`;
     },
     onDeleteReturnPlan(index) {
       this.deleteReturnPlan(index);

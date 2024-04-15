@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card class="register-info">
-      <div class="form-title text-center">マイページ</div>
+      <div class="form-title text-center">MY ACCOUNT</div>
       <div class="register-info-form">
         <div class="settings-list">
           <div v-for="(item, index) in menu" :key="index" class="item-info">
@@ -31,18 +31,18 @@ export default {
   data() {
     return {
       menu: [
-        { id: 1, title: "プロフィール編集", url: "profile" },
-        { id: 2, title: "パスワード設定", url: "password" },
-        { id: 3, title: "お届け先の住所", url: "address" },
+        { id: 1, title: "Edit profile", url: "profile" },
+        { id: 2, title: "Password setting", url: "password" },
+        { id: 3, title: "Shipping Address", url: "address" },
         {
           id: 4,
-          title: "メール設定",
+          title: "Email settings",
           url: "email",
         },
-        { id: 5, title: "応援履歴", url: "donation" },
+        { id: 5, title: "Support history", url: "donation" },
         {
           id: 6,
-          title: "クレジットカード\n情報",
+          title: "Credit card information",
           url: "card",
         },
       ],

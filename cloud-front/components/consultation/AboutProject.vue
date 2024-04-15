@@ -66,7 +66,7 @@
 <script>
 import FormValidator from "@/components/common/FormValidator";
 import DatePicker from "vue2-datepicker";
-import { mapFields } from "vuex-map-fields";
+// import { mapFields } from "vuex-map-fields";
 export default {
   components: { FormValidator, DatePicker },
 
@@ -83,16 +83,7 @@ export default {
     };
   },
 
-  computed: {
-    ...mapFields("business/application", {
-      aboutProject: "application.project.aboutProject",
-      preferredPublicationDateStart:
-        "application.project.preferredPublicationDateStart",
-      preferredPublicationDateEnd:
-        "application.project.preferredPublicationDateEnd",
-      targetAmount: "application.project.targetAmount",
-    }),
-  },
+  computed: {},
 
   methods: {
     isNumber(event) {

@@ -9,6 +9,8 @@
             <span class="line line2"></span>
             <span class="line line3"></span>
           </div>
+
+          <!-- SMALL MENU -->
           <div class="header-menu menu-items">
             <div class="opaciti-bg"></div>
             <div class="d-block d-lg-none">
@@ -35,7 +37,7 @@
                     `/account/1/project`"
                     @click.native="showMenu = false"
                   >
-                    マイプロジェクト
+                    My Account
                   </nuxt-link>
                 </li>
                 <div v-if="user">
@@ -85,10 +87,12 @@
               </div>
             </div>
           </div>
+
+          <!-- BIG MENU -->
           <div class="d-none d-md-flex align-items-center">
             <div class="select-project mr-3">
               <nuxt-link to="/consultation" class="text-white">
-                プロジェクトをはじめる
+                Create Projects
               </nuxt-link>
             </div>
 
@@ -96,7 +100,7 @@
               :to="`/account/1/project`"
               class="btn btn-project btn-top-bar"
             >
-              マイプロジェクト</nuxt-link
+              My Account</nuxt-link
             >
           </div>
           <nuxt-link
@@ -155,7 +159,7 @@ export default {
         },
         {
           id: 7,
-          text: "プロジェクトをはじめる",
+          text: "Create Projects",
           link: "/consultation",
         },
       ],

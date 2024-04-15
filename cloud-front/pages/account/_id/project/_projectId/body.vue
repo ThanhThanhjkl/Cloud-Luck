@@ -49,8 +49,6 @@ import QuillEditor from "@/components/common/QuillEditor";
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 // import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState } = createNamespacedHelpers("business/campaign");
-
 const accountMapper = createNamespacedHelpers("account");
 
 export default {
@@ -78,8 +76,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     ...accountMapper.mapState(["account"]),
 
     readOnly() {
@@ -112,8 +108,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setLocalCampaign"]),
-
     onSaveStep() {
       this.$v.$touch();
 

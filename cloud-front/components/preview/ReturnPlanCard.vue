@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     imageSource(id) {
-      return `${process.env.businessApiUrl}/file/${id}`;
+      return `${process.env.consumerApiUrl}/file/${id}`;
     },
     isImages(listImages) {
       return listImages.filter((item) => item.id !== "");

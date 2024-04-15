@@ -13,9 +13,6 @@
 import EditVerification from "@/components/project/edit/EditVerification";
 import EditItidentificationPattern from "@/components/project/edit/EditItidentificationPattern";
 
-import { createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("business/campaign");
-
 export default {
   components: {
     EditVerification,
@@ -23,8 +20,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     publishable() {
       const status = ["offline", "updated", "update_rejected"];
       if (this.campaign) {

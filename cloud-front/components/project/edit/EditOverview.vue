@@ -156,7 +156,6 @@ import MaxLengthIndicator from "@/components/common/MaxLengthIndicator.vue";
 
 import { createNamespacedHelpers } from "vuex";
 const accountMapper = createNamespacedHelpers("account");
-const { mapActions, mapState } = createNamespacedHelpers("business/campaign");
 
 export default {
   inject: ["prefix"],
@@ -223,8 +222,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     ...accountMapper.mapState(["account"]),
 
     readOnly() {
@@ -262,8 +259,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setLocalCampaign"]),
-
     onSaveStep() {
       this.$v.$touch();
       if (!this.$v.$error) {

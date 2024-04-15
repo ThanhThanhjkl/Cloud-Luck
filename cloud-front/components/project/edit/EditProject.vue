@@ -46,9 +46,7 @@
 <script>
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 
-import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 
 export default {
@@ -83,12 +81,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
     ...accountMapper.mapState(["account"]),
-
-    ...mapFields("business/campaign", {
-      submitted: "campaign.submitted",
-    }),
 
     path() {
       return this.$route.path;
@@ -109,7 +102,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["postCampaignDetail", "setLocalCampaign"]),
     async submitProject() {
       try {
         await this.postCampaignDetail(this.campaign);

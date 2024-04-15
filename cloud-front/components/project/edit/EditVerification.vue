@@ -672,7 +672,6 @@ import _ from "lodash";
 
 import { createNamespacedHelpers } from "vuex";
 import moment from "moment";
-const campaignMapper = createNamespacedHelpers("business/campaign");
 const { mapState } = createNamespacedHelpers("account");
 
 export default {
@@ -827,8 +826,6 @@ export default {
 
   computed: {
     ...mapState(["accountCards"]),
-    ...campaignMapper.mapState(["campaign"]),
-
     singleImage() {
       if (
         this.kindIdentification === "my-number-card" ||
@@ -945,8 +942,6 @@ export default {
   },
 
   methods: {
-    ...campaignMapper.mapActions(["setLawInput", "setLocalCampaign"]),
-
     convertDate(value) {
       if (value) {
         this.year = new Date(value).getFullYear();

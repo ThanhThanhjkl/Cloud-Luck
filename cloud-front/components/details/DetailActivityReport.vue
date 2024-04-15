@@ -43,28 +43,34 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
 import SvgTwitter from "@/components/common/svg/SvgTwitter";
 import SvgFacebook from "@/components/common/svg/SvgFacebook";
-const { mapState, mapActions } = createNamespacedHelpers("campaign");
 export default {
   components: {
     SvgTwitter,
     SvgFacebook,
   },
-  computed: {
-    ...mapState(["CampaignNote", "campaign"]),
 
+  data() {
+    return {
+      CampaignNote: [
+        {
+          id: "1",
+          title: "キャンペションキャンペション",
+          summary: "キャンペションキャンペション",
+          body: "キャンペションキャンペション",
+          createdAt: "2020-01-01T00:00:00.000Z",
+        },
+      ],
+    };
+  },
+  computed: {
     campaignId() {
       return this.$route.params.id;
     },
   },
-  async mounted() {
-    await this.getCampaignNote(this.campaignId);
-  },
-  methods: {
-    ...mapActions(["getCampaignNote"]),
 
+  methods: {
     sharePost(platform, item) {
       let shareUrl = "";
       if (platform === "facebook") {

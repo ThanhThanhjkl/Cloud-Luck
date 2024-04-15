@@ -61,9 +61,7 @@ import SvgClock from "@/components/common/svg/SvgClock";
 import FormValidator from "@/components/common/FormValidator";
 
 import _ from "lodash";
-import { createNamespacedHelpers } from "vuex";
 import moment from "moment";
-const { mapState, mapActions } = createNamespacedHelpers("business/campaign");
 export default {
   components: {
     SvgCheckbox,
@@ -91,8 +89,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     campaignId() {
       return this.$route.params.projectId;
     },
@@ -112,7 +108,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["publishCampaign"]),
     async releasingProject(type) {
       const params = {
         campaignId: this.campaignId,

@@ -8,7 +8,7 @@
           </div>
           <div class="banner-button">
             <nuxt-link class="btn-banner" to="/consultation">
-              プロジェクトをはじめる
+              Create Projects
             </nuxt-link>
           </div>
         </div>
@@ -28,10 +28,10 @@
       </section>
 
       <section class="section-recommend">
-        <div class="top-list-card">
+        <div class="top-list-card" v-if="products.length > 0">
           <div class="top-1">
             <TopCard
-              v-for="(item, index) in campaigns.slice(0, 1)"
+              v-for="(item, index) in products.slice(0, 1)"
               :key="index"
               :item="item"
               large
@@ -39,7 +39,7 @@
             />
           </div>
           <div class="top-5">
-            <div v-for="(item, index) in campaigns.slice(1, 5)" :key="index">
+            <div v-for="(item, index) in products.slice(1, 5)" :key="index">
               <TopCard
                 :item="item"
                 @click="$router.push(`/project/${item.id}`)"
@@ -58,7 +58,7 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-import TopCard from "@/components/common/TopCard";
+import TopCard from "@/components/common/TopCard.vue";
 
 const { mapState, mapActions } = createNamespacedHelpers("home");
 
@@ -75,15 +75,15 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaigns"]),
+    ...mapState(["products"]),
   },
 
   mounted() {
-    this.getCampaigns({ keyword: null });
+    this.getProducts({ keyword: null });
   },
 
   methods: {
-    ...mapActions(["getCampaigns"]),
+    ...mapActions(["getProducts"]),
   },
 };
 </script>

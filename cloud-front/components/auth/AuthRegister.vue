@@ -1,28 +1,21 @@
 <template>
   <div class="register-pages">
-    <div v-if="success" class="section-complete">
-      <h4 class="section-title text-primary mx-auto">メールをご確認ください</h4>
-
-      <div class="section-body">
-        メールに記載されたURLをクリックの上、新規会員登録を続けてください。
-        もしメールが届かない場合は、メールアドレスが間違っているか、
-        @kokotuku.jpからのメール受信を許可していない可能性があります。
-      </div>
-
-      <div class="btn-service-name">
-        <b-button to="/" type="submit" variant="primary" block
-          >kokodeTUKURU トップ</b-button
-        >
-      </div>
-    </div>
-    <b-card v-else class="register-form">
-      <div class="form-title text-center">新規登録</div>
+    <b-card class="register-form">
+      <div class="form-title text-center">sign up</div>
       <form @submit.prevent="register">
         <FormValidator name="registrationRequest.email">
           <b-input
             v-model="email"
             type="email"
-            placeholder="メールアドレスを入力してください。"
+            placeholder="Please enter your e-mail address."
+            required
+          ></b-input>
+        </FormValidator>
+        <FormValidator name="registrationRequest.name">
+          <b-input
+            v-model="name"
+            type="name"
+            placeholder="Please enter your name."
             required
           ></b-input>
         </FormValidator>
@@ -30,11 +23,13 @@
           <b-input
             v-model="password"
             type="password"
-            placeholder="パスワードを入力してください。"
+            placeholder="Please enter your password."
             required
           ></b-input>
         </FormValidator>
-        <div class="pass-note text-left">※半角英数字（8桁以上）</div>
+        <div class="pass-note text-left">
+          ※ Half-width alphanumeric characters (8 digits or more)
+        </div>
       </form>
 
       <div class="submit-area">
@@ -45,7 +40,7 @@
           block
           :disabled="disabled"
           @click="register"
-          >登録する</b-button
+          >register</b-button
         >
       </div>
     </b-card>
@@ -66,15 +61,12 @@ export default {
       email: "",
       name: "",
       password: "",
-      passwordConfirmation: "",
-      success: false,
-      msg: {},
     };
   },
 
   computed: {
     disabled() {
-      if (!this.email || !this.password) {
+      if (!this.email || !this.password || !this.name) {
         return true;
       } else {
         return false;
@@ -89,11 +81,13 @@ export default {
       const params = {
         email: this.email,
         password: this.password,
+        name: this.name,
+        role: "USER",
       };
       try {
         await this.accountRegister(params);
         this.$toasted.success("メールご確認お願いします");
-        this.success = true;
+        this.$router.push("/auth/login");
         this.email = "";
         this.password = "";
       } catch (error) {}

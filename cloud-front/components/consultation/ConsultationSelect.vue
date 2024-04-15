@@ -77,8 +77,6 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
-
 import SvgCompany from "@/components/common/svg/SvgCompany";
 import SvgInvidual from "@/components/common/svg/SvgInvidual";
 import SvgBook from "@/components/common/svg/SvgBook.vue";
@@ -92,10 +90,6 @@ import SvgFile from "@/components/common/svg/SvgFile.vue";
 const COMPANY = "company";
 const INDIVIDUAL = "individual";
 
-const { mapActions, mapState } = createNamespacedHelpers(
-  "business/application"
-);
-const authMapper = createNamespacedHelpers("auth");
 export default {
   components: {
     SvgCompany,
@@ -165,13 +159,9 @@ export default {
     };
   },
 
-  computed: {
-    ...mapState(["applicationFiles"]),
-    ...authMapper.mapState(["user"]),
-  },
+  computed: {},
 
   methods: {
-    ...mapActions(["postApplication", "getApplication"]),
     createApplication(type) {
       // let application = {};
 

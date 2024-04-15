@@ -227,7 +227,6 @@ import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/locale/ja";
 import { createNamespacedHelpers } from "vuex";
 
-const { mapActions } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 export default {
   components: {
@@ -322,8 +321,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["createReturnPlan"]),
-
     disabledRange(date) {
       if (date <= new Date()) {
         return true;

@@ -447,12 +447,7 @@
 import FormValidator from "@/components/common/FormValidator";
 import FileUpload from "@/components/common/FileUpload";
 
-import { createNamespacedHelpers } from "vuex";
-import { mapFields } from "vuex-map-fields";
 import { prefectureNames } from "jp-prefectures";
-const { mapState, mapActions } = createNamespacedHelpers(
-  "business/application"
-);
 
 export default {
   components: {
@@ -497,38 +492,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["applicationFiles", "application"]),
-    ...mapFields("business/application", {
-      company: "application.company",
-      name: "application.company.name",
-      nameKana: "application.company.nameKana",
-      companyNumber: "application.company.companyNumber",
-      established: "application.company.established",
-      zipCode: "application.company.zipCode",
-      prefecture: "application.company.prefecture",
-      city: "application.company.city",
-      street: "application.company.street",
-      phoneNumber: "application.company.phoneNumber",
-      website1: "application.company.website1",
-      website2: "application.company.website2",
-      ceoName: "application.company.ceoName",
-      ceoNameKana: "application.company.ceoNameKana",
-      ceoBirthdate: "application.company.ceoBirthdate",
-      industrial: "application.company.industrial",
-      certificateOfRegisteredMatters1:
-        "application.company.certification.certificateOfRegisteredMatters1.imageId",
-      certificateOfRegisteredMatters2:
-        "application.company.certification.certificateOfRegisteredMatters2.imageId",
-      declarationOfSettlement:
-        "application.company.certification.declarationOfSettlement.imageId",
-      personalCertificationOfThePersonInCharge1:
-        "application.company.certification.personalCertificationOfThePersonInCharge1.imageId",
-      personalCertificationOfThePersonInCharge2:
-        "application.company.certification.personalCertificationOfThePersonInCharge2.imageId",
-      certificateOfOfficialRegistrationOfASeal:
-        "application.company.certification.certificateOfOfficialRegistrationOfASeal.imageId",
-    }),
-
     yearOtions() {
       const currentYear = new Date().getFullYear();
       let startYear = 1970;
@@ -579,8 +542,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["addApplicationImage", "deleteApplicationImage"]),
-
     onUploadApplicationImages($event, type) {
       this.addApplicationImage({ type, id: $event });
     },
@@ -591,7 +552,7 @@ export default {
     },
 
     imageSource(id) {
-      return `${process.env.businessApiUrl}/file/${id}`;
+      return `${process.env.consumerApiUrl}/file/${id}`;
     },
 
     convertDate(type) {

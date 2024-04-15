@@ -1,22 +1,22 @@
 <template>
-  <div v-if="campaign">
+  <div v-if="product">
     <b-card class="card-infor">
       <b-card-title class="d-block d-md-none">
-        {{ campaign.detail.title }}
+        {{ product.title }}
       </b-card-title>
 
       <b-row class="price target">
         <b-col>
           <label class="d-block">現在の応援金額</label>
           <strong class="current-amount amount">{{
-            (campaign.summary.totalAmountOfDonation || 0) | japanMoney
+            (product.cost || 0) | japanMoney
           }}</strong>
         </b-col>
 
         <b-col class="d-md-none">
           <label class="d-block">目標金額</label>
           <strong class="target-amount-sp">{{
-            (campaign.target.amount || 0) | japanMoney
+            (product.sale_cost || 0) | japanMoney
           }}</strong>
         </b-col>
       </b-row>
@@ -25,10 +25,8 @@
         <b-col>
           <label class="mb-2">達成率</label>
           <div class="position-relative">
-            <b-progress :value="progressPercent || 0" :max="100"> </b-progress>
-            <span class="progress-percent">
-              {{ progressPercent | formatNumber }}%
-            </span>
+            <b-progress :value="70 || 0" :max="100"> </b-progress>
+            <span class="progress-percent"> {{ 70 | formatNumber }}% </span>
           </div>
         </b-col>
       </b-row>
@@ -37,7 +35,7 @@
         <b-col class="d-none d-md-flex align-items-center">
           <label>目標金額</label>
           <strong class="target-amount">{{
-            (campaign.target.amount || 0) | japanMoney
+            (product.sold || 0) | japanMoney
           }}</strong>
         </b-col>
       </b-row>
@@ -48,7 +46,7 @@
             <SvgClock></SvgClock>
             <label>募集終了まで残り</label>
             <strong class="remain-detail-date"
-              >{{ campaign.target.endedAt | remainDate }}日</strong
+              >{{ product.date | remainDate }}日</strong
             >
           </div>
           <div class="d-flex d-md-none align-items-center card-info sp">
@@ -56,9 +54,7 @@
               <svg-users></svg-users>
               <span>サポーター数</span>
             </label>
-            <strong class="supporters-sp">
-              {{ campaign.summary.totalNumberOfDonors }}人
-            </strong>
+            <strong class="supporters-sp"> {{ product.title }}人 </strong>
           </div>
         </b-col>
       </b-row>
@@ -70,32 +66,30 @@
               <svg-users></svg-users>
               <span>サポーター数</span>
             </label>
-            <strong class="supporters">
-              {{ campaign.summary.totalNumberOfDonors }}人
-            </strong>
+            <strong class="supporters"> {{ product.title }}人 </strong>
           </div>
         </b-col>
       </b-row>
 
-      <b-row v-if="currentCampaignAccount" class="mt-3 mt-md-0">
+      <b-row v-if="product" class="mt-3 mt-md-0">
         <b-col class="author d-flex align-items-center">
           <svg-user-solid></svg-user-solid>
           <span>
-            {{ currentCampaignAccount.name }}
+            {{ product.name }}
           </span>
         </b-col>
       </b-row>
     </b-card>
 
     <b-card-text class="d-block d-lg-none col-12 col-lg-8">
-      {{ campaign.detail.summary }}
+      {{ product.title }}
     </b-card-text>
 
     <div class="d-flex flex-column box likes">
       <nuxt-link
         class="d-none d-md-block btn-favorite btn btn-primary"
         variant="primary"
-        :to="`/project/${campaignId}/buy/?returnId=${firstReturnId}`"
+        :to="`/project/${productId}/buy/?returnId=${1}`"
       >
         このプロジェクトを応援する
       </nuxt-link>
@@ -104,7 +98,7 @@
       >
         <div
           :class="{
-            liked: campaignFavorite ? campaignFavorite.isFavorited : false,
+            liked: false,
           }"
           @click="changeLike()"
         >
@@ -112,7 +106,7 @@
         </div>
         <b class="mt-auto mb-auto text-primary">お気に入りに追加</b>
         <div class="badge">
-          <span>{{ campaignFavorite.totalFavoritedNumber || 0 }}</span>
+          <span>{{ product.sold || 0 }}</span>
         </div>
       </div>
     </div>
@@ -125,9 +119,7 @@ import SvgLike from "@/components/common/svg/SvgLike";
 import SvgClock from "@/components/common/svg/SvgClock";
 import SvgUsers from "@/components/common/svg/SvgUsers";
 import SvgUserSolid from "@/components/common/svg/SvgUserSolid";
-import { get } from "lodash";
-const { mapState, mapActions, mapGetters } =
-  createNamespacedHelpers("campaign");
+const { mapState } = createNamespacedHelpers("home");
 
 export default {
   components: {
@@ -145,49 +137,14 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign", "campaignFavorite"]),
-    ...mapGetters(["currentCampaignAccount"]),
+    ...mapState(["product"]),
 
-    progressPercent() {
-      if (this.campaign) {
-        return Math.floor(
-          (this.campaign.summary.totalAmountOfDonation /
-            this.campaign.target.amount) *
-            100
-        );
-      } else {
-        return 0;
-      }
-    },
-
-    campaignId() {
+    productId() {
       return this.$route.params.id;
     },
-
-    firstReturnId() {
-      if (this.campaign) {
-        return get(this.campaign.returns[0], "id", "");
-      } else return "";
-    },
   },
 
-  methods: {
-    ...mapActions([
-      "postCampaignFavorite",
-      "deleteCampaignFavorite",
-      "getCampaignFavorite",
-    ]),
-
-    async changeLike() {
-      if (!this.campaignFavorite.isFavorited) {
-        await this.postCampaignFavorite(this.campaignId);
-      } else {
-        this.deleteCampaignFavorite(this.campaignId);
-      }
-
-      this.getCampaignFavorite(this.campaignId);
-    },
-  },
+  methods: {},
 };
 </script>
 

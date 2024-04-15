@@ -6,8 +6,6 @@
 
 <script>
 import ConsultationIndividual from "@/components/consultation/ConsultationIndividual.vue";
-import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("business/application");
 
 export default {
   components: {
@@ -19,8 +17,6 @@ export default {
     this.getApplication();
   },
 
-  methods: {
-    ...mapActions(["getApplication"]),
-  },
+  methods: {},
 };
 </script>

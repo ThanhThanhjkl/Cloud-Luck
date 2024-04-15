@@ -9,12 +9,9 @@
       <template #header>
         <b-avatar class="cursor-pointer" @click="seeProfile">
           <b-img
-            v-if="
-              currentCampaignAccount.image && currentCampaignAccount.image.id
-            "
             class="h-100"
             fluid
-            :src="imageSource(currentCampaignAccount.image.id)"
+            src="imageSource(currentCampaignAccount.image.id)"
           />
         </b-avatar>
 
@@ -23,17 +20,15 @@
             class="profile-name cursor-pointer text-break"
             @click="seeProfile"
           >
-            {{ currentCampaignAccount.name }}
+            ádfasdfasÏ
           </div>
         </div>
       </template>
       <div>
-        {{ currentCampaignAccount.bio }}
-        <div v-if="currentCampaignAccount.url" class="mt-2">
+        ádfadsfasdf
+        <div class="mt-2">
           URL:
-          <a :href="currentCampaignAccount.url"
-            >{{ currentCampaignAccount.url }}
-          </a>
+          <a href="currentCampaignAccount.url">ádfasdfadsfÏá </a>
         </div>
       </div>
     </b-card>

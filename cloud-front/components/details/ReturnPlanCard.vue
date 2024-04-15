@@ -1,25 +1,20 @@
 <template>
-  <b-card v-if="returnPlan" class="return-plan-card position-relative">
-    <div v-if="!buyAble" class="card-disabled"></div>
+  <b-card class="return-plan-card position-relative">
     <template #header>
-      <b-carousel v-if="returnPlan.images" controls>
-        <b-carousel-slide
-          v-for="image in returnPlan.images"
-          :key="image.id"
-          class=""
-        >
+      <b-carousel controls>
+        <b-carousel-slide>
           <template #img>
-            <img class="w-100" :src="imageSource(image.id)" />
+            <img class="w-100" src="imageSource(image.id)" />
           </template>
         </b-carousel-slide>
       </b-carousel>
     </template>
-    <h4 v-if="returnPlan.title">{{ returnPlan.title }}</h4>
+    <h4>ádfasdfasd</h4>
     <div class="row no-gutters align-items-center">
       <div class="price">
-        {{ returnPlan.amount | japanMoney }}
+        {{ 222 }}
       </div>
-      <div class="users">残り：{{ returnPlan.stockQuantity }}人まで</div>
+      <div class="users">残り：{{ 111 }}人まで</div>
     </div>
 
     <div class="px-3 text-center">
@@ -28,27 +23,24 @@
       </a>
     </div>
 
-    <div v-if="returnPlan.bio" class="card-text">
-      {{ returnPlan.bio }}
+    <div class="card-text">
+      {{ 111 }}
     </div>
 
     <b-card-sub-title class="d-flex align-items-center">
       <div>
         <label>サポーター</label>
-        <strong>{{ returnPlan.sponsorCount || 0 }}人</strong>
+        <strong>{{ 0 }}人</strong>
       </div>
 
-      <div v-if="returnPlan.scheduledDeliveryDate">
+      <div>
         <label>お届け予定</label>
-        <strong>{{ returnPlan.scheduledDeliveryDate | japanDate }} </strong>
+        <strong>{{ 2022 | japanDate }} </strong>
       </div>
     </b-card-sub-title>
   </b-card>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("campaign");
-
 export default {
   props: {
     plan: {
@@ -74,19 +66,7 @@ export default {
     },
   },
 
-  async mounted() {
-    const params = {
-      id: this.$route.params.id,
-      returnId: this.plan.id,
-    };
-
-    const res = await this.getCampaignReturnDetail(params);
-    this.returnPlan = res;
-  },
-
   methods: {
-    ...mapActions(["getCampaignReturnDetail"]),
-
     choseReturnPlan(id) {
       if (!this.buyAble) {
         return false;

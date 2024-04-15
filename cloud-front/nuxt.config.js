@@ -38,7 +38,6 @@ export default {
     { src: "@/plugins/axios" },
     { src: "@/plugins/filters" },
     { src: "@/plugins/consumerRepositories" },
-    { src: "@/plugins/businessRepositories" },
     { src: "@/plugins/authRepositories" },
     { src: "@/plugins/vue-quill-editor", ssr: false },
     { src: "@/plugins/yubinbango", ssr: false },
@@ -104,11 +103,6 @@ export default {
       process.env.NODE_ENV === "dev"
         ? "http://localhost:4040/v1"
         : process.env.CONSUMER_API_URL,
-
-    businessApiUrl:
-      process.env.NODE_ENV === "dev"
-        ? "http://localhost:4000/v1"
-        : process.env.BUSINESS_API_URL,
 
     gmoPgEnv: process.env.YOUR_GMOPG_TEST_ENV,
     gmoPgShopId: process.env.YOUR_GMOPG_SHOP_ID,

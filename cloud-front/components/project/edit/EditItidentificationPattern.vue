@@ -27,7 +27,6 @@ import PublishItidentification from "@/components/project/edit/PublishItidentifi
 
 import _ from "lodash";
 import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 
 export default {
@@ -39,8 +38,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     ...accountMapper.mapState(["account"]),
 
     readOnly() {
@@ -62,7 +59,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setLocalCampaign"]),
     submitProject() {
       this.setLocalCampaign();
     },

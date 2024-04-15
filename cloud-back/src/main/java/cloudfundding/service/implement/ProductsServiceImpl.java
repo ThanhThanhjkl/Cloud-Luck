@@ -23,6 +23,11 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
+    public Products getProductsById(Long id) {
+        return productsRepository.getProductsById(id);
+    }
+
+    @Override
     public void addProduct(Products products) {
         productsRepository.addProduct(products);
     }

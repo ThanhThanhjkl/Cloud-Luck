@@ -23,7 +23,7 @@ export default {
         this.$router.push("/auth/registeration/complete");
       } catch (error) {
         this.$router.push("/auth/registeration");
-        this.$toasted.error("トークン正しくありません");
+        this.$toasted.error("token is incorrect");
       }
     }
   },

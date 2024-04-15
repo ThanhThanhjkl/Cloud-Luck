@@ -47,10 +47,7 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
 import { get } from "lodash";
-
-const { mapState } = createNamespacedHelpers("business/campaign");
 
 export default {
   data() {
@@ -62,8 +59,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     progressPercent() {
       if (this.campaign) {
         return (this.campaign.currentAmount / this.campaign.targetAmount) * 100;
@@ -100,7 +95,7 @@ export default {
     },
 
     imageSource(id) {
-      return `${process.env.businessApiUrl}/file/${id}`;
+      return `${process.env.consumerApiUrl}/file/${id}`;
     },
   },
 };

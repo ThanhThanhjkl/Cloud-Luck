@@ -4,16 +4,11 @@
 
 <script>
 import EditEstablish from "@/components/project/edit/EditEstablish.vue";
-import { createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("business/campaign");
-
 export default {
   components: {
     EditEstablish,
   },
 
-  computed: {
-    ...mapState(["campaign"]),
-  },
+  computed: {},
 };
 </script>

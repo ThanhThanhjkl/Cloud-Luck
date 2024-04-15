@@ -31,15 +31,10 @@
 
 <script>
 import { omit } from "lodash";
-import { createNamespacedHelpers } from "vuex";
 import { mapFields } from "vuex-map-fields";
 
 import IndividualAuthor from "@/components/consultation/IndividualAuthor";
 import AboutProject from "@/components/consultation/AboutProject";
-
-const { mapState, mapActions } = createNamespacedHelpers(
-  "business/application"
-);
 
 export default {
   components: {
@@ -48,16 +43,12 @@ export default {
   },
 
   computed: {
-    ...mapState(["application"]),
-
     ...mapFields("global", {
       keepError: "keepError",
     }),
   },
 
   methods: {
-    ...mapActions(["updateApplication", "resetApplication"]),
-
     async onSave() {
       try {
         await this.updateApplication(omit(this.application, "company"));

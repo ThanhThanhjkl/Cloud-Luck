@@ -19,20 +19,6 @@ export default {
     setValidationErrors({ commit }, payload) {
       commit(SET_VALIDATION_ERRORS, payload);
     },
-
-    getImage(_, params) {
-      return this.$businessRepositories.businessCampaigns.getImage(params);
-    },
-
-    postImage(_, params) {
-      const formData = new FormData();
-      formData.append("file", params);
-      return this.$businessRepositories.businessCampaigns.postImage(formData);
-    },
-
-    deleteImage(_, params) {
-      return this.$businessRepositories.businessCampaigns.deleteImage(params);
-    },
   },
 
   mutations: {

@@ -37,11 +37,7 @@ import CorporateInfo from "@/components/consultation/CorporateInfo";
 import AboutProject from "@/components/consultation/AboutProject";
 
 import { omit } from "lodash";
-import { createNamespacedHelpers } from "vuex";
 import { mapFields } from "vuex-map-fields";
-const { mapActions, mapState } = createNamespacedHelpers(
-  "business/application"
-);
 export default {
   components: {
     IndividualAuthor,
@@ -51,16 +47,12 @@ export default {
   },
 
   computed: {
-    ...mapState(["application"]),
-
     ...mapFields("global", {
       keepError: "keepError",
     }),
   },
 
   methods: {
-    ...mapActions(["updateApplication", "resetApplication"]),
-
     async onSave() {
       try {
         await this.updateApplication(omit(this.application, "company.images"));

@@ -30,7 +30,6 @@
 </template>
 <script>
 import FormValidator from "@/components/common/FormValidator";
-import { mapFields } from "vuex-map-fields";
 export default {
   components: { FormValidator },
 
@@ -41,11 +40,6 @@ export default {
     },
   },
 
-  computed: {
-    ...mapFields("business/application", {
-      website: "application.publisher.website",
-      body: "application.publisher.body",
-    }),
-  },
+  computed: {},
 };
 </script>

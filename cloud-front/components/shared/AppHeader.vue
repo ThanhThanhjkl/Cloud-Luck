@@ -34,7 +34,7 @@
                 <SvgUser></SvgUser>
               </template>
               <b-dropdown-item>
-                <nuxt-link :to="`/account/${user.id}`">マイページ</nuxt-link>
+                <nuxt-link :to="`/account/${user.id}`">MY ACCOUNT</nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item @click="onLogout">
                 <a>ログアウト</a>

@@ -11,7 +11,6 @@
 import EditProject from "@/components/project/edit/EditProject";
 
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("business/campaign");
 const accountMapper = createNamespacedHelpers("account");
 const authMapper = createNamespacedHelpers("auth");
 
@@ -26,7 +25,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
     ...authMapper.mapState(["user"]),
     ...accountMapper.mapState(["account"]),
 
@@ -65,7 +63,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getCampaignDetail", "getLocalCampaign"]),
     ...accountMapper.mapActions(["getAccountCards"]),
 
     handleBeforeUnload(event) {

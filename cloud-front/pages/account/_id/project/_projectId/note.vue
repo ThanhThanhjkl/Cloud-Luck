@@ -25,10 +25,7 @@
 </template>
 <script>
 import ProjectEdit from "@/components/project/edit/ProjectEdit.vue";
-
 import { get } from "lodash";
-import { createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("business/campaign");
 
 export default {
   layout: "auth",
@@ -37,12 +34,10 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign"]),
-
     imageSource() {
       if (this.campaign) {
         const id = get(this.campaign, "visual.mainImage.id");
-        return `${process.env.businessApiUrl}/file/${id}`;
+        return `${process.env.consumerApiUrl}/file/${id}`;
       } else return null;
     },
 

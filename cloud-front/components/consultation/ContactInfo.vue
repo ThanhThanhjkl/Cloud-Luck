@@ -127,7 +127,6 @@
 </template>
 <script>
 import FormValidator from "@/components/common/FormValidator";
-import { mapFields } from "vuex-map-fields";
 export default {
   components: {
     FormValidator,
@@ -146,20 +145,7 @@ export default {
     };
   },
 
-  computed: {
-    ...mapFields("business/application", {
-      name: "application.company.contact.name",
-      nameKana: "application.company.contact.nameKana",
-      department: "application.company.contact.department",
-      position: "application.company.contact.position",
-      email: "application.company.contact.email",
-      emailConfirm: "application.company.contact.emailConfirm",
-      emailSubConfirm: "application.company.contact.emailSubConfirm",
-      emailSub: "application.company.contact.emailSub",
-      phoneNumber: "application.company.contact.phoneNumber",
-      phoneNumberMain: "application.company.contact.phoneNumberMain",
-    }),
-  },
+  computed: {},
 
   methods: {
     isNumber(event) {

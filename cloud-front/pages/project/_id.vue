@@ -3,7 +3,7 @@
     <nuxt-child></nuxt-child>
   </div>
   <div v-else class="pt-md-5">
-    <b-container v-if="campaign && campaign.id" class="page-detail" fluid="xl">
+    <b-container v-if="product && product.id" class="page-detail" fluid="xl">
       <div class="box alert-message">
         <div class="box-header">VERY編集部コメント</div>
         <div class="box-body">
@@ -11,7 +11,7 @@
             <SvgMessage></SvgMessage>
           </div>
           <div class="box-title">
-            {{ campaign.detail.title }}
+            {{ product.name }}
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
       <div class="page-detail-content">
         <section class="left-content">
           <b-card-title class="d-none mb-0 d-lg-block text-center">
-            {{ campaign.name }}
+            {{ product.name }}
           </b-card-title>
 
           <section class="d-grid g-32">
@@ -31,7 +31,7 @@
 
             <div class="right-section">
               <section class="section-tabs">
-                <div class="campaign-body col-12 p-0">
+                <div class="product-body col-12 p-0">
                   <div class="d-none d-lg-block section-header">
                     <h2 class="section-title">PROJECT DETAIL</h2>
                     <h4 class="section-subtitle">プロジェクト詳細</h4>
@@ -42,7 +42,7 @@
                         <!---->
                         <li role="presentation" class="nav-item">
                           <nuxt-link
-                            :to="`/project/${campaignId}`"
+                            :to="`/project/${productId}`"
                             role="tab"
                             class="nav-link text-center"
                             :class="{ active: url == 'project-id' }"
@@ -52,7 +52,7 @@
                         </li>
                         <li role="presentation" class="nav-item">
                           <nuxt-link
-                            :to="`/project/${campaignId}/note`"
+                            :to="`/project/${productId}/note`"
                             class="nav-link"
                             :class="{
                               active:
@@ -66,7 +66,7 @@
                         </li>
                         <li role="presentation" class="nav-item">
                           <nuxt-link
-                            :to="`/project/${campaignId}/sponsor`"
+                            :to="`/project/${productId}/sponsor`"
                             class="nav-link"
                             :class="{ active: url == 'project-id-sponsor' }"
                           >
@@ -78,7 +78,7 @@
                         </li>
                         <li role="presentation" class="nav-item">
                           <nuxt-link
-                            :to="`/project/${campaignId}/comment`"
+                            :to="`/project/${productId}/comment`"
                             class="nav-link"
                             :class="{ active: url == 'project-id-comment' }"
                           >
@@ -94,7 +94,7 @@
                   <nuxt-child></nuxt-child>
                   <DetailProject
                     v-if="url == 'project-id'"
-                    :campaign="campaign"
+                    :product="product"
                   ></DetailProject>
                 </div>
               </section>
@@ -105,9 +105,7 @@
         <section class="right-content">
           <DetailSummary class="d-none d-md-block"></DetailSummary>
 
-          <DetailProjectOwner
-            v-if="currentCampaignAccount"
-          ></DetailProjectOwner>
+          <DetailProjectOwner></DetailProjectOwner>
 
           <section class="return-plan">
             <div class="section-header">
@@ -115,23 +113,23 @@
               <h4 class="section-subtitle">リターンを選択する</h4>
             </div>
             <div class="d-grid g-16">
-              <div v-for="item in campaignReturns" :key="item.id">
-                <ReturnPlanCard v-if="item" :plan="item"></ReturnPlanCard>
+              <div>
+                <ReturnPlanCard v-if="product" :plan="product"></ReturnPlanCard>
               </div>
             </div>
           </section>
 
-          <b-card v-if="campaign.target" class="card-notice">
+          <b-card v-if="product.target" class="card-notice">
             <span>
               このプロジェクトは、<a class="text-primary">
-                {{ campaign.target.method }}
+                {{ product.target.method }}
               </a>
               です。
             </span>
             <span>
               目標金額に関わらず、
               <a class="text-primary">
-                {{ campaign.target.endedAt | fullDateTime }}
+                {{ product.date | fullDateTime }}
               </a>
               までに集まった金額がファンディングされます。
             </span>
@@ -145,13 +143,13 @@
             class="icon"
             opacity="0.7"
             :class="{
-              liked: campaignFavorite ? campaignFavorite.isFavorited : false,
+              liked: false,
             }"
           ></SvgHeart>
         </div>
 
-        <span>{{ campaignFavorite.totalFavoritedNumber }}</span>
-        <nuxt-link class="btn btn-primary" :to="`/project/${campaignId}/buy`">
+        <span>{{ 100 }}</span>
+        <nuxt-link class="btn btn-primary" :to="`/project/${productId}/buy`">
           このプロジェクトを応援する
         </nuxt-link>
       </div>
@@ -170,9 +168,7 @@ import ReturnPlanCard from "@/components/details/ReturnPlanCard.vue";
 import SvgMessage from "@/components/common/svg/SvgMessage";
 import SvgHeart from "@/components/common/svg/SvgHeart";
 
-const { mapState, mapActions, mapGetters } =
-  createNamespacedHelpers("campaign");
-const authMapper = createNamespacedHelpers("auth");
+const { mapState, mapActions } = createNamespacedHelpers("home");
 
 export default {
   components: {
@@ -192,15 +188,13 @@ export default {
   },
 
   computed: {
-    ...mapState(["campaign", "campaignReturns", "campaignFavorite"]),
-    ...mapGetters(["currentCampaignAccount"]),
-    ...authMapper.mapState(["user"]),
+    ...mapState(["product"]),
 
     url() {
       return this.$route.name;
     },
 
-    campaignId() {
+    productId() {
       return this.$route.params.id;
     },
 
@@ -214,44 +208,11 @@ export default {
     },
   },
   async mounted() {
-    try {
-      const campaignResponse = await this.getCampaignDetail(this.campaignId);
-      this.getCampaignReturn(this.campaignId);
-
-      if (campaignResponse.accountId) {
-        this.getAccountCampaign(campaignResponse.accountId);
-      }
-
-      if (this.user && this.user.id) {
-        this.getCampaignFavorite(this.campaignId);
-      }
-    } catch (error) {}
-  },
-
-  beforeDestroy() {
-    this.resetCampaignDetail();
+    await this.getProductsDetail(this.productId);
   },
 
   methods: {
-    ...mapActions([
-      "getCampaignDetail",
-      "getCampaignFavorite",
-      "postCampaignFavorite",
-      "deleteCampaignFavorite",
-      "getCampaignReturn",
-      "resetCampaignDetail",
-      "getAccountCampaign",
-    ]),
-
-    async changeLike() {
-      if (!this.campaignFavorite.isFavorited) {
-        await this.postCampaignFavorite(this.campaignId);
-        this.getCampaignFavorite(this.campaignId);
-      } else {
-        await this.deleteCampaignFavorite(this.campaignId);
-        this.getCampaignFavorite(this.campaignId);
-      }
-    },
+    ...mapActions(["getProductsDetail"]),
   },
 };
 </script>

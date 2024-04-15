@@ -45,12 +45,9 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
 import { omit } from "lodash";
 import { mapFields } from "vuex-map-fields";
-const { mapActions, mapState } = createNamespacedHelpers(
-  "business/application"
-);
+
 export default {
   data() {
     return {
@@ -59,7 +56,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["application"]),
     ...mapFields("global", {
       keepError: "keepError",
     }),
@@ -86,7 +82,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getApplication", "updateApplication", "resetApplication"]),
     setResult() {
       this.result = [
         {
@@ -140,7 +135,7 @@ export default {
     },
 
     imageSource(id) {
-      return `${process.env.businessApiUrl}/file/${id}`;
+      return `${process.env.consumerApiUrl}/file/${id}`;
     },
   },
 };

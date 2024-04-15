@@ -1,14 +1,14 @@
 <template>
   <div class="auth-login-page">
     <b-card class="login-email-form">
-      <div class="form-title text-center">メールアドレスでログイン</div>
+      <div class="form-title text-center">Login with email address</div>
       <form @submit.prevent="login">
         <FormValidator name="loginRequest.email">
           <b-input
             v-model="email"
             :class="{ error: emailError }"
             type="email"
-            placeholder="メールアドレスを入力してください。"
+            placeholder="Please enter your e-mail address."
             required
           ></b-input>
         </FormValidator>
@@ -17,15 +17,17 @@
             v-model="password"
             :class="{ error: passwordError }"
             type="password"
-            placeholder="パスワードを入力してください。"
+            placeholder="Please enter your password."
             required
           ></b-input>
-          <span class="text-muted"> ※半角英数字（8桁以上） </span>
+          <span class="text-muted">
+            ※ Half-width alphanumeric characters (8 digits or more)</span
+          >
         </FormValidator>
 
         <div class="text-right">
           <nuxt-link to="/auth/forgot" class="d-inline-block small forgot-pass">
-            パスワードをお忘れの方
+            Forgot password
           </nuxt-link>
         </div>
       </form>
@@ -38,7 +40,7 @@
           class="btn-login"
           :disabled="disabled"
           @click="login"
-          >ログイン</b-button
+          >Login</b-button
         >
         <nuxt-link
           to="/auth/registeration"
@@ -46,13 +48,13 @@
           class="btn btn-block btn-sign-up"
         >
           <svg-mail></svg-mail>
-          <span>新規登録</span>
+          <span>Sign Up</span>
         </nuxt-link>
       </div>
     </b-card>
     <b-modal id="modal-1">
       <p class="my-4">
-        申し訳ありません。エラーが発生しました。 トップページへ戻ります。
+        very sorry. An error has occurred. Return to the top page.
       </p>
       <button v-b-modal.modal-2 @click="$bvModal.hide('modal-1')">
         kokodeTUKURU トップ
@@ -75,7 +77,7 @@
     </b-modal>
 
     <b-card class="login-external-id">
-      <div class="form-title text-center">外部サイトIDでログイン</div>
+      <div class="form-title text-center">Log in with external site ID</div>
       <div class="btn-external">
         <a block class="btn btn-block btn-twitter" @click="redirectTwitter">
           <svg-twitter></svg-twitter>
@@ -141,23 +143,18 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      "accountLogin",
-      "getRedirectInstagram",
-      "getRedirectTwitter",
-      "getRedirectLine",
-    ]),
+    ...mapActions(["accountLogin"]),
 
-    login() {
-      // const params = {
-      //   email: this.email,
-      //   password: this.password,
-      // };
+    async login() {
+      const params = {
+        email: this.email,
+        password: this.password,
+      };
       try {
-        // const res = await this.accountLogin(params);
-        // if (res) {
-        this.$router.push(`/`);
-        // }
+        const res = await this.accountLogin(params);
+        if (res.token !== null) {
+          this.$router.push(`/`);
+        }
       } catch (error) {}
     },
 
