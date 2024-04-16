@@ -17,6 +17,14 @@ export default ($authApi) => ({
     return $authApi.delete(`${ENDPOINT}/login`);
   },
 
+  getAccount(params) {
+    return $authApi.get(`${ENDPOINT}/${params}`);
+  },
+
+  updateAccount(params) {
+    return $authApi.put(`${ENDPOINT}`, params);
+  },
+
   // ABCD
   activeAccount(params) {
     return $authApi.put(`${ENDPOINT}/activate`, params);

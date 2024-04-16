@@ -1,45 +1,12 @@
 <template>
   <div class="container">
-    <div v-if="availableCampaigns.length" class="list-project">
-      <b-card v-if="getCampaignsList('draft').length" class="card">
+    <div class="list-project">
+      <b-card class="card">
         <div class="form-title text-center">編集中プロジェクト</div>
-        <ListProject :campaigns="getCampaignsList('draft')" editable />
-      </b-card>
-
-      <b-card v-if="getCampaignsList('rejected').length" class="card">
-        <div class="form-title text-center">編集中プロジェクト</div>
-        <ListProject :campaigns="getCampaignsList('rejected')" editable />
-      </b-card>
-
-      <b-card v-if="getCampaignsList('offline').length" class="card">
-        <div class="form-title text-center">掲載前プロジェクト</div>
-        <ListProject :campaigns="getCampaignsList('offline')" editable />
-      </b-card>
-
-      <b-card v-if="getCampaignsList('updated').length" class="card">
-        <div class="form-title text-center">掲載更新前プロジェクト</div>
-        <ListProject :campaigns="getCampaignsList('updated')" editable />
-      </b-card>
-
-      <b-card v-if="getCampaignsList('update_rejected').length" class="card">
-        <div class="form-title text-center">掲載更新前プロジェクト</div>
-        <ListProject
-          :campaigns="getCampaignsList('update_rejected')"
-          editable
-        />
-      </b-card>
-
-      <b-card v-if="getCampaignsList('published').length" class="card">
-        <div class="form-title text-center">掲載中プロジェクト</div>
-        <ListProject :campaigns="getCampaignsList('published')" editable />
-      </b-card>
-
-      <b-card v-if="getCampaignsList('finished').length" class="card">
-        <div class="form-title text-center">終了したプロジェクト</div>
-        <ListProject :campaigns="getCampaignsList('finished')" noteable />
+        <ListProject editable />
       </b-card>
     </div>
-    <div v-else>
+    <div>
       <h3 class="mt-2 text-primary text-center">
         まずは
         <nuxt-link to="/consultation" class="text-primary">
@@ -51,34 +18,16 @@
   </div>
 </template>
 <script>
-import CampaignStatus from "@/helpers/campaignStatus";
 import ListProject from "./ListProject.vue";
 
 export default {
   components: {
     ListProject,
   },
-  computed: {
-    availableCampaigns() {
-      return this.campaigns.filter((item) => {
-        return (
-          item.status !== CampaignStatus.REVIEWING &&
-          item.status !== CampaignStatus.UPDATE_REVIEWING
-        );
-      });
-    },
-  },
+  computed: {},
 
-  mounted() {
-    this.getCampaigns();
-  },
+  mounted() {},
 
-  methods: {
-    getCampaignsList(type) {
-      return this.availableCampaigns.filter((item) => {
-        return item.status === type;
-      });
-    },
-  },
+  methods: {},
 };
 </script>

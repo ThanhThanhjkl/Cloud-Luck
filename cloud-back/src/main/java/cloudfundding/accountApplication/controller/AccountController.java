@@ -5,12 +5,17 @@ import cloudfundding.accountApplication.model.AccountLoginDTO;
 import cloudfundding.accountApplication.model.AccountResetPasswordDTO;
 import cloudfundding.accountApplication.model.AccountTokenDTO;
 import cloudfundding.accountApplication.service.AccountService;
+import cloudfundding.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +66,15 @@ public class AccountController {
     // update
     @PutMapping("/account")
     public void update(@RequestBody AccountDTO accountDTO) {
+        // Kiểm tra xem avatar có được cung cấp không
+        if (accountDTO.getAvatar() != null) {
+            // Lấy URL hình ảnh từ trường avatar
+            String imageUrl = accountDTO.getAvatar();
+            // Tải hình ảnh từ URL và chuyển đổi thành mảng byte
+            byte[] avatar = ImageUtils.extractImageData(imageUrl);
+            // Cập nhật dữ liệu avatar của tài khoản
+            accountDTO.setAvatar(Base64.getEncoder().encodeToString(avatar));
+        }
         accountService.update(accountDTO);
     }
 

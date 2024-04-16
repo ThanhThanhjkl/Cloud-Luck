@@ -5,30 +5,27 @@
         <b-card>
           <div class="form-title text-center">Edit profile</div>
           <form>
-            <FormValidator label="ユーザー名" required>
+            <FormValidator label="Acount Name" required>
               <b-input
+                v-model="name"
                 type="text"
                 placeholder="exampleexampleexample"
                 required
               ></b-input>
             </FormValidator>
-            <FormValidator label="メールアドレス" required>
+            <FormValidator label="Email" required>
               <b-input
-                :class="{ error: error }"
+                v-model="email"
                 value="example@example.com"
                 type="email"
                 placeholder="example@example.com"
               >
               </b-input>
-              <span v-if="error" class="validation">
-                正しいメールアドレスを入力してください
-              </span>
             </FormValidator>
-            <FormValidator class="mb-0" label="プロフィール画像">
+            <FormValidator class="mb-0" label="Avatar">
               <div class="iframe-avatar text-center">
                 <div class="d-flex justify-content-center uploading-image">
-                  <!-- <b-img v-if="srcAvatar" fluid :src="srcAvatar" /> -->
-                  <b-img fluid src="@/assets/img/avatar-iframe.png" />
+                  <b-img fluid :src="avatar" />
                 </div>
                 <div class="upload-image-box">
                   <label
@@ -42,9 +39,11 @@
                       @drop="drop"
                     >
                       <svg-avatar></svg-avatar>
-                      画像をアップロードする
+                      Upload an image
                     </div>
-                    <div>縦横比200px*200px以上の画像推奨</div>
+                    <div>
+                      Image with aspect ratio of 200px*200px or more recommended
+                    </div>
                   </label>
                   <input
                     id="files"
@@ -56,7 +55,8 @@
                     @change="onUploadAvatar"
                   />
                   <div class="sub-note">
-                    ※アップロードできるファイル形式はPNG/JPG/JPEG/GIFのみです。
+                    ※The only file formats that can be uploaded are
+                    PNG/JPG/JPEG/GIF.
                   </div>
                 </div>
               </div>
@@ -65,28 +65,22 @@
         </b-card>
 
         <b-card class="card-about-person">
-          <div class="form-title text-center">記載者について</div>
+          <div class="form-title text-center">About the author</div>
           <form class="mx-auto">
-            <FormValidator
-              name="editAccountRequest.website"
-              class="mt-3"
-              label="HPやブログなどのURL"
-            >
-              <input
+            <FormValidator class="mt-3" label="URL of homepage, blog, etc.">
+              <b-input
+                v-model="url"
                 type="text"
                 placeholder="（例）https://www.kobunsha.com/"
                 class="form-control"
-              />
+              ></b-input>
             </FormValidator>
 
-            <FormValidator
-              name="editAccountRequest.bio"
-              class="mt-3"
-              label="本文"
-            >
+            <FormValidator class="mt-3" label="Text">
               <textarea
+                v-model="about"
                 type="text"
-                placeholder="自己紹介などを記入してください"
+                placeholder="Please enter your self-introduction etc."
                 class="form-control"
               />
             </FormValidator>
@@ -98,7 +92,7 @@
             class="btn-changeinfo-profile"
             block
             @click="update"
-            >更新する</b-button
+            >Update</b-button
           >
         </b-card>
       </div>
@@ -107,19 +101,13 @@
 </template>
 
 <script>
-import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
-// import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import SvgAvatar from "@/components/common/svg/SvgAvatar";
 import FormValidator from "@/components/common/FormValidator";
-import { get, omit } from "lodash";
-const { mapActions, mapState } = createNamespacedHelpers("account");
-const globalMapper = createNamespacedHelpers("global");
-const authMapper = createNamespacedHelpers("auth");
+const { mapActions, mapState } = createNamespacedHelpers("auth");
 
 export default {
   components: {
-    // AuthRegisterInfo,
     SvgAvatar,
     FormValidator,
   },
@@ -128,43 +116,46 @@ export default {
 
   data() {
     return {
-      mail: null,
+      name: null,
+      email: null,
+      avatar: null,
+      url: null,
+      about: null,
+      role: null,
       error: false,
       isDragging: false,
     };
   },
 
   computed: {
-    ...authMapper.mapState(["user"]),
-    ...mapState(["account"]),
-    ...mapFields("account", {
-      name: "account.name",
-      url: "account.url",
-      bio: "account.bio",
-    }),
-  },
-
-  watch: {
-    user: {
-      immediate: true,
-      deep: true,
-      handler(val) {
-        if (get(val, "email")) {
-          this.mail = val.email;
-        }
-      },
+    ...mapState(["userId", "account"]),
+    accountId() {
+      if (this.userId) {
+        return this.userId;
+      } else {
+        return null;
+      }
     },
   },
 
-  methods: {
-    ...mapActions(["updateProfile", "uploadAvatar"]),
-    ...globalMapper.mapActions(["getImage"]),
+  async mounted() {
+    await this.getAccount(this.accountId).then(() => {
+      this.name = this.account.name;
+      this.email = this.account.email;
+      this.avatar = "data:image/jpeg;base64," + this.account.avatar;
+      this.url = this.account.url;
+      this.about = this.account.about;
+      this.role = this.account.role;
+    });
+  },
 
-    async onUploadAvatar(e, isDrop) {
+  methods: {
+    ...mapActions(["getAccount", "updateAccount"]),
+    onUploadAvatar(e, isDrop) {
       const fileInput = this.$refs.fileInput;
       const files = isDrop ? e.dataTransfer.files : fileInput.files;
       if (files && files[0]) {
-        await this.uploadAvatar(files[0]);
+        this.avatar = URL.createObjectURL(files[0]);
       }
     },
 
@@ -179,29 +170,32 @@ export default {
     },
 
     update() {
-      this.error = false;
-
-      let params = {
-        username: this.account.name,
-        image: {
-          id: this.account.image ? this.account.image.id : null,
-        },
-        bio: this.account.bio || "",
-        website: this.account.url || "",
-      };
-
-      if (this.mail && this.mail !== this.user.email) {
-        params = { ...params, email: this.mail };
-        if (!this.validateEmail(this.mail)) return false;
-      }
-
-      if (!this.account.image) {
-        params = omit(params, "image");
-      }
-
-      this.updateProfile(params).then(() => {
-        this.$toasted.success("更新しました");
+      this.imageToBase64(this.avatar, (base64Image) => {
+        const params = {
+          id: this.accountId,
+          name: this.name,
+          email: this.email,
+          avatar: base64Image,
+          url: this.url,
+          about: this.about,
+          role: this.role,
+        };
+        this.updateAccount(params);
       });
+    },
+
+    imageToBase64(url, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        const reader = new FileReader();
+        reader.onloadend = function () {
+          callback(reader.result);
+        };
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.open("GET", url);
+      xhr.responseType = "blob";
+      xhr.send();
     },
 
     dragover(e) {

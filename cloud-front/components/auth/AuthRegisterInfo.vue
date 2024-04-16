@@ -8,7 +8,7 @@
             <nuxt-link
               class="menu-item"
               :class="{ active: path.includes(item.url) }"
-              :to="`/account/${account ? account.id : 1}/${item.url}`"
+              :to="`/account/${accountId}/${item.url}`"
               ><span>{{ item.title }}</span></nuxt-link
             >
           </div>
@@ -24,9 +24,7 @@
 </template>
 <script>
 import { createNamespacedHelpers } from "vuex";
-
-const { mapState } = createNamespacedHelpers("account");
-
+const { mapState } = createNamespacedHelpers("auth");
 export default {
   data() {
     return {
@@ -75,9 +73,16 @@ export default {
   },
 
   computed: {
-    ...mapState(["account"]),
+    ...mapState(["userId"]),
     path() {
       return this.$route.path;
+    },
+    accountId() {
+      if (this.userId) {
+        return this.userId;
+      } else {
+        return null;
+      }
     },
   },
 };

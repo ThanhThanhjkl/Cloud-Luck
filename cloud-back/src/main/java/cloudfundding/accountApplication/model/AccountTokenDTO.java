@@ -6,4 +6,5 @@ import lombok.Data;
 public class AccountTokenDTO {
     private String token;
     private String message;
+    private String id;
 }

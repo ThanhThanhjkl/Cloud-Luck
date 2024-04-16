@@ -13,4 +13,10 @@ public class AccountDTO {
     private String email;
 
     private String role;
+
+    private String avatar;
+
+    private String url;
+
+    private String about;
 }

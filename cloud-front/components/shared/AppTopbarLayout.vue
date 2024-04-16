@@ -33,8 +33,7 @@
                 <li class="second-list">
                   <SvgList class="d-inline-block d-lg-none" />
                   <nuxt-link
-                    :to="// accountId
-                    `/account/1/project`"
+                    :to="`/account/${accountId}`"
                     @click.native="showMenu = false"
                   >
                     My Account
@@ -97,7 +96,7 @@
             </div>
 
             <nuxt-link
-              :to="`/account/1/project`"
+              :to="`/account/${accountId}`"
               class="btn btn-project btn-top-bar"
             >
               My Account</nuxt-link
@@ -170,14 +169,14 @@ export default {
     isMobile() {
       return this.windowWidth <= 768;
     },
-    ...mapState(["user"]),
+    ...mapState(["userId"]),
     path() {
       return this.$route.path;
     },
 
     accountId() {
-      if (this.user) {
-        return this.user.id;
+      if (this.userId) {
+        return this.userId;
       } else {
         return null;
       }

@@ -20,4 +20,13 @@ public class Account {
 
     @Column (name = "role")
     private String role;
+
+    @Column (name = "avatar")
+    private String avatar;
+
+    @Column (name = "url")
+    private String url;
+
+    @Column (name = "about")
+    private String about;
 }

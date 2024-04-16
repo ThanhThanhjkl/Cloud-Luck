@@ -1,15 +1,18 @@
 import { getField, updateField } from "vuex-map-fields";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
-const SET_LOGGED_USER = "SET_LOGGED_USER";
+const SET_LOGGED_USER_ID = "SET_LOGGED_USER_ID";
 const RESET_CURRENT_USER = "RESET_CURRENT_USER";
 const SET_TOKEN = "SET_TOKEN";
+const SET_ACCOUNT = "SET_ACCOUNT";
 
 export default {
   state: () => ({
-    user: null,
+    userId: null,
     token: "",
+    account: null,
   }),
+
   getters: {
     getField,
   },
@@ -28,10 +31,9 @@ export default {
       const res = await this.$authRepositories.accountLogin(params);
       if (res.token) {
         this.$axios.setToken(res.token, "Bearer");
-        const decodedToken = jwt.decode(res.token);
+        // const decodedToken = jwt.decode(res.token);
         commit(SET_TOKEN, res.token);
-        commit(SET_LOGGED_USER, decodedToken.sub);
-        commit("account/SET_ACCOUNT", decodedToken.sub, { root: true });
+        commit(SET_LOGGED_USER_ID, res.id);
         return res;
       }
     },
@@ -41,7 +43,23 @@ export default {
           commit(RESET_CURRENT_USER),
           this.$authRepositories.accountLogout(),
         ]);
-      } catch (error) {}
+      } catch (error) {
+        //
+      }
+    },
+
+    async getAccount({ commit }, params) {
+      const res = await this.$authRepositories.getAccount(params);
+      if (res) {
+        console.log(res);
+        commit(SET_ACCOUNT, res);
+      }
+      commit(SET_ACCOUNT, res);
+      return res;
+    },
+
+    updateAccount(_, params) {
+      return this.$authRepositories.updateAccount(params);
     },
 
     // ABCD
@@ -55,8 +73,10 @@ export default {
     async getLoggedUser({ commit }) {
       try {
         const response = await this.$authRepositories.getLoggedUser();
-        commit(SET_LOGGED_USER, response.body);
-      } catch {}
+        commit(SET_LOGGED_USER_ID, response.body);
+      } catch {
+        //
+      }
     },
 
     changePassword(_ctx, params) {
@@ -88,14 +108,17 @@ export default {
 
   mutations: {
     updateField,
-    SET_LOGGED_USER(state, payload) {
-      state.user = payload;
+    SET_LOGGED_USER_ID(state, payload) {
+      state.userId = payload;
     },
     SET_TOKEN(state, payload) {
       state.token = payload;
     },
     RESET_CURRENT_USER(state) {
       state.user = null;
+    },
+    SET_ACCOUNT(state, payload) {
+      state.account = payload;
     },
   },
 };

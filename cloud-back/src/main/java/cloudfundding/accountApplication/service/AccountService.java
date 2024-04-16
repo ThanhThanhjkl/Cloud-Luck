@@ -64,6 +64,7 @@ class AccountServiceImpl implements AccountService {
                 AccountTokenDTO accountTokenDTO = new AccountTokenDTO();
                 accountTokenDTO.setToken(token);
                 accountTokenDTO.setMessage("Success");
+                accountTokenDTO.setId(String.valueOf(account.getId()));
                 return accountTokenDTO;
 
             } else {
