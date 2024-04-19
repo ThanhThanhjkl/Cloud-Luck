@@ -1,6 +1,6 @@
-package cloudfundding.repository;
+package cloudfundding.productApplication.repository;
 
-import cloudfundding.model.Products;
+import cloudfundding.productApplication.model.Products;
 
 import java.util.List;
 

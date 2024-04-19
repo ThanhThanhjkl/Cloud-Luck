@@ -4,6 +4,7 @@ import cloudfundding.accountApplication.entity.Account;
 import cloudfundding.accountApplication.model.AccountDTO;
 import cloudfundding.accountApplication.model.AccountLoginDTO;
 import cloudfundding.accountApplication.model.AccountResetPasswordDTO;
+import cloudfundding.accountApplication.model.AccountChangePasswordDTO;
 import cloudfundding.accountApplication.model.AccountTokenDTO;
 import cloudfundding.accountApplication.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
@@ -22,6 +23,8 @@ public interface AccountService {
     void update(AccountDTO accountDTO);
 
     void updatePassword(AccountResetPasswordDTO accountResetPasswordDTO);
+
+    void changePassword(AccountChangePasswordDTO accountChangePasswordDTO);
 
     void delete(Long id);
 
@@ -102,6 +105,21 @@ class AccountServiceImpl implements AccountService {
         if (account == null) {
             throw new IllegalArgumentException("Account not found for email: " + email);
         }
+        account.setPassword(encodedPassword);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void changePassword(AccountChangePasswordDTO accountChangePasswordDTO) {
+        Account account = accountRepository.getById(accountChangePasswordDTO.getId());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!accountChangePasswordDTO.getNewPassword().equals(accountChangePasswordDTO.getConfirmPassword())) {
+            throw new IllegalArgumentException("New password and confirmPassword do not match");
+        }
+        if (!passwordEncoder.matches(accountChangePasswordDTO.getPassword(), account.getPassword())) {
+            throw new IllegalArgumentException("Password is Incorrect");
+        }
+        String encodedPassword = new BCryptPasswordEncoder().encode(accountChangePasswordDTO.getNewPassword());
         account.setPassword(encodedPassword);
         accountRepository.save(account);
     }

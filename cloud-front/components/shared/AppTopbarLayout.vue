@@ -21,7 +21,7 @@
               <div class="menu-list">
                 <li class="firt-list">
                   <SvgList class="d-inline-block d-lg-none" />
-                  <nuxt-link v-if="user" to="/">設定</nuxt-link>
+                  <nuxt-link v-if="userId" to="/">設定</nuxt-link>
                   <nuxt-link
                     v-else
                     to="/auth/login"
@@ -39,7 +39,7 @@
                     My Account
                   </nuxt-link>
                 </li>
-                <div v-if="user">
+                <div v-if="userId">
                   <li
                     v-for="(item, index) in primaryTree"
                     :key="'primary' + index"
@@ -103,7 +103,7 @@
             >
           </div>
           <nuxt-link
-            v-if="!user"
+            v-if="!userId"
             to="/auth/login"
             class="btn btn-login btn-top-bar ml-3"
           >

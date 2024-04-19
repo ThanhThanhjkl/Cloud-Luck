@@ -1,50 +1,55 @@
 <template>
   <div class="changeinfo detail">
-    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
     <div class="mx-lg-5">
       <div
-        v-if="user"
+        v-if="userId"
         id="register-setting-1"
         accordion="register-setting"
         class="password-setting"
       >
         <b-card>
-          <div class="form-title text-center">パスワード設定</div>
+          <div class="form-title text-center">Password setting</div>
           <form @submit.prevent="submitForm">
-            <FormValidator name="createRequest.password" class="mb-1">
-              <b-input
-                v-model="oldPassword"
-                type="password"
-                placeholder="現在のパスワードを入力してください"
-                required
-              >
-              </b-input>
-              <div class="pass-note mb-2">※半角英数字（8桁以上）</div>
-            </FormValidator>
-
-            <FormValidator class="mb-1" name="resetRequest.password">
+            <FormValidator label="Password" class="mb-1" required>
               <b-input
                 v-model="password"
                 type="password"
-                placeholder="新パスワード"
+                placeholder="Please enter your current password"
                 required
-              ></b-input>
-              <div class="pass-note">※半角英数字（8桁以上）</div>
+              >
+              </b-input>
+              <div class="pass-note mb-2">
+                ※Half-width alphanumeric characters (8 digits or more)
+              </div>
             </FormValidator>
 
-            <FormValidator>
+            <FormValidator class="mb-1" label="New Password" required>
+              <b-input
+                v-model="newPassword"
+                type="password"
+                placeholder="New password"
+                required
+              ></b-input>
+              <div class="pass-note">
+                ※Half-width alphanumeric characters (8 digits or more)
+              </div>
+            </FormValidator>
+
+            <FormValidator label="Confirm Password" required>
               <b-input
                 v-model="passwordConfirmation"
                 type="password"
-                placeholder="新パスワード（確認用）"
+                placeholder="New password (for confirmation)"
                 class="mt-3"
                 required
                 :class="{ 'border border-danger': !error }"
               ></b-input>
-              <div class="pass-note mb-4">※半角英数字（8桁以上）</div>
+              <div class="pass-note mb-4">
+                ※Half-width alphanumeric characters (8 digits or more)
+              </div>
 
               <p v-if="!error" class="text-danger">
-                新しいパスワードと再確認パスワードが一致しません
+                New password and reconfirm password do not match
               </p>
             </FormValidator>
           </form>
@@ -55,7 +60,7 @@
               variant="primary"
               block
               :disabled="!clickable"
-              @click="newPassword"
+              @click="submitChangePassword"
               >更新する</b-button
             >
           </div>
@@ -66,7 +71,6 @@
 </template>
 
 <script>
-import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import { createNamespacedHelpers } from "vuex";
 import FormValidator from "@/components/common/FormValidator";
 
@@ -74,7 +78,6 @@ const { mapState, mapActions } = createNamespacedHelpers("auth");
 
 export default {
   components: {
-    AuthRegisterInfo,
     FormValidator,
   },
 
@@ -83,15 +86,15 @@ export default {
   data() {
     return {
       password: "",
-      oldPassword: "",
+      newPassword: "",
       passwordConfirmation: "",
       error: true,
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["userId"]),
     clickable() {
-      if (this.password && this.oldPassword && this.passwordConfirmation) {
+      if (this.newPassword && this.password && this.passwordConfirmation) {
         return true;
       } else return false;
     },
@@ -102,7 +105,7 @@ export default {
 
   watch: {
     confirmPassword(value) {
-      if (value !== this.password) {
+      if (value !== this.newPassword) {
         return (this.error = false);
       } else {
         return (this.error = true);
@@ -110,27 +113,29 @@ export default {
     },
   },
   mounted() {
-    if (!this.user) {
-      this.$router.push("/auth/login");
+    if (!this.userId) {
+      this.$router.upsh("/auth/login");
     }
   },
   methods: {
-    ...mapActions(["changePassword", "createToken"]),
-    async newPassword() {
+    ...mapActions(["changePassword"]),
+    submitChangePassword() {
       try {
-        const token = await this.createToken({ password: this.oldPassword });
-        if (this.password === this.passwordConfirmation) {
-          this.changePassword({
-            oneTimeToken: token.body,
+        if (this.newPassword === this.passwordConfirmation) {
+          const params = {
+            id: this.userId,
             password: this.password,
-          }).then(() => {
+            newPassword: this.newPassword,
+            confirmPassword: this.confirmPassword,
+          };
+          this.changePassword(params).then(() => {
             this.password = "";
             this.passwordConfirmation = "";
-            this.oldPassword = "";
-            this.$toast.success("成功");
+            this.newPassword = "";
+            this.$toast.success("Password updated successfully");
           });
         } else {
-          this.$toast.error("新しいパスワードと再確認パスワードが一致しません");
+          this.$toast.error("Error");
         }
       } catch (e) {
         alert(e.message);

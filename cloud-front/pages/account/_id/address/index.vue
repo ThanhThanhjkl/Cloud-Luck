@@ -1,15 +1,14 @@
 <template>
   <div class="changeinfo detail">
-    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
     <div class="mx-lg-5">
       <div
-        v-if="user"
+        v-if="userId"
         id="register-setting-2"
         accordion="register-setting"
         class="shipping-address"
       >
         <b-card>
-          <div class="form-title text-center">登録済み住所</div>
+          <div class="form-title text-center">Shipping Address</div>
           <form @submit.prevent="submitForm">
             <div
               class="text-center"
@@ -17,15 +16,15 @@
                 $router.push(`/account/${$route.params.id}/address/add`)
               "
             >
-              <div class="register-now"><svg-add></svg-add>新しく登録する</div>
+              <div class="register-now"><svg-add></svg-add>Register new</div>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th width="45%">保存したお届け先住所</th>
-                  <th width="25%">編集</th>
-                  <th width="25%">削除</th>
-                  <th width="5%">標準</th>
+                  <th width="45%">Saved shipping address</th>
+                  <th width="25%">edit</th>
+                  <th width="25%">delete</th>
+                  <th width="5%">standard</th>
                 </tr>
               </thead>
               <tbody v-if="accountAddress">
@@ -48,7 +47,7 @@
                       type="button"
                       @click.prevent="toEdit(item)"
                     >
-                      編集する
+                      To edit
                     </button>
                   </td>
                   <td>
@@ -57,7 +56,7 @@
                       :disabled="unclickable"
                       @click.prevent="showConfirmModal(item)"
                     >
-                      <svg-delete></svg-delete>削除する
+                      <svg-delete></svg-delete>delete
                     </button>
                   </td>
                   <td>
@@ -82,7 +81,7 @@
             block
             :disabled="!accountAddress.length || !isSelectedId"
             @click="changeDefaultAddress"
-            >更新する</b-button
+            >Update</b-button
           >
         </b-card>
       </div>
@@ -91,7 +90,6 @@
 </template>
 
 <script>
-import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import SvgAdd from "@/components/common/svg/SvgAdd";
 import SvgDelete from "@/components/common/svg/SvgDelete";
 import ConfirmModal from "@/components/common/ConfirmModal";
@@ -104,7 +102,6 @@ const accountMapper = createNamespacedHelpers("account");
 export default {
   components: {
     ConfirmModal,
-    AuthRegisterInfo,
     SvgAdd,
     SvgDelete,
   },
@@ -120,32 +117,17 @@ export default {
   },
 
   computed: {
-    ...authMapper.mapState(["user"]),
+    ...authMapper.mapState(["userId"]),
     ...accountMapper.mapState(["account"]),
     ...mapState(["accountAddress"]),
-
-    isSelected: {
-      get() {
-        return this.accountAddress.find((item) => {
-          return item.isPrimary ? item.id : null;
-        }).id;
-      },
-      set(value) {
-        this.isSelectedId = value;
-      },
-    },
   },
 
   mounted() {
-    this.getAccountAddress(this.account.id);
+    // this.getAccountAddress(this.account.id);
   },
 
   methods: {
-    ...mapActions([
-      "getAccountAddress",
-      "deleteAccountAddress",
-      "postChangingDefaultAddress",
-    ]),
+    ...mapActions(["getAccountAddress"]),
 
     addNewAddress() {
       this.allAddress = false;

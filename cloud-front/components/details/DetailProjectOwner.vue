@@ -2,7 +2,7 @@
   <section class="project-owner">
     <div class="section-header">
       <h2 class="section-title">PROJECT OWNER</h2>
-      <h4 class="section-subtitle">プロジェクトオーナー</h4>
+      <h4 class="section-subtitle">project owner</h4>
     </div>
 
     <b-card class="owner-section">
@@ -38,7 +38,7 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 
-const campaignMapper = createNamespacedHelpers("campaign");
+const campaignMapper = createNamespacedHelpers("auth");
 
 export default {
   data() {

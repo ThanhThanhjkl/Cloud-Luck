@@ -1,9 +1,9 @@
 import { getField, updateField } from "vuex-map-fields";
 // import jwt from "jsonwebtoken";
 
-const SET_LOGGED_USER_ID = "SET_LOGGED_USER_ID";
 const RESET_CURRENT_USER = "RESET_CURRENT_USER";
 const SET_TOKEN = "SET_TOKEN";
+const SET_LOGGED_USER_ID = "SET_LOGGED_USER_ID";
 const SET_ACCOUNT = "SET_ACCOUNT";
 
 export default {
@@ -51,7 +51,6 @@ export default {
     async getAccount({ commit }, params) {
       const res = await this.$authRepositories.getAccount(params);
       if (res) {
-        console.log(res);
         commit(SET_ACCOUNT, res);
       }
       commit(SET_ACCOUNT, res);
@@ -60,6 +59,10 @@ export default {
 
     updateAccount(_, params) {
       return this.$authRepositories.updateAccount(params);
+    },
+
+    changePassword(_ctx, params) {
+      return this.$authRepositories.changePassword(params);
     },
 
     // ABCD
@@ -77,10 +80,6 @@ export default {
       } catch {
         //
       }
-    },
-
-    changePassword(_ctx, params) {
-      return this.$authRepositories.changePassword(params);
     },
 
     createToken(_ctx, params) {

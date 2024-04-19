@@ -1,6 +1,6 @@
-package cloudfundding.service;
+package cloudfundding.productApplication.service;
 
-import cloudfundding.model.Products;
+import cloudfundding.productApplication.model.Products;
 
 import java.util.List;
 public interface ProductsService {

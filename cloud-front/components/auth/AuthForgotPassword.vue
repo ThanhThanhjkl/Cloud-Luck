@@ -7,7 +7,7 @@
           We will send you a password reset URL, so please enter your registered
           email address and press the "Send" button.
         </div>
-        <FormValidator name="request.email">
+        <FormValidator>
           <b-input
             v-model="email"
             type="email"
@@ -16,7 +16,7 @@
           ></b-input>
         </FormValidator>
 
-        <FormValidator name="request.password">
+        <FormValidator>
           <b-input
             v-model="password"
             type="password"
@@ -25,7 +25,7 @@
           ></b-input>
         </FormValidator>
 
-        <FormValidator name="request.confirmPassword">
+        <FormValidator>
           <b-input
             v-model="confirmPassword"
             type="password"

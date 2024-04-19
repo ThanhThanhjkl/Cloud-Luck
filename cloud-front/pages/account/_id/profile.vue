@@ -170,18 +170,23 @@ export default {
     },
 
     update() {
-      this.imageToBase64(this.avatar, (base64Image) => {
-        const params = {
-          id: this.accountId,
-          name: this.name,
-          email: this.email,
-          avatar: base64Image,
-          url: this.url,
-          about: this.about,
-          role: this.role,
-        };
-        this.updateAccount(params);
-      });
+      try {
+        this.imageToBase64(this.avatar, (base64Image) => {
+          const params = {
+            id: this.accountId,
+            name: this.name,
+            email: this.email,
+            avatar: base64Image,
+            url: this.url,
+            about: this.about,
+            role: this.role,
+          };
+          this.updateAccount(params);
+          this.$toast.success("updated successfully");
+        });
+      } catch (error) {
+        this.$toast.error(error);
+      }
     },
 
     imageToBase64(url, callback) {

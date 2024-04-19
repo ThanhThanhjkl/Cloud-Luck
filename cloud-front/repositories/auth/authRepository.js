@@ -5,14 +5,11 @@ export default ($authApi) => ({
     return $authApi.post(`${ENDPOINT}`, params);
   },
   forgotPassword(params) {
-    return $authApi.put(`${ENDPOINT}/password`, params);
+    return $authApi.put(`${ENDPOINT}/forgot`, params);
   },
   accountLogin(params) {
     return $authApi.post(`${ENDPOINT}/login`, params);
   },
-  // getLoggedUser() {
-  //   return $authApi.get(`${ENDPOINT}` + "s");
-  // },
   accountLogout() {
     return $authApi.delete(`${ENDPOINT}/login`);
   },
@@ -25,14 +22,15 @@ export default ($authApi) => ({
     return $authApi.put(`${ENDPOINT}`, params);
   },
 
+  changePassword(params) {
+    return $authApi.put(`${ENDPOINT}/password`, params);
+  },
+
   // ABCD
   activeAccount(params) {
     return $authApi.put(`${ENDPOINT}/activate`, params);
   },
   resetPassword(params) {
-    return $authApi.put(`${ENDPOINT}/password`, params);
-  },
-  changePassword(params) {
     return $authApi.put(`${ENDPOINT}/password`, params);
   },
   createToken(params) {

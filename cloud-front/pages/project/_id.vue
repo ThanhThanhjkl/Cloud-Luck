@@ -5,7 +5,7 @@
   <div v-else class="pt-md-5">
     <b-container v-if="product && product.id" class="page-detail" fluid="xl">
       <div class="box alert-message">
-        <div class="box-header">VERY編集部コメント</div>
+        <div class="box-header">VERY editorial department comment</div>
         <div class="box-body">
           <div class="icon">
             <SvgMessage></SvgMessage>
@@ -23,7 +23,10 @@
           </b-card-title>
 
           <section class="d-grid g-32">
-            <DetailCarousel />
+            <DetailCarousel
+              :images="product.images"
+              :descriptions="product.name"
+            />
 
             <div class="right-content d-md-none">
               <DetailSummary></DetailSummary>
@@ -34,7 +37,7 @@
                 <div class="product-body col-12 p-0">
                   <div class="d-none d-lg-block section-header">
                     <h2 class="section-title">PROJECT DETAIL</h2>
-                    <h4 class="section-subtitle">プロジェクト詳細</h4>
+                    <h4 class="section-subtitle">Project details</h4>
                   </div>
                   <div class="tabs">
                     <div>
@@ -47,7 +50,7 @@
                             class="nav-link text-center"
                             :class="{ active: url == 'project-id' }"
                           >
-                            <span class="title-main"> ホーム </span>
+                            <span class="title-main"> home </span>
                           </nuxt-link>
                         </li>
                         <li role="presentation" class="nav-item">
@@ -60,7 +63,7 @@
                                 url == 'project-id-note-noteId',
                             }"
                           >
-                            <span class="title-tab">活動報告</span>
+                            <span class="title-tab">activity report</span>
                             <span class="alert-amount text-center">0</span>
                           </nuxt-link>
                         </li>
@@ -82,7 +85,7 @@
                             class="nav-link"
                             :class="{ active: url == 'project-id-comment' }"
                           >
-                            <span class="title-tab">コメント</span>
+                            <span class="title-tab">comment</span>
                             <span class="alert-amount text-center">0</span>
                           </nuxt-link>
                         </li>
@@ -110,7 +113,7 @@
           <section class="return-plan">
             <div class="section-header">
               <h2 class="section-title">Return Plan</h2>
-              <h4 class="section-subtitle">リターンを選択する</h4>
+              <h4 class="section-subtitle">Select return</h4>
             </div>
             <div class="d-grid g-16">
               <div>
@@ -121,17 +124,17 @@
 
           <b-card v-if="product.target" class="card-notice">
             <span>
-              このプロジェクトは、<a class="text-primary">
+              This project is<a class="text-primary">
                 {{ product.target.method }}
               </a>
               です。
             </span>
             <span>
-              目標金額に関わらず、
+              Regardless of the target amount,
               <a class="text-primary">
                 {{ product.date | fullDateTime }}
               </a>
-              までに集まった金額がファンディングされます。
+              The amount collected up to this point will be used for funding.
             </span>
           </b-card>
         </section>
@@ -150,7 +153,7 @@
 
         <span>{{ 100 }}</span>
         <nuxt-link class="btn btn-primary" :to="`/project/${productId}/buy`">
-          このプロジェクトを応援する
+          Support this project
         </nuxt-link>
       </div>
     </b-container>

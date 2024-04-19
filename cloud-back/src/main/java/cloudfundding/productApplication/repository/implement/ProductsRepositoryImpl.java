@@ -1,7 +1,7 @@
-package cloudfundding.repository.implement;
+package cloudfundding.productApplication.repository.implement;
 
-import cloudfundding.repository.ProductsRepository;
-import cloudfundding.model.Products;
+import cloudfundding.productApplication.repository.ProductsRepository;
+import cloudfundding.productApplication.model.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -36,6 +36,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setSold(rs.getInt("sold"));
                 products.setTitle(rs.getString("title"));
                 String imagesString = rs.getString("images");
+                products.setAccount_id(rs.getInt("account-id"));
 
                 if (imagesString != null) {
                     List<String> imagesList = Arrays.asList(imagesString.split(","));
@@ -65,6 +66,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setSold(rs.getInt("sold"));
                 products.setTitle(rs.getString("title"));
                 String imagesString = rs.getString("images");
+                products.setAccount_id(rs.getInt("account-id"));
                 if (imagesString != null) {
                     List<String> imagesList = Arrays.asList(imagesString.split(","));
                     products.setImages(imagesList);

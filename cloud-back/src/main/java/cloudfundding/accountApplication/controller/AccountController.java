@@ -1,9 +1,6 @@
 package cloudfundding.accountApplication.controller;
 
-import cloudfundding.accountApplication.model.AccountDTO;
-import cloudfundding.accountApplication.model.AccountLoginDTO;
-import cloudfundding.accountApplication.model.AccountResetPasswordDTO;
-import cloudfundding.accountApplication.model.AccountTokenDTO;
+import cloudfundding.accountApplication.model.*;
 import cloudfundding.accountApplication.service.AccountService;
 import cloudfundding.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -65,26 +59,33 @@ public class AccountController {
 
     // update
     @PutMapping("/account")
-    public void update(@RequestBody AccountDTO accountDTO) {
-        // Kiểm tra xem avatar có được cung cấp không
+    public ResponseEntity<String> update(@RequestBody AccountDTO accountDTO) {
         if (accountDTO.getAvatar() != null) {
-            // Lấy URL hình ảnh từ trường avatar
             String imageUrl = accountDTO.getAvatar();
-            // Tải hình ảnh từ URL và chuyển đổi thành mảng byte
             byte[] avatar = ImageUtils.extractImageData(imageUrl);
-            // Cập nhật dữ liệu avatar của tài khoản
             accountDTO.setAvatar(Base64.getEncoder().encodeToString(avatar));
         }
         accountService.update(accountDTO);
+        return ResponseEntity.status(HttpStatus.OK).body("updated successfully");
     }
 
     // update password
-    @PutMapping("/account/password")
+    @PutMapping("/account/forgot")
     public ResponseEntity<String> updatePassword(@RequestBody AccountResetPasswordDTO accountResetPasswordDTO) {
         if (!accountResetPasswordDTO.getPassword().equals(accountResetPasswordDTO.getConfirmPassword())) {
             return ResponseEntity.badRequest().body("Password and confirm password do not match");
         }
         accountService.updatePassword(accountResetPasswordDTO);
+        return ResponseEntity.ok("Password updated successfully");
+    }
+
+    // change password
+    @PutMapping("/account/password")
+    public ResponseEntity<String> changesPassword(@RequestBody AccountChangePasswordDTO accountChangePasswordDTO) {
+        if (!accountChangePasswordDTO.getNewPassword().equals(accountChangePasswordDTO.getConfirmPassword())) {
+            return ResponseEntity.badRequest().body("New password and confirm password do not match");
+        }
+        accountService.changePassword(accountChangePasswordDTO);
         return ResponseEntity.ok("Password updated successfully");
     }
 }

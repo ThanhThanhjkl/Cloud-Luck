@@ -1,13 +1,13 @@
 <template>
   <b-card
+    v-if="item"
     class="h-100 p2-top-card"
     :class="{ large }"
     @click="$emit('click')"
-    v-if="item"
   >
     <template #header>
       <div class="card-photo">
-        <img class="w-100" :src="item.images" />
+        <img class="w-100" :src="images" />
         <svg-heart :class="item" class="svg-heart"></svg-heart>
       </div>
       <div class="position-relative">
@@ -20,22 +20,27 @@
 
     <b-card-sub-title>
       <b-row class="py-5px">
-        <b-col>
-          <label class="current-amount">現在の応援金額</label>
-          <strong class="price">{{ item.cost | japanMoney }} </strong>
+        <b-col class="d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <label class="current-amount">Amount</label>
+            <strong class="price">{{ item.sale_cost | japanMoney }} </strong>
+          </div>
+          <strong style="text-decoration-line: line-through" class="price"
+            >{{ item.cost | japanMoney }}
+          </strong>
         </b-col>
       </b-row>
       <b-row class="pt-20px">
         <b-col class="card-info">
-          <label>
+          <label class="d-flex align-items-center">
             <svg-clock></svg-clock>
-            <span>募集終了まで残り</span>
+            <span>10</span>
           </label>
-          <strong> {{ item.date }}日 </strong>
+          <strong class="d-flex align-items-center">{{ item.date }}日 </strong>
           <span class="divider">/</span>
           <label class="supporter">
             <svg-users></svg-users>
-            <span>サポーター数</span>
+            <span>supporters</span>
           </label>
           <strong>{{ item.sold }}</strong>
           <b-col class="author d-none d-lg-block">
@@ -62,11 +67,6 @@ import SvgClock from "@/components/common/svg/SvgClock.vue";
 import SvgUsers from "@/components/common/svg/SvgUsers.vue";
 import SvgUserSolid from "@/components/common/svg/SvgUserSolid.vue";
 
-// import moment from "moment";
-
-// import { createNamespacedHelpers } from "vuex";
-// const accountMapper = createNamespacedHelpers("account");
-
 export default {
   components: {
     SvgHeart,
@@ -85,30 +85,16 @@ export default {
   data() {
     return {
       max: 100,
+      images: null,
     };
   },
 
-  computed: {
-    // percent() {
-    //   return (
-    //     parseInt(this.item.totalAmountOfDonation * 100) /
-    //     parseInt(this.item.targetAmount)
-    //   ).toFixed(0);
-    // },
+  computed: {},
+
+  mounted() {
+    this.images = "data:image/jpeg;base64," + this.item.images;
   },
 
-  methods: {
-    // ...accountMapper.mapActions(["getAccountDetail"]),
-    // imageSource(id) {
-    //   return `${process.env.consumerApiUrl}/file/${id}`;
-    // },
-    // timeRemaining(date) {
-    //   const currentDate = moment(new Date());
-    //   const endDate = moment(date);
-    //   if (endDate.diff(currentDate, "days") < 0) {
-    //     return 0;
-    //   } else return endDate.diff(currentDate, "days");
-    // },
-  },
+  methods: {},
 };
 </script>

@@ -1,9 +1,9 @@
-package cloudfundding.service.implement;
+package cloudfundding.productApplication.service.implement;
 
 
-import cloudfundding.model.Products;
-import cloudfundding.repository.ProductsRepository;
-import cloudfundding.service.ProductsService;
+import cloudfundding.productApplication.model.Products;
+import cloudfundding.productApplication.repository.ProductsRepository;
+import cloudfundding.productApplication.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

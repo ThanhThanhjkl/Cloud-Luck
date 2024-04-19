@@ -1,8 +1,7 @@
-package cloudfundding.controller;
+package cloudfundding.productApplication.controller;
 
-import cloudfundding.model.Products;
-import cloudfundding.service.PersonService;
-import cloudfundding.service.ProductsService;
+import cloudfundding.productApplication.model.Products;
+import cloudfundding.productApplication.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +11,6 @@ import java.util.List;
 
 @RestController
 public class ProductsController {
-    @Autowired
-    private PersonService personService;
-
     @Autowired
     private ProductsService productsService;
 
