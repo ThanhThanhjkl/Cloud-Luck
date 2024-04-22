@@ -1,10 +1,18 @@
 package cloudfundding.productApplication.service;
 
-import cloudfundding.productApplication.model.Products;
+import cloudfundding.productApplication.model.ProductsDTO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+
 public interface ProductsService {
-    List<Products> getAllProducts();
-    Products getProductsById(Long id);
-    void addProduct(Products products);
+    List<ProductsDTO> getAllProducts();
+
+    List<ProductsDTO> getProductsByAccountId(Long accountId);
+
+    ProductsDTO getProductsById(Long id);
+
+    ResponseEntity<String> updateProduct(ProductsDTO products);
+
+    void addProduct(ProductsDTO products);
 }

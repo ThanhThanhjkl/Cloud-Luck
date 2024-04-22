@@ -2,56 +2,42 @@
   <div class="list-form">
     <form>
       <div
-        v-for="(campaign, index) in campaigns"
+        v-for="(product, index) in products"
         :key="index"
         class="product-list"
       >
         <div class="campaign-content">
           <div class="product-info">
             <div class="product-img">
-              <b-img fluid src="imageSource(campaign.id)" />
+              <b-img fluid :src="urlImage + product.images[0]" />
             </div>
             <div class="product-info-right">
-              <div class="product-title">{{ ádfasdfas }}</div>
+              <div class="product-title">{{ product.title }}</div>
               <div class="list-btn list-btn-pc">
                 <nuxt-link
-                  v-if="editable"
-                  :to="`/account/${1}/project/${1}/`"
+                  :to="`/account/${accountId}/project/${product.id}/`"
                   class="btn btn-primary campaigns-btn"
-                  >編集する</nuxt-link
+                  >To edit</nuxt-link
                 >
                 <nuxt-link
-                  :to="`/account/${1}/project/${1}/preview`"
+                  :to="`/account/${accountId}/project/${product.id}/preview`"
                   class="btn btn-secondary view-project campaigns-btn"
-                  >プロジェクトページを見る</nuxt-link
+                  >View project page</nuxt-link
                 >
-                <nuxt-link
-                  v-if="noteable"
-                  :to="`/account/${1}/project/${1}/note`"
-                  class="btn btn-secondary view-project campaigns-btn"
-                  >活動報告を投稿する
-                </nuxt-link>
               </div>
             </div>
           </div>
           <div class="list-btn-sp">
             <nuxt-link
-              v-if="editable"
-              :to="`/account/${1}/project/${1}/`"
+              :to="`/account/${accountId}/project/${product.id}/`"
               class="btn btn-primary campaigns-btn"
-              >編集する</nuxt-link
+              >To edit</nuxt-link
             >
             <nuxt-link
-              :to="`/account/${1}/project/${1}/preview`"
+              :to="`/account/${accountId}/project/${product.id}/preview`"
               class="btn btn-secondary view-project campaigns-btn"
-              >プロジェクトページを見る</nuxt-link
+              >View project page</nuxt-link
             >
-            <nuxt-link
-              v-if="noteable"
-              :to="`/account/${1}/project/${1}/note`"
-              class="btn btn-secondary view-project campaigns-btn"
-              >活動報告を投稿する
-            </nuxt-link>
           </div>
         </div>
       </div>
@@ -59,9 +45,6 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
-
 export default {
   props: {
     editable: {
@@ -72,37 +55,23 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  computed: {
-    ...accountMapper.mapState(["account"]),
-
-    accountId() {
-      return this.account.id;
+    products: {
+      type: Array,
+      default: () => [],
+    },
+    accountId: {
+      type: String,
+      default: () => "",
     },
   },
+
   data() {
     return {
-      campaigns: [
-        {
-          id: 1,
-          title:
-            "フェーズフリーというコンセプトから生まれた本当に使える浄水器「SESERA」",
-          imageId: 1,
-        },
-        {
-          id: 2,
-          title:
-            "フェーズフリーというコンセプトから生まれた本当に使える浄水器「SESERA」",
-          imageId: 2,
-        },
-      ],
+      urlImage: "data:image/jpeg;base64,",
     };
   },
+  computed: {},
 
-  methods: {
-    imageSource(id) {
-      return `${process.env.consumerApiUrl}/file/${id}`;
-    },
-  },
+  methods: {},
 };
 </script>

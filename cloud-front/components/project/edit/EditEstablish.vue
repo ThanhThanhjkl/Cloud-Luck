@@ -1,78 +1,67 @@
 <template>
   <section class="edit-establish-page">
-    <div class="head-colapse text-center">必要な目標金額を設定しましょう</div>
-    <b-card v-if="campaignMapper && validator">
-      <form v-if="campaignMapper.target">
+    <div class="head-colapse text-center">Set the desired target amount</div>
+    <b-card>
+      <form>
         <b-form-group>
           <FormValidator
             class="col-md-6 col-12 mt-3 p-0"
-            label="目標金額"
+            label="Target amount"
             text-required
-            :validator="$v.campaignMapper.target.amount"
-            :name="`${prefix}.target.amount`"
           >
             <div class="input-money d-flex">
               <b-input
-                v-model.trim="campaignMapper.target.amount"
+                v-model="cost"
                 type="text"
                 placeholder="（例）100,000"
                 required
-                :readonly="readOnly"
-                :class="{ disabled: readOnly }"
               ></b-input>
               <span>円</span>
             </div>
 
-            <span>※目標金額は100,000円以上の金額で入力してください。</span>
+            <span>※Please enter a target amount of 100,000 yen or more.</span>
           </FormValidator>
         </b-form-group>
         <hr />
         <b-form-group>
-          <FormValidator
-            class="mt-3"
-            label="募集方式"
-            :name="`${prefix}.target.method`"
-            :validator="$v.campaignMapper.target.method"
-            text-required
-          >
+          <FormValidator class="mt-3" label="Recruitment method" text-required>
             <b-form-radio
-              v-model="campaignMapper.target.method"
+              v-model="method"
               value="all_in"
               class="recruit"
               :class="{
-                isSelected: campaignMapper.target.method == 'all_in',
-                disabled: readOnly,
+                isSelected: method == 'all_in',
               }"
-              :disabled="readOnly"
               ><div class="right-content">
-                <div class="head-box">All-In 方式</div>
+                <div class="head-box">All-In</div>
                 <div class="description">
-                  目標金額を達成しなかったとしても、
-                  終了日までの応援金を受け取れます。
+                  Even if the target amount is not achieved, You can receive the
+                  support money until the end date.
                 </div>
                 <span class="p-0">
                   <SvgWaringAlert class="mr-2" />
-                  1人の応援からリターン履行義務が発生します
+                  Return performance obligation arises from one person's
+                  support.
                 </span>
               </div></b-form-radio
             >
             <b-form-radio
-              v-model="campaignMapper.target.method"
+              v-model="method"
               value="all_or_nothing"
               class="recruit"
               :class="{
-                isSelected: campaignMapper.target.method == 'all_or_nothing',
-                disabled: readOnly,
+                isSelected: method == 'all_or_nothing',
               }"
-              :disabled="readOnly"
               ><div class="right-content">
-                <div class="head-box">All-or-Nothing 方式</div>
+                <div class="head-box">All-or-Nothing</div>
                 <div class="description">
-                  期間内に目標金額を達成した場合に、応援金を受け取れます。
+                  If you reach the target amount within the period, you will
+                  receive the support money.
                 </div>
                 <span class="p-0">
                   <SvgWaringAlert class="mr-2" />
-                  目標金額の達成後リターン履行義務が発生します
+                  Return performance obligation will occur after the target
+                  amount is achieved.
                 </span>
               </div>
             </b-form-radio>
@@ -82,45 +71,36 @@
         <b-form-group>
           <FormValidator
             class="col-md-5 col-8 mt-3 p-0"
-            label="募集終了日"
+            label="Recruitment end date"
             text-required
-            :validator="$v.campaignMapper.target.endedAt"
-            :name="`${prefix}.target.endAt`"
           >
             <date-picker
-              v-model.trim="endedAtTime"
+              v-model="date"
               class="date-picker"
               type="date"
               format="YYYY-MM-DD"
-              placeholder="----年 --月 --日"
-              :disabled="readOnly"
+              placeholder="----year--month--day"
             >
             </date-picker>
           </FormValidator>
           <div>
             <span
-              >※プロジェクトの公開可能期間は、1日〜79日間となります。（All-or-Nothing方式の場合は1日〜59日間）
+              >※Projects can be published for 1 to 79 days. (1 day to 59 days
+              for All-or-Nothing method)
               <br />
-              ※募集終了時刻は募集終了日の23:59です。
-              例）2022年12月31日を指定した場合、2022年12月31日
-              23:59に募集終了します。
+              ※The recruitment end time is 23:59 on the recruitment end date.
+              Example: If December 31, 2022 is specified, December 31, 2022
+              Recruitment ends at 23:59.
             </span>
           </div>
         </b-form-group>
       </form>
     </b-card>
     <div class="group-btn">
-      <button
-        :disabled="readOnly"
-        :class="{ disabled: readOnly }"
-        class="btn-true col-5"
-        @click="onSaveStep"
-      >
-        保存
-      </button>
+      <button class="btn-true col-5" @click="onSaveStep">keep</button>
       <button class="btn btn-fall col-5" @click="onPreview">
         <SvgEyes />
-        プレビュー
+        Preview
       </button>
     </div>
   </section>
@@ -131,11 +111,9 @@ import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 import SvgWaringAlert from "@/components/common/svg/SvgWaringAlert.vue";
 import DatePicker from "vue2-datepicker";
 
-import _ from "lodash";
-import { required } from "vuelidate/lib/validators";
-// import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
+const { mapState } = createNamespacedHelpers("auth");
+const projectMapper = createNamespacedHelpers("home");
 export default {
   inject: ["prefix"],
 
@@ -143,90 +121,76 @@ export default {
 
   data() {
     return {
-      campaignMapper: null,
+      cost: "",
+      method: "all_in",
+      date: "",
+      productDraft: null,
     };
   },
 
   computed: {
-    ...accountMapper.mapState(["account"]),
-
-    readOnly() {
-      const status = [
-        "reviewing",
-        "update_reviewing",
-        "offline",
-        "updated",
-        "update_rejected",
-        "published",
-        "finished",
-      ];
-      return status.includes(this.campaignStatus);
-    },
-
-    campaignStatus() {
-      return _.get(this.campaign, "status");
-    },
+    ...projectMapper.mapState(["product"]),
+    ...mapState(["userId"]),
 
     accountId() {
-      return this.account.id;
+      return this.userId;
     },
 
-    campaignId() {
+    productId() {
       return this.$route.params.projectId;
-    },
-
-    endedAtTime: {
-      get() {
-        if (this.campaignMapper.target.endedAt) {
-          return new Date(this.campaignMapper.target.endedAt);
-        } else return new Date();
-      },
-      set(value) {
-        this.campaignMapper.target.endedAt = value ?? "";
-      },
-    },
-    validator() {
-      return this.$v;
-    },
-  },
-
-  validations: {
-    campaignMapper: {
-      target: {
-        amount: {
-          required,
-        },
-        method: {
-          required,
-        },
-        endedAt: {
-          required,
-        },
-      },
     },
   },
 
   mounted() {
-    // fix cloneDeep campaign
-    if (this.campaign.id) {
-      this.campaignMapper = _.cloneDeep(this.campaign);
+    const productUpdate = localStorage.getItem(
+      `productUpdate${this.productId}`
+    );
+    this.productDraft = JSON.parse(productUpdate);
+    if (productUpdate && this.productDraft.id === this.productId) {
+      this.cost = this.productDraft.cost;
+      this.method = this.productDraft.method;
+      this.date = new Date(this.productDraft.date);
+    } else {
+      this.cost = this.product.cost;
+      this.method = "all-in";
+      this.date = new Date(this.product.date);
     }
   },
 
   methods: {
     onSaveStep() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        // Fix payload to setlocalCampaign
-        this.setLocalCampaign(this.campaignMapper);
-        this.$router.push("overview");
+      const productUpdateAvailable = localStorage.getItem(
+        `productUpdate${this.productId}`
+      );
+      if (productUpdateAvailable) {
+        const productUpdate = JSON.parse(productUpdateAvailable);
+        productUpdate.id = this.productId;
+        productUpdate.cost = this.cost;
+        productUpdate.method = this.method;
+        productUpdate.date = this.date;
+        localStorage.setItem(
+          `productUpdate${this.productId}`,
+          JSON.stringify(productUpdate)
+        );
+      } else {
+        const productUpdate = {
+          id: this.productId,
+          cost: this.cost,
+          method: this.method,
+          date: this.date,
+        };
+        localStorage.setItem(
+          `productUpdate${this.productId}`,
+          JSON.stringify(productUpdate)
+        );
       }
+      this.$router.push("overview");
     },
 
     onPreview() {
       this.setLocalCampaign(this.campaignMapper);
       this.$router.push(
-        `/account/${this.accountId}/project/${this.campaignId}/preview`
+        `/account/${this.accountId}/project/${this.productId}/preview`
       );
     },
   },

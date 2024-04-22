@@ -1,161 +1,76 @@
 <template>
   <section class="edit-overview-page">
-    <div class="head-colapse text-center">
-      あなたのプロジェクトを伝えましょう
-    </div>
-    <b-card v-if="campaignMapper && validator">
+    <div class="head-colapse text-center">Tell us about your project</div>
+    <b-card>
       <form>
         <b-form-group>
-          <FormValidator
-            class="mt-3"
-            label="タイトル"
-            :name="`${prefix}.detail.title`"
-            :validator="$v.campaignMapper.detail.title"
-            text-required
-          >
+          <FormValidator class="mt-3" label="Title" text-required>
             <div class="input-title d-flex">
               <b-form-textarea
                 id="textarea-small"
-                v-model.trim="campaignMapper.detail.title"
+                v-model="title"
                 maxlength="40"
                 size="lg"
-                placeholder="タイトルを設定してください"
-                :readonly="readOnly"
-                :class="{ disabled: readOnly }"
+                placeholder="Please set a title"
               ></b-form-textarea>
               <MaxLengthIndicator
                 class="quatily"
-                :value="campaignMapper.detail.title"
+                :value="title"
                 max="40"
               ></MaxLengthIndicator>
             </div>
+            <span class="sub-title"
+              >※When you search by region, it will be displayed as a project for
+              the prefecture you set. ※The prefecture you set will be displayed
+              on the project page.</span
+            >
           </FormValidator>
         </b-form-group>
         <hr />
         <b-form-group>
-          <FormValidator
-            class="mt-3"
-            label="概要文"
-            :name="`${prefix}.detail.summary`"
-            :validator="$v.campaignMapper.detail.summary"
-            text-required
-          >
+          <FormValidator class="mt-3" label="Name" text-required>
             <div class="input-title d-flex">
               <b-form-textarea
                 id="textarea-small"
-                v-model.trim="campaignMapper.detail.summary"
+                v-model="name"
                 maxlength="150"
                 size="lg"
-                placeholder="概要を記入してください"
+                placeholder="Please fill in the name"
                 rows="5"
-                :readonly="readOnly"
-                :class="{ disabled: readOnly }"
               ></b-form-textarea>
               <MaxLengthIndicator
                 class="quatily"
-                :value="campaignMapper.detail.summary"
+                :value="name"
                 max="150"
               ></MaxLengthIndicator>
             </div>
-          </FormValidator>
-        </b-form-group>
-        <hr />
-        <b-form-group>
-          <FormValidator
-            class="mt-3"
-            label="カテゴリ"
-            :name="`${prefix}.detail.categoryId`"
-            :validator="$v.campaignMapper.detail.categoryId"
-          >
-            <div class="input-title col-8">
-              <b-form-select
-                v-model="campaignMapper.detail.categoryId"
-                class="chose lengthen"
-                :options="categories"
-                :disabled="readOnly"
-              >
-              </b-form-select>
-            </div>
             <span class="sub-title"
-              >※カテゴリーの決定に関しましては、弊社の基準が適用されることがあります。</span
+              >※When you search by region, it will be displayed as a project for
+              the prefecture you set. ※The prefecture you set will be displayed
+              on the project page.</span
             >
           </FormValidator>
         </b-form-group>
         <hr />
-        <b-form-group>
-          <FormValidator
-            class="mt-3"
-            label="関連する地域"
-            :name="`${prefix}.detail.areaId`"
-            text-required
-            :validator="$v.campaignMapper.detail.areaId"
-          >
-            <div class="input-title col-5">
-              <b-form-select
-                v-model="campaignMapper.detail.areaId"
-                class="chose"
-                :options="prefOptions"
-                :disabled="readOnly"
-              >
-              </b-form-select>
-            </div>
-            <span class="sub-title"
-              >※地域で検索された際に、設定した都道府県のプロジェクトとして表示されます。
-              ※プロジェクトのページに、設定した都道府県が表示されます。</span
-            >
-          </FormValidator>
-        </b-form-group>
-        <hr />
-        <b-form-group>
-          <FormValidator
-            class="mt-3"
-            label="掲載希望ブランド"
-            :name="`${prefix}.detail.brandId`"
-            text-required
-            :validator="$v.campaignMapper.detail.brandId"
-          >
-            <div class="input-title col-5">
-              <b-form-select
-                v-model="campaignMapper.detail.brandId"
-                class="chose"
-                :options="brands"
-                :disabled="readOnly"
-              >
-              </b-form-select>
-            </div>
-            <span class="sub-title"
-              >※掲載をお約束するものではありませんのであらかじめご了承ください。<br
-            /></span>
-          </FormValidator>
-        </b-form-group>
       </form>
     </b-card>
     <div class="group-btn">
-      <button
-        class="btn-true col-5"
-        :class="{ disabled: readOnly }"
-        :disabled="readOnly"
-        @click="onSaveStep"
-      >
-        保存
-      </button>
+      <button class="btn-true col-5" @click="onSaveStep">keep</button>
       <button class="btn btn-fall col-5" @click="onPreview">
         <SvgEyes />
-        プレビュー
+        preview
       </button>
     </div>
   </section>
 </template>
 <script>
-import { required } from "vuelidate/lib/validators";
-import _ from "lodash";
-
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 import FormValidator from "@/components/common/FormValidator.vue";
 import MaxLengthIndicator from "@/components/common/MaxLengthIndicator.vue";
 
 import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
+const { mapState } = createNamespacedHelpers("auth");
+const projectMapper = createNamespacedHelpers("home");
 
 export default {
   inject: ["prefix"],
@@ -164,108 +79,63 @@ export default {
 
   data() {
     return {
-      prefOptions: [
-        {
-          value: null,
-          text: "選択してください",
-        },
-        {
-          value: "CwoNCg8ODQICAAkCBAQKAQ",
-          text: "dummy",
-        },
-      ],
-      categories: [
-        {
-          value: null,
-          text: "選択してください",
-        },
-        {
-          value: "DwYJBwsFAwAKAAUJBA4ADg",
-          text: "アート・写真",
-        },
-      ],
-      brands: [
-        {
-          value: null,
-          text: "選択してください",
-        },
-        {
-          value: "AwEFCwMMBw0NCQcBBAMABw",
-          text: "アート・写真",
-        },
-      ],
-
-      campaignMapper: null,
+      title: "",
+      name: "",
+      productDraft: "",
     };
   },
 
-  validations: {
-    campaignMapper: {
-      detail: {
-        title: {
-          required,
-        },
-        summary: {
-          required,
-        },
-        categoryId: {
-          required,
-        },
-        areaId: {
-          required,
-        },
-        brandId: {
-          required,
-        },
-      },
-    },
-  },
-
   computed: {
-    ...accountMapper.mapState(["account"]),
-
-    readOnly() {
-      const status = ["reviewing", "update_reviewing"];
-      return status.includes(this.campaignStatus);
-    },
-
-    campaignStatus() {
-      return _.get(this.campaign, "status");
-    },
+    ...mapState(["userId"]),
+    ...projectMapper.mapState(["product"]),
 
     accountId() {
-      return this.account.id;
+      return this.userId;
     },
 
-    campaignId() {
+    productId() {
       return this.$route.params.projectId;
-    },
-
-    validator() {
-      return this.$v;
-    },
-  },
-
-  watch: {
-    "campaign.id"(value) {
-      if (value) {
-        this.campaignMapper = _.cloneDeep(this.campaign);
-      }
     },
   },
 
   mounted() {
-    this.campaignMapper = _.cloneDeep(this.campaign);
+    const productUpdate = localStorage.getItem(
+      `productUpdate${this.productId}`
+    );
+    this.productDraft = JSON.parse(productUpdate);
+    if (productUpdate && this.productDraft.id === this.productId) {
+      this.title = this.productDraft.title;
+      this.name = this.productDraft.name;
+    } else {
+      this.title = this.product.title;
+      this.name = this.product.name;
+    }
   },
 
   methods: {
     onSaveStep() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        this.setLocalCampaign(this.campaignMapper);
-        this.$toasted.success("更新しました");
-        this.$router.push("visual");
+      const productUpdateAvailable = localStorage.getItem(
+        `productUpdate${this.productId}`
+      );
+
+      if (productUpdateAvailable) {
+        const productUpdate = JSON.parse(productUpdateAvailable);
+        productUpdate.name = this.name;
+        productUpdate.title = this.title;
+        localStorage.setItem(
+          `productUpdate${this.productId}`,
+          JSON.stringify(productUpdate)
+        );
+      } else {
+        localStorage.setItem(
+          `productUpdate${this.productId}`,
+          JSON.stringify({
+            name: this.name,
+            title: this.title,
+          })
+        );
       }
+      this.$router.push("visual");
     },
 
     onPreview() {

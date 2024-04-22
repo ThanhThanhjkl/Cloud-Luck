@@ -1,22 +1,20 @@
 <template>
   <section class="edit-verification-page">
-    <div class="head-colapse text-center">最後にあなたの情報を</div>
+    <div class="head-colapse text-center">Finally your information</div>
     <PublishItidentification></PublishItidentification>
 
     <div class="group-btn">
       <b-button
         type="button"
         class="btn-true col-5"
-        :class="{ disabled: readOnly }"
-        :disabled="readOnly"
         @click.prevent="submitProject"
       >
-        保存
+        keep
       </b-button>
       <nuxt-link
         class="btn btn-fall col-5"
-        :to="`/account/${accountId}/project/${campaignId}/preview`"
-        ><SvgEyes />プレビュー</nuxt-link
+        :to="`/account/${accountId}/project/${productId}/preview`"
+        ><SvgEyes />preview</nuxt-link
       >
     </div>
   </section>
@@ -25,9 +23,9 @@
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 import PublishItidentification from "@/components/project/edit/PublishItidentification.vue";
 
-import _ from "lodash";
 import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
+const { mapState } = createNamespacedHelpers("auth");
+const projectMapper = createNamespacedHelpers("home");
 
 export default {
   inject: ["prefix"],
@@ -38,23 +36,13 @@ export default {
   },
 
   computed: {
-    ...accountMapper.mapState(["account"]),
-
-    readOnly() {
-      const status = ["reviewing", "update_reviewing", "published", "finished"];
-      return status.includes(this.campaignStatus);
-    },
-
-    campaignStatus() {
-      return _.get(this.campaign, "status");
-    },
-
+    ...projectMapper.mapState(["product"]),
+    ...mapState(["userId"]),
     accountId() {
-      return this.account.id;
+      return this.userId;
     },
-
-    campaignId() {
-      return this.$route.params.id;
+    productId() {
+      return this.$route.params.projectId;
     },
   },
 

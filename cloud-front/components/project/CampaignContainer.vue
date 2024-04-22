@@ -2,32 +2,49 @@
   <div class="container">
     <div class="list-project">
       <b-card class="card">
-        <div class="form-title text-center">編集中プロジェクト</div>
-        <ListProject editable />
+        <div class="form-title text-center">Editing project</div>
+        <ListProject :products="myProducts" :account-id="accountId" editable />
       </b-card>
     </div>
     <div>
       <h3 class="mt-2 text-primary text-center">
-        まずは
+        First
         <nuxt-link to="/consultation" class="text-primary">
-          プロジェクト掲載・相談フォーム
+          Project posting/consultation form
         </nuxt-link>
-        からご相談ください
+        Please contact us from
       </h3>
     </div>
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
 import ListProject from "./ListProject.vue";
+const { mapState, mapActions } = createNamespacedHelpers("home");
+const authMapper = createNamespacedHelpers("auth");
 
 export default {
   components: {
     ListProject,
   },
-  computed: {},
+  computed: {
+    ...mapState(["myProducts"]),
+    ...authMapper.mapState(["userId"]),
+    accountId() {
+      if (this.userId) {
+        return this.userId;
+      } else {
+        return null;
+      }
+    },
+  },
 
-  mounted() {},
+  mounted() {
+    this.getProductsByAccountId(this.accountId);
+  },
 
-  methods: {},
+  methods: {
+    ...mapActions(["getProductsByAccountId"]),
+  },
 };
 </script>

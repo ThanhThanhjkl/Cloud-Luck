@@ -1,21 +1,14 @@
 <template>
   <div>
-    <EditItidentificationPattern
-      v-if="publishable"
-    ></EditItidentificationPattern>
-    <EditVerification
-      v-if="campaign && campaign.id && !publishable"
-    ></EditVerification>
+    <EditItidentificationPattern></EditItidentificationPattern>
   </div>
 </template>
 
 <script>
-import EditVerification from "@/components/project/edit/EditVerification";
 import EditItidentificationPattern from "@/components/project/edit/EditItidentificationPattern";
 
 export default {
   components: {
-    EditVerification,
     EditItidentificationPattern,
   },
 

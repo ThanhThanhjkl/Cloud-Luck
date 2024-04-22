@@ -7,23 +7,23 @@
 
       <b-row class="price target">
         <b-col>
-          <label class="d-block">現在の応援金額</label>
+          <label class="d-block">Current support amount</label>
           <strong class="current-amount amount">{{
-            (product.cost || 0) | japanMoney
+            (product.sale_cost || 0) | japanMoney
           }}</strong>
         </b-col>
 
         <b-col class="d-md-none">
-          <label class="d-block">目標金額</label>
+          <label class="d-block">Target amount</label>
           <strong class="target-amount-sp">{{
-            (product.sale_cost || 0) | japanMoney
+            (product.cost || 0) | japanMoney
           }}</strong>
         </b-col>
       </b-row>
 
       <b-row class="percent-progress position-relative">
         <b-col>
-          <label class="mb-2">達成率</label>
+          <label class="mb-2">Achievement rate</label>
           <div class="position-relative">
             <b-progress :value="70 || 0" :max="100"> </b-progress>
             <span class="progress-percent"> {{ 70 | formatNumber }}% </span>
@@ -33,9 +33,9 @@
 
       <b-row class="price current">
         <b-col class="d-none d-md-flex align-items-center">
-          <label>目標金額</label>
+          <label>Target amount</label>
           <strong class="target-amount">{{
-            (product.sold || 0) | japanMoney
+            (product.cost || 0) | japanMoney
           }}</strong>
         </b-col>
       </b-row>
@@ -44,7 +44,7 @@
         <b-col class="sub-summary mb-0">
           <div class="d-flex align-items-center remain-date">
             <SvgClock></SvgClock>
-            <label>募集終了まで残り</label>
+            <label>Remaining until recruitment ends</label>
             <strong class="remain-detail-date"
               >{{ product.date | remainDate }}日</strong
             >
@@ -52,9 +52,9 @@
           <div class="d-flex d-md-none align-items-center card-info sp">
             <label class="supporter">
               <svg-users></svg-users>
-              <span>サポーター数</span>
+              <span>Number of supporters</span>
             </label>
-            <strong class="supporters-sp"> {{ product.title }}人 </strong>
+            <strong class="supporters-sp"> {{ product.sold }}人 </strong>
           </div>
         </b-col>
       </b-row>
@@ -64,9 +64,9 @@
           <div class="d-flex align-items-center">
             <label class="supporter">
               <svg-users></svg-users>
-              <span>サポーター数</span>
+              <span>Number of supporters</span>
             </label>
-            <strong class="supporters"> {{ product.title }}人 </strong>
+            <strong class="supporters"> {{ product.sold }}人 </strong>
           </div>
         </b-col>
       </b-row>
@@ -91,7 +91,7 @@
         variant="primary"
         :to="`/project/${productId}/buy/?returnId=${1}`"
       >
-        このプロジェクトを応援する
+        Support this project
       </nuxt-link>
       <div
         class="icon-favorite d-flex justify-content-center align-items-center"
@@ -104,7 +104,7 @@
         >
           <SvgLike class="icon" opacity="0.7"></SvgLike>
         </div>
-        <b class="mt-auto mb-auto text-primary">お気に入りに追加</b>
+        <b class="mt-auto mb-auto text-primary">Add to Favourites</b>
         <div class="badge">
           <span>{{ product.sold || 0 }}</span>
         </div>

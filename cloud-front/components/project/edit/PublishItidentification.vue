@@ -2,7 +2,7 @@
   <b-card>
     <div class="title-card">
       <div class="warning">Check</div>
-      <span>プロジェクトを公開できるようになりました！</span>
+      <span>You can now publish your project!</span>
     </div>
     <div class="contents">
       <div v-for="item in contents" :key="item.id" class="item">
@@ -21,8 +21,6 @@
       <b-button
         variant="primary"
         class="w-100"
-        :disabled="readOnly"
-        :class="{ disabled: readOnly }"
         @click="releasingProject('immediately')"
         ><SvgPublish class="mr-2"></SvgPublish> すぐに公開する
       </b-button>
@@ -36,8 +34,6 @@
           class="input-settings"
           type="text"
           placeholder="2022/11/11 17:00"
-          :readonly="readOnly"
-          :class="{ disabled: readOnly }"
         ></b-input>
       </FormValidator>
       <div class="text-muted text-center mb-3">
@@ -46,8 +42,6 @@
       <b-button
         variant="primary"
         class="w-100"
-        :disabled="readOnly"
-        :class="{ disabled: readOnly }"
         @click="releasingProject('specified')"
         ><SvgClock class="mr-2"></SvgClock>予約する
       </b-button>

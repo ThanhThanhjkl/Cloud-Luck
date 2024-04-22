@@ -4,38 +4,38 @@
       <b-carousel controls>
         <b-carousel-slide>
           <template #img>
-            <img class="w-100" src="imageSource(image.id)" />
+            <img class="w-100" :src="images" />
           </template>
         </b-carousel-slide>
       </b-carousel>
     </template>
-    <h4>ádfasdfasd</h4>
+    <h4>{{ product.title }}</h4>
     <div class="row no-gutters align-items-center">
       <div class="price">
-        {{ 222 }}
+        {{ product.sale_cost | japanMoney }}
       </div>
-      <div class="users">残り：{{ 111 }}人まで</div>
+      <div class="users">Rest: {{ product.sold }} Even people</div>
     </div>
 
     <div class="px-3 text-center">
       <a class="w-100 btn btn-crimson" @click="choseReturnPlan(returnPlan.id)">
-        このリターンを選択する
+        BUY
       </a>
     </div>
 
     <div class="card-text">
-      {{ 111 }}
+      {{ product.name }}
     </div>
 
     <b-card-sub-title class="d-flex align-items-center">
       <div>
-        <label>サポーター</label>
-        <strong>{{ 0 }}人</strong>
+        <label>supporter</label>
+        <strong>{{ product.sold }}人</strong>
       </div>
 
       <div>
-        <label>お届け予定</label>
-        <strong>{{ 2022 | japanDate }} </strong>
+        <label>Scheduled delivery</label>
+        <strong>{{ product.date | japanDate }} </strong>
       </div>
     </b-card-sub-title>
   </b-card>
@@ -43,7 +43,7 @@
 <script>
 export default {
   props: {
-    plan: {
+    product: {
       type: Object,
       default: null,
     },
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       returnPlan: null,
+      images: "data:image/jpeg;base64," + this.product.images,
     };
   },
 

@@ -1,9 +1,10 @@
 package cloudfundding.productApplication.controller;
 
-import cloudfundding.productApplication.model.Products;
+import cloudfundding.productApplication.model.ProductsDTO;
 import cloudfundding.productApplication.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,17 +19,27 @@ public class ProductsController {
     Environment environment;
 
     @GetMapping("/products")
-    public List<Products> productsList() {
+    public List<ProductsDTO> productsList() {
         return productsService.getAllProducts();
     }
 
-    @GetMapping("/products/{id}")
-    public Products getProductById(@PathVariable Long id) {
+    @GetMapping("/products/{accountId}")
+    public List<ProductsDTO> getProductsByAccountId(@PathVariable Long accountId) {
+        return productsService.getProductsByAccountId(accountId);
+    }
+
+    @GetMapping("/product/{id}")
+    public ProductsDTO getProductById(@PathVariable Long id) {
         return productsService.getProductsById(id);
     }
 
+    @PutMapping("/product")
+    public ResponseEntity<String> updateProduct(@RequestBody ProductsDTO products) {
+        return productsService.updateProduct(products);
+    }
+
     @PostMapping("/product")
-    public String addProduct(HttpServletRequest request, @ModelAttribute(name = "product") Products products) {
+    public String addProduct(HttpServletRequest request, @ModelAttribute(name = "product") ProductsDTO products) {
         productsService.addProduct(products);
         return "redirect:/products/list";
     }

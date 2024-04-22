@@ -1,5 +1,5 @@
 <template>
-  <EditEstablish v-if="campaign && campaign.id"></EditEstablish>
+  <EditEstablish></EditEstablish>
 </template>
 
 <script>

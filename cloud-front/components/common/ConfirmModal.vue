@@ -2,14 +2,14 @@
   <b-modal
     ref="modal"
     hide-header
-    ok-title="削除"
-    cancel-title="キャンセル"
+    ok-title="delete"
+    cancel-title="cancel"
     ok-variant="danger"
     @ok="submit"
   >
-    本当に削除しますか？
+    Do you really want to delete this?
     <br />
-    削除した情報は2度と復旧できません。
+    Deleted information cannot be recovered again.
   </b-modal>
 </template>
 <script>

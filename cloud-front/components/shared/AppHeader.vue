@@ -6,7 +6,7 @@
           <div class="d-flex align-items-center">
             <nuxt-link to="/" class="header-title">kokodeTUKURU</nuxt-link>
             <div class="header-subtitle">
-              ココデつくろう、ユメをかなえよう。
+              Let's create a place and make our dreams come true.
             </div>
           </div>
         </div>

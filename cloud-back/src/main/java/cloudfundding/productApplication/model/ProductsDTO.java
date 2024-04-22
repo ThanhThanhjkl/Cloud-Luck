@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class Products {
+public class ProductsDTO {
     private int id;
     private String name;
     private String descriptions;
@@ -17,4 +17,7 @@ public class Products {
     private List<String> images;
     private String title;
     private int account_id;
+    private String main_image;
+    private String methods;
+    private String video_url;
 }

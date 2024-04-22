@@ -8,11 +8,7 @@
     <b-card class="owner-section">
       <template #header>
         <b-avatar class="cursor-pointer" @click="seeProfile">
-          <b-img
-            class="h-100"
-            fluid
-            src="imageSource(currentCampaignAccount.image.id)"
-          />
+          <b-img fluid :src="avatar" />
         </b-avatar>
 
         <div class="profile">
@@ -20,15 +16,15 @@
             class="profile-name cursor-pointer text-break"
             @click="seeProfile"
           >
-            ádfasdfasÏ
+            {{ name }}
           </div>
         </div>
       </template>
       <div>
-        ádfadsfasdf
+        {{ email }}
         <div class="mt-2">
           URL:
-          <a href="currentCampaignAccount.url">ádfasdfadsfÏá </a>
+          <a href="currentCampaignAccount.url">{{ url }} </a>
         </div>
       </div>
     </b-card>
@@ -37,28 +33,41 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-
-const campaignMapper = createNamespacedHelpers("auth");
-
+const { mapState, mapActions } = createNamespacedHelpers("auth");
 export default {
+  props: {
+    product: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       showPopUp: false,
+      avatar: "",
+      email: "",
+      name: "",
+      url: "",
     };
   },
 
   computed: {
-    ...campaignMapper.mapGetters(["currentCampaignAccount"]),
-
+    ...mapState(["account"]),
     accountId() {
-      return this.currentCampaignAccount.id;
+      return this.product.account_id;
     },
   },
 
+  async mounted() {
+    await this.getAccount(this.accountId);
+    this.email = this.account.email;
+    this.name = this.account.name;
+    this.url = this.account.url;
+    this.avatar = "data:image/jpeg;base64," + this.account.avatar;
+  },
+
   methods: {
-    imageSource(id) {
-      return `${process.env.consumerApiUrl}/file/${id}`;
-    },
+    ...mapActions(["getAccount"]),
     seeProfile() {
       const params = this.$route.params.id;
       this.$router.push({

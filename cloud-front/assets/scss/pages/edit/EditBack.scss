@@ -255,8 +255,7 @@
             font-size: 14px;
             border: none;
             border-radius: 5px;
-            background: #efefef url("@/assets/img/btn-updown.png") right 0.75rem
-              center/8px 10px no-repeat;
+            background: #efefef url("@/assets/img/btn-updown.png") right 0.75rem center/8px 10px no-repeat;
           }
         }
       }
@@ -535,5 +534,34 @@
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .card-upload-big {
+    width: 100% !important;
+    max-width: unset !important;
+    margin-bottom: 15px;
+
+    .card-upload {
+      padding: 30px 0;
+      min-height: 400px;
+      background-size: cover;
+      position: relative;
+      background-position: top;
+      display: grid;
+
+      svg {
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .card-body {
+        .closed {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+        }
+      }
+    }
   }
 }

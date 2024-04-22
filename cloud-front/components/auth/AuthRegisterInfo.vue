@@ -34,8 +34,8 @@ export default {
         { id: 3, title: "Shipping Address", url: "address" },
         {
           id: 4,
-          title: "Email settings",
-          url: "email",
+          title: "Project settings",
+          url: "project",
         },
         { id: 5, title: "Support history", url: "donation" },
         {

@@ -10,7 +10,6 @@
       @dragleave="dragleave"
       @drop="drop"
     >
-      <div v-if="id" class="notification">{{ id }}</div>
       <SvgUpload class="cursor-pointer" />
       <div class="card-body">
         <input
@@ -18,17 +17,12 @@
           ref="fileInput"
           class="d-none"
           type="file"
-          :accept="acceptFile"
-          :readonly="readonly"
+          :accept="fileAccept"
           @change="selectImgFile"
         />
-        <h4 class="card-title cursor-pointer">ドラッグ＆ドロップ</h4>
-        <b-button
-          :disabled="readonly"
-          variant="primary"
-          type="button"
-          class="card-title mt-1"
-          >画像を選択</b-button
+        <h4 class="card-title cursor-pointer">Drag and Drop</h4>
+        <b-button variant="primary" type="button" class="card-title mt-1"
+          >select</b-button
         >
       </div>
     </div>
@@ -38,17 +32,10 @@
       class="card-upload card-uploaded"
     >
       <div class="card-body">
-        <div
-          v-if="!readonly"
-          class="closed cursor-pointer"
-          @click="removeImage"
-        >
+        <div class="closed cursor-pointer" @click="removeImage">
           <SvgClose class="icon-close"></SvgClose>
         </div>
       </div>
-    </div>
-    <div v-if="errors" class="validation">
-      {{ errors }}
     </div>
   </div>
 </template>
@@ -56,35 +43,15 @@
 import SvgUpload from "@/components/common/svg/SvgUpload.vue";
 import SvgClose from "@/components/common/svg/SvgClose.vue";
 
-import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapGetters } = createNamespacedHelpers("global");
-
 export default {
   components: {
     SvgUpload,
     SvgClose,
   },
   props: {
-    id: {
-      type: Number,
-      default: 0,
-    },
     imageId: {
       type: String,
       default: () => "",
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-    name: {
-      type: String,
-      default: null,
-    },
-    acceptFile: {
-      type: String,
-      default:
-        "image/png, image/jpeg, image/gif, image/jpg, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
     },
   },
 
@@ -93,54 +60,38 @@ export default {
       fileAccept:
         "image/png, image/jpeg, image/gif, image/jpg, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
       isDragging: false,
-      image: {},
       src: null,
       placeholder: "https://www.youtube.com/watch? \n v=XXXXXXXXX or vimeo",
     };
   },
 
-  computed: {
-    errors() {
-      return this.getErrors()(this.name);
-    },
-  },
+  computed: {},
 
   watch: {
-    async imageId(value) {
+    imageId(value) {
       if (value) {
-        this.src = await this.getImage(this.imageId);
+        this.src = this.imageId;
       }
     },
   },
 
-  async mounted() {
+  mounted() {
     if (this.imageId) {
-      this.src = await this.getImage(this.imageId);
+      this.src = this.imageId;
     }
   },
 
   methods: {
-    ...mapActions(["postImage", "getImage", "deleteImage"]),
-
-    ...mapGetters(["getErrors"]),
-
     chooseFile() {
-      if (this.readonly) {
-        return false;
-      }
       this.$refs.fileInput.click();
     },
 
-    async selectImgFile(e, isDrop) {
-      if (this.readonly) {
-        return false;
-      }
-
+    selectImgFile(e, isDrop) {
       const fileInput = this.$refs.fileInput;
       const files = isDrop ? e.dataTransfer.files : fileInput.files;
       if (files && files[0]) {
-        this.image = await this.postImage(files[0]);
-        this.$emit("upload", this.image.body.id);
+        this.src = URL.createObjectURL(files[0]);
+        this.$emit("upload", this.src);
       }
     },
 
@@ -157,21 +108,9 @@ export default {
       this.isDragging = false;
     },
 
-    async removeImage() {
-      if (this.readonly) {
-        return false;
-      }
-      if (this.imageId) {
-        await this.deleteImage(this.imageId);
-        this.src = null;
-        this.$emit("destroy", this.imageId);
-      } else if (this.image.body && this.image.body.id) {
-        await this.deleteImage(this.image.body.id);
-        this.src = null;
-        this.$emit("destroy", this.image.body.id);
-      } else {
-        this.$emit("destroy");
-      }
+    removeImage() {
+      this.src = null;
+      this.$emit("destroy");
     },
   },
 };

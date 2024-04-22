@@ -1,18 +1,15 @@
 <template>
   <b-container fluid="xl">
-    <EditProject
-      v-if="showToolbar && campaign && campaign.id"
-      class="mb-4"
-    ></EditProject>
-    <nuxt-child v-if="account"></nuxt-child>
+    <EditProject class="mb-4"></EditProject>
+    <nuxt-child></nuxt-child>
   </b-container>
 </template>
 <script>
 import EditProject from "@/components/project/edit/EditProject";
 
 import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
-const authMapper = createNamespacedHelpers("auth");
+const { mapState } = createNamespacedHelpers("auth");
+const projectMapper = createNamespacedHelpers("home");
 
 export default {
   components: {
@@ -25,8 +22,8 @@ export default {
   },
 
   computed: {
-    ...authMapper.mapState(["user"]),
-    ...accountMapper.mapState(["account"]),
+    ...mapState(["userId"]),
+    ...projectMapper.mapState(["product"]),
 
     showToolbar() {
       if (
@@ -48,28 +45,16 @@ export default {
 
   async mounted() {
     window.addEventListener("beforeunload", this.handleBeforeUnload);
-    if (!this.account) {
+    if (!this.userId) {
       this.$router.push("/auth/login");
     }
-    if (this.user) {
-      const campaign = await this.getLocalCampaign(
-        this.$route.params.projectId
-      );
-      if (!campaign) {
-        await this.getCampaignDetail(this.$route.params.projectId);
-      }
-      this.getAccountCards(this.user.id);
-    }
+    await this.getProductsDetail(this.$route.params.projectId);
   },
 
   methods: {
-    ...accountMapper.mapActions(["getAccountCards"]),
-
+    ...projectMapper.mapActions(["getProductsDetail"]),
     handleBeforeUnload(event) {
-      // Cancel the event
       event.preventDefault();
-
-      // Prompt the user with a confirmation dialog
       event.returnValue = "";
     },
   },

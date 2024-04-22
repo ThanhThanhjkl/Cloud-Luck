@@ -18,7 +18,7 @@
       <section>
         <div class="section-header">
           <h2 class="section-title">LINE UP</h2>
-          <h4 class="section-subtitle">ファンディング ラインナップ</h4>
+          <h4 class="section-subtitle">Funding lineup</h4>
           <b-form-select
             v-model="sortCampaign"
             :options="options"
@@ -28,7 +28,7 @@
       </section>
 
       <section class="section-recommend">
-        <div class="top-list-card" v-if="products.length > 0">
+        <div v-if="products.length > 0" class="top-list-card">
           <div class="top-1">
             <TopCard
               v-for="(item, index) in products.slice(0, 1)"
@@ -50,7 +50,7 @@
       </section>
 
       <div class="view-all">
-        <b-button variant="primary">すべてのプロジェクトを見る</b-button>
+        <b-button variant="primary">See all projects</b-button>
       </div>
     </b-container>
   </div>
@@ -69,7 +69,7 @@ export default {
 
   data() {
     return {
-      options: [{ value: 1, text: "新着" }],
+      options: [{ value: 1, text: "New arrival" }],
       sortCampaign: 1,
     };
   },

@@ -18,8 +18,8 @@
 
       <div class="page-detail-content">
         <section class="left-content">
-          <b-card-title class="d-none mb-0 d-lg-block text-center">
-            {{ product.name }}
+          <b-card-title class="d-none mb-3 d-lg-block text-center">
+            {{ product.title }}
           </b-card-title>
 
           <section class="d-grid g-32">
@@ -74,7 +74,7 @@
                             :class="{ active: url == 'project-id-sponsor' }"
                           >
                             <span class="title-tab">
-                              <span v-html="`応援\nメッセージ`"></span>
+                              <span v-html="`Support\nMessage`"></span>
                             </span>
                             <span class="alert-amount text-center">0</span>
                           </nuxt-link>
@@ -108,7 +108,7 @@
         <section class="right-content">
           <DetailSummary class="d-none d-md-block"></DetailSummary>
 
-          <DetailProjectOwner></DetailProjectOwner>
+          <DetailProjectOwner :product="product"></DetailProjectOwner>
 
           <section class="return-plan">
             <div class="section-header">
@@ -117,7 +117,10 @@
             </div>
             <div class="d-grid g-16">
               <div>
-                <ReturnPlanCard v-if="product" :plan="product"></ReturnPlanCard>
+                <ReturnPlanCard
+                  v-if="product"
+                  :product="product"
+                ></ReturnPlanCard>
               </div>
             </div>
           </section>

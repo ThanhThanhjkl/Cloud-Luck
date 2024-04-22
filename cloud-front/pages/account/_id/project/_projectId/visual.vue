@@ -1,14 +1,14 @@
 <template>
   <div>
-    <EditIntuitive v-if="campaign && campaign.id"></EditIntuitive>
+    <EditVisual></EditVisual>
   </div>
 </template>
 
 <script>
-import EditIntuitive from "@/components/project/edit/EditIntuitive.vue";
+import EditVisual from "~/components/project/edit/EditVisual.vue";
 export default {
   components: {
-    EditIntuitive,
+    EditVisual,
   },
 
   computed: {},

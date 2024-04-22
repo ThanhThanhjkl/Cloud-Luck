@@ -1,56 +1,36 @@
 <template>
-  <div v-if="campaign" class="mb-3 edit-story-page">
+  <div class="mb-3 edit-story-page">
     <h4 class="text-center mt-2 mb-3 edit-story-title">
-      あなたの想いを語りましょう
+      Let's talk about your thoughts
     </h4>
-    <b-card v-if="campaignMapper && validator">
-      <FormValidator
-        class="mt-3"
-        label="本文"
-        text-required
-        :validator="$v.campaignMapper.body.body"
-        :name="`${prefix}.body.body`"
-      >
-        <quill-editor
-          v-if="campaign && campaign.id"
-          v-model.trim="campaignMapper.body.body"
-          :readonly="readOnly"
-        ></quill-editor>
+    <b-card>
+      <FormValidator class="mt-3" label="Text" text-required>
+        <quill-editor v-model="descriptions"></quill-editor>
         <span class="pass-note"
-          >※行間をあけずに改行するには【 Shift + Enter 】を押してください。
+          >※Press [Shift + Enter] to start a new line without spacing between
+          lines.
         </span>
       </FormValidator>
     </b-card>
     <div class="group-btn">
-      <button
-        class="btn-true col-5"
-        :class="{ disabled: readOnly }"
-        :disabled="readOnly"
-        @click="onSaveStep"
-      >
-        保存
-      </button>
+      <button class="btn-true col-5" @click="onSaveStep">keep</button>
       <nuxt-link
         class="btn btn-fall col-5"
-        :to="`/account/${accountId}/project/${campaignId}/preview`"
+        :to="`/account/${accountId}/project/${productId}/preview`"
         ><SvgEyes />
-        プレビュー
+        preview
       </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
-import _ from "lodash";
-
 import FormValidator from "@/components/common/FormValidator.vue";
 import QuillEditor from "@/components/common/QuillEditor";
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
-// import { mapFields } from "vuex-map-fields";
 import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
-
+const { mapState } = createNamespacedHelpers("auth");
+const projectMapper = createNamespacedHelpers("home");
 export default {
   inject: ["prefix"],
   components: {
@@ -61,60 +41,55 @@ export default {
 
   data() {
     return {
-      campaignMapper: null,
+      descriptions: "",
     };
   },
 
-  validations: {
-    campaignMapper: {
-      body: {
-        body: {
-          required,
-        },
-      },
-    },
-  },
-
   computed: {
-    ...accountMapper.mapState(["account"]),
-
-    readOnly() {
-      const status = ["reviewing", "update_reviewing"];
-      return status.includes(this.campaignStatus);
-    },
-
-    campaignStatus() {
-      return _.get(this.campaign, "status");
-    },
-
+    ...projectMapper.mapState(["product"]),
+    ...mapState(["userId"]),
     accountId() {
-      return this.$route.params.id;
+      return this.userId;
     },
-
-    campaignId() {
+    productId() {
       return this.$route.params.projectId;
-    },
-
-    validator() {
-      return this.$v;
     },
   },
 
   mounted() {
-    // fix cloneDeep campaign
-    if (this.campaign.id) {
-      this.campaignMapper = _.cloneDeep(this.campaign);
+    const productUpdate = localStorage.getItem(
+      `productUpdate${this.productId}`
+    );
+    this.productDraft = JSON.parse(productUpdate);
+    if (productUpdate && this.productDraft.descriptions) {
+      this.descriptions = this.productDraft.descriptions;
+    } else {
+      this.descriptions = this.product.descriptions;
     }
   },
 
   methods: {
     onSaveStep() {
-      this.$v.$touch();
-
-      if (!this.$v.$error) {
-        this.setLocalCampaign(this.campaignMapper);
-        this.$router.push("return");
+      const productUpdateAvailable = localStorage.getItem(
+        `productUpdate${this.productId}`
+      );
+      const productUpdate = JSON.parse(productUpdateAvailable);
+      if (productUpdateAvailable) {
+        productUpdate.descriptions = this.descriptions;
+        localStorage.setItem(
+          `productUpdate${this.productId}`,
+          JSON.stringify(productUpdate)
+        );
+      } else {
+        const productUpdate = {
+          descriptions: this.descriptions,
+        };
+        localStorage.setItem(
+          `productUpdate${this.productId}`,
+          JSON.stringify(productUpdate)
+        );
       }
+      this.$router.push("return");
     },
   },
 };
