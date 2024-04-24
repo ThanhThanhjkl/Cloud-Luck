@@ -1,7 +1,5 @@
 <template>
   <div class="changeinfo detail">
-    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
-
     <FormAddress
       v-if="address && address.id"
       :address="address"
@@ -12,14 +10,10 @@
 </template>
 <script>
 import { cloneDeep } from "lodash";
-
 import FormAddress from "@/components/profile/changeinfo/FormAddress";
-import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
-
 export default {
   components: {
     FormAddress,
-    AuthRegisterInfo,
   },
 
   layout: "auth",

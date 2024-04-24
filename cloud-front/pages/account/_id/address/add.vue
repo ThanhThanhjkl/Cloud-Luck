@@ -1,17 +1,14 @@
 <template>
   <div class="changeinfo detail">
-    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
     <FormAddress @submit="onCreateAddress"></FormAddress>
   </div>
 </template>
 <script>
-import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import FormAddress from "@/components/profile/changeinfo/FormAddress";
 
 export default {
   components: {
     FormAddress,
-    AuthRegisterInfo,
   },
 
   layout: "auth",

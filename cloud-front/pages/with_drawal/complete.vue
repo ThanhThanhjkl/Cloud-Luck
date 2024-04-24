@@ -7,7 +7,7 @@
       <div class="complete-content text-center">
         <svg-complete></svg-complete>
         <div class="complete-alert">
-          kokodeTUKURU の<br />ご利用ありがとうございました！
+          CloudFunding の<br />ご利用ありがとうございました！
         </div>
         <ul>
           <li>
@@ -20,7 +20,7 @@
       </div>
     </section>
     <div class="btn-service-name">
-      <nuxt-link to="/auth/login">kokodeTUKURU トップ</nuxt-link>
+      <nuxt-link to="/auth/login">CloudFunding トップ</nuxt-link>
     </div>
   </b-container>
 </template>

@@ -34,17 +34,12 @@
       </b-row>
       <b-row class="pt-20px">
         <b-col class="card-info">
-          <label class="d-flex align-items-center">
-            <svg-clock></svg-clock>
-            <span>10</span>
-          </label>
-          <strong class="d-flex align-items-center">{{ item.date }}日 </strong>
+          <strong class="d-flex align-items-center">{{ item.date }}</strong>
           <span class="divider">/</span>
           <label class="supporter">
             <svg-users></svg-users>
-            <span>supporters</span>
+            <span>{{ item.sold }} supporters</span>
           </label>
-          <strong>{{ item.sold }}</strong>
           <b-col class="author d-none d-lg-block">
             <label>
               <svg-user-solid></svg-user-solid>
@@ -65,14 +60,12 @@
 
 <script>
 import SvgHeart from "@/components/common/svg/SvgHeart.vue";
-import SvgClock from "@/components/common/svg/SvgClock.vue";
 import SvgUsers from "@/components/common/svg/SvgUsers.vue";
 import SvgUserSolid from "@/components/common/svg/SvgUserSolid.vue";
 
 export default {
   components: {
     SvgHeart,
-    SvgClock,
     SvgUsers,
     SvgUserSolid,
   },

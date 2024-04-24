@@ -15,7 +15,7 @@
       </div>
     </section>
     <div class="btn-service-name">
-      <nuxt-link to="/">kokodeTUKURU トップ</nuxt-link>
+      <nuxt-link to="/">CloudFunding トップ</nuxt-link>
     </div>
   </b-container>
 </template>

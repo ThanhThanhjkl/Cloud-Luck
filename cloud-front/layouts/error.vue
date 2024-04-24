@@ -7,10 +7,10 @@
         <hr />
         <h3>Not Found</h3>
         <p>エラー文言エラー文言エラー文言エラー文言 エラー文言エラー文言</p>
-        <nuxt-link to="/">kokodeTUKURU トップ</nuxt-link>
+        <nuxt-link to="/">CloudFunding トップ</nuxt-link>
       </div>
       <div class="footer-eror">
-        <h3>kokodeTUKURU</h3>
+        <h3>CloudFunding</h3>
         <p>
           株式会社 光文社 <br />
           Copyright © 2022 Kobunsha Co., Ltd. All Rights Reserved.

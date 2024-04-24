@@ -3,7 +3,7 @@
     <b-container fluid="xl">
       <div v-if="showTopAndBodyFooter" class="footer-header">
         <nuxt-link class="footer-title text-white" to="/"
-          >kokodeTUKURU
+          >CloudFunding
         </nuxt-link>
         <ul class="footer-menu links">
           <li v-for="(item, index) in menu" :key="index">

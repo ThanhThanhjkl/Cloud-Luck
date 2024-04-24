@@ -15,7 +15,7 @@
             <div class="opaciti-bg"></div>
             <div class="d-block d-lg-none">
               <span>MENU</span>
-              <div class="inner rotate">kokodeTUKURU</div>
+              <div class="inner rotate">CloudFunding</div>
             </div>
             <div class="d-lg-none">
               <div class="menu-list">

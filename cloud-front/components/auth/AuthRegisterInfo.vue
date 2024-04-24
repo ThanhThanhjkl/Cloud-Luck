@@ -15,7 +15,7 @@
         </div>
         <div class="text-right">
           <nuxt-link to="/with_drawal" class="note-info">
-            kokodeTUKURU を退会する
+            Withdraw from CloudFunding
           </nuxt-link>
         </div>
       </div>

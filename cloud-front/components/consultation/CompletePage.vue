@@ -16,7 +16,7 @@
     </section>
     <div class="btn-service-name">
       <b-button to="/" type="submit" variant="primary" block
-        >kokodeTUKURU トップ</b-button
+        >CloudFunding トップ</b-button
       >
     </div>
   </b-container>

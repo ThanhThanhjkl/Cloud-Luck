@@ -4,7 +4,7 @@
       <b-row class="m-md-0">
         <div class="company-name">
           <div class="d-flex align-items-center">
-            <nuxt-link to="/" class="header-title">kokodeTUKURU</nuxt-link>
+            <nuxt-link to="/" class="header-title">CLOUDFunding</nuxt-link>
             <div class="header-subtitle">
               Let's create a place and make our dreams come true.
             </div>
@@ -18,7 +18,7 @@
               <input
                 v-model="keyword"
                 type="search"
-                placeholder="キーワード検索"
+                placeholder="Keyword search"
                 @keyup.enter="onSearchCampaign"
               />
             </div>
@@ -48,7 +48,7 @@
               @click.native="onLogout"
             >
               <SvgLogout></SvgLogout>
-              ログイン
+              Logot
             </nuxt-link>
           </div>
         </div>

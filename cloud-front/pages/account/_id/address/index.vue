@@ -111,6 +111,7 @@ export default {
       unclickable: false,
       isSelectedId: null,
       addressSelected: null,
+      accountAddress: [],
     };
   },
 
