@@ -11,14 +11,10 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
 import { cloneDeep } from "lodash";
 
 import FormAddress from "@/components/profile/changeinfo/FormAddress";
 import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
-
-const { mapState, mapActions } = createNamespacedHelpers("account/address");
-const accountMapper = createNamespacedHelpers("account");
 
 export default {
   components: {
@@ -33,10 +29,7 @@ export default {
       address: null,
     };
   },
-  computed: {
-    ...mapState(["accountAddress"]),
-    ...accountMapper.mapState(["account"]),
-  },
+  computed: {},
   async mounted() {
     if (this.$route.params.address) {
       this.address = cloneDeep(this.$route.params.address);
@@ -52,7 +45,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["updateAccountAddress", "getAccountAddress"]),
     async onUpdateAddress(payload) {
       try {
         await this.updateAccountAddress({

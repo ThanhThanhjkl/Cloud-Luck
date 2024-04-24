@@ -72,9 +72,6 @@ import SvgComplete from "@/components/common/svg/SvgComplete";
 import SvgTwitter from "@/components/common/svg/SvgTwitter";
 import SvgFacebook from "@/components/common/svg/SvgFacebook";
 import SvgLineCircle from "@/components/common/svg/SvgLineCircle";
-
-import { createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("account");
 export default {
   components: {
     SvgComplete,
@@ -113,8 +110,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["account"]),
-
     nextPerson() {
       const x = _.get(this.campaignReturnDetail, "sponsorCount");
       return x + 1;

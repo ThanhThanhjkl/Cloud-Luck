@@ -171,7 +171,6 @@ import FormValidator from "@/components/common/FormValidator";
 import { mapFields } from "vuex-map-fields";
 const { mapActions } = createNamespacedHelpers("campaign");
 
-const accountMapper = createNamespacedHelpers("account");
 const globalMapper = createNamespacedHelpers("global");
 
 export default {
@@ -213,7 +212,6 @@ export default {
   },
 
   computed: {
-    ...accountMapper.mapState(["account", "accountCards"]),
     ...globalMapper.mapState(["keepError"]),
 
     ...mapFields("campaign", {
@@ -262,7 +260,6 @@ export default {
   },
 
   methods: {
-    ...accountMapper.mapActions(["getAccountCards"]),
     ...mapActions(["setLocalCardInfo"]),
 
     checkActive(idx) {

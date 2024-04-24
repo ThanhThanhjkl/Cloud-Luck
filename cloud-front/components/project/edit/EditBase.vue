@@ -26,11 +26,11 @@
         <b-form-group>
           <FormValidator class="mt-3" label="Recruitment method" text-required>
             <b-form-radio
-              v-model="method"
+              v-model="methods"
               value="all_in"
               class="recruit"
               :class="{
-                isSelected: method == 'all_in',
+                isSelected: methods == 'all_in',
               }"
               ><div class="right-content">
                 <div class="head-box">All-In</div>
@@ -46,11 +46,11 @@
               </div></b-form-radio
             >
             <b-form-radio
-              v-model="method"
+              v-model="methods"
               value="all_or_nothing"
               class="recruit"
               :class="{
-                isSelected: method == 'all_or_nothing',
+                isSelected: methods == 'all_or_nothing',
               }"
               ><div class="right-content">
                 <div class="head-box">All-or-Nothing</div>
@@ -122,7 +122,7 @@ export default {
   data() {
     return {
       cost: "",
-      method: "all_in",
+      methods: "",
       date: "",
       productDraft: null,
     };
@@ -146,13 +146,19 @@ export default {
       `productUpdate${this.productId}`
     );
     this.productDraft = JSON.parse(productUpdate);
-    if (productUpdate && this.productDraft.id === this.productId) {
+    if (productUpdate && this.productDraft.cost) {
       this.cost = this.productDraft.cost;
-      this.method = this.productDraft.method;
-      this.date = new Date(this.productDraft.date);
     } else {
       this.cost = this.product.cost;
-      this.method = "all-in";
+    }
+    if (productUpdate && this.productDraft.methods) {
+      this.methods = this.productDraft.methods;
+    } else {
+      this.methods = this.product.methods;
+    }
+    if (productUpdate && this.productDraft.date) {
+      this.date = new Date(this.productDraft.date);
+    } else {
       this.date = new Date(this.product.date);
     }
   },
@@ -166,7 +172,7 @@ export default {
         const productUpdate = JSON.parse(productUpdateAvailable);
         productUpdate.id = this.productId;
         productUpdate.cost = this.cost;
-        productUpdate.method = this.method;
+        productUpdate.methods = this.methods;
         productUpdate.date = this.date;
         localStorage.setItem(
           `productUpdate${this.productId}`,
@@ -176,7 +182,7 @@ export default {
         const productUpdate = {
           id: this.productId,
           cost: this.cost,
-          method: this.method,
+          methods: this.methods,
           date: this.date,
         };
         localStorage.setItem(

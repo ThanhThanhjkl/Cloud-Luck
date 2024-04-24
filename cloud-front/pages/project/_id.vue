@@ -25,7 +25,8 @@
           <section class="d-grid g-32">
             <DetailCarousel
               :images="product.images"
-              :descriptions="product.name"
+              :name="product.name"
+              :main-image="product.main_image"
             />
 
             <div class="right-content d-md-none">

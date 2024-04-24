@@ -103,8 +103,10 @@ export default {
       `productUpdate${this.productId}`
     );
     this.productDraft = JSON.parse(productUpdate);
-    if (productUpdate && this.productDraft.id === this.productId) {
+    if (productUpdate && this.productDraft.title) {
       this.title = this.productDraft.title;
+    }
+    if (productUpdate && this.productDraft.name) {
       this.name = this.productDraft.name;
     } else {
       this.title = this.product.title;

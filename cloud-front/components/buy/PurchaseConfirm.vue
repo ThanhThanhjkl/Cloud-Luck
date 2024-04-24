@@ -145,8 +145,6 @@ import gmoPgCode from "@/utils/gmoPgCode";
 import PurchaseStepList from "~/components/buy/PurchaseStepList.vue";
 
 const { mapActions } = createNamespacedHelpers("campaign");
-const authMapper = createNamespacedHelpers("account");
-const addressMapper = createNamespacedHelpers("account/address");
 export default {
   layout: "default",
 
@@ -190,8 +188,6 @@ export default {
   },
 
   computed: {
-    ...authMapper.mapState(["accountCards", "account"]),
-    ...addressMapper.mapState(["accountAddress"]),
     ...mapFields("campaign", {
       cardType: "donation.cardType",
       cardInfo: "donation.cardInfo",

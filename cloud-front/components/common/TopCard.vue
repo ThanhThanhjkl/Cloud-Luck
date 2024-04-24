@@ -11,8 +11,10 @@
         <svg-heart :class="item" class="svg-heart"></svg-heart>
       </div>
       <div class="position-relative">
-        <b-progress :value="70" :max="100"></b-progress>
-        <span class="percent-label"> <span>FUNDED!</span> 20% </span>
+        <b-progress :value="salePersent" :max="100"></b-progress>
+        <span class="percent-label text-dark">
+          <span class="text-dark">SALE!</span> {{ salePersent }}%
+        </span>
       </div>
     </template>
 
@@ -89,10 +91,14 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    salePersent() {
+      return Math.floor((this.item.sale_cost / this.item.cost) * 100);
+    },
+  },
 
   mounted() {
-    this.images = "data:image/jpeg;base64," + this.item.images;
+    this.images = this.item.main_image;
   },
 
   methods: {},

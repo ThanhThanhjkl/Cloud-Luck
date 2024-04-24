@@ -83,6 +83,7 @@ export default {
 
   computed: {
     ...mapState(["userId"]),
+    ...projectMapper.mapState(["product"]),
 
     path() {
       return this.$route.path;
@@ -109,20 +110,36 @@ export default {
       );
       if (productUpdateAvailable) {
         const productUpdate = JSON.parse(productUpdateAvailable);
+        const subImages = productUpdate.images.map((image) => {
+          if (image.startsWith("data:image/jpeg;base64,")) {
+            return image.replace("data:image/jpeg;base64,", "");
+          } else {
+            return image;
+          }
+        });
         const params = {
           id: this.productId,
-          name: productUpdate.name,
-          descriptions: productUpdate.descriptions,
-          date: productUpdate.date,
-          cost: productUpdate.cost,
+          name: productUpdate.name ? productUpdate.name : this.product.name,
+          descriptions: productUpdate.descriptions
+            ? productUpdate.descriptions
+            : this.product.descriptions,
+          date: productUpdate.date ? productUpdate.date : this.product.date,
+          cost: productUpdate.cost ? productUpdate.cost : this.product.cost,
           sale_cost: 100,
-          sold: productUpdate.sold,
-          images: productUpdate.images,
-          title: productUpdate.title,
+          sold: productUpdate.sold ? productUpdate.sold : this.product.sold,
+          images:
+            productUpdate.images.length > 0 ? subImages : this.product.images,
+          title: productUpdate.title ? productUpdate.title : this.product.title,
           account_id: this.accountId,
-          main_image: productUpdate.mainImage,
-          methods: productUpdate.methods,
-          video_url: productUpdate.videoUrl,
+          main_image: productUpdate.mainImage
+            ? productUpdate.mainImage
+            : this.product.main_image,
+          methods: productUpdate.methods
+            ? productUpdate.methods
+            : this.product.methods,
+          video_url: productUpdate.videoUrl
+            ? productUpdate.videoUrl
+            : this.product.videoUrl,
         };
         await this.updateProduct(params).then(() => {
           this.$toast.success("updated successfully");

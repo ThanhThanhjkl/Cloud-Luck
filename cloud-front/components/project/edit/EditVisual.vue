@@ -96,6 +96,7 @@ export default {
       images: [],
       videoUrl: null,
       placeholder: "https://www.youtube.com/watch?v=XXXXXXXXX or vimeo",
+      productDraft: null,
     };
   },
 
@@ -124,8 +125,8 @@ export default {
     if (productUpdate && this.productDraft.videoUrl) {
       this.videoUrl = this.productDraft.videoUrl;
     } else {
-      if (this.product.mainImage) {
-        this.mainImage = "data:image/jpeg;base64," + this.product.mainImage;
+      if (this.product.main_image) {
+        this.mainImage = this.product.main_image;
       } else {
         this.mainImage = null;
       }
@@ -166,6 +167,7 @@ export default {
       );
       const productUpdate = JSON.parse(productUpdateAvailable);
       if (productUpdateAvailable) {
+        productUpdate.id = this.productId;
         productUpdate.mainImage = this.mainImage;
         productUpdate.images = this.images;
         productUpdate.videoUrl = this.videoUrl;

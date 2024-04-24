@@ -9,7 +9,7 @@
         <div class="campaign-content">
           <div class="product-info">
             <div class="product-img">
-              <b-img fluid :src="urlImage + product.images[0]" />
+              <b-img fluid :src="product.main_image" />
             </div>
             <div class="product-info-right">
               <div class="product-title">{{ product.title }}</div>
@@ -66,9 +66,7 @@ export default {
   },
 
   data() {
-    return {
-      urlImage: "data:image/jpeg;base64,",
-    };
+    return {};
   },
   computed: {},
 

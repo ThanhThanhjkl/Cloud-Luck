@@ -1,12 +1,12 @@
 <template>
-  <EditEstablish></EditEstablish>
+  <EditBase></EditBase>
 </template>
 
 <script>
-import EditEstablish from "@/components/project/edit/EditEstablish.vue";
+import EditBase from "@/components/project/edit/EditBase.vue";
 export default {
   components: {
-    EditEstablish,
+    EditBase,
   },
 
   computed: {},

@@ -2,6 +2,17 @@
   <b-card class="detail-carousel">
     <div>
       <b-carousel controls indicators>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              height="480"
+              :src="mainImage"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
         <b-carousel-slide
           v-for="(item, imageIndex) in images"
           :key="imageIndex"
@@ -18,7 +29,7 @@
         </b-carousel-slide>
       </b-carousel>
       <b-card-text class="d-none d-lg-block mt-2">
-        {{ descriptions }}
+        {{ name }}
       </b-card-text>
     </div>
   </b-card>
@@ -31,7 +42,11 @@ export default {
       type: Array,
       default: () => [],
     },
-    descriptions: {
+    name: {
+      type: String,
+      default: "",
+    },
+    mainImage: {
       type: String,
       default: "",
     },

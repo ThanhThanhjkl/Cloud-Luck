@@ -96,9 +96,7 @@ import ConfirmModal from "@/components/common/ConfirmModal";
 
 import { createNamespacedHelpers } from "vuex";
 
-const { mapState, mapActions } = createNamespacedHelpers("account/address");
 const authMapper = createNamespacedHelpers("auth");
-const accountMapper = createNamespacedHelpers("account");
 export default {
   components: {
     ConfirmModal,
@@ -118,8 +116,6 @@ export default {
 
   computed: {
     ...authMapper.mapState(["userId"]),
-    ...accountMapper.mapState(["account"]),
-    ...mapState(["accountAddress"]),
   },
 
   mounted() {
@@ -127,8 +123,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getAccountAddress"]),
-
     addNewAddress() {
       this.allAddress = false;
     },

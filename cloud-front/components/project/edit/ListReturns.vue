@@ -154,7 +154,6 @@ export default {
       this.getReturnsByProductId(this.productId);
     },
     onSaveStep() {
-      this.setLocalCampaign();
       this.$router.push("identifications");
     },
     isImages(listImages) {

@@ -79,11 +79,8 @@
 </template>
 <script>
 import FormAddress from "@/components/profile/changeinfo/FormAddress.vue";
-import { createNamespacedHelpers } from "vuex";
 import { mapFields } from "vuex-map-fields";
 import _ from "lodash";
-const { mapState, mapActions } = createNamespacedHelpers("account/address");
-const authMapper = createNamespacedHelpers("account");
 export default {
   components: {
     FormAddress,
@@ -96,8 +93,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["accountAddress"]),
-    ...authMapper.mapState(["account"]),
     ...mapFields("campaign", {
       address: "donation.address",
       addressId: "donation.addressId",
@@ -126,9 +121,6 @@ export default {
   },
 
   methods: {
-    ...authMapper.mapActions(["getProfile"]),
-    ...mapActions(["getAccountAddress"]),
-
     changeAddress($event) {
       // TODO
       this.$emit("address", $event);

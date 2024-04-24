@@ -52,29 +52,6 @@
         </nuxt-link>
       </div>
     </b-card>
-    <b-modal id="modal-1">
-      <p class="my-4">
-        very sorry. An error has occurred. Return to the top page.
-      </p>
-      <button v-b-modal.modal-2 @click="$bvModal.hide('modal-1')">
-        kokodeTUKURU トップ
-      </button>
-    </b-modal>
-    <b-modal id="modal-2">
-      <h2>エラータイトル</h2>
-      <p class="my-4">
-        エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言エラー文言
-      </p>
-      <button v-b-modal.modal-3 @click="$bvModal.hide('modal-2')">OK</button>
-    </b-modal>
-    <b-modal id="modal-3">
-      <h2>確認タイトル</h2>
-      <p class="my-4">
-        確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言確認文言
-      </p>
-      <button class="cancel" @click="$bvModal.hide('modal-3')">はい</button>
-      <button class="ok" @click="$bvModal.hide('modal-3')">戻る</button>
-    </b-modal>
 
     <b-card class="login-external-id">
       <div class="form-title text-center">Log in with external site ID</div>
@@ -111,7 +88,6 @@ import SvgInstagram from "@/components/common/svg/SvgInstagram";
 import FormValidator from "@/components/common/FormValidator";
 
 const { mapActions } = createNamespacedHelpers("auth");
-const accountMapper = createNamespacedHelpers("account");
 export default {
   components: {
     SvgMail,
@@ -131,7 +107,6 @@ export default {
   },
 
   computed: {
-    ...accountMapper.mapState(["account"]),
     disabled() {
       if (!this.email || !this.password) {
         return true;

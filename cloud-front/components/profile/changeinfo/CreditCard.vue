@@ -106,7 +106,6 @@ import FormValidator from "@/components/common/FormValidator";
 import gmoPgCode from "@/utils/gmoPgCode";
 import { createNamespacedHelpers } from "vuex";
 const authMapper = createNamespacedHelpers("auth");
-const { mapState, mapActions } = createNamespacedHelpers("account");
 export default {
   components: { FormValidator },
 
@@ -129,7 +128,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["account"]),
     ...authMapper.mapState(["user"]),
 
     currentYear() {
@@ -168,7 +166,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["putAccountCard", "postAccountCard", "getAccountCards"]),
     onSubmit(card) {
       if (card) {
         this.update();

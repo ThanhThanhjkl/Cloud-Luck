@@ -5,11 +5,8 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
 import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import FormAddress from "@/components/profile/changeinfo/FormAddress";
-const { mapActions } = createNamespacedHelpers("account/address");
-const accountMapper = createNamespacedHelpers("account");
 
 export default {
   components: {
@@ -19,12 +16,9 @@ export default {
 
   layout: "auth",
 
-  computed: {
-    ...accountMapper.mapState(["account"]),
-  },
+  computed: {},
 
   methods: {
-    ...mapActions(["createAccountAddress"]),
     async onCreateAddress(address) {
       try {
         await this.createAccountAddress({

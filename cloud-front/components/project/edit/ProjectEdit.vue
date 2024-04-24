@@ -64,9 +64,6 @@ import QuillEditor from "@/components/common/QuillEditor";
 import SvgEyes from "@/components/common/svg/SvgEyes.vue";
 import FileUpload from "@/components/common/FileUpload.vue";
 import MaxLengthIndicator from "@/components/common/MaxLengthIndicator";
-import { createNamespacedHelpers } from "vuex";
-const accountMapper = createNamespacedHelpers("account");
-
 export default {
   components: {
     FileUpload,
@@ -80,8 +77,6 @@ export default {
     campaignId() {
       return this.$route.params.projectId;
     },
-
-    ...accountMapper.mapState(["account"]),
 
     accountId() {
       return this.account.id;
