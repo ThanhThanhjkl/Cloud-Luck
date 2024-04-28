@@ -1,16 +1,16 @@
 <template>
   <div class="changeinfo detail">
     <FormAddress
-      v-if="address && address.id"
-      :address="address"
-      prefix="editAddressRequest"
+      :address="accountAddressDetail"
       @submit="onUpdateAddress"
     ></FormAddress>
   </div>
 </template>
 <script>
-import { cloneDeep } from "lodash";
 import FormAddress from "@/components/profile/changeinfo/FormAddress";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("auth");
+
 export default {
   components: {
     FormAddress,
@@ -19,26 +19,21 @@ export default {
   layout: "auth",
 
   data() {
-    return {
-      address: null,
-    };
+    return {};
   },
-  computed: {},
+
+  computed: {
+    ...mapState(["accountAddressDetail"]),
+  },
+
   async mounted() {
-    if (this.$route.params.address) {
-      this.address = cloneDeep(this.$route.params.address);
-    } else {
-      await this.getAccountAddress(this.$route.params.id);
-
-      const detailAddress = this.accountAddress.find((item) => {
-        return item.id === this.$route.params.addressId;
-      });
-
-      this.address = cloneDeep(detailAddress);
-    }
+    await this.getAccountAddress(this.$route.params.addressId).then((res) => {
+      this.accountAddressDetail = res;
+    });
   },
 
   methods: {
+    ...mapActions(["getAccountAddress"]),
     async onUpdateAddress(payload) {
       try {
         await this.updateAccountAddress({

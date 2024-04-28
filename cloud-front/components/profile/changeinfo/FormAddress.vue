@@ -5,104 +5,81 @@
       class="new-address"
     >
       <div class="form-title text-center">
-        {{ address ? "お届け先の住所編集" : "お届け先の住所" }}
+        {{ address ? "Edit delivery address" : "Shipping Address" }}
       </div>
       <form>
-        <FormValidator :name="`${prefix}.address`"></FormValidator>
-        <FormValidator label="氏名" :name="`${prefix}.name`" text-required>
+        <FormValidator label="Full Name" text-required>
           <b-input
-            v-model="addressMapper.name"
+            v-model="name"
             type="text"
-            placeholder="姓名"
+            placeholder="First and last name"
             text-required
-            @input="(e) => setLocalAdrressState({ name: e })"
           ></b-input>
         </FormValidator>
 
         <FormValidator
           class="col-md-5 col-12 p-0"
-          label="郵便番号"
-          :name="`${prefix}.zipCode`"
+          label="Post Code"
           text-required
         >
           <b-input
-            v-model="addressMapper.zipCode"
+            v-model="postCode"
             placeholder="000000"
             text-required
-            @input="(e) => setLocalAdrressState({ zipCode: e })"
           ></b-input>
           <div class="pass-note">
-            ※「-」は入力不要です。半角英数字で入力してください。
+            ※"-" does not need to be entered. Please enter in half-width
+            alphanumeric characters.
           </div>
         </FormValidator>
 
         <FormValidator
           class="col-md-5 col-12 p-0"
-          label="都道府県"
-          :name="`${prefix}.prefecture`"
+          label="Prefectures"
           text-required
         >
           <b-form-select
-            v-model="addressMapper.prefecture"
+            v-model="prefectures"
             class="form-control"
             :options="prefOptions"
-            @input="(e) => setLocalAdrressState({ prefecture: e })"
           >
             <template #first>
               <b-form-select-option :value="null" disabled>
-                選択
+                choice
               </b-form-select-option>
             </template>
           </b-form-select>
         </FormValidator>
 
-        <FormValidator label="市区町村" :name="`${prefix}.city`" text-required>
+        <FormValidator label="District" text-required>
           <b-input
-            v-model="addressMapper.city"
+            v-model="district"
             type="text"
-            placeholder="例）文京区音羽"
+            placeholder="(Example) Cau Giay"
             required
-            @input="(e) => setLocalAdrressState({ city: e })"
           ></b-input>
         </FormValidator>
 
-        <FormValidator
-          label="番地  建物名"
-          :name="`${prefix}.street`"
-          text-required
-        >
+        <FormValidator label="address building name" text-required>
           <b-input
-            v-model="addressMapper.street"
+            v-model="street"
             type="text"
-            placeholder="例）1-16-6光文社ビル9F"
+            placeholder="(Example) 1-16-6 Kobunsha Building 9F"
             text-required
-            @input="(e) => setLocalAdrressState({ street: e })"
           ></b-input>
         </FormValidator>
 
-        <FormValidator
-          label="電話番号"
-          :name="`${prefix}.phoneNumber`"
-          text-required
-        >
+        <FormValidator label="telephone number" text-required>
           <b-input
-            v-model="addressMapper.phoneNumber"
+            v-model="phone"
             type="text"
-            placeholder="電話番号を入力してください"
+            placeholder="Please enter your phone number"
             text-required
-            @input="(e) => setLocalAdrressState({ phoneNumber: e })"
           ></b-input>
         </FormValidator>
       </form>
 
       <div class="submit-area mt-4">
-        <!-- <nuxt-link
-          to="/account/1/address/"
-          class="btn btn-block btn-outline-primary mt-0"
-        >
-          取消
-        </nuxt-link> -->
-
         <b-button
           v-if="!hideCreateAddress"
           type="button"
@@ -110,18 +87,14 @@
           block
           @click.prevent="submit"
         >
-          {{ address ? "更新する" : "追加する" }}
+          {{ address ? "Update" : "Create" }}
         </b-button>
       </div>
     </b-card>
   </div>
 </template>
 <script>
-import { prefectureNames } from "jp-prefectures";
 import FormValidator from "@/components/common/FormValidator";
-import { cloneDeep } from "lodash";
-import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("campaign");
 
 export default {
   components: {
@@ -133,10 +106,6 @@ export default {
       type: Object,
       default: () => {},
     },
-    prefix: {
-      type: String,
-      default: "addAddressRequest",
-    },
     hideCreateAddress: {
       type: Boolean,
       default: false,
@@ -145,57 +114,38 @@ export default {
 
   data() {
     return {
-      prefOptions: [],
-      addressMapper: {
-        prefecture: null,
-      },
-      ready: false,
+      name: "",
+      postCode: "",
+      prefectures: null,
+      district: "",
+      street: "",
+      phone: "",
+      prefOptions: ["Ha Noi", "Hai Duong", "Ha Nam"],
     };
   },
 
-  watch: {
-    "addressMapper.zipCode"(newValue) {
-      if (this.address && this.address.id && !this.ready) return;
-
-      if (newValue.length !== 7) return;
-
-      this.$yubinbango(newValue).then((results) => {
-        if (results) {
-          this.addressMapper.prefecture = results.region;
-          this.addressMapper.city = results.locality;
-          this.addressMapper.street = results.street;
-
-          if (this.hideCreateAddress) {
-            this.setLocalAddress({
-              prefecture: results.region,
-              city: results.locality,
-              street: results.street,
-            });
-          }
-        }
-      });
-    },
-  },
-
-  async mounted() {
-    this.prefOptions = await prefectureNames();
-
-    if (this.address && this.address.id) {
-      this.addressMapper = await cloneDeep(this.address);
+  mounted() {
+    if (this.address) {
+      this.name = this.address.name;
+      this.postCode = this.address.postCode;
+      this.prefectures = this.address.prefectures;
+      this.district = this.address.district;
+      this.street = this.address.street;
+      this.phone = this.address.phone;
     }
   },
 
   methods: {
-    ...mapActions(["setLocalAddress"]),
     submit() {
-      this.$emit("submit", this.addressMapper);
-    },
-
-    setLocalAdrressState(value) {
-      this.ready = true;
-      if (this.hideCreateAddress) {
-        this.setLocalAddress(value);
-      }
+      const params = {
+        name: this.name,
+        postCode: this.postCode,
+        prefectures: this.prefectures,
+        district: this.district,
+        street: this.street,
+        phone: this.phone,
+      };
+      this.$emit("submit", params);
     },
   },
 };

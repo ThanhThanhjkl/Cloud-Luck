@@ -50,7 +50,9 @@
       </section>
 
       <div class="view-all">
-        <b-button variant="primary">See all projects</b-button>
+        <b-button variant="primary" @click="seeAllProjects"
+          >See all projects</b-button
+        >
       </div>
     </b-container>
   </div>
@@ -84,6 +86,7 @@ export default {
 
   methods: {
     ...mapActions(["getProducts"]),
+    seeAllProjects() {},
   },
 };
 </script>

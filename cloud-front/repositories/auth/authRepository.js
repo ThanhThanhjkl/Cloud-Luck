@@ -25,27 +25,10 @@ export default ($authApi) => ({
   changePassword(params) {
     return $authApi.put(`${ENDPOINT}/password`, params);
   },
-
-  // ABCD
-  activeAccount(params) {
-    return $authApi.put(`${ENDPOINT}/activate`, params);
+  getAddressByAccountId(params) {
+    return $authApi.get(`/address/${params}`);
   },
-  resetPassword(params) {
-    return $authApi.put(`${ENDPOINT}/password`, params);
-  },
-  createToken(params) {
-    return $authApi.post(`${ENDPOINT}/token`, params);
-  },
-  deactivateUser() {
-    return $authApi.delete(`${ENDPOINT}`);
-  },
-  getRedirectInstagram() {
-    return $authApi.get(`${ENDPOINT}/instagram`);
-  },
-  getRedirectTwitter() {
-    return $authApi.get(`${ENDPOINT}/twitter`);
-  },
-  getRedirectLine() {
-    return $authApi.get(`${ENDPOINT}/line`);
+  getAccountAddress(params) {
+    return $authApi.get(`/address/detail/${params}`);
   },
 });

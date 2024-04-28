@@ -32,20 +32,20 @@
                   <td>
                     {{ item.name }}
                     <br />
-                    〒{{ item.zipCode }}
+                    〒{{ item.postCode }}
                     <br />
-                    {{ item.prefecture }}
+                    {{ item.prefectures }}
                     <br />
-                    {{ item.city }}-
-                    {{ item.street }}
+                    {{ item.street }}-
+                    {{ item.district }}
                     <br />
-                    (tel:{{ item.phoneNumber }})
+                    (tel: {{ item.phone }})
                   </td>
                   <td>
                     <button
                       class="btn-edit"
                       type="button"
-                      @click.prevent="toEdit(item)"
+                      @click.prevent="toEdit(item.id)"
                     >
                       To edit
                     </button>
@@ -61,8 +61,8 @@
                   </td>
                   <td>
                     <b-form-radio
-                      v-model="isSelected"
-                      :value="item.id"
+                      v-model="item.defaultSelect"
+                      :value="item.defaultSelect"
                       name="some-radios"
                     ></b-form-radio>
                   </td>
@@ -79,7 +79,6 @@
             variant="primary"
             class="btn-changeinfo-profile mt-4"
             block
-            :disabled="!accountAddress.length || !isSelectedId"
             @click="changeDefaultAddress"
             >Update</b-button
           >
@@ -95,8 +94,7 @@ import SvgDelete from "@/components/common/svg/SvgDelete";
 import ConfirmModal from "@/components/common/ConfirmModal";
 
 import { createNamespacedHelpers } from "vuex";
-
-const authMapper = createNamespacedHelpers("auth");
+const { mapState, mapActions } = createNamespacedHelpers("auth");
 export default {
   components: {
     ConfirmModal,
@@ -111,22 +109,19 @@ export default {
       unclickable: false,
       isSelectedId: null,
       addressSelected: null,
-      accountAddress: [],
     };
   },
 
   computed: {
-    ...authMapper.mapState(["userId"]),
+    ...mapState(["userId", "accountAddress"]),
   },
 
   mounted() {
-    // this.getAccountAddress(this.account.id);
+    this.getAddressByAccountId(this.userId);
   },
 
   methods: {
-    addNewAddress() {
-      this.allAddress = false;
-    },
+    ...mapActions(["getAddressByAccountId"]),
 
     async deleteAddress() {
       this.unclickable = true;
@@ -140,11 +135,8 @@ export default {
       this.$toast.success("削除しました");
     },
 
-    toEdit(address) {
-      this.$router.push({
-        name: `account-id-address-addressId`,
-        params: { id: this.account.id, addressId: address.id, address },
-      });
+    toEdit(id) {
+      this.$router.push(`/account/${this.account.id}/address/${id}/edit`);
     },
 
     async changeDefaultAddress() {

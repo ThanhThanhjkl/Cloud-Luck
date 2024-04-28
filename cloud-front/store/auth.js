@@ -5,12 +5,16 @@ const RESET_CURRENT_USER = "RESET_CURRENT_USER";
 const SET_TOKEN = "SET_TOKEN";
 const SET_LOGGED_USER_ID = "SET_LOGGED_USER_ID";
 const SET_ACCOUNT = "SET_ACCOUNT";
+const SET_ACCOUNT_ADDRESS = "SET_ACCOUNT_ADDRESS";
+const SET_ACCOUNT_ADDRESS_DETAIL = "SET_ACCOUNT_ADDRESS_DETAIL";
 
 export default {
   state: () => ({
     userId: null,
     token: "",
     account: null,
+    accountAddress: null,
+    accountAddressDetail: null,
   }),
 
   getters: {
@@ -65,43 +69,22 @@ export default {
       return this.$authRepositories.changePassword(params);
     },
 
-    // ABCD
-
-    accountActivate(_, params) {
-      return this.$authRepositories.activeAccount(params);
-    },
-    resetPassword(_, params) {
-      return this.$authRepositories.resetPassword(params);
-    },
-    async getLoggedUser({ commit }) {
-      try {
-        const response = await this.$authRepositories.getLoggedUser();
-        commit(SET_LOGGED_USER_ID, response.body);
-      } catch {
-        //
+    async getAddressByAccountId({ commit }, params) {
+      const res = await this.$authRepositories.getAddressByAccountId(params);
+      if (res) {
+        commit(SET_ACCOUNT_ADDRESS, res);
       }
+      commit(SET_ACCOUNT_ADDRESS, res);
+      return res;
     },
 
-    createToken(_ctx, params) {
-      return this.$authRepositories.createToken(params);
-    },
-    deactivateUser(_ctx) {
-      return this.$authRepositories.deactivateUser();
-    },
-
-    getRedirectInstagram(_) {
-      return this.$authRepositories.getRedirectInstagram();
-    },
-    getRedirectTwitter(_) {
-      return this.$authRepositories.getRedirectTwitter();
-    },
-
-    getRedirectLine(_) {
-      return this.$authRepositories.getRedirectLine();
-    },
-
-    resetUser({ commit }) {
-      commit(RESET_CURRENT_USER);
+    async getAccountAddress({ commit }, params) {
+      const res = await this.$authRepositories.getAccountAddress(params);
+      if (res) {
+        commit(SET_ACCOUNT_ADDRESS_DETAIL, res);
+      }
+      commit(SET_ACCOUNT_ADDRESS_DETAIL, res);
+      return res;
     },
   },
 
@@ -118,6 +101,12 @@ export default {
     },
     SET_ACCOUNT(state, payload) {
       state.account = payload;
+    },
+    SET_ACCOUNT_ADDRESS(state, payload) {
+      state.accountAddress = payload;
+    },
+    SET_ACCOUNT_ADDRESS_DETAIL(state, payload) {
+      state.accountAddressDetail = payload;
     },
   },
 };
