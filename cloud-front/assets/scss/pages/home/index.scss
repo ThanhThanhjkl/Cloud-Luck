@@ -31,7 +31,7 @@
     width: 100%;
     height: 647px;
     position: relative;
-    background-image: url("@/assets/img/fin_hand_pc.jpg");
+    background-image: url("@/assets/img/Chill_Mario.gif");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -243,7 +243,7 @@
   @include max-width(md) {
     .section-banner {
       height: 426px;
-      background-image: url("@/assets/img/fin_hand_mobile.jpg");
+      background-image: url("@/assets/img/Chill_Mario.gif");
       background-repeat: no-repeat;
       background-size: cover;
       margin-top: 15px;

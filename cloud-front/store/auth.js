@@ -41,15 +41,12 @@ export default {
         return res;
       }
     },
-    accountLogout({ commit }) {
+
+    async accountLogout({ commit }, params) {
       try {
-        Promise.all([
-          commit(RESET_CURRENT_USER),
-          this.$authRepositories.accountLogout(),
-        ]);
-      } catch (error) {
-        //
-      }
+        await this.$authRepositories.accountLogout(params);
+        commit(RESET_CURRENT_USER);
+      } catch (error) {}
     },
 
     async getAccount({ commit }, params) {
@@ -85,6 +82,14 @@ export default {
       }
       commit(SET_ACCOUNT_ADDRESS_DETAIL, res);
       return res;
+    },
+
+    createAccountAddress({ commit }, params) {
+      return this.$authRepositories.createAccountAddress(params);
+    },
+
+    deleteAccountAddress({ commit }, id) {
+      return this.$authRepositories.deleteAccountAddress(id);
     },
   },
 

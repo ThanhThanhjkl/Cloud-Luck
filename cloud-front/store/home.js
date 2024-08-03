@@ -53,6 +53,12 @@ export default {
       );
     },
 
+    async createProduct({ commit }, params) {
+      return await this.$consumerRepositories.consumerCampaigns.createProduct(
+        params
+      );
+    },
+
     async getReturnsByProductId({ commit }, params) {
       try {
         const response =

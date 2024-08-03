@@ -48,7 +48,9 @@ export default {
     if (!this.userId) {
       this.$router.push("/auth/login");
     }
-    await this.getProductsDetail(this.$route.params.projectId);
+    if (this.$route.params.projectId !== "add") {
+      await this.getProductsDetail(this.$route.params.projectId);
+    }
   },
 
   methods: {

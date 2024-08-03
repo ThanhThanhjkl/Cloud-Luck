@@ -89,7 +89,12 @@ export default {
           JSON.stringify(productUpdate)
         );
       }
-      this.$router.push("return");
+
+      if (this.productId !== "add") {
+        this.$router.push("return");
+      } else {
+        this.$router.push("identifications");
+      }
     },
   },
 };

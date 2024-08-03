@@ -11,6 +11,9 @@ export default ($consumerApi) => ({
   updateProduct(params) {
     return $consumerApi.put(`/product/`, params);
   },
+  createProduct(params) {
+    return $consumerApi.post(`/product/`, params);
+  },
   getReturnsByProductId(params) {
     return $consumerApi.get(`/returns/${params}`);
   },

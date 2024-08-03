@@ -41,7 +41,7 @@
               </b-dropdown-item>
             </b-dropdown>
 
-            <nuxt-link
+            <!-- <nuxt-link
               v-else
               class="btn-login"
               to="/auth/login"
@@ -49,7 +49,16 @@
             >
               <SvgLogout></SvgLogout>
               Logot
-            </nuxt-link>
+            </nuxt-link> -->
+
+            <b-button
+              type="submit"
+              variant="primary"
+              block
+              class="btn-login"
+              @click="onLogout"
+              ><SvgLogout></SvgLogout>Login</b-button
+            >
           </div>
         </div>
       </b-row>
@@ -80,7 +89,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "account"]),
 
     searchAble() {
       return this.$route.name === "index";
@@ -100,10 +109,12 @@ export default {
     ...campaignMapper.mapActions(["getCampaigns"]),
 
     async onLogout() {
-      if (this.user) {
-        await this.accountLogout();
+      try {
+        await this.accountLogout("thanhnv@lgcns.com");
+        // this.$router.push("/auth/login");
+      } catch (error) {
+        this.$toast.error("Logout failed. Please try again.");
       }
-      this.$router.push("/auth/login");
     },
 
     onSearchCampaign() {

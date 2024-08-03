@@ -7,7 +7,7 @@
             <img class="w-100" src="@/assets/img/new_banner.png" />
           </div>
           <div class="banner-button">
-            <nuxt-link class="btn-banner" to="/consultation">
+            <nuxt-link class="btn-banner" :to="`/account/${accountId}/project`">
               Create Projects
             </nuxt-link>
           </div>
@@ -63,7 +63,7 @@ import { createNamespacedHelpers } from "vuex";
 import TopCard from "@/components/common/TopCard.vue";
 
 const { mapState, mapActions } = createNamespacedHelpers("home");
-
+const authMapper = createNamespacedHelpers("auth");
 export default {
   components: {
     TopCard,
@@ -78,6 +78,11 @@ export default {
 
   computed: {
     ...mapState(["products"]),
+    ...authMapper.mapState(["userId"]),
+
+    accountId() {
+      return this.userId;
+    },
   },
 
   mounted() {

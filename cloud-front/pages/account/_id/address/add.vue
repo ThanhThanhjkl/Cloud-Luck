@@ -5,6 +5,8 @@
 </template>
 <script>
 import FormAddress from "@/components/profile/changeinfo/FormAddress";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("auth");
 
 export default {
   components: {
@@ -13,17 +15,21 @@ export default {
 
   layout: "auth",
 
-  computed: {},
+  computed: {
+    ...mapState(["userId"]),
+    accountId() {
+      return this.userId;
+    },
+  },
 
   methods: {
+    ...mapActions(["createAccountAddress"]),
     async onCreateAddress(address) {
       try {
-        await this.createAccountAddress({
-          accountId: this.account.id,
-          params: address,
-        });
+        address.accountId = this.accountId;
+        await this.createAccountAddress(address);
         this.$toast.success("成功");
-        this.$router.push(`/account/${this.account.id}/address`);
+        this.$router.push(`/account/${this.accountId}/address`);
       } catch (error) {
         this.$toast.error(error.message);
       }

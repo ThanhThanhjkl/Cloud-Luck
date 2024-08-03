@@ -14,5 +14,5 @@ public interface ProductsRepository {
 
     ResponseEntity<String> updateProduct(ProductsDTO products);
 
-    void addProduct(ProductsDTO products);
+    ResponseEntity<String> addProduct(ProductsDTO products);
 }

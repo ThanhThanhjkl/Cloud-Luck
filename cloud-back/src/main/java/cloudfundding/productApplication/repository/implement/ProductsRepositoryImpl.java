@@ -133,9 +133,27 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     }
 
     @Override
-    public void addProduct(ProductsDTO products) {
-        String sql = "INSERT INTO PRODUCTS(name, descriptions, date, cost, sale-cost, sold, images) VALUES('" + products.getName() + "','" + products.getDescriptions() + "'," +
-                products.getDate() + ", " + products.getCost() + "," + products.getSale_cost() + "," + products.getSold() + "," + products.getImages() + ")";
-        jdbcTemplate.execute(sql);
+    public ResponseEntity<String> addProduct(ProductsDTO products) {
+        String sql = "INSERT INTO PRODUCTS (name, descriptions, date, cost, `sale-cost`, sold, title, images, `account-id`, `main-image`, methods, `video-url`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(sql,
+                products.getName(),
+                products.getDescriptions(),
+                products.getDate(),
+                products.getCost(),
+                products.getSale_cost(),
+                products.getSold(),
+                products.getTitle(),
+                String.join(",", products.getImages()),
+                products.getAccount_id(),
+                products.getMain_image(),
+                products.getMethods(),
+                products.getVideo_url()
+        );
+
+        if (rowsAffected > 0) {
+            return ResponseEntity.status(HttpStatus.OK).body("Product added successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add product");
+        }
     }
 }

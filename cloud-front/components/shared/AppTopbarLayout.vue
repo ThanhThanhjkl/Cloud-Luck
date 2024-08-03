@@ -90,7 +90,10 @@
           <!-- BIG MENU -->
           <div class="d-none d-md-flex align-items-center">
             <div class="select-project mr-3">
-              <nuxt-link to="/consultation" class="text-white">
+              <nuxt-link
+                :to="`/account/${accountId}/project`"
+                class="text-white"
+              >
                 Create Projects
               </nuxt-link>
             </div>
@@ -159,7 +162,7 @@ export default {
         {
           id: 7,
           text: "Create Projects",
-          link: "/consultation",
+          link: `/account/${this.accountId}/project`,
         },
       ],
     };

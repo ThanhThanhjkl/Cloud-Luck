@@ -96,13 +96,13 @@ import ConfirmModal from "@/components/common/ConfirmModal";
 import { createNamespacedHelpers } from "vuex";
 const { mapState, mapActions } = createNamespacedHelpers("auth");
 export default {
+  layout: "auth",
+
   components: {
     ConfirmModal,
     SvgAdd,
     SvgDelete,
   },
-
-  layout: "auth",
 
   data() {
     return {
@@ -114,6 +114,10 @@ export default {
 
   computed: {
     ...mapState(["userId", "accountAddress"]),
+
+    accountId() {
+      return this.userId;
+    },
   },
 
   mounted() {
@@ -121,22 +125,18 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getAddressByAccountId"]),
+    ...mapActions(["getAddressByAccountId", "deleteAccountAddress"]),
 
     async deleteAddress() {
       this.unclickable = true;
-      const accountId = this.account.id;
-      await this.deleteAccountAddress({
-        accountId,
-        addressId: this.addressSelected.id,
-      });
+      await this.deleteAccountAddress(this.addressSelected.id);
       this.getAccountAddress(this.account.id);
       this.unclickable = false;
       this.$toast.success("削除しました");
     },
 
     toEdit(id) {
-      this.$router.push(`/account/${this.account.id}/address/${id}/edit`);
+      this.$router.push(`/account/${this.accountId}/address/${id}`);
     },
 
     async changeDefaultAddress() {

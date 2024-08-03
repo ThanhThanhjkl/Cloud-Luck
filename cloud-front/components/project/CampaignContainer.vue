@@ -2,7 +2,17 @@
   <div class="container">
     <div class="list-project">
       <b-card class="card">
-        <div class="form-title text-center">Editing project</div>
+        <div class="form-title d-flex justify-content-between text-center">
+          Editing project
+          <div
+            class="text-center"
+            @click.prevent="
+              $router.push(`/account/${$route.params.id}/project/add/`)
+            "
+          >
+            <div class="register-now">Register new</div>
+          </div>
+        </div>
         <ListProject :products="myProducts" :account-id="accountId" editable />
       </b-card>
     </div>

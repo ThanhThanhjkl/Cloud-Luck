@@ -160,16 +160,19 @@ export default {
         {
           id: 7,
           text: " プロジェクト掲載・相談フォーム",
-          link: "/consultation",
+          link: `/account/${this.accountId}/project`,
         },
       ],
       CloseMenu: false,
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "userId"]),
     path() {
       return this.$route.path;
+    },
+    accountId() {
+      return this.userId;
     },
   },
 

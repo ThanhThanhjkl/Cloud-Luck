@@ -39,7 +39,7 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
-    public void addProduct(ProductsDTO products) {
-        productsRepository.addProduct(products);
+    public ResponseEntity<String> addProduct(ProductsDTO products) {
+        return productsRepository.addProduct(products);
     }
 }

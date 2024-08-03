@@ -39,8 +39,7 @@ public class ProductsController {
     }
 
     @PostMapping("/product")
-    public String addProduct(HttpServletRequest request, @ModelAttribute(name = "product") ProductsDTO products) {
-        productsService.addProduct(products);
-        return "redirect:/products/list";
+    public ResponseEntity<String> addProduct(@RequestBody ProductsDTO products) {
+        return productsService.addProduct(products);
     }
 }

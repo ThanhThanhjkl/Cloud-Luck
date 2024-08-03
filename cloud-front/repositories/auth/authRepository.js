@@ -10,10 +10,9 @@ export default ($authApi) => ({
   accountLogin(params) {
     return $authApi.post(`${ENDPOINT}/login`, params);
   },
-  accountLogout() {
-    return $authApi.delete(`${ENDPOINT}/login`);
+  accountLogout(params) {
+    return $authApi.delete(`${ENDPOINT}/logout`, params);
   },
-
   getAccount(params) {
     return $authApi.get(`${ENDPOINT}/${params}`);
   },
@@ -30,5 +29,12 @@ export default ($authApi) => ({
   },
   getAccountAddress(params) {
     return $authApi.get(`/address/detail/${params}`);
+  },
+  createAccountAddress(params) {
+    return $authApi.post(`/address`, params);
+  },
+
+  deleteAccountAddress(id) {
+    return $authApi.delete(`/address/${id}`);
   },
 });

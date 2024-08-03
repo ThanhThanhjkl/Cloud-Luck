@@ -59,7 +59,7 @@ export default {
 
   data() {
     return {
-      submission: true,
+      submitted: false,
       button: [
         { id: 1, title: "goal setting", url: "", key: null },
         {
@@ -103,22 +103,23 @@ export default {
     },
   },
   methods: {
-    ...projectMapper.mapActions(["updateProduct"]),
+    ...projectMapper.mapActions(["updateProduct", "createProduct"]),
     async submitProject() {
+      this.submitted = true;
       const productUpdateAvailable = localStorage.getItem(
         `productUpdate${this.productId}`
       );
       if (productUpdateAvailable) {
         const productUpdate = JSON.parse(productUpdateAvailable);
         const subImages = productUpdate.images.map((image) => {
-          if (image.startsWith("data:image/jpeg;base64,")) {
+          if (image && image.startsWith("data:image/jpeg;base64,")) {
             return image.replace("data:image/jpeg;base64,", "");
           } else {
             return image;
           }
         });
         const params = {
-          id: this.productId,
+          id: this.productId.id,
           name: productUpdate.name ? productUpdate.name : this.product.name,
           descriptions: productUpdate.descriptions
             ? productUpdate.descriptions
@@ -141,13 +142,22 @@ export default {
             ? productUpdate.videoUrl
             : this.product.videoUrl,
         };
-        await this.updateProduct(params).then(() => {
-          this.$toast.success("updated successfully");
-          localStorage.removeItem(`productUpdate${this.productId}`);
-          this.$router.push(
-            `/account/${this.accountId}/project/${this.productId}`
-          );
-        });
+        if (this.productId !== "add") {
+          await this.updateProduct(params).then(() => {
+            this.$toast.success("updated successfully");
+            localStorage.removeItem(`productUpdate${this.productId}`);
+            this.$router.push(
+              `/account/${this.accountId}/project/${this.productId}`
+            );
+          });
+        } else {
+          delete params.id;
+          await this.createProduct(params).then(() => {
+            this.$toast.success("createed successfully");
+            localStorage.removeItem(`productUpdate${this.productId}`);
+            this.$router.push(`/`);
+          });
+        }
       }
     },
   },
