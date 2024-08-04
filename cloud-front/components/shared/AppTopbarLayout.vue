@@ -27,7 +27,7 @@
                     to="/auth/login"
                     @click.native="showMenu = false"
                   >
-                    ログイン / 新規登録
+                    Log in / Register
                   </nuxt-link>
                 </li>
                 <li class="second-list">
@@ -110,7 +110,7 @@
             to="/auth/login"
             class="btn btn-login btn-top-bar ml-3"
           >
-            ログイン / 新規登録
+            Log in / Register
           </nuxt-link>
         </div>
       </div>

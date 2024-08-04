@@ -119,8 +119,8 @@
             <div class="d-grid g-16">
               <div>
                 <ReturnPlanCard
-                  v-if="product"
-                  :product="product"
+                  :account-id="product.account_id"
+                  :my-returns="myReturns"
                 ></ReturnPlanCard>
               </div>
             </div>
@@ -143,23 +143,6 @@
           </b-card>
         </section>
       </div>
-
-      <div class="d-flex d-lg-none box likes floating">
-        <div class="cursor-pointer" @click="changeLike()">
-          <SvgHeart
-            class="icon"
-            opacity="0.7"
-            :class="{
-              liked: false,
-            }"
-          ></SvgHeart>
-        </div>
-
-        <span>{{ 100 }}</span>
-        <nuxt-link class="btn btn-primary" :to="`/project/${productId}/buy`">
-          Support this project
-        </nuxt-link>
-      </div>
     </b-container>
   </div>
 </template>
@@ -173,7 +156,6 @@ import DetailCarousel from "@/components/details/DetailCarousel.vue";
 import DetailProjectOwner from "@/components/details/DetailProjectOwner";
 import ReturnPlanCard from "@/components/details/ReturnPlanCard.vue";
 import SvgMessage from "@/components/common/svg/SvgMessage";
-import SvgHeart from "@/components/common/svg/SvgHeart";
 
 const { mapState, mapActions } = createNamespacedHelpers("home");
 
@@ -182,7 +164,6 @@ export default {
     DetailCarousel,
     DetailProjectOwner,
     SvgMessage,
-    SvgHeart,
     DetailSummary,
     DetailProject,
     ReturnPlanCard,
@@ -195,7 +176,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["product"]),
+    ...mapState(["product", "myReturns"]),
 
     url() {
       return this.$route.name;
@@ -216,10 +197,11 @@ export default {
   },
   async mounted() {
     await this.getProductsDetail(this.productId);
+    this.getReturnsByProductId(this.productId);
   },
 
   methods: {
-    ...mapActions(["getProductsDetail"]),
+    ...mapActions(["getProductsDetail", "getReturnsByProductId"]),
   },
 };
 </script>

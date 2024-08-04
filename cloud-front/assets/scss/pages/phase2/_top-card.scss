@@ -210,13 +210,14 @@
     padding-top: 66.44778481%;
     position: relative;
     overflow: hidden;
+    background-color: white;
     > img {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
     }
     .svg-heart {

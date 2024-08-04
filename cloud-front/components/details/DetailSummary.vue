@@ -84,38 +84,11 @@
     <b-card-text class="d-block d-lg-none col-12 col-lg-8">
       {{ product.title }}
     </b-card-text>
-
-    <div class="d-flex flex-column box likes">
-      <nuxt-link
-        class="d-none d-md-block btn-favorite btn btn-primary"
-        variant="primary"
-        :to="`/project/${productId}/buy/?returnId=${1}`"
-      >
-        Support this project
-      </nuxt-link>
-      <div
-        class="icon-favorite d-flex justify-content-center align-items-center"
-      >
-        <div
-          :class="{
-            liked: false,
-          }"
-          @click="changeLike()"
-        >
-          <SvgLike class="icon" opacity="0.7"></SvgLike>
-        </div>
-        <b class="mt-auto mb-auto text-primary">Add to Favourites</b>
-        <div class="badge">
-          <span>{{ product.sold || 0 }}</span>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
 import { createNamespacedHelpers } from "vuex";
 
-import SvgLike from "@/components/common/svg/SvgLike";
 import SvgClock from "@/components/common/svg/SvgClock";
 import SvgUsers from "@/components/common/svg/SvgUsers";
 import SvgUserSolid from "@/components/common/svg/SvgUserSolid";
@@ -126,7 +99,6 @@ export default {
     SvgClock,
     SvgUsers,
     SvgUserSolid,
-    SvgLike,
   },
 
   data() {

@@ -1,86 +1,74 @@
 <template>
-  <b-card class="return-plan-card position-relative">
-    <template #header>
-      <b-carousel controls>
-        <b-carousel-slide>
-          <template #img>
-            <img class="w-100" :src="images" />
-          </template>
-        </b-carousel-slide>
-      </b-carousel>
-    </template>
-    <h4>{{ product.title }}</h4>
-    <div class="row no-gutters align-items-center">
-      <div class="price">
-        {{ product.sale_cost | japanMoney }}
-      </div>
-      <div class="users">Rest: {{ product.sold }} Even people</div>
+  <div>
+    <div v-for="returnPlan in myReturns" :key="returnPlan.id">
+      <b-card class="return-plan-card position-relative">
+        <template #header>
+          <b-carousel controls>
+            <b-carousel-slide>
+              <template #img>
+                <img class="w-100" :src="returnPlan.image" />
+              </template>
+            </b-carousel-slide>
+          </b-carousel>
+        </template>
+        <h4>{{ returnPlan.title }}</h4>
+        <div class="row no-gutters align-items-center">
+          <div class="price">
+            {{ returnPlan.cost | japanMoney }}
+          </div>
+        </div>
+
+        <div class="px-3 text-center">
+          <a
+            class="w-100 btn btn-crimson"
+            @click="choseReturnPlan(returnPlan.id)"
+          >
+            BUY
+          </a>
+        </div>
+
+        <div class="card-text">
+          {{ returnPlan.name }}
+        </div>
+      </b-card>
     </div>
-
-    <div class="px-3 text-center">
-      <a class="w-100 btn btn-crimson" @click="choseReturnPlan(returnPlan.id)">
-        BUY
-      </a>
-    </div>
-
-    <div class="card-text">
-      {{ product.name }}
-    </div>
-
-    <b-card-sub-title class="d-flex align-items-center">
-      <div>
-        <label>supporter</label>
-        <strong>{{ product.sold }}人</strong>
-      </div>
-
-      <div>
-        <label>Scheduled delivery</label>
-        <strong>{{ product.date | japanDate }} </strong>
-      </div>
-    </b-card-sub-title>
-  </b-card>
+  </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapActions } = createNamespacedHelpers("home");
 export default {
   props: {
-    product: {
-      type: Object,
-      default: null,
+    myReturns: {
+      type: Array,
+      default: () => [],
     },
-  },
-
-  data() {
-    return {
-      returnPlan: null,
-      images: "data:image/jpeg;base64," + this.product.images,
-    };
+    accountId: {
+      type: String,
+      default: "",
+    },
   },
 
   computed: {
     campaignId() {
       return this.$route.params.id;
     },
-
-    buyAble() {
-      if (!this.returnPlan) return false;
-      return this.returnPlan.stockQuantity > 0;
-    },
   },
 
   methods: {
+    ...mapActions(["createFunded"]),
     choseReturnPlan(id) {
-      if (!this.buyAble) {
-        return false;
-      }
-
-      this.$router.push({
-        path: `/project/${this.campaignId}/buy`,
-        query: { returnId: id },
+      const params = {
+        id: 0,
+        account_id: this.accountId,
+        return_id: id,
+      };
+      this.createFunded(params).then(() => {
+        this.$router.push({
+          path: `/account/${this.accountId}/donation`,
+          query: { returnId: id },
+        });
       });
-    },
-
-    imageSource(id) {
-      return `${process.env.consumerApiUrl}/file/${id}`;
     },
   },
 };

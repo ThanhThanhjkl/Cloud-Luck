@@ -29,4 +29,13 @@ export default ($consumerApi) => ({
   deleteReturn(params) {
     return $consumerApi.delete(`/return/${params}`);
   },
+  createFunded(params) {
+    return $consumerApi.post(`/funded`, params);
+  },
+  getFundedByAccountId(params) {
+    return $consumerApi.get(`/funded/${params}`);
+  },
+  deleteFundedById(params) {
+    return $consumerApi.delete(`/funded/${params}`);
+  },
 });

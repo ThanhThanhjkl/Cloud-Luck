@@ -20,9 +20,14 @@
                   >To edit</nuxt-link
                 >
                 <nuxt-link
-                  :to="`/account/${accountId}/project/${product.id}/preview`"
+                  :to="`/project/${product.id}`"
                   class="btn btn-secondary view-project campaigns-btn"
                   >View project page</nuxt-link
+                >
+                <nuxt-link
+                  :to="`/project/${product.id}`"
+                  class="btn btn-secondary view-project campaigns-btn"
+                  >Delete project page</nuxt-link
                 >
               </div>
             </div>
@@ -34,9 +39,14 @@
               >To edit</nuxt-link
             >
             <nuxt-link
-              :to="`/account/${accountId}/project/${product.id}/preview`"
+              :to="`/project/${product.id}`"
               class="btn btn-secondary view-project campaigns-btn"
               >View project page</nuxt-link
+            >
+            <nuxt-link
+              :to="`/project/${product.id}`"
+              class="btn btn-secondary view-project campaigns-btn"
+              >Delete project page</nuxt-link
             >
           </div>
         </div>

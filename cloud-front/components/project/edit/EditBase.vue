@@ -21,6 +21,24 @@
 
             <span>※Please enter a target amount of 100,000 yen or more.</span>
           </FormValidator>
+
+          <FormValidator
+            class="col-md-6 col-12 mt-3 p-0"
+            label="Funding amount"
+            text-required
+          >
+            <div class="input-money d-flex">
+              <b-input
+                v-model="sale_cost"
+                type="text"
+                placeholder="（例）100,000"
+                required
+              ></b-input>
+              <span>円</span>
+            </div>
+
+            <span>※Please enter a target amount of 100,000 yen or more.</span>
+          </FormValidator>
         </b-form-group>
         <hr />
         <b-form-group>
@@ -122,6 +140,7 @@ export default {
   data() {
     return {
       cost: "",
+      sale_cost: "",
       methods: "",
       date: "",
       productDraft: null,
@@ -151,6 +170,11 @@ export default {
     } else {
       this.cost = this.product.cost;
     }
+    if (productUpdate && this.productDraft.sale_cost) {
+      this.sale_cost = this.productDraft.sale_cost;
+    } else {
+      this.sale_cost = this.product.sale_cost;
+    }
     if (productUpdate && this.productDraft.methods) {
       this.methods = this.productDraft.methods;
     } else {
@@ -172,6 +196,7 @@ export default {
         const productUpdate = JSON.parse(productUpdateAvailable);
         productUpdate.id = this.productId;
         productUpdate.cost = this.cost;
+        productUpdate.sale_cost = this.sale_cost;
         productUpdate.methods = this.methods;
         productUpdate.date = this.date;
         localStorage.setItem(
@@ -182,6 +207,7 @@ export default {
         const productUpdate = {
           id: this.productId,
           cost: this.cost,
+          sale_cost: this.sale_cost,
           methods: this.methods,
           date: this.date,
         };

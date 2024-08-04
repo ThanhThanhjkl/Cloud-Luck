@@ -4,14 +4,11 @@
       <b-card class="card">
         <div class="form-title d-flex justify-content-between text-center">
           Editing project
-          <div
-            class="text-center"
-            @click.prevent="
-              $router.push(`/account/${$route.params.id}/project/add/`)
-            "
+          <nuxt-link
+            :to="`/account/${$route.params.id}/project/add/`"
+            class="register-btn"
+            >Create New Project</nuxt-link
           >
-            <div class="register-now">Register new</div>
-          </div>
         </div>
         <ListProject :products="myProducts" :account-id="accountId" editable />
       </b-card>

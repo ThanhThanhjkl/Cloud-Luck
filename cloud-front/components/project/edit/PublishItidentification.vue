@@ -17,17 +17,19 @@
     </div>
 
     <div class="publish">
-      <div class="publish-title">すぐに公開</div>
+      <div class="publish-title">Published soon</div>
       <b-button
         variant="primary"
         class="w-100"
         @click="releasingProject('immediately')"
-        ><SvgPublish class="mr-2"></SvgPublish> すぐに公開する
+        ><SvgPublish class="mr-2"></SvgPublish> Publish now
       </b-button>
     </div>
     <div class="publish publish-settings">
-      <div class="publish-title">日時指定で公開</div>
-      <div class="text-center text-primary">公開日時の設定</div>
+      <div class="publish-title">Release at a specified date and time</div>
+      <div class="text-center text-primary">
+        Setting the publication date and time
+      </div>
       <FormValidator name="campaignReleaseRequest.releaseDateTime">
         <b-input
           v-model="releaseDateTime"
@@ -37,13 +39,13 @@
         ></b-input>
       </FormValidator>
       <div class="text-muted text-center mb-3">
-        ※予約公開は5分刻みで設定が可能です
+        ※ Scheduled release can be set in 5-minute increments.
       </div>
       <b-button
         variant="primary"
         class="w-100"
         @click="releasingProject('specified')"
-        ><SvgClock class="mr-2"></SvgClock>予約する
+        ><SvgClock class="mr-2"></SvgClock>make a reservation
       </b-button>
     </div>
   </b-card>
@@ -69,16 +71,16 @@ export default {
       contents: [
         {
           id: 12,
-          title: "公開するためには：",
-          des: "右の「公開する」よりお好きなタイミングを公開できます。",
+          title: "To publish:",
+          des: "You can publish at any time by clicking 'Publish' on the right.",
         },
         {
           id: 2141,
-          title: "本日公開を開始すると：",
-          des: "募集終了日は、2022-12-12 23:59:59。募集期間は27日です。",
+          title: "Starting today, we're releasing:",
+          des: "The deadline for applications is 2022-12-12 23:59:59. The application period is 27 days.",
         },
       ],
-      note: "※ 現在、数多くのご投稿をいただいているため、所定の審査に時間がかかっております。",
+      note: "※ We are currently receiving a large number of submissions, so it is taking some time to complete the required review process.",
     };
   },
 

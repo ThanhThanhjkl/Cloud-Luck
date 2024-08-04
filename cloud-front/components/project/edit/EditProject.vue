@@ -119,14 +119,16 @@ export default {
           }
         });
         const params = {
-          id: this.productId.id,
+          id: productUpdate.id ? productUpdate.id : this.product.id,
           name: productUpdate.name ? productUpdate.name : this.product.name,
           descriptions: productUpdate.descriptions
             ? productUpdate.descriptions
             : this.product.descriptions,
           date: productUpdate.date ? productUpdate.date : this.product.date,
           cost: productUpdate.cost ? productUpdate.cost : this.product.cost,
-          sale_cost: 100,
+          sale_cost: productUpdate.sale_cost
+            ? Number(productUpdate.sale_cost)
+            : Number(this.product.sale_cost),
           sold: productUpdate.sold ? productUpdate.sold : this.product.sold,
           images:
             productUpdate.images.length > 0 ? subImages : this.product.images,
@@ -146,9 +148,7 @@ export default {
           await this.updateProduct(params).then(() => {
             this.$toast.success("updated successfully");
             localStorage.removeItem(`productUpdate${this.productId}`);
-            this.$router.push(
-              `/account/${this.accountId}/project/${this.productId}`
-            );
+            this.$router.push(`/`);
           });
         } else {
           delete params.id;

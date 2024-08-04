@@ -3,6 +3,7 @@ const SET_PRODUCTS_DETAIL = "SET_PRODUCTS_DETAIL";
 const SET_MY_PRODUCTS = "SET_MY_PRODUCTS";
 const SET_MY_RETURNS = "SET_MY_RETURNS";
 const SET_RETURN = "SET_RETURN";
+const SET_FUNDED = "SET_FUNDED";
 
 export default {
   state: () => ({
@@ -11,6 +12,7 @@ export default {
     product: {},
     myReturns: [],
     return: {},
+    funded: [],
   }),
 
   actions: {
@@ -99,6 +101,30 @@ export default {
         params
       );
     },
+
+    async createFunded({ commit }, params) {
+      return await this.$consumerRepositories.consumerCampaigns.createFunded(
+        params
+      );
+    },
+
+    async getFundedByAccountId({ commit }, params) {
+      try {
+        const response =
+          await this.$consumerRepositories.consumerCampaigns.getFundedByAccountId(
+            params
+          );
+        commit(SET_FUNDED, response);
+      } catch (e) {
+        // aaaa
+      }
+    },
+
+    async deleteFundedById({ commit }, params) {
+      return await this.$consumerRepositories.consumerCampaigns.deleteFundedById(
+        params
+      );
+    },
   },
 
   mutations: {
@@ -116,6 +142,9 @@ export default {
     },
     SET_RETURN(state, payload) {
       state.return = payload;
+    },
+    SET_FUNDED(state, payload) {
+      state.funded = payload;
     },
   },
 };

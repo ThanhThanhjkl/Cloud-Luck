@@ -473,8 +473,6 @@
       }
 
       .form {
-        width: 80%;
-
         @include max-width(lg) {
           width: 100%;
         }
@@ -574,15 +572,23 @@
 
           img {
             aspect-ratio: 3/2;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
           }
         }
 
         .product-title {
-          width: 60%;
+          width: 100%;
           color: $primary;
           padding-left: 13px;
+        }
+
+        .funded-btn {
+          color: #466cb0;
+          border-radius: 4px;
+          border: 2px solid #bbbbbb;
+          padding: 5px;
+          width: fit-content;
         }
 
         .product-item {

@@ -41,7 +41,7 @@
               </b-dropdown-item>
             </b-dropdown>
 
-            <!-- <nuxt-link
+            <nuxt-link
               v-else
               class="btn-login"
               to="/auth/login"
@@ -49,16 +49,7 @@
             >
               <SvgLogout></SvgLogout>
               Logot
-            </nuxt-link> -->
-
-            <b-button
-              type="submit"
-              variant="primary"
-              block
-              class="btn-login"
-              @click="onLogout"
-              ><SvgLogout></SvgLogout>Login</b-button
-            >
+            </nuxt-link>
           </div>
         </div>
       </b-row>

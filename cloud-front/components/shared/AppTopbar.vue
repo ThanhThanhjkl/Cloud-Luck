@@ -18,7 +18,7 @@
             <div v-if="!user" class="menu-list">
               <li class="firt-list" @click="unlogined = false">
                 <SvgList class="d-inline-block d-lg-none" /><a href="#"
-                  >ログイン / 新規登録</a
+                  >Log in / Register</a
                 >
               </li>
               <li class="second-list" @click="unlogined = false">
@@ -70,7 +70,7 @@
             </div>
           </div>
           <nuxt-link v-if="!user" to="/auth/login" class="btn btn-login">
-            ログイン / 新規登録
+            Log in / Register
           </nuxt-link>
         </div>
       </div>

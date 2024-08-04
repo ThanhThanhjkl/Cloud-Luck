@@ -37,7 +37,7 @@ export default {
           title: "Project settings",
           url: "project",
         },
-        { id: 5, title: "Support history", url: "donation" },
+        { id: 5, title: "Funding history", url: "donation" },
         {
           id: 6,
           title: "Credit card information",

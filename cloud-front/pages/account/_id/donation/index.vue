@@ -1,23 +1,21 @@
 <template>
   <div class="changeinfo detail">
-    <AuthRegisterInfo class="mb-4"></AuthRegisterInfo>
     <div class="mx-lg-5">
       <div
-        v-if="user"
         id="register-setting-4"
         accordion="register-setting"
         class="purchase_details"
       >
         <b-card>
-          <div class="details-title text-center">応援履歴</div>
+          <div class="details-title text-center">Funding History</div>
 
           <hr />
 
           <div class="form">
             <DonationCard
-              v-for="(item, index) in donations"
-              :key="index"
-              :donation="item"
+              v-for="item in funded"
+              :key="item.id"
+              :funded="item"
               class="product-info item"
             ></DonationCard>
           </div>
@@ -28,24 +26,20 @@
 </template>
 
 <script>
-import AuthRegisterInfo from "@/components/auth/AuthRegisterInfo";
 import DonationCard from "@/components/donation/DonationCard";
 
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("campaign");
-const authMapper = createNamespacedHelpers("auth");
+const { mapState, mapActions } = createNamespacedHelpers("home");
 
 export default {
   components: {
-    AuthRegisterInfo,
     DonationCard,
   },
 
   layout: "auth",
 
   computed: {
-    ...authMapper.mapState(["user"]),
-    ...mapState(["donations"]),
+    ...mapState(["funded"]),
 
     accountId() {
       return this.$route.params.id;
@@ -53,15 +47,11 @@ export default {
   },
 
   mounted() {
-    this.getDonations();
+    this.getFundedByAccountId(this.accountId);
   },
 
   methods: {
-    ...mapActions(["getDonations"]),
-
-    toDonationDetail(id) {
-      this.$router.push(`/account/${this.accountId}/donation/${id}`);
-    },
+    ...mapActions(["getFundedByAccountId"]),
   },
 };
 </script>

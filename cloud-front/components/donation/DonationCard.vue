@@ -1,40 +1,35 @@
 <template>
-  <div v-if="donation">
-    <div
-      class="d-flex col-12 col-md-5 p-0 cursor-pointer"
-      @click="toCampaign(donation.campaign.id)"
-    >
+  <div>
+    <div class="d-flex col-6 col-md-5 p-0 cursor-pointer">
       <div class="product-img">
-        <b-img fluid :src="imageSource" />
+        <b-img fluid :src="imageUrl" />
       </div>
+    </div>
+    <div class="col-6 product-item">
+      <div>
+        Funded ID:<span>{{ funded.id }}</span>
+      </div>
+      <div>
+        Amount of money:<span>{{ ammount | japanMoney }}</span>
+      </div>
+      <div>Project name :</div>
       <div class="product-title">
         {{ title }}
       </div>
-    </div>
-    <div class="product-item">
-      <div>
-        応援ID：<span>{{ donation.id }}</span>
+      <div class="funded-btn mt-3" @click="deleteFunded">
+        Delete this funded
       </div>
-      <div>
-        注文日：<span>{{ donation.createdAt | japanDate }}</span>
-      </div>
-      <div>
-        金額：<span>{{ donation.amount | japanMoney }}</span>
-      </div>
-      <nuxt-link :to="`/account/${accountId}/donation/${donation.id}`">
-        応援詳細を確認する
-      </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("campaign");
+const { mapState, mapActions } = createNamespacedHelpers("home");
 
 export default {
   props: {
-    donation: {
+    funded: {
       type: Object,
       default: () => {},
     },
@@ -42,32 +37,36 @@ export default {
 
   data() {
     return {
-      title: "",
-      imageSource: "",
+      title: null,
+      ammount: null,
+      imageUrl: null,
     };
   },
 
   computed: {
+    ...mapState(["return"]),
     accountId() {
       return this.$route.params.id;
     },
   },
 
   async mounted() {
-    try {
-      if (this.donation && this.donation.id) {
-        const res = await this.getCampaignDetail(this.donation.campaign.id);
-        this.title = res.detail.title;
-        this.imageSource = `${process.env.consumerApiUrl}/file/${res.visual?.mainImage?.id}`;
-      }
-    } catch (error) {}
+    await this.getReturnById(this.funded.return_id);
+    this.imageUrl = this.return.image;
+    this.title = this.return.title;
+    this.ammount = this.return.cost;
   },
 
   methods: {
-    ...mapActions(["getCampaignDetail"]),
+    ...mapActions(["getReturnById", "deleteFundedById"]),
 
     toCampaign(id) {
       this.$router.push(`/project/${id}`);
+    },
+    deleteFunded() {
+      this.deleteFundedById(this.funded.id).then(() => {
+        window.location.reload();
+      });
     },
   },
 };
