@@ -23,26 +23,26 @@ export default {
   },
 
   computed: {
-    ...mapState(["accountAddressDetail"]),
+    ...mapState(["accountAddressDetail", "userId"]),
+    accountId() {
+      return this.userId;
+    },
   },
 
   async mounted() {
-    await this.getAccountAddress(this.$route.params.addressId).then((res) => {
-      this.accountAddressDetail = res;
-    });
+    await this.getAccountAddress(this.$route.params.addressId);
   },
 
   methods: {
-    ...mapActions(["getAccountAddress"]),
+    ...mapActions(["getAccountAddress", "updateAccountAddress"]),
     async onUpdateAddress(payload) {
       try {
-        await this.updateAccountAddress({
-          accountId: this.account.id,
-          payload,
-        });
+        payload.accountId = this.accountId;
+        payload.id = this.accountAddressDetail.id;
+        await this.updateAccountAddress(payload);
         this.$toast.success("成功");
         this.$router.push(`/account/${this.$route.params.id}/address`);
-      } catch (error) {}
+      } catch {}
     },
   },
 };

@@ -97,6 +97,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .section-header {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 </style>

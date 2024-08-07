@@ -47,6 +47,10 @@ export default {
       type: String,
       default: "",
     },
+    ownerId: {
+      type: String,
+      default: "",
+    },
   },
 
   computed: {
@@ -60,8 +64,9 @@ export default {
     choseReturnPlan(id) {
       const params = {
         id: 0,
-        account_id: this.accountId,
+        account_id: Number(this.accountId),
         return_id: id,
+        owner_id: Number(this.ownerId),
       };
       this.createFunded(params).then(() => {
         this.$router.push({

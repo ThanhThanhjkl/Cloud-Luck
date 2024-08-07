@@ -43,6 +43,24 @@ public class FundedRepositoryimpl implements FundedRepository {
                 funded.setId(rs.getInt("id"));
                 funded.setReturn_id(rs.getInt("return_id"));
                 funded.setAccount_id(rs.getInt("account_id"));
+                funded.setOwner_id(rs.getInt("owner_id"));
+
+                return funded;
+            }
+        });
+    }
+
+    @Override
+    public List<FundedDTO> getFundedByOwnerId(Long ownerId) {
+        String sql = "SELECT * FROM FUNDED WHERE `owner_id` = ?";
+        return jdbcTemplate.query(sql, new Object[]{ownerId}, new RowMapper<FundedDTO>() {
+            @Override
+            public FundedDTO mapRow(ResultSet rs, int index) throws SQLException {
+                FundedDTO funded = new FundedDTO();
+                funded.setId(rs.getInt("id"));
+                funded.setReturn_id(rs.getInt("return_id"));
+                funded.setAccount_id(rs.getInt("account_id"));
+                funded.setOwner_id(rs.getInt("owner_id"));
 
                 return funded;
             }
@@ -50,11 +68,12 @@ public class FundedRepositoryimpl implements FundedRepository {
     }
 
     private int insertFunded(FundedDTO funded) {
-        String sql = "INSERT INTO FUNDED (id, return_id, account_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO FUNDED (id, return_id, account_id, owner_id) VALUES (?, ?, ?, ?)";
         return jdbcTemplate.update(sql,
                 funded.getId(),
                 funded.getReturn_id(),
-                funded.getAccount_id());
+                funded.getAccount_id(),
+                funded.getOwner_id());
     }
 
     @Override

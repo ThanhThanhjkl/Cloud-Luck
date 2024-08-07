@@ -10,5 +10,7 @@ public interface FundedRepository {
 
     List<FundedDTO> getFundedByAccountId(Long id);
 
+    List<FundedDTO> getFundedByOwnerId(Long id);
+
     ResponseEntity<String> deleteFunded(int id);
 }

@@ -53,8 +53,6 @@ a:hover {
 }
 
 section {
-  margin-bottom: 60px;
-
   @include max-width(md) {
     margin-bottom: 40px;
   }

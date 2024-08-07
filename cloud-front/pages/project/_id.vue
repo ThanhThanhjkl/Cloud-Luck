@@ -119,7 +119,8 @@
             <div class="d-grid g-16">
               <div>
                 <ReturnPlanCard
-                  :account-id="product.account_id"
+                  :account-id="accountId"
+                  :owner-id="ownerId"
                   :my-returns="myReturns"
                 ></ReturnPlanCard>
               </div>
@@ -158,6 +159,7 @@ import ReturnPlanCard from "@/components/details/ReturnPlanCard.vue";
 import SvgMessage from "@/components/common/svg/SvgMessage";
 
 const { mapState, mapActions } = createNamespacedHelpers("home");
+const authMapper = createNamespacedHelpers("auth");
 
 export default {
   components: {
@@ -177,9 +179,18 @@ export default {
 
   computed: {
     ...mapState(["product", "myReturns"]),
+    ...authMapper.mapState(["userId"]),
 
     url() {
       return this.$route.name;
+    },
+
+    accountId() {
+      return this.userId;
+    },
+
+    ownerId() {
+      return this.product.account_id;
     },
 
     productId() {
@@ -198,6 +209,7 @@ export default {
   async mounted() {
     await this.getProductsDetail(this.productId);
     this.getReturnsByProductId(this.productId);
+    console.log(this.accountId);
   },
 
   methods: {

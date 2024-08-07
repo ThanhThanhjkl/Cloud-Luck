@@ -22,6 +22,8 @@ public interface AddressService {
 
     AddressDTO createAddress(AddressDTO addressDTO);
 
+    AddressDTO updateAddress(AddressDTO addressDTO);
+
     boolean deleteAddress(int id);
 }
 
@@ -66,6 +68,15 @@ class AddressServiceImpl implements AddressService {
     public AddressDTO createAddress(AddressDTO addressDTO) {
         Address address = modelMapper.map(addressDTO, Address.class);
         address.setAccountId(Integer.parseInt(addressDTO.getAccountId()));
+        Address savedAddress = addressRepository.save(address);
+        return modelMapper.map(savedAddress, AddressDTO.class);
+    }
+
+    @Override
+    public AddressDTO updateAddress(AddressDTO addressDTO) {
+        Address address = modelMapper.map(addressDTO, Address.class);
+        address.setAccountId(Integer.parseInt(addressDTO.getAccountId()));
+        address.setId(addressDTO.getId());
         Address savedAddress = addressRepository.save(address);
         return modelMapper.map(savedAddress, AddressDTO.class);
     }

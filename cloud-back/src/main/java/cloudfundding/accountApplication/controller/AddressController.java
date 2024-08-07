@@ -39,6 +39,13 @@ public class AddressController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Address created successfully");
     }
 
+    // update address
+    @PutMapping("/address")
+    public ResponseEntity<String> updateAddress(@RequestBody AddressDTO addressDTO) {
+        addressService.updateAddress(addressDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Address updated successfully");
+    }
+
     // Delete address
     @DeleteMapping("/address/{id}")
     public ResponseEntity<String> deleteAddress(@PathVariable int id) {

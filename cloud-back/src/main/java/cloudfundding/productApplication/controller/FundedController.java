@@ -31,4 +31,9 @@ public class FundedController {
     public List<FundedDTO> getFundedByAccountId(@PathVariable Long accountId) {
         return fundedService.getFundedByAccountId(accountId);
     }
+
+    @GetMapping("/funded/mine/{ownerId}")
+    public List<FundedDTO> getFundedByOwnerId(@PathVariable Long ownerId) {
+        return fundedService.getFundedByOwnerId(ownerId);
+    }
 }

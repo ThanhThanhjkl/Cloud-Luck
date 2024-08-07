@@ -7,4 +7,5 @@ public class FundedDTO {
     private int id;
     private int return_id;
     private int account_id;
+    private int owner_id;
 }

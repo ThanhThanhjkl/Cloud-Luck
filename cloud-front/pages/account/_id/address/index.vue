@@ -108,7 +108,6 @@ export default {
     return {
       unclickable: false,
       isSelectedId: null,
-      addressSelected: null,
     };
   },
 
@@ -130,7 +129,7 @@ export default {
     async deleteAddress() {
       this.unclickable = true;
       await this.deleteAccountAddress(this.addressSelected.id);
-      this.getAccountAddress(this.account.id);
+      this.getAccountAddress(this.accountId);
       this.unclickable = false;
       this.$toast.success("削除しました");
     },

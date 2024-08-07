@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface FundedService {
     ResponseEntity<String> addFunded(FundedDTO funded);
-
     List<FundedDTO> getFundedByAccountId(Long accountId);
-
+    List<FundedDTO> getFundedByOwnerId(Long ownerId);
     ResponseEntity<String> deleteFunded(int id);
 }

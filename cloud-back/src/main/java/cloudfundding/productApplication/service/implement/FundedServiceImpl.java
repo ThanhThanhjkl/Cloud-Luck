@@ -28,6 +28,11 @@ public class FundedServiceImpl implements FundedService {
     }
 
     @Override
+    public List<FundedDTO> getFundedByOwnerId(Long ownerId) {
+        return fundedRepository.getFundedByOwnerId(ownerId);
+    }
+
+    @Override
     public ResponseEntity<String> deleteFunded(int id) {
         return fundedRepository.deleteFunded(id);
     }

@@ -33,7 +33,9 @@ export default ($authApi) => ({
   createAccountAddress(params) {
     return $authApi.post(`/address`, params);
   },
-
+  updateAccountAddress(params) {
+    return $authApi.put(`/address`, params);
+  },
   deleteAccountAddress(id) {
     return $authApi.delete(`/address/${id}`);
   },

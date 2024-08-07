@@ -35,6 +35,9 @@ export default ($consumerApi) => ({
   getFundedByAccountId(params) {
     return $consumerApi.get(`/funded/${params}`);
   },
+  getFundedByOwnerId(params) {
+    return $consumerApi.get(`/funded/mine/${params}`);
+  },
   deleteFundedById(params) {
     return $consumerApi.delete(`/funded/${params}`);
   },

@@ -40,7 +40,7 @@ export default {
         { id: 5, title: "Funding history", url: "donation" },
         {
           id: 6,
-          title: "Credit card information",
+          title: "Funded List Your Project",
           url: "card",
         },
       ],

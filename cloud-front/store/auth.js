@@ -88,6 +88,10 @@ export default {
       return this.$authRepositories.createAccountAddress(params);
     },
 
+    updateAccountAddress({ commit }, params) {
+      return this.$authRepositories.updateAccountAddress(params);
+    },
+
     deleteAccountAddress({ commit }, id) {
       return this.$authRepositories.deleteAccountAddress(id);
     },
