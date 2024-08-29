@@ -46,6 +46,21 @@
               />
             </div>
           </div>
+          <div
+            v-for="(start, index) in starts"
+            :key="index"
+            :class="showMore ? `top-5` : `d-none`"
+          >
+            <div
+              v-for="(item, innerIndex) in products.slice(start, start + 4)"
+              :key="innerIndex"
+            >
+              <TopCard
+                :item="item"
+                @click="$router.push(`/project/${item.id}`)"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -73,6 +88,7 @@ export default {
     return {
       options: [{ value: 1, text: "New arrival" }],
       sortCampaign: 1,
+      showMore: false,
     };
   },
 
@@ -83,6 +99,14 @@ export default {
     accountId() {
       return this.userId;
     },
+
+    starts() {
+      const starts = [];
+      for (let i = 5; i < this.products.length; i += 4) {
+        starts.push(i);
+      }
+      return starts;
+    },
   },
 
   mounted() {
@@ -91,7 +115,9 @@ export default {
 
   methods: {
     ...mapActions(["getProducts"]),
-    seeAllProjects() {},
+    seeAllProjects() {
+      this.showMore = !this.showMore;
+    },
   },
 };
 </script>

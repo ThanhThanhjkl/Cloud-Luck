@@ -1,107 +1,84 @@
 <template>
   <div class="comment-box">
     <b-textarea
-      v-model="message"
+      v-model="contents"
       cols="45"
       rows="8"
       maxlength="65525"
       class="comment-input"
       type="text"
-      placeholder="プロジェクトに対する意見や質問を投稿しましょう"
+      placeholder="Post your thoughts and comment about the project"
     />
     <div class="btn-comment">
-      <button type="button" @click="submitComment">コメントする</button>
-      <a class="about-comment-btn text-primary">※コメントについて</a>
+      <button type="button" @click="submitComment">To comment</button>
+      <a class="about-comment-btn text-primary">※ About comments</a>
     </div>
 
-    <div v-if="comments.length" class="comment-list">
-      <div class="replier comment-thread">
-        <b-img fluid src="@/assets/img/avatar-iframe.png" />
-        <div>
-          <div class="comment-body">
-            太陽光パネルの接続コードに関して質問です。普通、パネル側の接続は二股になっていると思いますが、写真で見るとそう見えません。どうなっていますか？
-            できれば画像で見えるといいんですが！
-          </div>
-          <div>
-            <div class="profile-name"><a href="#">abcd1234</a></div>
-            <div class="profile-date text-secondary">
-              2023-02-22T18:05:17.250Z
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <Pagination
-      v-if="comments.length > 12"
-      :total="total"
-      :page="page"
-      @change="onChange"
-    ></Pagination>
+    <CommentList
+      v-for="comment in comments"
+      :key="comment.id"
+      :comment="comment"
+      :delete-comment="deleteComment"
+      :account-id="accountId"
+    ></CommentList>
   </div>
 </template>
 
 <script>
-import Pagination from "@/components/common/Pagination";
-
+import CommentList from "@/components/details/CommentList";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("home");
+const authMapper = createNamespacedHelpers("auth");
 export default {
   components: {
-    Pagination,
+    CommentList,
   },
-
   data() {
     return {
-      message: "",
-      page: 1,
-      total: 40,
-
-      comments: [
-        {
-          id: "1",
-          message: "キャンペションキャンペション",
-          summary: "キャンペションキャンペション",
-          image: {
-            id: "1",
-          },
-        },
-        {
-          id: "2",
-          message: "キャンペションキャンペション",
-          summary: "キャンペションキャンペション",
-          image: {
-            id: "1",
-          },
-        },
-      ],
+      contents: "",
+      firtsId: null,
     };
   },
   computed: {
-    campaignId() {
+    ...mapState(["comments"]),
+    ...authMapper.mapState(["userId"]),
+    projectId() {
       return this.$route.params.id;
+    },
+    accountId() {
+      return this.userId;
     },
   },
 
+  async mounted() {
+    await this.getCommentsByProductId(this.projectId);
+  },
+
   methods: {
+    ...mapActions([
+      "getCommentsByProductId",
+      "createComment",
+      "deleteCommentById",
+    ]),
     async submitComment() {
-      if (!this.user) {
+      if (!this.accountId) {
         return this.$router.push("/auth/login");
       }
-
-      if (this.message && this.campaignId) {
+      if (this.contents && this.projectId) {
         const params = {
-          id: this.campaignId,
-          message: this.message,
+          contents: this.contents,
+          productId: Number(this.projectId),
+          accountId: Number(this.accountId),
         };
-        await this.postComment(params);
-
-        this.getComments({ id: this.campaignId });
-        this.message = "";
+        await this.createComment(params);
+        this.getCommentsByProductId(this.projectId);
+        this.contents = "";
       }
     },
 
-    onChange(page) {
-      this.page = page;
-      this.getComments({ id: this.campaignId, page: this.page - 1 });
+    async deleteComment(id) {
+      await this.deleteCommentById(id);
+      this.getCommentsByProductId(this.projectId);
     },
   },
 };

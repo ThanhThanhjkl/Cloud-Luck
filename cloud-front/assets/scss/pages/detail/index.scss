@@ -320,9 +320,11 @@
           border-radius: 50%;
           height: 112px;
           width: 112px;
+          object-fit: cover;
           @include max-width(md) {
             width: 56px;
             height: 56px;
+            object-fit: cover;
           }
         }
         .comment-body {

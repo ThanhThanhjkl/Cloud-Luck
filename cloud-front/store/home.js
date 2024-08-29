@@ -5,6 +5,8 @@ const SET_MY_RETURNS = "SET_MY_RETURNS";
 const SET_RETURN = "SET_RETURN";
 const SET_FUNDED = "SET_FUNDED";
 const SET_MY_FUNDED = "SET_MY_FUNDED";
+const SET_COMMENTS = "SET_COMMENTS";
+const SET_SUPORTS = "SET_SUPORTS";
 
 export default {
   state: () => ({
@@ -15,6 +17,8 @@ export default {
     return: {},
     funded: [],
     myFunded: [],
+    comments: [],
+    suports: [],
   }),
 
   actions: {
@@ -139,6 +143,48 @@ export default {
         // aaaa
       }
     },
+
+    async createComment({ commit }, params) {
+      return await this.$consumerRepositories.consumerCampaigns.createComment(
+        params
+      );
+    },
+
+    async getCommentsByProductId({ commit }, params) {
+      try {
+        const response =
+          await this.$consumerRepositories.consumerCampaigns.getCommentsByProductId(
+            params
+          );
+        commit(SET_COMMENTS, response);
+      } catch (e) {
+        // aaaa
+      }
+    },
+
+    deleteCommentById({ commit }, params) {
+      return this.$consumerRepositories.consumerCampaigns.deleteCommentById(
+        params
+      );
+    },
+
+    async createSuport({ commit }, params) {
+      return await this.$consumerRepositories.consumerCampaigns.createSuport(
+        params
+      );
+    },
+
+    async getSuportsByProductId({ commit }, params) {
+      try {
+        const response =
+          await this.$consumerRepositories.consumerCampaigns.getSuportsByProductId(
+            params
+          );
+        commit(SET_SUPORTS, response);
+      } catch (e) {
+        // aaaa
+      }
+    },
   },
 
   mutations: {
@@ -162,6 +208,12 @@ export default {
     },
     SET_MY_FUNDED(state, payload) {
       state.myFunded = payload;
+    },
+    SET_COMMENTS(state, payload) {
+      state.comments = payload;
+    },
+    SET_SUPORTS(state, payload) {
+      state.suports = payload;
     },
   },
 };

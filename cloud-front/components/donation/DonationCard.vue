@@ -17,7 +17,7 @@
         {{ title }}
       </div>
       <div class="card-header d-flex">
-        <b-avatar class="ml-none mr-2">
+        <b-avatar class="ml-0 mr-2">
           <b-img fluid :src="avatar" />
         </b-avatar>
         <div>
@@ -29,13 +29,9 @@
               email: <span class="text-secondary">{{ email }}</span>
             </div>
             <div class="profile-date">
-              name: <span class="text-secondary">{{ name }}</span>
-            </div>
-            <div class="profile-date">
               email: <span class="text-secondary">{{ email }}</span>
             </div>
           </div>
-          <div class="mt-3">{{ address }}</div>
         </div>
       </div>
       <div
@@ -70,7 +66,6 @@ export default {
       avatar: null,
       name: null,
       email: null,
-      address: null,
     };
   },
 
@@ -83,25 +78,16 @@ export default {
   },
 
   async mounted() {
-    await this.getReturnById(this.funded.return_id);
-    await this.getAccount(this.funded.account_id);
-    await this.getAddressByAccountId(this.funded.account_id);
-    this.imageUrl = this.return.image;
-    this.title = this.return.title;
-    this.ammount = this.return.cost;
-    this.avatar = "data:image/jpeg;base64," + this.account.avatar;
-    this.name = this.account.name;
-    this.email = this.account.email;
-    this.address =
-      this.accountAddress.name +
-      "-" +
-      this.accountAddress.phone +
-      "-" +
-      this.accountAddress.street +
-      "-" +
-      this.accountAddress.district +
-      "-" +
-      this.accountAddress.prefectures;
+    await this.getReturnById(this.funded.return_id).then(() => {
+      this.imageUrl = this.return.image;
+      this.title = this.return.title;
+      this.ammount = this.return.cost;
+      this.getAccount(this.funded.account_id).then(() => {
+        this.avatar = "data:image/jpeg;base64," + this.account.avatar;
+        this.name = this.account.name;
+        this.email = this.account.email;
+      });
+    });
   },
 
   methods: {

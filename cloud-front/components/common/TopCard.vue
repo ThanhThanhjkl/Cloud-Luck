@@ -10,12 +10,6 @@
         <img class="w-100" :src="images" />
         <svg-heart :class="item" class="svg-heart"></svg-heart>
       </div>
-      <div class="position-relative">
-        <b-progress :value="salePersent" :max="100"></b-progress>
-        <span class="percent-label text-dark">
-          <span class="text-dark">SALE!</span> {{ salePersent }}%
-        </span>
-      </div>
     </template>
 
     <b-card-title> {{ item.name }} </b-card-title>

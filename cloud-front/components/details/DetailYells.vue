@@ -1,107 +1,72 @@
 <template>
   <div class="owner-card owner-card-list">
-    <div
-      v-for="(item, yellIndex) in campaignYells"
-      :key="yellIndex"
-      :item="item"
-      class="card"
-    >
-      <div class="card-header">
-        <b-avatar>
-          <b-img fluid src="@/assets/img/author_avatar.png" />
-        </b-avatar>
-        <div>
-          <div>
-            <div class="profile-name">
-              <a href="#">{{ item.id }}</a>
-            </div>
-            <div class="profile-date text-secondary">
-              {{ item.createdAt | fullDateTime }}
-            </div>
-          </div>
-          <div class="mt-3">
-            {{ item.message }}
-          </div>
-        </div>
+    <div v-if="Number(accountId) === product.account_id" class="comment-box">
+      <b-textarea
+        v-model="suportContent"
+        cols="45"
+        rows="8"
+        maxlength="65525"
+        class="comment-input"
+        type="text"
+        placeholder="Post your thoughts and support about the project"
+      />
+      <div class="btn-comment">
+        <button type="button" @click="submitSuport">To Support</button>
+        <a class="about-comment-btn text-primary">※ About Support</a>
       </div>
     </div>
 
-    <Pagination
-      v-if="campaignYells.length > 12"
-      :total="total"
-      :page="page"
-      @change="onPageChange"
-    >
-    </Pagination>
+    <DetailYellList
+      v-for="suport in suports"
+      :key="suport.id"
+      :suport="suport"
+      :account-id="accountId"
+    />
   </div>
 </template>
 <script>
-import Pagination from "@/components/common/Pagination";
-
-// import { createNamespacedHelpers } from "vuex";
-// const { mapState, mapActions } = createNamespacedHelpers("campaign");
+import DetailYellList from "@/components/details/DetailYellList";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("home");
+const authMapper = createNamespacedHelpers("auth");
 export default {
   components: {
-    Pagination,
+    DetailYellList,
   },
-
   data() {
     return {
-      page: 1,
-      total: 40,
-      campaignYells: [
-        {
-          id: "1",
-          message: "キャンペションキャンペション",
-          summary: "キャンペションキャンペション",
-          image: {
-            id: "1",
-          },
-        },
-        {
-          id: "2",
-          message: "キャンペションキャンペション",
-          summary: "キャンペションキャンペション",
-          image: {
-            id: "1",
-          },
-        },
-        {
-          id: "3",
-          message: "キャンペションキャンペション",
-          summary: "キャンペションキャンペション",
-          image: {
-            id: "1",
-          },
-        },
-      ],
+      suportContent: "",
     };
   },
 
-  // computed: {
-  //   ...mapState(["campaign", "campaignYells", "page"]),
-  // },
+  computed: {
+    ...mapState(["suports", "product"]),
+    ...authMapper.mapState(["userId"]),
+    projectId() {
+      return this.$route.params.id;
+    },
+    accountId() {
+      return this.userId;
+    },
+  },
 
-  // async mounted() {
-  //   await this.getCampaignYell({
-  //     id: this.$route.params.id,
-  //     page: this.page - 1,
-  //   });
-  // },
+  async mounted() {
+    await this.getSuportsByProductId(this.projectId);
+  },
 
   methods: {
-    // ...mapActions(["getCampaignYell"]),
-
-    imageSource(id) {
-      return `${process.env.consumerApiUrl}/file/${id}`;
-    },
-
-    onPageChange(page) {
-      this.page = page;
-      this.getCampaignYell({
-        id: this.$route.params.id,
-        page: this.page - 1,
-      });
+    ...mapActions(["getSuportsByProductId", "createSuport"]),
+    async submitSuport() {
+      if (this.suportContent && this.projectId) {
+        const params = {
+          suportContent: this.suportContent,
+          productId: Number(this.projectId),
+          accountId: Number(this.accountId),
+        };
+        await this.createSuport(params);
+        this.getSuportsByProductId(this.projectId);
+        this.suportContent = "";
+      }
     },
   },
 };

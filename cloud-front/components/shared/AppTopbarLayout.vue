@@ -215,7 +215,7 @@ export default {
   line-height: 17px;
 
   @include min-width(md) {
-    padding: 20px 0;
+    padding: 5px 0;
   }
 
   .container-xl {

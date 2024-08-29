@@ -41,4 +41,19 @@ export default ($consumerApi) => ({
   deleteFundedById(params) {
     return $consumerApi.delete(`/funded/${params}`);
   },
+  createComment(params) {
+    return $consumerApi.post(`/comment`, params);
+  },
+  getCommentsByProductId(params) {
+    return $consumerApi.get(`/comment/${params}`);
+  },
+  deleteCommentById(params) {
+    return $consumerApi.delete(`/comment/${params}`);
+  },
+  createSuport(params) {
+    return $consumerApi.post(`/suport`, params);
+  },
+  getSuportsByProductId(params) {
+    return $consumerApi.get(`/suport/${params}`);
+  },
 });

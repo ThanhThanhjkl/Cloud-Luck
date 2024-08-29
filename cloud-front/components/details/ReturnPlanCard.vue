@@ -48,8 +48,8 @@ export default {
       default: "",
     },
     ownerId: {
-      type: String,
-      default: "",
+      type: Number,
+      default: 0,
     },
   },
 
