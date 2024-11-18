@@ -29,7 +29,13 @@
               email: <span class="text-secondary">{{ email }}</span>
             </div>
             <div class="profile-date">
-              email: <span class="text-secondary">{{ email }}</span>
+              receiver: <span class="text-secondary">{{ receiver }}</span>
+            </div>
+            <div class="profile-date">
+              address: <span class="text-secondary">{{ address }}</span>
+            </div>
+            <div class="profile-date">
+              phone: <span class="text-secondary">{{ phone }}</span>
             </div>
           </div>
         </div>
@@ -66,6 +72,9 @@ export default {
       avatar: null,
       name: null,
       email: null,
+      receiver: null,
+      address: null,
+      phone: null,
     };
   },
 
@@ -86,6 +95,15 @@ export default {
         this.avatar = "data:image/jpeg;base64," + this.account.avatar;
         this.name = this.account.name;
         this.email = this.account.email;
+        this.getAddressByAccountId(this.funded.account_id).then(() => {
+          const address = this.accountAddress.find(
+            (address) => address.defaultSelect === "true"
+          );
+          const phone = address.phone;
+          this.address = `${address.prefectures}, ${address.district}, ${address.street}`;
+          this.phone = phone;
+          this.receiver = address.name;
+        });
       });
     });
   },

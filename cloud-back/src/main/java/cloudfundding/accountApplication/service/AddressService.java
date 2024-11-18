@@ -25,6 +25,8 @@ public interface AddressService {
     AddressDTO updateAddress(AddressDTO addressDTO);
 
     boolean deleteAddress(int id);
+
+    boolean updateDefaultAddress (int accountId, int addressId);
 }
 
 @Transactional
@@ -68,6 +70,16 @@ class AddressServiceImpl implements AddressService {
     public AddressDTO createAddress(AddressDTO addressDTO) {
         Address address = modelMapper.map(addressDTO, Address.class);
         address.setAccountId(Integer.parseInt(addressDTO.getAccountId()));
+
+        // Check if there's already an address with defaultSelect = "true"
+        List<Address> totalAddress = addressRepository.findAllByAccountId(Integer.parseInt(addressDTO.getAccountId()));
+
+        if (totalAddress.stream().anyMatch(a -> a.getDefaultSelect().equals("true"))) {
+            address.setDefaultSelect("false");
+        } else {
+            address.setDefaultSelect("true");
+        }
+
         Address savedAddress = addressRepository.save(address);
         return modelMapper.map(savedAddress, AddressDTO.class);
     }
@@ -87,6 +99,20 @@ class AddressServiceImpl implements AddressService {
             addressRepository.deleteById(id);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean updateDefaultAddress(int accountId, int addressId) {
+        List<Address> addresses = addressRepository.findAllByAccountId(accountId);
+        for (Address address : addresses) {
+            if (address.getId() == addressId) {
+                address.setDefaultSelect("true");
+            } else {
+                address.setDefaultSelect("false");
+            }
+        }
+        addressRepository.saveAll(addresses);
         return false;
     }
 }

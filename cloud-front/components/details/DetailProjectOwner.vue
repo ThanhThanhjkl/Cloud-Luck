@@ -34,13 +34,8 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapState, mapActions } = createNamespacedHelpers("auth");
+const projectMapper = createNamespacedHelpers("home");
 export default {
-  props: {
-    product: {
-      type: Object,
-      default: () => {},
-    },
-  },
   data() {
     return {
       showPopUp: false,
@@ -53,21 +48,29 @@ export default {
 
   computed: {
     ...mapState(["account"]),
+    ...projectMapper.mapState(["product"]),
+    projectId() {
+      return this.$route.params.id;
+    },
     accountId() {
       return this.product.account_id;
     },
   },
 
-  async mounted() {
-    await this.getAccount(this.accountId);
-    this.email = this.account.email;
-    this.name = this.account.name;
-    this.url = this.account.url;
-    this.avatar = "data:image/jpeg;base64," + this.account.avatar;
+  mounted() {
+    this.getProductsDetail(this.projectId).then(() => {
+      this.getAccount(this.accountId).then(() => {
+        this.email = this.account.email;
+        this.name = this.account.name;
+        this.url = this.account.url;
+        this.avatar = "data:image/jpeg;base64," + this.account.avatar;
+      });
+    });
   },
 
   methods: {
     ...mapActions(["getAccount"]),
+    ...projectMapper.mapActions(["getProductsDetail"]),
     seeProfile() {
       const params = this.$route.params.id;
       this.$router.push({

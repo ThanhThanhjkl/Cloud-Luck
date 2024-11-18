@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class AddressController {
@@ -44,6 +45,13 @@ public class AddressController {
     public ResponseEntity<String> updateAddress(@RequestBody AddressDTO addressDTO) {
         addressService.updateAddress(addressDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Address updated successfully");
+    }
+
+    // update default address
+    @PutMapping("/address/default")
+    public ResponseEntity<String> updateDefaultAddress(@RequestBody AddressDTO addressDTO) {
+        addressService.updateDefaultAddress(Integer.parseInt(addressDTO.getAccountId()), addressDTO.getId());
+        return ResponseEntity.status(HttpStatus.OK).body("Default address updated successfully");
     }
 
     // Delete address

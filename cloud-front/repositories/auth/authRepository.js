@@ -39,4 +39,7 @@ export default ($authApi) => ({
   deleteAccountAddress(id) {
     return $authApi.delete(`/address/${id}`);
   },
+  updateDefaultAddress(params) {
+    return $authApi.put(`/address/default`, params);
+  },
 });

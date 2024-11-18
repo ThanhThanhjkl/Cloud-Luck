@@ -40,7 +40,7 @@ export default {
         payload.accountId = this.accountId;
         payload.id = this.accountAddressDetail.id;
         await this.updateAccountAddress(payload);
-        this.$toast.success("成功");
+        this.$toast.success("Updated Successfully");
         this.$router.push(`/account/${this.$route.params.id}/address`);
       } catch {}
     },

@@ -77,7 +77,9 @@
                             <span class="title-tab">
                               <span v-html="`Support\nMessage`"></span>
                             </span>
-                            <span class="alert-amount text-center">0</span>
+                            <span class="alert-amount text-center">{{
+                              suports.length
+                            }}</span>
                           </nuxt-link>
                         </li>
                         <li role="presentation" class="nav-item">
@@ -87,7 +89,9 @@
                             :class="{ active: url == 'project-id-comment' }"
                           >
                             <span class="title-tab">comment</span>
-                            <span class="alert-amount text-center">0</span>
+                            <span class="alert-amount text-center">{{
+                              comments.length
+                            }}</span>
                           </nuxt-link>
                         </li>
                         <!---->
@@ -109,7 +113,7 @@
         <section class="right-content">
           <DetailSummary class="d-none d-md-block"></DetailSummary>
 
-          <DetailProjectOwner :product="product"></DetailProjectOwner>
+          <DetailProjectOwner></DetailProjectOwner>
 
           <section class="return-plan">
             <div class="section-header">
@@ -178,7 +182,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["product", "myReturns"]),
+    ...mapState(["product", "myReturns", "suports", "comments"]),
     ...authMapper.mapState(["userId"]),
 
     url() {
@@ -208,12 +212,18 @@ export default {
   },
   async mounted() {
     await this.getProductsDetail(this.productId);
-    this.getReturnsByProductId(this.productId);
-    console.log(this.accountId);
+    await this.getReturnsByProductId(this.productId);
+    await this.getSuportsByProductId(this.productId);
+    await this.getCommentsByProductId(this.productId);
   },
 
   methods: {
-    ...mapActions(["getProductsDetail", "getReturnsByProductId"]),
+    ...mapActions([
+      "getProductsDetail",
+      "getReturnsByProductId",
+      "getSuportsByProductId",
+      "getCommentsByProductId",
+    ]),
   },
 };
 </script>

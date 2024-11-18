@@ -7,7 +7,9 @@
         class="purchase_details"
       >
         <b-card>
-          <div class="details-title text-center">Funded List Your Project</div>
+          <div class="details-title text-center">
+            List People Who Funded Your Project
+          </div>
 
           <hr />
 

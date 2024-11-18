@@ -3,14 +3,11 @@
     <section class="section-top">
       <div class="section-banner">
         <div class="banner-header">
-          <div class="section-header">
-            <img class="w-100" src="@/assets/img/new_banner.png" />
-          </div>
-          <div class="banner-button">
+          <!-- <div class="banner-button mt-0">
             <nuxt-link class="btn-banner" :to="`/account/${accountId}/project`">
               Create Projects
             </nuxt-link>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>

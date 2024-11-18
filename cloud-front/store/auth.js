@@ -1,5 +1,4 @@
 import { getField, updateField } from "vuex-map-fields";
-// import jwt from "jsonwebtoken";
 
 const RESET_CURRENT_USER = "RESET_CURRENT_USER";
 const SET_TOKEN = "SET_TOKEN";
@@ -7,6 +6,7 @@ const SET_LOGGED_USER_ID = "SET_LOGGED_USER_ID";
 const SET_ACCOUNT = "SET_ACCOUNT";
 const SET_ACCOUNT_ADDRESS = "SET_ACCOUNT_ADDRESS";
 const SET_ACCOUNT_ADDRESS_DETAIL = "SET_ACCOUNT_ADDRESS_DETAIL";
+const UPDATE_DEFAULT_ADDRESS = "UPDATE_DEFAULT_ADDRESS";
 
 export default {
   state: () => ({
@@ -95,6 +95,14 @@ export default {
     deleteAccountAddress({ commit }, id) {
       return this.$authRepositories.deleteAccountAddress(id);
     },
+
+    updateDefaultAddress({ commit }, params) {
+      return this.$authRepositories.updateDefaultAddress(params);
+    },
+
+    changedDefaultAddress({ commit }, params) {
+      commit(UPDATE_DEFAULT_ADDRESS, params);
+    },
   },
 
   mutations: {
@@ -116,6 +124,16 @@ export default {
     },
     SET_ACCOUNT_ADDRESS_DETAIL(state, payload) {
       state.accountAddressDetail = payload;
+    },
+
+    UPDATE_DEFAULT_ADDRESS(state, addressId) {
+      state.accountAddress.forEach((address) => {
+        if (address.id === addressId) {
+          address.defaultSelect = "true";
+        } else {
+          address.defaultSelect = "false";
+        }
+      });
     },
   },
 };

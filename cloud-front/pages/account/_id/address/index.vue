@@ -53,18 +53,19 @@
                   <td>
                     <button
                       type="button"
-                      :disabled="unclickable"
+                      :disabled="item.defaultSelect === 'true'"
                       @click.prevent="showConfirmModal(item)"
                     >
                       <svg-delete></svg-delete>delete
                     </button>
                   </td>
                   <td>
-                    <b-form-radio
-                      v-model="item.defaultSelect"
-                      :value="item.defaultSelect"
-                      name="some-radios"
-                    ></b-form-radio>
+                    <b-form-checkbox
+                      :checked="isChecked(item)"
+                      name="check-button"
+                      switch
+                      @change="onChangeDefaultAddress(item.id)"
+                    />
                   </td>
                 </tr>
               </tbody>
@@ -79,7 +80,7 @@
             variant="primary"
             class="btn-changeinfo-profile mt-4"
             block
-            @click="changeDefaultAddress"
+            @click="submitUpdatedDefaultAddress"
             >Update</b-button
           >
         </b-card>
@@ -104,54 +105,61 @@ export default {
     SvgDelete,
   },
 
-  data() {
-    return {
-      unclickable: false,
-      isSelectedId: null,
-    };
-  },
-
   computed: {
     ...mapState(["userId", "accountAddress"]),
 
     accountId() {
       return this.userId;
     },
+    isChecked() {
+      return (item) => item.defaultSelect;
+    },
   },
 
   mounted() {
     this.getAddressByAccountId(this.userId);
+    this.address = this.accountAddress;
   },
 
   methods: {
-    ...mapActions(["getAddressByAccountId", "deleteAccountAddress"]),
+    ...mapActions([
+      "getAddressByAccountId",
+      "deleteAccountAddress",
+      "updateDefaultAddress",
+      "changedDefaultAddress",
+    ]),
 
     async deleteAddress() {
-      this.unclickable = true;
-      await this.deleteAccountAddress(this.addressSelected.id);
-      this.getAccountAddress(this.accountId);
-      this.unclickable = false;
-      this.$toast.success("削除しました");
+      await this.deleteAccountAddress(this.addressSelected.id).then((res) => {
+        this.getAddressByAccountId(this.userId);
+        this.$toast.success("Deleted Successfully");
+      });
     },
 
     toEdit(id) {
       this.$router.push(`/account/${this.accountId}/address/${id}`);
     },
 
-    async changeDefaultAddress() {
-      if (this.isSelectedId) {
-        const accountId = this.account.id;
-        await this.postChangingDefaultAddress({
-          accountId,
-          addressId: this.isSelectedId,
-        });
-        this.$toast.success("成功");
-      }
+    async submitUpdatedDefaultAddress() {
+      const address = this.accountAddress.find(
+        (item) => item.defaultSelect === "true"
+      );
+      const params = {
+        accountId: this.accountId,
+        id: address.id,
+      };
+      await this.updateDefaultAddress(params).then((res) => {
+        this.$toast.success(res);
+      });
     },
 
     showConfirmModal(address) {
       this.addressSelected = address;
       this.$refs.confirmModal.show();
+    },
+
+    onChangeDefaultAddress(addressId) {
+      this.changedDefaultAddress(addressId);
     },
   },
 };
