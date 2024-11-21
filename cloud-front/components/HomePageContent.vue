@@ -2,20 +2,18 @@
   <div class="page-home">
     <section class="section-top">
       <div class="section-banner">
-        <div class="banner-header">
-          <!-- <div class="banner-button mt-0">
-            <nuxt-link class="btn-banner" :to="`/account/${accountId}/project`">
-              Create Projects
-            </nuxt-link>
-          </div> -->
-        </div>
+        <div class="banner-header"></div>
       </div>
     </section>
     <b-container fluid="xl">
       <section>
         <div class="section-header">
-          <h2 class="section-title">LINE UP</h2>
-          <h4 class="section-subtitle">Funding lineup</h4>
+          <h2 class="section-title">
+            Các Sáng Chế Mới Nhất Đã Được Cập Nhật Trên Sàn Ứng Dụng
+          </h2>
+          <h4 class="section-subtitle">
+            Sản Phẩm Kêu Gọi Hàng Đầu Với Sự Đầu Tư Cơ Bản Đến Nâng Cao
+          </h4>
           <b-form-select
             v-model="sortCampaign"
             :options="options"
@@ -83,7 +81,12 @@ export default {
 
   data() {
     return {
-      options: [{ value: 1, text: "New arrival" }],
+      options: [
+        { value: 1, text: "Mới Nhất" },
+        { value: 1, text: "Cũ Nhất" },
+        { value: 1, text: "Giá Cao Nhất" },
+        { value: 1, text: "Giá Thấp Nhất" },
+      ],
       sortCampaign: 1,
       showMore: false,
     };

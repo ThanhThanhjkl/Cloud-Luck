@@ -6,8 +6,8 @@
 
 <script>
 import ProfilePage from "@/components/profile/ProfilePage.vue";
-import { createNamespacedHelpers, mapActions } from "vuex";
-const { mapState } = createNamespacedHelpers("auth");
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("auth");
 
 export default {
   name: "IndexPage",
@@ -16,14 +16,14 @@ export default {
   },
 
   computed: {
-    ...mapState(["userId", "account"]),
+    ...mapState(["account"]),
     accountId() {
-      return this.userId;
+      return this.$route.query.id;
     },
   },
 
-  mounted() {
-    this.getAccount(this.accountId);
+  async mounted() {
+    await this.getAccount(this.accountId);
   },
 
   methods: {

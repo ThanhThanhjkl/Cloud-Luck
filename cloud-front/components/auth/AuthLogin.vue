@@ -128,9 +128,14 @@ export default {
       try {
         const res = await this.accountLogin(params);
         if (res.token !== null) {
+          this.$toast.success(res.message);
           this.$router.push(`/`);
         }
-      } catch (error) {}
+      } catch (error) {
+        this.$toast.error(
+          "Login failed! Account with provided email does not exist."
+        );
+      }
     },
 
     redirectInstagram() {

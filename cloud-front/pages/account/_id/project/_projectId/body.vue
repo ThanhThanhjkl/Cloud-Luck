@@ -32,7 +32,6 @@ import { createNamespacedHelpers } from "vuex";
 const { mapState } = createNamespacedHelpers("auth");
 const projectMapper = createNamespacedHelpers("home");
 export default {
-  inject: ["prefix"],
   components: {
     QuillEditor,
     SvgEyes,

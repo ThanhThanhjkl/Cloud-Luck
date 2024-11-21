@@ -77,8 +77,10 @@ export default {
     },
 
     async deleteComment(id) {
-      await this.deleteCommentById(id);
-      this.getCommentsByProductId(this.projectId);
+      await this.deleteCommentById(id).then((res) => {
+        this.getCommentsByProductId(this.projectId);
+        this.$toast.success(res);
+      });
     },
   },
 };

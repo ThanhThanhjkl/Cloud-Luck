@@ -14,6 +14,9 @@ export default ($consumerApi) => ({
   createProduct(params) {
     return $consumerApi.post(`/product/`, params);
   },
+  deleteProduct(params) {
+    return $consumerApi.delete(`/product/${params}`);
+  },
   getReturnsByProductId(params) {
     return $consumerApi.get(`/returns/${params}`);
   },
@@ -51,9 +54,12 @@ export default ($consumerApi) => ({
     return $consumerApi.delete(`/comment/${params}`);
   },
   createSuport(params) {
-    return $consumerApi.post(`/suport`, params);
+    return $consumerApi.post(`/support`, params);
   },
   getSuportsByProductId(params) {
-    return $consumerApi.get(`/suport/${params}`);
+    return $consumerApi.get(`/support/${params}`);
+  },
+  deleteSupportById(params) {
+    return $consumerApi.delete(`/support/${params}`);
   },
 });

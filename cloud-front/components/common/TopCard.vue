@@ -35,10 +35,12 @@
             <span>{{ item.sold }} supporters</span>
           </label>
           <b-col class="author d-none d-lg-block">
-            <label>
+            <label class="mr-0">
               <svg-user-solid></svg-user-solid>
             </label>
-            <span>{{ item.sale_cost }}</span>
+            <span>{{
+              Math.floor((item.cost - item.sale_cost) / 1000) - item.sold
+            }}</span>
           </b-col>
         </b-col>
       </b-row>

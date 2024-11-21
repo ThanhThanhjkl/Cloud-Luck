@@ -41,15 +41,10 @@
               </b-dropdown-item>
             </b-dropdown>
 
-            <nuxt-link
-              v-else
-              class="btn-login"
-              to="/auth/login"
-              @click.native="onLogout"
-            >
+            <div v-else class="btn-login" @click="onLogout">
               <SvgLogout></SvgLogout>
-              Logot
-            </nuxt-link>
+              LogOut
+            </div>
           </div>
         </div>
       </b-row>
@@ -63,6 +58,7 @@ import SvgSearch from "@/components/common/svg/SvgSearch";
 import primaryMenu from "@/helpers/primaryMenu";
 import SvgLogout from "@/components/common/svg/SvgLogout";
 import SvgUser from "@/components/common/svg/SvgUser";
+
 const { mapState, mapActions } = createNamespacedHelpers("auth");
 const campaignMapper = createNamespacedHelpers("home");
 export default {
@@ -100,12 +96,8 @@ export default {
     ...campaignMapper.mapActions(["getCampaigns"]),
 
     async onLogout() {
-      try {
-        await this.accountLogout("thanhnv@lgcns.com");
-        // this.$router.push("/auth/login");
-      } catch (error) {
-        this.$toast.error("Logout failed. Please try again.");
-      }
+      await this.accountLogout("thanhnv@lgcns.com");
+      this.$router.push("/auth/login");
     },
 
     onSearchCampaign() {

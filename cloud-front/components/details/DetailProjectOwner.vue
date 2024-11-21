@@ -24,7 +24,7 @@
         {{ email }}
         <div class="mt-2">
           URL:
-          <a href="currentCampaignAccount.url">{{ url }} </a>
+          <a :href="url">{{ url }} </a>
         </div>
       </div>
     </b-card>

@@ -10,9 +10,6 @@ export default ($authApi) => ({
   accountLogin(params) {
     return $authApi.post(`${ENDPOINT}/login`, params);
   },
-  accountLogout(params) {
-    return $authApi.delete(`${ENDPOINT}/logout`, params);
-  },
   getAccount(params) {
     return $authApi.get(`${ENDPOINT}/${params}`);
   },

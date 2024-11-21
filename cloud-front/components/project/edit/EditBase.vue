@@ -133,8 +133,6 @@ import { createNamespacedHelpers } from "vuex";
 const { mapState } = createNamespacedHelpers("auth");
 const projectMapper = createNamespacedHelpers("home");
 export default {
-  inject: ["prefix"],
-
   components: { SvgEyes, SvgWaringAlert, FormValidator, DatePicker },
 
   data() {
@@ -160,11 +158,25 @@ export default {
     },
   },
 
-  mounted() {
+  // WHEN CREATE PRODUCT SET VALUE TO NULL
+  async beforeMount() {
+    if (this.$route.params.projectId === "add") {
+      await this.setProductToCreate();
+    }
+  },
+
+  async mounted() {
     const productUpdate = localStorage.getItem(
       `productUpdate${this.productId}`
     );
     this.productDraft = JSON.parse(productUpdate);
+
+    // API GET VALUE WHEN UPDATE PRODUCT
+    if (this.$route.params.projectId !== "add") {
+      await this.getProductsDetail(this.productId);
+    }
+
+    // LOGIC TO SET DEFAULT VALUE FOR FIELD
     if (productUpdate && this.productDraft.cost) {
       this.cost = this.productDraft.cost;
     } else {
@@ -188,6 +200,7 @@ export default {
   },
 
   methods: {
+    ...projectMapper.mapActions(["getProductsDetail", "setProductToCreate"]),
     onSaveStep() {
       const productUpdateAvailable = localStorage.getItem(
         `productUpdate${this.productId}`

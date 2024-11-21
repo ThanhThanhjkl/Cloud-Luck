@@ -4,6 +4,7 @@ import cloudfundding.productApplication.model.ProductsDTO;
 import cloudfundding.productApplication.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +42,11 @@ public class ProductsController {
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody ProductsDTO products) {
         return productsService.addProduct(products);
+    }
+
+    // delete product by id
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        return productsService.deleteProduct(id);
     }
 }

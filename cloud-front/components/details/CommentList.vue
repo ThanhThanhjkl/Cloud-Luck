@@ -3,26 +3,28 @@
     <div v-if="comment" class="replier comment-thread">
       <b-img fluid :src="avatar" />
       <div>
-        <div class="comment-body">
-          {{ comment.contents }}
-        </div>
         <div>
           <div class="profile-name">
-            <a href="#">{{ name }}</a>
+            <nuxt-link :to="`profile?id=${comment.accountId}`">{{
+              name
+            }}</nuxt-link>
+            <!-- <a href="#">{{ name }}</a> -->
           </div>
           <div class="profile-date text-secondary">
             {{ comment.date | fullDateTime }}
           </div>
         </div>
-        <div
-          v-if="Number(accountId) === comment.accountId"
-          class="btn-comment"
-          style="text-align: left"
-        >
-          <button type="button" @click="deleteComment(comment.id)">
-            Delete
-          </button>
+        <div class="comment-body mt-2">
+          {{ comment.contents }}
         </div>
+        <button
+          v-if="Number(accountId) === comment.accountId"
+          type="button"
+          class="btn-delete-comment mt-2"
+          @click="deleteComment(comment.id)"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -65,3 +67,14 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.btn-delete-comment {
+  border: medium none currentcolor;
+  border: initial;
+  background: #466cb0 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+  padding: 5px 10px;
+  color: white;
+}
+</style>

@@ -13,18 +13,17 @@
             {{ suport.date | fullDateTime }}
           </div>
         </div>
-        <div class="mt-3">
+        <div>
           {{ suport.suportContent }}
         </div>
-        <div
+        <button
           v-if="Number(accountId) === suport.accountId"
-          class="btn-comment"
-          style="text-align: left"
+          type="button"
+          class="btn-delete-support mt-3"
+          @click="deleteSuport(suport.id)"
         >
-          <button type="button" @click="deleteComment(comment.id)">
-            Delete
-          </button>
-        </div>
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -33,16 +32,14 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 const authMapper = createNamespacedHelpers("auth");
+const { mapActions } = createNamespacedHelpers("home");
 export default {
   props: {
     suport: {
       type: Object,
       default: () => {},
     },
-    // deleteComment: {
-    //   type: Function,
-    //   default: () => {},
-    // },
+
     accountId: {
       type: String,
       default: "",
@@ -56,6 +53,12 @@ export default {
     };
   },
 
+  computed: {
+    projectId() {
+      return this.$route.params.id;
+    },
+  },
+
   async mounted() {
     const res = await this.getAccount(this.suport.accountId);
     this.name = res.name;
@@ -64,6 +67,25 @@ export default {
 
   methods: {
     ...authMapper.mapActions(["getAccount"]),
+    ...mapActions(["deleteSupportById", "getSuportsByProductId"]),
+
+    deleteSuport(id) {
+      this.deleteSupportById(id).then((res) => {
+        this.getSuportsByProductId(this.projectId);
+        this.$toast.success(res);
+      });
+    },
   },
 };
 </script>
+<style lang="scss" scoped>
+.btn-delete-support {
+  border: medium none currentcolor;
+  border: initial;
+  background: #466cb0 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+  padding: 5px 10px;
+  color: white;
+}
+</style>

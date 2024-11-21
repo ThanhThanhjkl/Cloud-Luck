@@ -107,7 +107,6 @@
 <script scoped>
 import FormValidator from "@/components/common/FormValidator";
 import _ from "lodash";
-import { contactData } from "@/helpers/dummyData";
 
 export default {
   components: {
@@ -129,7 +128,7 @@ export default {
         { value: 2, text: "キャンセルについて" },
         { value: 3, text: "その他" },
       ],
-      caution: contactData,
+      caution: "",
       contact: {
         name: "",
         sur_name: "",

@@ -280,9 +280,9 @@
       position: relative;
       .about-comment-btn {
         font-size: 10px;
-        top: 20px;
+        bottom: 0;
         position: absolute;
-        right: calc(50% - 183px);
+        right: 0;
         @include max-width(md) {
           right: calc(50% - 170px);
         }
@@ -307,7 +307,7 @@
     .comment-list {
       display: grid;
       grid-row-gap: 80px;
-      padding-top: 67px;
+      padding-top: 20px;
       .comment-thread {
         display: flex;
         align-items: center;
@@ -329,7 +329,6 @@
         }
         .comment-body {
           font-size: 13px;
-          margin-bottom: 15px;
           word-break: break-all;
         }
         .profile-name {

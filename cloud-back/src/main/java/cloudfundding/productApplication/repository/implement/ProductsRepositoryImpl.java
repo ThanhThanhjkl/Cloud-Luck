@@ -36,13 +36,17 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setDate(rs.getDate("date"));
                 products.setCost(rs.getInt("cost"));
                 products.setSale_cost(rs.getInt("sale-cost"));
-                products.setSold(rs.getInt("sold"));
                 products.setTitle(rs.getString("title"));
                 String imagesString = rs.getString("images");
                 products.setAccount_id(rs.getInt("account-id"));
                 products.setMain_image(rs.getString("main-image"));
                 products.setMethods(rs.getString("methods"));
                 products.setVideo_url(rs.getString("video-url"));
+
+                // Count the number of rows in the funded table with product_id = id
+                String fundedSql = "SELECT COUNT(*) FROM FUNDED WHERE account_id = ?";
+                int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
+                products.setSold(sold);
 
                 if (imagesString != null) {
                     List<String> imagesList = Arrays.asList(imagesString.split(","));
@@ -69,13 +73,17 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setDate(rs.getDate("date"));
                 products.setCost(rs.getInt("cost"));
                 products.setSale_cost(rs.getInt("sale-cost"));
-                products.setSold(rs.getInt("sold"));
                 products.setTitle(rs.getString("title"));
                 String imagesString = rs.getString("images");
                 products.setAccount_id(rs.getInt("account-id"));
                 products.setMain_image(rs.getString("main-image"));
                 products.setMethods(rs.getString("methods"));
                 products.setVideo_url(rs.getString("video-url"));
+
+                // Count the number of rows in the funded table with product_id = id
+                String fundedSql = "SELECT COUNT(*) FROM FUNDED WHERE account_id = ?";
+                int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
+                products.setSold(sold);
 
                 if (imagesString != null) {
                     List<String> imagesList = Arrays.asList(imagesString.split(","));
@@ -109,6 +117,12 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setMain_image(rs.getString("main-image"));
                 products.setMethods(rs.getString("methods"));
                 products.setVideo_url(rs.getString("video-url"));
+
+                // Count the number of rows in the funded table with product_id = id
+                String fundedSql = "SELECT COUNT(*) FROM FUNDED WHERE account_id = ?";
+                int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
+                products.setSold(sold);
+                
                 if (imagesString != null) {
                     List<String> imagesList = Arrays.asList(imagesString.split(","));
                     products.setImages(imagesList);
@@ -154,6 +168,24 @@ public class ProductsRepositoryImpl implements ProductsRepository {
             return ResponseEntity.status(HttpStatus.OK).body("Product added successfully");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add product");
+        }
+    }
+
+    @Override
+        public ResponseEntity<String> deleteProduct(Long id) {
+        String sql = "DELETE FROM PRODUCTS WHERE id = ?";
+        String sql2 = "DELETE FROM COMMENTS WHERE product_id = ?";
+        String sql3 = "DELETE FROM RETURNS WHERE `product-id` = ?";
+        String sql4 = "DELETE FROM SUPORT WHERE product_id = ?";
+
+        try {
+            jdbcTemplate.update(sql, id);
+            jdbcTemplate.update(sql2, id);
+            jdbcTemplate.update(sql3, id);
+            jdbcTemplate.update(sql4, id);
+            return ResponseEntity.status(HttpStatus.OK).body("Product deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete product");
         }
     }
 }

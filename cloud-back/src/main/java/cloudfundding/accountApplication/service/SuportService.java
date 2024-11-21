@@ -16,6 +16,8 @@ public interface SuportService {
     SuportDTO createSuport(SuportDTO suportDTO);
 
     List<SuportDTO> getByProductId(int productId);
+
+    boolean deleteSupport(int id);
 }
 
 @Transactional
@@ -44,13 +46,13 @@ class SuportServiceImpl implements SuportService {
         }
         return suportDTOs;
     }
-//
-//    @Override
-//    public boolean deleteComment(int id) {
-//        if (commentRepository.existsById(id)) {
-//            commentRepository.deleteById(id);
-//            return true;
-//        }
-//        return false;
-//    }
+
+   @Override
+    public boolean deleteSupport(int id) {
+        if (suportRepository.existsById(id)) {
+            suportRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

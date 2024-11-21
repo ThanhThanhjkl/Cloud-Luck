@@ -35,18 +35,14 @@ export default {
       const res = await this.$authRepositories.accountLogin(params);
       if (res.token) {
         this.$axios.setToken(res.token, "Bearer");
-        // const decodedToken = jwt.decode(res.token);
         commit(SET_TOKEN, res.token);
         commit(SET_LOGGED_USER_ID, res.id);
         return res;
       }
     },
 
-    async accountLogout({ commit }, params) {
-      try {
-        await this.$authRepositories.accountLogout(params);
-        commit(RESET_CURRENT_USER);
-      } catch (error) {}
+    accountLogout({ commit }) {
+      commit(RESET_CURRENT_USER);
     },
 
     async getAccount({ commit }, params) {
@@ -115,6 +111,8 @@ export default {
     },
     RESET_CURRENT_USER(state) {
       state.user = null;
+      state.account = null;
+      state.token = null;
     },
     SET_ACCOUNT(state, payload) {
       state.account = payload;

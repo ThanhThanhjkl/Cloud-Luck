@@ -12,39 +12,25 @@
         <div class="profile-name">{{ account.name }}</div>
       </div>
     </template>
-    <div class="mb-5">
+    <div>
       {{ account.about }}
     </div>
     <div class="link-website">
       <div class="mr-auto d-flex flex-column">
-        <a
-          href="https://www.kobunsha.com/"
-          target="_blank"
-          class="text-primary"
-        >
-          <svg-globe></svg-globe>
-          {{ account.url }}
-        </a>
-        <a class="text-primary">
-          <svg-instagram-circle></svg-instagram-circle>
-          {{ account.url }}
-        </a>
-      </div>
-      <div class="d-flex flex-column">
-        <a href="https://twitter.com/koko_tuku" target="_blank">
-          <svg-twitter-circle></svg-twitter-circle>
-          {{ account.url }}
-        </a>
-        <a class="text-primary">
-          <svg-youtube-circle></svg-youtube-circle>
-          {{ account.url }}
-        </a>
-        <a
-          href="https://www.facebook.com/kokotuku/"
-          target="_blank"
-          class="svg-fb text-primary"
-        >
-          <svg-facebook></svg-facebook>
+        <a :href="account.url" target="_blank" class="text-primary">
+          <svg-instagram-circle
+            v-if="account.url.startsWith('https://www.instagram')"
+          ></svg-instagram-circle>
+          <svg-twitter-circle
+            v-if="account.url.startsWith('https://www.twitter')"
+          ></svg-twitter-circle>
+          <svg-youtube-circle
+            v-if="account.url.startsWith('https://www.youtube')"
+          ></svg-youtube-circle>
+          <svg-facebook
+            v-if="account.url.startsWith('https://www.facebook')"
+          ></svg-facebook>
+          <svg-globe v-else></svg-globe>
           {{ account.url }}
         </a>
       </div>

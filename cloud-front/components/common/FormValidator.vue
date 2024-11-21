@@ -23,7 +23,6 @@
 </template>
 <script>
 import { createNamespacedHelpers } from "vuex";
-import { FORM_REQUIRED_FIELD } from "@/helpers/errorMessages";
 const { mapGetters } = createNamespacedHelpers("global");
 
 export default {
@@ -54,7 +53,7 @@ export default {
 
   data() {
     return {
-      requiredMessage: FORM_REQUIRED_FIELD,
+      requiredMessage: "",
     };
   },
   computed: {

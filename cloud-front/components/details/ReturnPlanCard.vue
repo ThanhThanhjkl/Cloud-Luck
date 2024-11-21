@@ -28,7 +28,7 @@
         </div>
 
         <div class="card-text">
-          {{ returnPlan.name }}
+          {{ returnPlan.descriptions }}
         </div>
       </b-card>
     </div>

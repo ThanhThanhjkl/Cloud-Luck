@@ -25,8 +25,23 @@
         <b-col>
           <label class="mb-2">Achievement rate</label>
           <div class="position-relative">
-            <b-progress :value="70 || 0" :max="100"> </b-progress>
-            <span class="progress-percent"> {{ 70 | formatNumber }}% </span>
+            <b-progress
+              :value="
+                (product.sold /
+                  Math.floor((product.cost - product.sale_cost) / 1000)) *
+                100
+              "
+              :max="100"
+            >
+            </b-progress>
+            <span class="progress-percent">
+              {{
+                ((product.sold /
+                  Math.floor((product.cost - product.sale_cost) / 1000)) *
+                  100)
+                  | formatNumber
+              }}%
+            </span>
           </div>
         </b-col>
       </b-row>
@@ -163,8 +178,11 @@ export default {
 }
 .progress-percent {
   position: absolute;
-  top: -2px;
+  top: 0;
   left: calc(50% - 12px);
   color: #ffffff;
+  background-color: #466cb0;
+  font-size: small;
+  padding: 0 10px;
 }
 </style>

@@ -7,6 +7,7 @@ const SET_FUNDED = "SET_FUNDED";
 const SET_MY_FUNDED = "SET_MY_FUNDED";
 const SET_COMMENTS = "SET_COMMENTS";
 const SET_SUPORTS = "SET_SUPORTS";
+const SET_PRODUCTS_FOR_CREATE = "SET_PRODUCTS_FOR_CREATE";
 
 export default {
   state: () => ({
@@ -55,6 +56,10 @@ export default {
       }
     },
 
+    setProductToCreate({ commit }) {
+      commit(SET_PRODUCTS_FOR_CREATE, {});
+    },
+
     async updateProduct({ commit }, params) {
       return await this.$consumerRepositories.consumerCampaigns.updateProduct(
         params
@@ -65,6 +70,10 @@ export default {
       return await this.$consumerRepositories.consumerCampaigns.createProduct(
         params
       );
+    },
+
+    deleteProduct({ commit }, params) {
+      return this.$consumerRepositories.consumerCampaigns.deleteProduct(params);
     },
 
     async getReturnsByProductId({ commit }, params) {
@@ -185,6 +194,11 @@ export default {
         // aaaa
       }
     },
+    deleteSupportById({ commit }, params) {
+      return this.$consumerRepositories.consumerCampaigns.deleteSupportById(
+        params
+      );
+    },
   },
 
   mutations: {
@@ -214,6 +228,9 @@ export default {
     },
     SET_SUPORTS(state, payload) {
       state.suports = payload;
+    },
+    SET_PRODUCTS_FOR_CREATE(state, payload) {
+      state.product = payload;
     },
   },
 };

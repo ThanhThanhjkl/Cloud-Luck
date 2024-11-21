@@ -51,8 +51,6 @@ const { mapState } = createNamespacedHelpers("auth");
 const projectMapper = createNamespacedHelpers("home");
 
 export default {
-  inject: ["prefix"],
-
   components: {
     SvgEyes,
   },

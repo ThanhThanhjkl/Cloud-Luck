@@ -6,7 +6,7 @@
           Editing project
           <nuxt-link
             :to="`/account/${$route.params.id}/project/add/`"
-            class="register-btn"
+            class="create-project-btn"
             >Create New Project</nuxt-link
           >
         </div>
@@ -55,3 +55,17 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.create-project-btn {
+  font-size: 16px;
+  color: white;
+  background-color: #466cb0;
+  border-radius: 4px;
+  border: none;
+  padding: 30px 15px;
+  max-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

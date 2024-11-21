@@ -2,7 +2,7 @@
   <b-container class="page-detail mb-5 pb-5" fluid="xl">
     <section>
       <div class="box alert-message">
-        <div class="box-header">VERY editorial department comment</div>
+        <div class="box-header">Bình luận của ban biên tập viên</div>
         <div class="box-body">
           <div class="icon">
             <SvgMessage></SvgMessage>
@@ -19,7 +19,7 @@
       </div>
 
       <section>
-        <detail-profile-page :account="account"></detail-profile-page>
+        <DetailProfilePage :account="account"></DetailProfilePage>
       </section>
     </section>
   </b-container>

@@ -10,7 +10,7 @@ import HomePageContent from "@/components/HomePageContent";
 export default {
   name: "IndexPage",
 
-  layout: "consumer",
+  layout: "default",
 
   components: {
     HomePageContent,

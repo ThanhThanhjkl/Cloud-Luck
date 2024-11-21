@@ -299,7 +299,8 @@
 .sort-campaign {
   width: 400px;
   border-radius: 40px;
-  margin-top: 39px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   color: $primary;
   text-align: center;
   @include max-width(md) {

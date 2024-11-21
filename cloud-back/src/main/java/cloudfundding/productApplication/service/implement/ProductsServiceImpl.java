@@ -42,4 +42,9 @@ public class ProductsServiceImpl implements ProductsService {
     public ResponseEntity<String> addProduct(ProductsDTO products) {
         return productsRepository.addProduct(products);
     }
+
+    @Override
+    public ResponseEntity<String> deleteProduct(Long id) {
+        return productsRepository.deleteProduct(id);
+    }
 }

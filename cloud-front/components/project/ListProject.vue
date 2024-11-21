@@ -24,11 +24,13 @@
                   class="btn btn-secondary view-project campaigns-btn"
                   >View project page</nuxt-link
                 >
-                <nuxt-link
-                  :to="`/project/${product.id}`"
+                <b-button
+                  to=""
                   class="btn btn-secondary view-project campaigns-btn"
-                  >Delete project page</nuxt-link
+                  @click="showModal(product.id)"
                 >
+                  Delete project page
+                </b-button>
               </div>
             </div>
           </div>
@@ -52,9 +54,23 @@
         </div>
       </div>
     </form>
+
+    <b-modal
+      v-model="showConfirmDeleteModal"
+      size="md"
+      title="Confirmation Delete Project"
+      ok-title="Delete"
+      cancel-title="Cancel"
+      ok-variant="danger"
+      @ok="submitDelete"
+    >
+      <p>Are you sure to delete this project?</p></b-modal
+    >
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapActions } = createNamespacedHelpers("home");
 export default {
   props: {
     editable: {
@@ -76,10 +92,25 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      showConfirmDeleteModal: false,
+      idSelected: 0,
+    };
   },
-  computed: {},
 
-  methods: {},
+  methods: {
+    ...mapActions(["deleteProduct", "getProductsByAccountId"]),
+    showModal(id) {
+      this.showConfirmDeleteModal = true;
+      this.idSelected = id;
+    },
+
+    submitDelete() {
+      this.deleteProduct(this.idSelected).then((res) => {
+        this.getProductsByAccountId(this.accountId);
+        this.$toast.success(res);
+      });
+    },
+  },
 };
 </script>
