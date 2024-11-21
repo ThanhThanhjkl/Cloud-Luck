@@ -51,32 +51,30 @@
                             class="nav-link text-center"
                             :class="{ active: url == 'project-id' }"
                           >
-                            <span class="title-main"> home </span>
+                            <span class="title-main"> ABOUT </span>
                           </nuxt-link>
                         </li>
                         <li role="presentation" class="nav-item">
                           <nuxt-link
-                            :to="`/project/${productId}/note`"
+                            :to="`/project/${productId}/rating`"
                             class="nav-link"
                             :class="{
                               active:
-                                url == 'project-id-note' ||
-                                url == 'project-id-note-noteId',
+                                url == 'project-id-rating' ||
+                                url == 'project-id-rating-ratingId',
                             }"
                           >
-                            <span class="title-tab">activity report</span>
+                            <span class="title-tab">RATING</span>
                             <span class="alert-amount text-center">0</span>
                           </nuxt-link>
                         </li>
                         <li role="presentation" class="nav-item">
                           <nuxt-link
-                            :to="`/project/${productId}/sponsor`"
+                            :to="`/project/${productId}/recommend`"
                             class="nav-link"
-                            :class="{ active: url == 'project-id-sponsor' }"
+                            :class="{ active: url == 'project-id-recommend' }"
                           >
-                            <span class="title-tab">
-                              <span v-html="`Support\nMessage`"></span>
-                            </span>
+                            <span class="title-tab"> RECOMMEND </span>
                             <span class="alert-amount text-center">{{
                               suports.length
                             }}</span>

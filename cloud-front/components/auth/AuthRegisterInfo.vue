@@ -37,38 +37,13 @@ export default {
           title: "Project settings",
           url: "project",
         },
-        { id: 5, title: "Funding history", url: "donation" },
+        { id: 5, title: "Funding history", url: "funding" },
         {
           id: 6,
           title: "Funded List Your Project",
-          url: "card",
+          url: "funded",
         },
       ],
-      products: [
-        {
-          id: 1,
-          img: require("@/assets/img/img_product.png"),
-          title:
-            "フェーズフリーというコンセプトから生まれた本当に使える浄水器「SESERA」",
-          order_date: "2022/12/31 06:48",
-          money: "¥123,456（税込）",
-          payment_status: "yes",
-        },
-        {
-          id: 2,
-          img: require("@/assets/img/img_product.png"),
-          title:
-            "フェーズフリーというコンセプトから生まれた本当に使える浄水器「SESERA」",
-          order_date: "2022/12/31 06:48",
-          money: "¥123,456（税込）",
-          payment_status: "no",
-        },
-      ],
-      prefs: [
-        { value: null, text: "選択" },
-        { value: 1, text: "東京都" },
-      ],
-      previewImage: null,
     };
   },
 

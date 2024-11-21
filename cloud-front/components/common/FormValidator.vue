@@ -5,7 +5,7 @@
         {{ label }}
       </legend>
       <span v-if="required || textRequired" class="ic-required">＊</span>
-      <span v-if="textRequired" class="required">必須</span>
+      <span v-if="textRequired" class="required">required</span>
     </div>
 
     <div :class="{ 'has-error': conditionalError }">

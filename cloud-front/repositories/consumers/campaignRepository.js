@@ -62,4 +62,13 @@ export default ($consumerApi) => ({
   deleteSupportById(params) {
     return $consumerApi.delete(`/support/${params}`);
   },
+  createRating(params) {
+    return $consumerApi.post(`/rating`, params);
+  },
+  getRatingByProductId(params) {
+    return $consumerApi.get(`/rating/${params}`);
+  },
+  deleteRatingById(params) {
+    return $consumerApi.delete(`/rating/${params}`);
+  },
 });

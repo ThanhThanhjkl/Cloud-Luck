@@ -8,6 +8,7 @@ const SET_MY_FUNDED = "SET_MY_FUNDED";
 const SET_COMMENTS = "SET_COMMENTS";
 const SET_SUPORTS = "SET_SUPORTS";
 const SET_PRODUCTS_FOR_CREATE = "SET_PRODUCTS_FOR_CREATE";
+const SET_RATINGS = "SET_RATINGS";
 
 export default {
   state: () => ({
@@ -20,6 +21,7 @@ export default {
     myFunded: [],
     comments: [],
     suports: [],
+    ratings: [],
   }),
 
   actions: {
@@ -199,6 +201,27 @@ export default {
         params
       );
     },
+    async createRating({ commit }, params) {
+      return await this.$consumerRepositories.consumerCampaigns.createRating(
+        params
+      );
+    },
+    async getRatingByProductId({ commit }, params) {
+      try {
+        const response =
+          await this.$consumerRepositories.consumerCampaigns.getRatingByProductId(
+            params
+          );
+        commit(SET_RATINGS, response);
+      } catch (e) {
+        // aaaa
+      }
+    },
+    deleteRatingById({ commit }, params) {
+      return this.$consumerRepositories.consumerCampaigns.deleteRatingById(
+        params
+      );
+    },
   },
 
   mutations: {
@@ -231,6 +254,9 @@ export default {
     },
     SET_PRODUCTS_FOR_CREATE(state, payload) {
       state.product = payload;
+    },
+    SET_RATINGS(state, payload) {
+      state.ratings = payload;
     },
   },
 };

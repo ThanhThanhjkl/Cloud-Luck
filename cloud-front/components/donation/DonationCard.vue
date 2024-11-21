@@ -41,7 +41,7 @@
         </div>
       </div>
       <div
-        v-if="$route.path === `/account/${accountId}/donation`"
+        v-if="$route.path === `/account/${accountId}/funding`"
         class="funded-btn mt-3"
         @click="deleteFunded"
       >
