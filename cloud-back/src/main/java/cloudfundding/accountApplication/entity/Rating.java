@@ -20,6 +20,6 @@ public class Rating {
     @Column(name = "contents")
     private String contents;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "LONGTEXT")
     private String image;
 }

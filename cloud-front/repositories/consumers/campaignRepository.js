@@ -18,6 +18,9 @@ export default ($consumerApi) => ({
     return $consumerApi.delete(`/product/${params}`);
   },
   getReturnsByProductId(params) {
+    if (!/^\d+$/.test(String(params))) {
+      return Promise.resolve([]);
+    }
     return $consumerApi.get(`/returns/${params}`);
   },
   getReturnById(params) {

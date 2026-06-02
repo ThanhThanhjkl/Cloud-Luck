@@ -21,12 +21,12 @@ public class Account {
     @Column (name = "role")
     private String role;
 
-    @Column (name = "avatar")
+    @Column (name = "avatar", columnDefinition = "LONGTEXT")
     private String avatar;
 
     @Column (name = "url")
     private String url;
 
-    @Column (name = "about")
+    @Column (name = "about", columnDefinition = "LONGTEXT")
     private String about;
 }

@@ -13,7 +13,7 @@ public class ReturnController {
     @Autowired
     private ReturnService returnService;
 
-    @GetMapping("/returns/{productId}")
+    @GetMapping("/returns/{productId:\\d+}")
     public List<ReturnDTO> getReturnByProductId(@PathVariable(name = "productId") int productId) {
         return returnService.getReturnByProductId(productId);
     }
