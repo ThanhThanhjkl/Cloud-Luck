@@ -1,4 +1,7 @@
 export default {
+  ssr: false,
+  target: "static",
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     script: [
@@ -9,10 +12,9 @@ export default {
         src: "https://yubinbango.github.io/yubinbango-core/yubinbango-core.js",
       },
     ],
-    ssr: false,
     title: "cloudfunding-front-end",
     htmlAttrs: {
-      lang: "en",
+      lang: "vi",
     },
     meta: [
       { charset: "utf-8" },
@@ -64,6 +66,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    publicPath: "/_nuxt/",
     transpile: ["jp-prefectures"],
     babel: {
       compact: true,
