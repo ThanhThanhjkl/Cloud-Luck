@@ -24,10 +24,10 @@ export default {
   mutations: {
     updateField,
     SET_VALIDATION_ERRORS(state, payload) {
-      const errors = _.cloneDeep(payload);
+      const errors = _.cloneDeep(payload || {});
 
       Object.entries(errors).forEach(([key, value]) => {
-        _.set(errors, key, value.message);
+        _.set(errors, key, value && value.message ? value.message : value);
       });
 
       state.validationErrors = errors;

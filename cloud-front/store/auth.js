@@ -127,6 +127,10 @@ export default {
     },
 
     UPDATE_DEFAULT_ADDRESS(state, addressId) {
+      if (!Array.isArray(state.accountAddress)) {
+        return;
+      }
+
       state.accountAddress.forEach((address) => {
         if (address.id === addressId) {
           address.defaultSelect = "true";
