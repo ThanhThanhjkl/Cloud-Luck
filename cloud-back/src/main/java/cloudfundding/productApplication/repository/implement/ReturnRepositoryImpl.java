@@ -21,7 +21,7 @@ public class ReturnRepositoryImpl implements ReturnRepository {
 
     @Override
     public List<ReturnDTO> getReturnByProductId(int productId) {
-        String sql = "SELECT * FROM RETURNS WHERE `product-id` = ?";
+        String sql = "SELECT * FROM `returns` WHERE `product-id` = ?";
         return jdbcTemplate.query(sql, new Object[]{productId}, new RowMapper<ReturnDTO>() {
             @Override
             public ReturnDTO mapRow(ResultSet rs, int index) throws SQLException {
@@ -40,7 +40,7 @@ public class ReturnRepositoryImpl implements ReturnRepository {
 
     @Override
     public ReturnDTO getReturnById(int id) {
-        String sql = "SELECT * FROM RETURNS WHERE id = ?";
+        String sql = "SELECT * FROM `returns` WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<ReturnDTO>() {
             @Override
             public ReturnDTO mapRow(ResultSet rs, int index) throws SQLException {
@@ -84,7 +84,7 @@ public class ReturnRepositoryImpl implements ReturnRepository {
 
     @Override
     public ResponseEntity<String> deleteReturn(int id) {
-        String sql = "DELETE FROM RETURNS WHERE id = ?";
+        String sql = "DELETE FROM `returns` WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, id);
         if (rowsAffected > 0) {
             return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");

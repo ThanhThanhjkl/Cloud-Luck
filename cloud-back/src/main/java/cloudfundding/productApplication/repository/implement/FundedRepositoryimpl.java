@@ -35,7 +35,7 @@ public class FundedRepositoryimpl implements FundedRepository {
 
     @Override
     public List<FundedDTO> getFundedByAccountId(Long accountId) {
-        String sql = "SELECT * FROM FUNDED WHERE `account_id` = ?";
+        String sql = "SELECT * FROM `funded` WHERE `account_id` = ?";
         return jdbcTemplate.query(sql, new Object[]{accountId}, new RowMapper<FundedDTO>() {
             @Override
             public FundedDTO mapRow(ResultSet rs, int index) throws SQLException {
@@ -52,7 +52,7 @@ public class FundedRepositoryimpl implements FundedRepository {
 
     @Override
     public List<FundedDTO> getFundedByOwnerId(Long ownerId) {
-        String sql = "SELECT * FROM FUNDED WHERE `owner_id` = ?";
+        String sql = "SELECT * FROM `funded` WHERE `owner_id` = ?";
         return jdbcTemplate.query(sql, new Object[]{ownerId}, new RowMapper<FundedDTO>() {
             @Override
             public FundedDTO mapRow(ResultSet rs, int index) throws SQLException {
@@ -68,7 +68,7 @@ public class FundedRepositoryimpl implements FundedRepository {
     }
 
     private int insertFunded(FundedDTO funded) {
-        String sql = "INSERT INTO FUNDED (id, return_id, account_id, owner_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO `funded` (id, return_id, account_id, owner_id) VALUES (?, ?, ?, ?)";
         return jdbcTemplate.update(sql,
                 funded.getId(),
                 funded.getReturn_id(),
@@ -78,7 +78,7 @@ public class FundedRepositoryimpl implements FundedRepository {
 
     @Override
     public ResponseEntity<String> deleteFunded(int id) {
-        String sql = "DELETE FROM FUNDED WHERE id = ?";
+        String sql = "DELETE FROM `funded` WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, id);
         if (rowsAffected > 0) {
             return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");

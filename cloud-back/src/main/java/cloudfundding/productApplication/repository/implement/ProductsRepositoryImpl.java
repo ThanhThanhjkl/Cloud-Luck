@@ -6,6 +6,7 @@ import cloudfundding.productApplication.model.ProductsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
     public List<ProductsDTO> getAllProducts() {
-        String sql = "SELECT * FROM PRODUCTS";
+        String sql = "SELECT * FROM `products`";
         return jdbcTemplate.query(sql, new RowMapper<ProductsDTO>() {
             @Override
             public ProductsDTO mapRow(ResultSet rs, int index) throws SQLException {
@@ -44,7 +45,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setVideo_url(rs.getString("video-url"));
 
                 // Count the number of rows in the funded table with product_id = id
-                String fundedSql = "SELECT COUNT(*) FROM FUNDED WHERE account_id = ?";
+                String fundedSql = "SELECT COUNT(*) FROM `funded` WHERE account_id = ?";
                 int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
                 products.setSold(sold);
 
@@ -62,7 +63,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
     public List<ProductsDTO> getProductsByAccountId(Long accountId) {
-        String sql = "SELECT * FROM PRODUCTS WHERE `account-id` = ?";
+        String sql = "SELECT * FROM `products` WHERE `account-id` = ?";
         return jdbcTemplate.query(sql, new Object[]{accountId}, new RowMapper<ProductsDTO>() {
             @Override
             public ProductsDTO mapRow(ResultSet rs, int index) throws SQLException {
@@ -81,7 +82,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                 products.setVideo_url(rs.getString("video-url"));
 
                 // Count the number of rows in the funded table with product_id = id
-                String fundedSql = "SELECT COUNT(*) FROM FUNDED WHERE account_id = ?";
+                String fundedSql = "SELECT COUNT(*) FROM `funded` WHERE account_id = ?";
                 int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
                 products.setSold(sold);
 
@@ -99,45 +100,49 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
     public ProductsDTO getProductsById(Long id) {
-        String sql = "SELECT * FROM PRODUCTS WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<ProductsDTO>() {
-            @Override
-            public ProductsDTO mapRow(ResultSet rs, int index) throws SQLException {
-                ProductsDTO products = new ProductsDTO();
-                products.setId(rs.getInt("id"));
-                products.setName(rs.getString("name"));
-                products.setDescriptions(rs.getString("descriptions"));
-                products.setDate(rs.getDate("date"));
-                products.setCost(rs.getInt("cost"));
-                products.setSale_cost(rs.getInt("sale-cost"));
-                products.setSold(rs.getInt("sold"));
-                products.setTitle(rs.getString("title"));
-                String imagesString = rs.getString("images");
-                products.setAccount_id(rs.getInt("account-id"));
-                products.setMain_image(rs.getString("main-image"));
-                products.setMethods(rs.getString("methods"));
-                products.setVideo_url(rs.getString("video-url"));
+        String sql = "SELECT * FROM `products` WHERE id = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<ProductsDTO>() {
+                @Override
+                public ProductsDTO mapRow(ResultSet rs, int index) throws SQLException {
+                    ProductsDTO products = new ProductsDTO();
+                    products.setId(rs.getInt("id"));
+                    products.setName(rs.getString("name"));
+                    products.setDescriptions(rs.getString("descriptions"));
+                    products.setDate(rs.getDate("date"));
+                    products.setCost(rs.getInt("cost"));
+                    products.setSale_cost(rs.getInt("sale-cost"));
+                    products.setSold(rs.getInt("sold"));
+                    products.setTitle(rs.getString("title"));
+                    String imagesString = rs.getString("images");
+                    products.setAccount_id(rs.getInt("account-id"));
+                    products.setMain_image(rs.getString("main-image"));
+                    products.setMethods(rs.getString("methods"));
+                    products.setVideo_url(rs.getString("video-url"));
 
-                // Count the number of rows in the funded table with product_id = id
-                String fundedSql = "SELECT COUNT(*) FROM FUNDED WHERE account_id = ?";
-                int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
-                products.setSold(sold);
-                
-                if (imagesString != null) {
-                    List<String> imagesList = Arrays.asList(imagesString.split(","));
-                    products.setImages(imagesList);
-                } else {
-                    products.setImages(new ArrayList<>());
+                    // Count the number of rows in the funded table with product_id = id
+                    String fundedSql = "SELECT COUNT(*) FROM `funded` WHERE account_id = ?";
+                    int sold = jdbcTemplate.queryForObject(fundedSql, Integer.class, rs.getInt("account-id"));
+                    products.setSold(sold);
+
+                    if (imagesString != null) {
+                        List<String> imagesList = Arrays.asList(imagesString.split(","));
+                        products.setImages(imagesList);
+                    } else {
+                        products.setImages(new ArrayList<>());
+                    }
+
+                    return products;
                 }
-
-                return products;
-            }
-        });
+            });
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public ResponseEntity<String> updateProduct(ProductsDTO products) {
-        String sql = "UPDATE PRODUCTS SET name = ?, descriptions = ?, date = ?, cost = ?, `sale-cost` = ?, sold = ?, title = ?, images = ?, `account-id` = ?, `main-image` = ?, methods = ?, `video-url` = ? WHERE id = ?";
+        String sql = "UPDATE `products` SET name = ?, descriptions = ?, date = ?, cost = ?, `sale-cost` = ?, sold = ?, title = ?, images = ?, `account-id` = ?, `main-image` = ?, methods = ?, `video-url` = ? WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, products.getName(), products.getDescriptions(), products.getDate(), products.getCost(), products.getSale_cost(), products.getSold(), products.getTitle(), String.join(",", products.getImages()), products.getAccount_id(), products.getMain_image(), products.getMethods(), products.getVideo_url(), products.getId());
         if (rowsAffected > 0) {
             return ResponseEntity.status(HttpStatus.OK).body("Product updated successfully");
@@ -148,7 +153,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
     public ResponseEntity<String> addProduct(ProductsDTO products) {
-        String sql = "INSERT INTO PRODUCTS (name, descriptions, date, cost, `sale-cost`, sold, title, images, `account-id`, `main-image`, methods, `video-url`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `products` (name, descriptions, date, cost, `sale-cost`, sold, title, images, `account-id`, `main-image`, methods, `video-url`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int rowsAffected = jdbcTemplate.update(sql,
                 products.getName(),
                 products.getDescriptions(),
@@ -173,10 +178,10 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
         public ResponseEntity<String> deleteProduct(Long id) {
-        String sql = "DELETE FROM PRODUCTS WHERE id = ?";
-        String sql2 = "DELETE FROM COMMENTS WHERE product_id = ?";
-        String sql3 = "DELETE FROM RETURNS WHERE `product-id` = ?";
-        String sql4 = "DELETE FROM SUPORT WHERE product_id = ?";
+        String sql = "DELETE FROM `products` WHERE id = ?";
+        String sql2 = "DELETE FROM `comments` WHERE product_id = ?";
+        String sql3 = "DELETE FROM `returns` WHERE `product-id` = ?";
+        String sql4 = "DELETE FROM `suport` WHERE product_id = ?";
 
         try {
             jdbcTemplate.update(sql, id);

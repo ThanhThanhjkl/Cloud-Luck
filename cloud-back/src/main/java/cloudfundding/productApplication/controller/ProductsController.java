@@ -30,8 +30,12 @@ public class ProductsController {
     }
 
     @GetMapping("/product/{id}")
-    public ProductsDTO getProductById(@PathVariable Long id) {
-        return productsService.getProductsById(id);
+    public ResponseEntity<ProductsDTO> getProductById(@PathVariable Long id) {
+        ProductsDTO product = productsService.getProductsById(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(product);
     }
 
     @PutMapping("/product")
