@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card class="register-info">
-      <div class="form-title text-center">MY ACCOUNT</div>
+      <div class="form-title text-center">Tài khoản của tôi</div>
       <div class="register-info-form">
         <div class="settings-list">
           <div v-for="(item, index) in menu" :key="index" class="item-info">
@@ -15,7 +15,7 @@
         </div>
         <div class="text-right">
           <nuxt-link to="/with_drawal" class="note-info">
-            Withdraw from CloudFunding
+            Rút khỏi CloudFunding
           </nuxt-link>
         </div>
       </div>
@@ -29,18 +29,18 @@ export default {
   data() {
     return {
       menu: [
-        { id: 1, title: "Edit profile", url: "profile" },
-        { id: 2, title: "Password setting", url: "password" },
-        { id: 3, title: "Shipping Address", url: "address" },
+        { id: 1, title: "Chỉnh sửa hồ sơ", url: "profile" },
+        { id: 2, title: "Cài đặt mật khẩu", url: "password" },
+        { id: 3, title: "Địa chỉ nhận hàng", url: "address" },
         {
           id: 4,
-          title: "Project settings",
+          title: "Cài đặt dự án",
           url: "project",
         },
-        { id: 5, title: "Funding history", url: "funding" },
+        { id: 5, title: "Lịch sử ủng hộ", url: "funding" },
         {
           id: 6,
-          title: "Funded List Your Project",
+          title: "Danh sách ủng hộ dự án của bạn",
           url: "funded",
         },
       ],

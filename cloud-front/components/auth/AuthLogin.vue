@@ -1,14 +1,14 @@
 <template>
   <div class="auth-login-page">
     <b-card class="login-email-form">
-      <div class="form-title text-center">Login with email address</div>
+      <div class="form-title text-center">Đăng nhập bằng địa chỉ email</div>
       <form @submit.prevent="login">
         <FormValidator name="loginRequest.email">
           <b-input
             v-model="email"
             :class="{ error: emailError }"
             type="email"
-            placeholder="Please enter your e-mail address."
+            placeholder="Vui lòng nhập địa chỉ email."
             required
           ></b-input>
         </FormValidator>
@@ -17,17 +17,17 @@
             v-model="password"
             :class="{ error: passwordError }"
             type="password"
-            placeholder="Please enter your password."
+            placeholder="Vui lòng nhập mật khẩu."
             required
           ></b-input>
           <span class="text-muted">
-            ※ Half-width alphanumeric characters (8 digits or more)</span
+            ※ Mật khẩu gồm chữ/số, tối thiểu 8 ký tự</span
           >
         </FormValidator>
 
         <div class="text-right">
           <nuxt-link to="/auth/forgot" class="d-inline-block small forgot-pass">
-            Forgot password
+            Quên mật khẩu
           </nuxt-link>
         </div>
       </form>
@@ -40,7 +40,7 @@
           class="btn-login"
           :disabled="disabled"
           @click="login"
-          >Login</b-button
+          >Đăng nhập</b-button
         >
         <nuxt-link
           to="/auth/registeration"
@@ -48,13 +48,13 @@
           class="btn btn-block btn-sign-up"
         >
           <svg-mail></svg-mail>
-          <span>Sign Up</span>
+          <span>Đăng ký</span>
         </nuxt-link>
       </div>
     </b-card>
 
     <b-card class="login-external-id">
-      <div class="form-title text-center">Log in with external site ID</div>
+      <div class="form-title text-center">Đăng nhập bằng tài khoản mạng xã hội</div>
       <div class="btn-external">
         <a block class="btn btn-block btn-twitter" @click="redirectTwitter">
           <svg-twitter></svg-twitter>
@@ -133,7 +133,7 @@ export default {
         }
       } catch (error) {
         this.$toast.error(
-          "Login failed! Account with provided email does not exist."
+            "Đăng nhập thất bại! Email hoặc mật khẩu không chính xác."
         );
       }
     },

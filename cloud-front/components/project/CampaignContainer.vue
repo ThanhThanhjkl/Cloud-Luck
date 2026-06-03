@@ -3,11 +3,11 @@
     <div class="list-project">
       <b-card class="card">
         <div class="form-title d-flex justify-content-between text-center">
-          Editing project
+          Quản lý dự án
           <nuxt-link
             :to="`/account/${$route.params.id}/project/add/`"
             class="create-project-btn"
-            >Create New Project</nuxt-link
+            >Tạo dự án mới</nuxt-link
           >
         </div>
         <ListProject :products="myProducts" :account-id="accountId" editable />
@@ -15,11 +15,11 @@
     </div>
     <div>
       <h3 class="mt-2 text-primary text-center">
-        First
+        Trước khi đăng dự án,
         <nuxt-link to="/consultation" class="text-primary">
-          Project posting/consultation form
+          biểu mẫu đăng dự án / tư vấn
         </nuxt-link>
-        Please contact us from
+        vui lòng liên hệ với chúng tôi.
       </h3>
     </div>
   </div>

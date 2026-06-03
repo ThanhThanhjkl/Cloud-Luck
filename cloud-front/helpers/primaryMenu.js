@@ -9,32 +9,32 @@ export default [
   {
     id: 1,
     svg: SvgUser,
-    text: "Edit profile",
+    text: "Chỉnh sửa hồ sơ",
     url: "profile",
   },
   {
     id: 2,
     svg: SvgLocked,
-    text: "Password setting",
+    text: "Cài đặt mật khẩu",
     url: "password",
   },
   {
     id: 3,
     svg: SvgMap,
-    text: "Shipping Address",
+    text: "Địa chỉ nhận hàng",
     url: "address",
   },
   {
     id: 4,
     svg: SvgMail,
-    text: "E-mail magazine reception setting",
+    text: "Cài đặt nhận email",
     url: "email",
   },
-  { id: 5, svg: SvgMoney, text: "Purchase details", url: "project" },
+  { id: 5, svg: SvgMoney, text: "Dự án của tôi", url: "project" },
   {
     id: 6,
     svg: SvgArlert,
-    text: "Credit card information",
+    text: "Thông tin thẻ tín dụng",
     url: "card",
   },
 ];

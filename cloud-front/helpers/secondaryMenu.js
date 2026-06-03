@@ -1,13 +1,13 @@
 export default [
-  { id: 1, text: "利用規約", link: "/" },
-  { id: 2, text: " 個人情報取扱いについて", link: "/" },
-  { id: 3, text: " データ利用について", link: "/" },
-  { id: 4, text: " ヘルプセンター", link: "/" },
-  { id: 5, text: " お問合せ", link: "/" },
-  { id: 6, text: " 運営会社について", link: "https://www.kobunsha.com" },
+  { id: 1, text: "Điều khoản sử dụng", link: "/" },
+  { id: 2, text: "Chính sách bảo mật", link: "/" },
+  { id: 3, text: "Chính sách sử dụng dữ liệu", link: "/" },
+  { id: 4, text: "Trung tâm trợ giúp", link: "/" },
+  { id: 5, text: "Liên hệ", link: "/" },
+  { id: 6, text: "Về công ty vận hành", link: "https://www.kobunsha.com" },
   {
     id: 7,
-    text: " プロジェクト掲載・相談フォーム",
+    text: "Biểu mẫu đăng dự án / tư vấn",
     link: "/consultation",
   },
 ];

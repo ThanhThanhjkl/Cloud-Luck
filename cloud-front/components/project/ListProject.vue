@@ -17,19 +17,19 @@
                 <nuxt-link
                   :to="`/account/${accountId}/project/${product.id}/`"
                   class="btn btn-primary campaigns-btn"
-                  >To edit</nuxt-link
+                  >Chỉnh sửa</nuxt-link
                 >
                 <nuxt-link
                   :to="`/project/${product.id}`"
                   class="btn btn-secondary view-project campaigns-btn"
-                  >View project page</nuxt-link
+                  >Xem trang dự án</nuxt-link
                 >
                 <b-button
                   to=""
                   class="btn btn-secondary view-project campaigns-btn"
                   @click="showModal(product.id)"
                 >
-                  Delete project page
+                  Xoá dự án
                 </b-button>
               </div>
             </div>
@@ -38,17 +38,17 @@
             <nuxt-link
               :to="`/account/${accountId}/project/${product.id}/`"
               class="btn btn-primary campaigns-btn"
-              >To edit</nuxt-link
+              >Chỉnh sửa</nuxt-link
             >
             <nuxt-link
               :to="`/project/${product.id}`"
               class="btn btn-secondary view-project campaigns-btn"
-              >View project page</nuxt-link
+              >Xem trang dự án</nuxt-link
             >
             <nuxt-link
               :to="`/project/${product.id}`"
               class="btn btn-secondary view-project campaigns-btn"
-              >Delete project page</nuxt-link
+              >Xoá dự án</nuxt-link
             >
           </div>
         </div>
@@ -58,13 +58,13 @@
     <b-modal
       v-model="showConfirmDeleteModal"
       size="md"
-      title="Confirmation Delete Project"
-      ok-title="Delete"
-      cancel-title="Cancel"
+      title="Xác nhận xoá dự án"
+      ok-title="Xoá"
+      cancel-title="Huỷ"
       ok-variant="danger"
       @ok="submitDelete"
     >
-      <p>Are you sure to delete this project?</p></b-modal
+      <p>Bạn có chắc chắn muốn xoá dự án này không?</p></b-modal
     >
   </div>
 </template>

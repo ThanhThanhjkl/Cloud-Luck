@@ -1,12 +1,12 @@
 <template>
-  <div :class="{ logged: user }" class="header app-header">
+  <div :class="{ logged: isAuthenticated }" class="header app-header">
     <b-container fluid="xl">
       <b-row class="m-md-0">
         <div class="company-name">
           <div class="d-flex align-items-center">
             <nuxt-link to="/" class="header-title">CLOUDFunding</nuxt-link>
             <div class="header-subtitle">
-              Let's create a place and make our dreams come true.
+              Cùng tạo nên nơi biến ước mơ thành hiện thực.
             </div>
           </div>
         </div>
@@ -18,13 +18,13 @@
               <input
                 v-model="keyword"
                 type="search"
-                placeholder="Keyword search"
+                placeholder="Tìm kiếm từ khóa"
                 @keyup.enter="onSearchCampaign"
               />
             </div>
 
             <b-dropdown
-              v-if="user"
+              v-if="isAuthenticated"
               size="lg"
               variant="link"
               toggle-class="text-decoration-none"
@@ -34,17 +34,17 @@
                 <SvgUser></SvgUser>
               </template>
               <b-dropdown-item>
-                <nuxt-link :to="`/account/${user.id}`">MY ACCOUNT</nuxt-link>
+                <nuxt-link :to="`/account/${accountId}`">Tài khoản của tôi</nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item @click="onLogout">
-                <a>ログアウト</a>
+                <a>Đăng xuất</a>
               </b-dropdown-item>
             </b-dropdown>
 
-            <div v-else class="btn-login" @click="onLogout">
+            <nuxt-link v-else to="/auth/login" class="btn-login">
               <SvgLogout></SvgLogout>
-              LogOut
-            </div>
+              Đăng nhập
+            </nuxt-link>
           </div>
         </div>
       </b-row>
@@ -76,7 +76,15 @@ export default {
   },
 
   computed: {
-    ...mapState(["user", "account"]),
+    ...mapState(["userId", "token", "account"]),
+
+    isAuthenticated() {
+      return Boolean(this.userId || this.token);
+    },
+
+    accountId() {
+      return this.userId;
+    },
 
     searchAble() {
       return this.$route.name === "index";
@@ -96,7 +104,7 @@ export default {
     ...campaignMapper.mapActions(["getCampaigns"]),
 
     async onLogout() {
-      await this.accountLogout("thanhnv@lgcns.com");
+      await this.accountLogout();
       this.$router.push("/auth/login");
     },
 

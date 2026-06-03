@@ -42,6 +42,7 @@ export default {
     },
 
     accountLogout({ commit }) {
+      this.$axios.setToken(false);
       commit(RESET_CURRENT_USER);
     },
 
@@ -111,8 +112,9 @@ export default {
     },
     RESET_CURRENT_USER(state) {
       state.user = null;
+      state.userId = null;
       state.account = null;
-      state.token = null;
+      state.token = "";
     },
     SET_ACCOUNT(state, payload) {
       state.account = payload;

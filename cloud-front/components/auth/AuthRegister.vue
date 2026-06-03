@@ -1,13 +1,13 @@
 <template>
   <div class="register-pages">
     <b-card class="register-form">
-      <div class="form-title text-center">sign up</div>
+      <div class="form-title text-center">Đăng ký</div>
       <form @submit.prevent="register">
         <FormValidator name="registrationRequest.email">
           <b-input
             v-model="email"
             type="email"
-            placeholder="Please enter your e-mail address."
+            placeholder="Vui lòng nhập địa chỉ email."
             required
           ></b-input>
         </FormValidator>
@@ -15,7 +15,7 @@
           <b-input
             v-model="name"
             type="name"
-            placeholder="Please enter your name."
+            placeholder="Vui lòng nhập họ tên."
             required
           ></b-input>
         </FormValidator>
@@ -23,12 +23,12 @@
           <b-input
             v-model="password"
             type="password"
-            placeholder="Please enter your password."
+            placeholder="Vui lòng nhập mật khẩu."
             required
           ></b-input>
         </FormValidator>
         <div class="pass-note text-left">
-          ※ Half-width alphanumeric characters (8 digits or more)
+          ※ Mật khẩu gồm chữ/số, tối thiểu 8 ký tự
         </div>
       </form>
 
@@ -40,7 +40,7 @@
           block
           :disabled="disabled"
           @click="register"
-          >register</b-button
+          >Đăng ký</b-button
         >
       </div>
     </b-card>
@@ -86,7 +86,7 @@ export default {
       };
       try {
         await this.accountRegister(params);
-        this.$toasted.success("メールご確認お願いします");
+        this.$toasted.success("Vui lòng kiểm tra email của bạn.");
         this.$router.push("/auth/login");
         this.email = "";
         this.password = "";

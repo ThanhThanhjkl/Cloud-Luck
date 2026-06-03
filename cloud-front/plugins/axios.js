@@ -125,7 +125,7 @@ export default function ({ $axios, store, app }, inject) {
 
   const updateAxiosConfig = () => {
     const token = store.state.auth.token;
-    if (token !== null) {
+    if (token) {
       axiosConfig.headers = {
         Authorization: `Bearer ${token}`,
       };

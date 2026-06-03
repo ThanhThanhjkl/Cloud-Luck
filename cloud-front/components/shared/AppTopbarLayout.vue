@@ -21,22 +21,22 @@
               <div class="menu-list">
                 <li class="firt-list">
                   <SvgList class="d-inline-block d-lg-none" />
-                  <nuxt-link v-if="userId" to="/">設定</nuxt-link>
+                  <nuxt-link v-if="userId" to="/" @click.native="showMenu = false">Cài đặt</nuxt-link>
                   <nuxt-link
                     v-else
                     to="/auth/login"
                     @click.native="showMenu = false"
                   >
-                    Log in / Register
+                    Đăng nhập / Đăng ký
                   </nuxt-link>
                 </li>
-                <li class="second-list">
+                <li v-if="userId" class="second-list">
                   <SvgList class="d-inline-block d-lg-none" />
                   <nuxt-link
                     :to="`/account/${accountId}`"
                     @click.native="showMenu = false"
                   >
-                    My Account
+                    Tài khoản của tôi
                   </nuxt-link>
                 </li>
                 <div v-if="userId">
@@ -57,7 +57,7 @@
                   </li>
                 </div>
 
-                <li v-for="(item, index) in secondaryMenu" :key="index">
+                <li v-for="(item, index) in visibleSecondaryMenu" :key="index">
                   <SvgList class="d-inline-block d-lg-none" />
                   <div class="d-none d-lg-inline-block mr-1 ml-1">/</div>
                   <a v-if="item.blank" :href="item.link" target="_blank">{{
@@ -74,13 +74,13 @@
                 <li>
                   <SvgHome />
                   <nuxt-link to="/" @click.native="showMenu = false">
-                    トップページ
+                    Trang chủ
                   </nuxt-link>
                 </li>
-                <li>
+                <li v-if="userId">
                   <SvgLogout />
                   <b-button variant="white" @click="onLogout">
-                    サインアウト
+                    Đăng xuất
                   </b-button>
                 </li>
               </div>
@@ -89,20 +89,21 @@
 
           <!-- BIG MENU -->
           <div class="d-none d-md-flex align-items-center">
-            <div class="select-project mr-3">
+            <div v-if="userId" class="select-project mr-3">
               <nuxt-link
                 :to="`/account/${accountId}/project`"
                 class="text-white"
               >
-                Create Projects
+                Tạo dự án
               </nuxt-link>
             </div>
 
             <nuxt-link
+              v-if="userId"
               :to="`/account/${accountId}`"
               class="btn btn-project btn-top-bar"
             >
-              My Account</nuxt-link
+              Tài khoản của tôi</nuxt-link
             >
           </div>
           <nuxt-link
@@ -110,7 +111,7 @@
             to="/auth/login"
             class="btn btn-login btn-top-bar ml-3"
           >
-            Log in / Register
+            Đăng nhập / Đăng ký
           </nuxt-link>
         </div>
       </div>
@@ -140,28 +141,28 @@ export default {
       showMenu: false,
       primaryTree: primaryMenu,
       secondaryMenu: [
-        { id: 1, text: "利用規約", link: "/terms" },
-        { id: 2, text: " 個人情報取扱いについて", link: "/privacy_policy" },
-        { id: 3, text: " 特定商取引法に基づく表記", link: "/legal" },
+        { id: 1, text: "Điều khoản sử dụng", link: "/terms" },
+        { id: 2, text: "Chính sách bảo mật", link: "/privacy_policy" },
+        { id: 3, text: "Thông tin giao dịch thương mại", link: "/legal" },
         {
           id: 4,
-          text: " ヘルプセンター",
+          text: "Trung tâm trợ giúp",
           link: "/privacy_policy",
         },
         {
           id: 5,
-          text: " お問合せ",
+          text: "Liên hệ",
           link: "/contact",
         },
         {
           id: 6,
-          text: " 運営会社について",
+          text: "Về công ty vận hành",
           link: "https://www.kobunsha.com",
           blank: true,
         },
         {
           id: 7,
-          text: "Create Projects",
+          text: "Tạo dự án",
           link: `/account/${this.accountId}/project`,
         },
       ],
@@ -184,6 +185,15 @@ export default {
         return null;
       }
     },
+    visibleSecondaryMenu() {
+      return this.secondaryMenu
+        .filter((item) => item.id !== 7 || this.userId)
+        .map((item) =>
+          item.id === 7
+            ? { ...item, link: `/account/${this.accountId}/project` }
+            : item
+        );
+    },
   },
 
   mounted() {
@@ -196,9 +206,7 @@ export default {
   methods: {
     ...mapActions(["accountLogout"]),
     onLogout() {
-      if (this.user) {
-        this.accountLogout();
-      }
+      this.accountLogout();
       this.$router.push("/auth/login");
       this.showMenu = false;
     },

@@ -15,15 +15,15 @@
               <span>MENU</span>
               <div class="inner rotate">CloudFunding</div>
             </div>
-            <div v-if="!user" class="menu-list">
+            <div v-if="!userId" class="menu-list">
               <li class="firt-list" @click="unlogined = false">
                 <SvgList class="d-inline-block d-lg-none" /><a href="#"
-                  >Log in / Register</a
+                  >Đăng nhập / Đăng ký</a
                 >
               </li>
               <li class="second-list" @click="unlogined = false">
                 <SvgList class="d-inline-block d-lg-none" /><a href="#"
-                  >Create Projects</a
+                  >Tạo dự án</a
                 >
               </li>
               <li v-for="(item, index) in secondaryMenu" :key="index">
@@ -34,18 +34,18 @@
                 }}</a>
                 <nuxt-link v-else :to="item.link">{{ item.text }}</nuxt-link>
               </li>
-              <li><SvgHome /><a href="/">トップページ</a></li>
+              <li><SvgHome /><a href="/">Trang chủ</a></li>
             </div>
             <div v-else class="menu-list">
               <li class="firt-list">
                 <SvgList class="d-inline-block d-lg-none" />
-                <a href="#">設定</a>
+                <a href="#">Cài đặt</a>
               </li>
               <li class="second-list">
                 <SvgList class="d-inline-block d-lg-none" /><a
                   href="#"
                   @click="nextClose"
-                  >Create Projects</a
+                  >Tạo dự án</a
                 >
               </li>
               <li v-for="(item, index) in primaryMenu" :key="'primary' + index">
@@ -54,7 +54,7 @@
                   class="d-inline-block d-lg-none"
                 ></component>
                 <div class="d-none d-lg-inline-block mr-1 ml-1">/</div>
-                <nuxt-link :to="`/account/${user.id}/${item.url}`">{{
+                <nuxt-link :to="`/account/${userId}/${item.url}`">{{
                   item.text
                 }}</nuxt-link>
               </li>
@@ -63,14 +63,14 @@
                 <div class="d-none d-lg-inline-block mr-1 ml-1">/</div>
                 <nuxt-link :to="item.link">{{ item.text }}</nuxt-link>
               </li>
-              <li><SvgHome /><a href="#">トップページ</a></li>
+              <li><SvgHome /><a href="#">Trang chủ</a></li>
               <li>
-                <SvgLogout /><a href="#" @click="user = !user">サインアウト</a>
+                <SvgLogout /><a href="#">Đăng xuất</a>
               </li>
             </div>
           </div>
-          <nuxt-link v-if="!user" to="/auth/login" class="btn btn-login">
-            Log in / Register
+          <nuxt-link v-if="!userId" to="/auth/login" class="btn btn-login">
+            Đăng nhập / Đăng ký
           </nuxt-link>
         </div>
       </div>
@@ -104,62 +104,62 @@ export default {
         {
           id: 1,
           svg: SvgUser,
-          text: "Edit profile",
+          text: "Chỉnh sửa hồ sơ",
           url: "profile",
         },
         {
           id: 2,
           svg: SvgLocked,
-          text: " Password setting",
+          text: "Cài đặt mật khẩu",
           url: "password",
         },
         {
           id: 3,
           svg: SvgMap,
-          text: " Shipping Address",
+          text: "Địa chỉ nhận hàng",
           url: "address",
         },
         {
           id: 4,
           svg: SvgMail,
-          text: " E-mail magazine reception setting",
+          text: "Cài đặt nhận email",
           url: "email",
         },
-        { id: 5, svg: SvgMoney, text: "Purchase details", url: "project" },
+        { id: 5, svg: SvgMoney, text: "Dự án của tôi", url: "project" },
         {
           id: 6,
           svg: SvgArlert,
-          text: " Email notification settings",
+          text: "Cài đặt thông báo email",
           url: "card",
         },
       ],
       secondaryMenu: [
-        { id: 1, text: "terms of service", link: "/terms" },
+        { id: 1, text: "Điều khoản sử dụng", link: "/terms" },
         {
           id: 2,
-          text: " Regarding handling of personal information",
+          text: "Chính sách bảo mật",
           link: "/privacy_policy",
         },
         {
           id: 3,
-          text: " Description based on Specified Commercial Transactions Law",
+          text: "Thông tin giao dịch thương mại",
           link: "/legal",
         },
-        { id: 4, text: "Help center", link: "/privacy_policy" },
+        { id: 4, text: "Trung tâm trợ giúp", link: "/privacy_policy" },
         {
           id: 5,
-          text: " Contact us",
+          text: "Liên hệ",
           link: "/contact",
         },
         {
           id: 6,
-          text: " About the operating company",
+          text: "Về công ty vận hành",
           link: "https://www.kobunsha.com",
           blank: true,
         },
         {
           id: 7,
-          text: " プロジェクト掲載・相談フォーム",
+          text: "Biểu mẫu đăng dự án / tư vấn",
           link: `/account/${this.accountId}/project`,
         },
       ],
