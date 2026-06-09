@@ -54,7 +54,9 @@
     </b-card>
 
     <b-card class="login-external-id">
-      <div class="form-title text-center">Đăng nhập bằng tài khoản mạng xã hội</div>
+      <div class="form-title text-center">
+        Đăng nhập bằng tài khoản mạng xã hội
+      </div>
       <div class="btn-external">
         <a block class="btn btn-block btn-twitter" @click="redirectTwitter">
           <svg-twitter></svg-twitter>
@@ -133,7 +135,7 @@ export default {
         }
       } catch (error) {
         this.$toast.error(
-            "Đăng nhập thất bại! Email hoặc mật khẩu không chính xác."
+          "Đăng nhập thất bại! Email hoặc mật khẩu không chính xác."
         );
       }
     },

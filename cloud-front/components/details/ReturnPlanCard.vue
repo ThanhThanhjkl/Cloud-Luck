@@ -27,9 +27,7 @@
           </a>
         </div>
 
-        <div class="card-text">
-          {{ returnPlan.descriptions }}
-        </div>
+        <div class="card-text" v-html="returnPlan.descriptions"></div>
       </b-card>
     </div>
     <b-modal

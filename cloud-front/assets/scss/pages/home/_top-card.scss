@@ -146,20 +146,28 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 15px;
+  overflow: hidden;
 
   @include max-width(md) {
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: 1fr;
     grid-gap: 20px;
+  }
+
+  .top-1 {
+    min-width: 0;
+    overflow: hidden;
   }
 
   .top-5 {
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 308px));
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, max(343px));
     grid-gap: 15px;
+    min-width: 0;
+    overflow: hidden;
 
     @include max-width(md) {
-      grid-template-columns: repeat(1, auto);
+      grid-template-columns: 1fr;
       grid-template-rows: unset;
       grid-gap: 20px;
     }

@@ -18,11 +18,15 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    // add new
+    // add new (register)
     @PostMapping("/account")
-    public AccountDTO addAccount(@RequestBody AccountDTO accountDTO) {
-        accountService.add(accountDTO);
-        return accountDTO;
+    public ResponseEntity<?> addAccount(@RequestBody AccountDTO accountDTO) {
+        try {
+            accountService.add(accountDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(accountDTO);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     // Login

@@ -47,7 +47,7 @@
       <b-row class="pt-10px d-block d-lg-none">
         <b-col class="author">
           <svg-user-solid></svg-user-solid>
-          <span>{{ item.descriptions }}</span>
+          <span>{{ item.descriptions | stripHtml }}</span>
         </b-col>
       </b-row>
     </b-card-sub-title>
@@ -80,16 +80,8 @@ export default {
     };
   },
 
-  computed: {
-    salePersent() {
-      return Math.floor((this.item.sale_cost / this.item.cost) * 100);
-    },
-  },
-
   mounted() {
     this.images = this.item.main_image;
   },
-
-  methods: {},
 };
 </script>

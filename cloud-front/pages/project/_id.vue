@@ -3,7 +3,12 @@
     <nuxt-child></nuxt-child>
   </div>
   <div v-else class="pt-md-5">
-    <b-container v-if="product && product.id" class="page-detail" fluid="xl">
+    <DetailSkeleton v-if="loading" />
+    <b-container
+      v-else-if="product && product.id"
+      class="page-detail"
+      fluid="xl"
+    >
       <div class="box alert-message">
         <div class="box-header">VERY editorial department comment</div>
         <div class="box-body">
@@ -159,6 +164,7 @@ import DetailCarousel from "@/components/details/DetailCarousel.vue";
 import DetailProjectOwner from "@/components/details/DetailProjectOwner";
 import ReturnPlanCard from "@/components/details/ReturnPlanCard.vue";
 import SvgMessage from "@/components/common/svg/SvgMessage";
+import DetailSkeleton from "@/components/details/DetailSkeleton.vue";
 
 const { mapState, mapActions } = createNamespacedHelpers("home");
 const authMapper = createNamespacedHelpers("auth");
@@ -171,11 +177,12 @@ export default {
     DetailSummary,
     DetailProject,
     ReturnPlanCard,
+    DetailSkeleton,
   },
 
   data() {
     return {
-      loading: false,
+      loading: true,
     };
   },
 
@@ -208,11 +215,17 @@ export default {
       );
     },
   },
-  async mounted() {
-    await this.getProductsDetail(this.productId);
-    await this.getReturnsByProductId(this.productId);
-    await this.getSuportsByProductId(this.productId);
-    await this.getCommentsByProductId(this.productId);
+
+  watch: {
+    "$route.params.id": {
+      handler() {
+        this.fetchData();
+      },
+    },
+  },
+
+  mounted() {
+    this.fetchData();
   },
 
   methods: {
@@ -221,7 +234,20 @@ export default {
       "getReturnsByProductId",
       "getSuportsByProductId",
       "getCommentsByProductId",
+      "setProductToCreate",
     ]),
+
+    async fetchData() {
+      this.loading = true;
+      this.setProductToCreate();
+      await Promise.all([
+        this.getProductsDetail(this.productId),
+        this.getReturnsByProductId(this.productId),
+        this.getSuportsByProductId(this.productId),
+        this.getCommentsByProductId(this.productId),
+      ]);
+      this.loading = false;
+    },
   },
 };
 </script>

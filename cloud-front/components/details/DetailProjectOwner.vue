@@ -57,20 +57,28 @@ export default {
     },
   },
 
-  mounted() {
-    this.getProductsDetail(this.projectId).then(() => {
-      this.getAccount(this.accountId).then(() => {
-        this.email = this.account.email;
-        this.name = this.account.name;
-        this.url = this.account.url;
-        this.avatar = "data:image/jpeg;base64," + this.account.avatar;
-      });
-    });
+  watch: {
+    accountId: {
+      immediate: true,
+      handler(val) {
+        if (val) {
+          this.fetchOwner(val);
+        }
+      },
+    },
   },
 
   methods: {
     ...mapActions(["getAccount"]),
-    ...projectMapper.mapActions(["getProductsDetail"]),
+    async fetchOwner(id) {
+      await this.getAccount(id);
+      if (this.account) {
+        this.email = this.account.email;
+        this.name = this.account.name;
+        this.url = this.account.url;
+        this.avatar = "data:image/jpeg;base64," + this.account.avatar;
+      }
+    },
     seeProfile() {
       const params = this.$route.params.id;
       this.$router.push({

@@ -99,13 +99,15 @@ export default {
   env: {
     authApiUrl:
       process.env.NODE_ENV === "dev"
-        ? "http://localhost:4010/v1"
-        : process.env.AUTH_API_URL,
+        ? "http://localhost:4010"
+        : process.env.AUTH_API_URL ||
+          "https://cloud-back-kmak.onrender.com",
 
     consumerApiUrl:
       process.env.NODE_ENV === "dev"
-        ? "http://localhost:4040/v1"
-        : process.env.CONSUMER_API_URL,
+        ? "http://localhost:4040"
+        : process.env.CONSUMER_API_URL ||
+          "https://cloud-back-kmak.onrender.com",
 
     gmoPgEnv: process.env.YOUR_GMOPG_TEST_ENV,
     gmoPgShopId: process.env.YOUR_GMOPG_SHOP_ID,

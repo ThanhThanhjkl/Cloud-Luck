@@ -62,19 +62,19 @@ export default {
       commit(SET_PRODUCTS_FOR_CREATE, {});
     },
 
-    async updateProduct({ commit }, params) {
+    async updateProduct(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.updateProduct(
         params
       );
     },
 
-    async createProduct({ commit }, params) {
+    async createProduct(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.createProduct(
         params
       );
     },
 
-    deleteProduct({ commit }, params) {
+    deleteProduct(_, params) {
       return this.$consumerRepositories.consumerCampaigns.deleteProduct(params);
     },
 
@@ -101,25 +101,25 @@ export default {
       }
     },
 
-    async updateReturn({ commit }, params) {
+    async updateReturn(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.updateReturn(
         params
       );
     },
 
-    async createReturn({ commit }, params) {
+    async createReturn(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.createReturn(
         params
       );
     },
 
-    async deleteReturn({ commit }, params) {
+    async deleteReturn(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.deleteReturn(
         params
       );
     },
 
-    async createFunded({ commit }, params) {
+    async createFunded(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.createFunded(
         params
       );
@@ -137,7 +137,7 @@ export default {
       }
     },
 
-    async deleteFundedById({ commit }, params) {
+    async deleteFundedById(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.deleteFundedById(
         params
       );
@@ -155,7 +155,7 @@ export default {
       }
     },
 
-    async createComment({ commit }, params) {
+    async createComment(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.createComment(
         params
       );
@@ -173,13 +173,13 @@ export default {
       }
     },
 
-    deleteCommentById({ commit }, params) {
+    deleteCommentById(_, params) {
       return this.$consumerRepositories.consumerCampaigns.deleteCommentById(
         params
       );
     },
 
-    async createSuport({ commit }, params) {
+    async createSuport(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.createSuport(
         params
       );
@@ -196,12 +196,12 @@ export default {
         // aaaa
       }
     },
-    deleteSupportById({ commit }, params) {
+    deleteSupportById(_, params) {
       return this.$consumerRepositories.consumerCampaigns.deleteSupportById(
         params
       );
     },
-    async createRating({ commit }, params) {
+    async createRating(_, params) {
       return await this.$consumerRepositories.consumerCampaigns.createRating(
         params
       );
@@ -217,7 +217,7 @@ export default {
         // aaaa
       }
     },
-    deleteRatingById({ commit }, params) {
+    deleteRatingById(_, params) {
       return this.$consumerRepositories.consumerCampaigns.deleteRatingById(
         params
       );

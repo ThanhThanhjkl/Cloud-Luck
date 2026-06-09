@@ -9,17 +9,34 @@ export default {
   data: () => ({
     visible: false,
     hidden: true,
+    requestCount: 0,
+    finishTimer: null,
   }),
   methods: {
     start() {
+      this.requestCount++;
+      if (this.finishTimer) {
+        clearTimeout(this.finishTimer);
+        this.finishTimer = null;
+      }
       this.hidden = false;
       this.visible = true;
     },
     finish() {
-      this.hidden = true;
-      setTimeout(() => {
-        this.visible = false;
-      }, 1000);
+      this.requestCount--;
+      if (this.requestCount <= 0) {
+        this.requestCount = 0;
+        this.finishTimer = setTimeout(() => {
+          if (this.requestCount === 0) {
+            this.hidden = true;
+            setTimeout(() => {
+              if (this.requestCount === 0) {
+                this.visible = false;
+              }
+            }, 500);
+          }
+        }, 100);
+      }
     },
   },
 };

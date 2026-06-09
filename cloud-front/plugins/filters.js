@@ -56,6 +56,11 @@ function remainDate(date) {
   }
 }
 
+function stripHtml(value) {
+  if (!value) return "";
+  return value.replace(/<[^>]*>/g, "").trim();
+}
+
 Vue.filter("cardDate", cardDate);
 Vue.filter("japanDate", japanDate);
 Vue.filter("japanMoney", japanMoney);
@@ -63,3 +68,4 @@ Vue.filter("numberFormat", numberFormat);
 Vue.filter("fullDateTime", fullDateTime);
 Vue.filter("remainDate", remainDate);
 Vue.filter("formatNumber", formatNumber);
+Vue.filter("stripHtml", stripHtml);

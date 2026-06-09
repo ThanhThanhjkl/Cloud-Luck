@@ -21,7 +21,12 @@
               <div class="menu-list">
                 <li class="firt-list">
                   <SvgList class="d-inline-block d-lg-none" />
-                  <nuxt-link v-if="userId" to="/" @click.native="showMenu = false">Cài đặt</nuxt-link>
+                  <nuxt-link
+                    v-if="userId"
+                    to="/"
+                    @click.native="showMenu = false"
+                    >Cài đặt</nuxt-link
+                  >
                   <nuxt-link
                     v-else
                     to="/auth/login"

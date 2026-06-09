@@ -61,17 +61,12 @@ export default {
         "image/png, image/jpeg, image/gif, image/jpg, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
       isDragging: false,
       src: null,
-      placeholder: "https://www.youtube.com/watch? \n v=XXXXXXXXX or vimeo",
     };
   },
 
-  computed: {},
-
   watch: {
     imageId(value) {
-      if (value) {
-        this.src = this.imageId;
-      }
+      this.src = value || null;
     },
   },
 

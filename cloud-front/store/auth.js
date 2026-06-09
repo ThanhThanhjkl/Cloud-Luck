@@ -48,9 +48,6 @@ export default {
 
     async getAccount({ commit }, params) {
       const res = await this.$authRepositories.getAccount(params);
-      if (res) {
-        commit(SET_ACCOUNT, res);
-      }
       commit(SET_ACCOUNT, res);
       return res;
     },
@@ -65,35 +62,29 @@ export default {
 
     async getAddressByAccountId({ commit }, params) {
       const res = await this.$authRepositories.getAddressByAccountId(params);
-      if (res) {
-        commit(SET_ACCOUNT_ADDRESS, res);
-      }
       commit(SET_ACCOUNT_ADDRESS, res);
       return res;
     },
 
     async getAccountAddress({ commit }, params) {
       const res = await this.$authRepositories.getAccountAddress(params);
-      if (res) {
-        commit(SET_ACCOUNT_ADDRESS_DETAIL, res);
-      }
       commit(SET_ACCOUNT_ADDRESS_DETAIL, res);
       return res;
     },
 
-    createAccountAddress({ commit }, params) {
+    createAccountAddress(_, params) {
       return this.$authRepositories.createAccountAddress(params);
     },
 
-    updateAccountAddress({ commit }, params) {
+    updateAccountAddress(_, params) {
       return this.$authRepositories.updateAccountAddress(params);
     },
 
-    deleteAccountAddress({ commit }, id) {
+    deleteAccountAddress(_, id) {
       return this.$authRepositories.deleteAccountAddress(id);
     },
 
-    updateDefaultAddress({ commit }, params) {
+    updateDefaultAddress(_, params) {
       return this.$authRepositories.updateDefaultAddress(params);
     },
 

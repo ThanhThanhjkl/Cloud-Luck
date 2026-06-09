@@ -51,6 +51,10 @@ class AccountServiceImpl implements AccountService {
 
     @Override
     public void add(AccountDTO accountDTO) {
+        Account existingAccount = accountRepository.findByEmail(accountDTO.getEmail());
+        if (existingAccount != null) {
+            throw new IllegalArgumentException("Email đã được sử dụng");
+        }
         Account account = modelMapper.map(accountDTO, Account.class);
         account.setPassword(new BCryptPasswordEncoder().encode(accountDTO.getPassword()));
         accountRepository.save(account);

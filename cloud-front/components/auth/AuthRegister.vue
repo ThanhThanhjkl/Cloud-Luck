@@ -86,11 +86,18 @@ export default {
       };
       try {
         await this.accountRegister(params);
-        this.$toasted.success("Vui lòng kiểm tra email của bạn.");
+        this.$toasted.success("Đăng ký thành công!");
         this.$router.push("/auth/login");
         this.email = "";
         this.password = "";
-      } catch (error) {}
+        this.name = "";
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          this.$toasted.error("Email đã được sử dụng.");
+        } else {
+          this.$toasted.error("Đăng ký thất bại. Vui lòng thử lại.");
+        }
+      }
     },
   },
 };
