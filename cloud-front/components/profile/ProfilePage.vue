@@ -14,8 +14,8 @@
       </div>
 
       <div class="section-header">
-        <h2 class="section-title">USER PROFILE</h2>
-        <h4 class="section-subtitle">User profile</h4>
+        <h2 class="section-title">HỒ SƠ NGƯỜI DÙNG</h2>
+        <h4 class="section-subtitle">Thông tin cá nhân</h4>
       </div>
 
       <section>

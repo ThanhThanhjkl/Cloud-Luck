@@ -8,7 +8,7 @@
         class="shipping-address"
       >
         <b-card>
-          <div class="form-title text-center">Shipping Address</div>
+          <div class="form-title text-center">Địa chỉ nhận hàng</div>
           <form @submit.prevent="submitForm">
             <div
               class="text-center"
@@ -16,15 +16,15 @@
                 $router.push(`/account/${$route.params.id}/address/add`)
               "
             >
-              <div class="register-now"><svg-add></svg-add>Register new</div>
+              <div class="register-now"><svg-add></svg-add>Thêm mới</div>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th width="45%">Saved shipping address</th>
-                  <th width="25%">edit</th>
-                  <th width="25%">delete</th>
-                  <th width="5%">standard</th>
+                  <th width="45%">Địa chỉ đã lưu</th>
+                  <th width="25%">Sửa</th>
+                  <th width="25%">Xóa</th>
+                  <th width="5%">Mặc định</th>
                 </tr>
               </thead>
               <tbody v-if="accountAddress">
@@ -39,7 +39,7 @@
                     {{ item.street }}-
                     {{ item.district }}
                     <br />
-                    (tel: {{ item.phone }})
+                    (SĐT: {{ item.phone }})
                   </td>
                   <td>
                     <button
@@ -47,7 +47,7 @@
                       type="button"
                       @click.prevent="toEdit(item.id)"
                     >
-                      To edit
+                      Chỉnh sửa
                     </button>
                   </td>
                   <td>
@@ -56,7 +56,7 @@
                       :disabled="item.defaultSelect === 'true'"
                       @click.prevent="showConfirmModal(item)"
                     >
-                      <svg-delete></svg-delete>delete
+                      <svg-delete></svg-delete>Xóa
                     </button>
                   </td>
                   <td>
@@ -81,7 +81,7 @@
             class="btn-changeinfo-profile mt-4"
             block
             @click="submitUpdatedDefaultAddress"
-            >Update</b-button
+            >Cập nhật</b-button
           >
         </b-card>
       </div>
@@ -132,7 +132,7 @@ export default {
     async deleteAddress() {
       await this.deleteAccountAddress(this.addressSelected.id).then((res) => {
         this.getAddressByAccountId(this.userId);
-        this.$toast.success("Deleted Successfully");
+        this.$toast.success("Xóa thành công");
       });
     },
 

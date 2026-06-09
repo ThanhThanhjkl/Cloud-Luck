@@ -10,7 +10,7 @@
       fluid="xl"
     >
       <div class="box alert-message">
-        <div class="box-header">VERY editorial department comment</div>
+        <div class="box-header">Nhận xét từ ban biên tập</div>
         <div class="box-body">
           <div class="icon">
             <SvgMessage></SvgMessage>
@@ -42,67 +42,82 @@
               <section class="section-tabs">
                 <div class="product-body col-12 p-0">
                   <div class="d-none d-lg-block section-header">
-                    <h2 class="section-title">PROJECT DETAIL</h2>
-                    <h4 class="section-subtitle">Project details</h4>
+                    <h2 class="section-title">CHI TIẾT DỰ ÁN</h2>
+                    <h4 class="section-subtitle">Thông tin chi tiết dự án</h4>
                   </div>
                   <div class="tabs">
                     <div>
                       <ul role="tablist" class="nav nav-tabs nav-fill">
                         <!---->
                         <li role="presentation" class="nav-item">
-                          <nuxt-link
-                            :to="`/project/${productId}`"
+                          <a
                             role="tab"
                             class="nav-link text-center"
                             :class="{ active: url == 'project-id' }"
+                            href="#"
+                            @click.prevent="switchTab(`/project/${productId}`)"
                           >
-                            <span class="title-main"> ABOUT </span>
-                          </nuxt-link>
+                            <span class="title-tab"> GIỚI THIỆU </span>
+                          </a>
                         </li>
                         <li role="presentation" class="nav-item">
-                          <nuxt-link
-                            :to="`/project/${productId}/rating`"
+                          <a
+                            role="tab"
                             class="nav-link"
                             :class="{
                               active:
                                 url == 'project-id-rating' ||
                                 url == 'project-id-rating-ratingId',
                             }"
+                            href="#"
+                            @click.prevent="
+                              switchTab(`/project/${productId}/rating`)
+                            "
                           >
-                            <span class="title-tab">RATING</span>
+                            <span class="title-tab">ĐÁNH GIÁ</span>
                             <span class="alert-amount text-center">0</span>
-                          </nuxt-link>
+                          </a>
                         </li>
                         <li role="presentation" class="nav-item">
-                          <nuxt-link
-                            :to="`/project/${productId}/recommend`"
+                          <a
+                            role="tab"
                             class="nav-link"
                             :class="{ active: url == 'project-id-recommend' }"
+                            href="#"
+                            @click.prevent="
+                              switchTab(`/project/${productId}/recommend`)
+                            "
                           >
-                            <span class="title-tab"> RECOMMEND </span>
+                            <span class="title-tab"> GỢI Ý </span>
                             <span class="alert-amount text-center">{{
                               suports.length
                             }}</span>
-                          </nuxt-link>
+                          </a>
                         </li>
                         <li role="presentation" class="nav-item">
-                          <nuxt-link
-                            :to="`/project/${productId}/comment`"
+                          <a
+                            role="tab"
                             class="nav-link"
                             :class="{ active: url == 'project-id-comment' }"
+                            href="#"
+                            @click.prevent="
+                              switchTab(`/project/${productId}/comment`)
+                            "
                           >
-                            <span class="title-tab">comment</span>
+                            <span class="title-tab">Bình luận</span>
                             <span class="alert-amount text-center">{{
                               comments.length
                             }}</span>
-                          </nuxt-link>
+                          </a>
                         </li>
                         <!---->
                       </ul>
                     </div>
                   </div>
 
-                  <nuxt-child></nuxt-child>
+                  <keep-alive>
+                    <nuxt-child></nuxt-child>
+                  </keep-alive>
                   <DetailProject
                     v-if="url == 'project-id'"
                     :product="product"
@@ -120,8 +135,8 @@
 
           <section class="return-plan">
             <div class="section-header">
-              <h2 class="section-title">Return Plan</h2>
-              <h4 class="section-subtitle">Select return</h4>
+              <h2 class="section-title">Gói Hỗ Trợ</h2>
+              <h4 class="section-subtitle">Chọn gói hỗ trợ</h4>
             </div>
             <div class="d-grid g-16">
               <div>
@@ -136,17 +151,16 @@
 
           <b-card v-if="product.target" class="card-notice">
             <span>
-              This project is<a class="text-primary">
+              Dự án này thuộc loại<a class="text-primary">
                 {{ product.target.method }}
               </a>
-              です。
             </span>
             <span>
-              Regardless of the target amount,
+              Bất kể số tiền mục tiêu,
               <a class="text-primary">
                 {{ product.date | fullDateTime }}
               </a>
-              The amount collected up to this point will be used for funding.
+              số tiền đã quyên góp được sẽ được sử dụng để tài trợ.
             </span>
           </b-card>
         </section>
@@ -236,6 +250,12 @@ export default {
       "getCommentsByProductId",
       "setProductToCreate",
     ]),
+
+    switchTab(path) {
+      if (this.$route.path !== path) {
+        this.$router.replace(path);
+      }
+    },
 
     async fetchData() {
       this.loading = true;

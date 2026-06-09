@@ -1,8 +1,8 @@
 <template>
   <section class="project-owner">
     <div class="section-header">
-      <h2 class="section-title">PROJECT OWNER</h2>
-      <h4 class="section-subtitle">project owner</h4>
+      <h2 class="section-title">CHỦ DỰ ÁN</h2>
+      <h4 class="section-subtitle">Thông tin chủ dự án</h4>
     </div>
 
     <b-card class="owner-section">

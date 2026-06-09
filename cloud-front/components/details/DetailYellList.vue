@@ -31,7 +31,6 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const authMapper = createNamespacedHelpers("auth");
 const { mapActions } = createNamespacedHelpers("home");
 export default {
   props: {
@@ -44,29 +43,28 @@ export default {
       type: String,
       default: "",
     },
-  },
 
-  data() {
-    return {
-      name: null,
-      avatar: null,
-    };
+    accountInfo: {
+      type: Object,
+      default: null,
+    },
   },
 
   computed: {
+    name() {
+      return this.accountInfo ? this.accountInfo.name : null;
+    },
+    avatar() {
+      return this.accountInfo && this.accountInfo.avatar
+        ? "data:image/jpeg;base64," + this.accountInfo.avatar
+        : null;
+    },
     projectId() {
       return this.$route.params.id;
     },
   },
 
-  async mounted() {
-    const res = await this.getAccount(this.suport.accountId);
-    this.name = res.name;
-    this.avatar = "data:image/jpeg;base64," + res.avatar;
-  },
-
   methods: {
-    ...authMapper.mapActions(["getAccount"]),
     ...mapActions(["deleteSupportById", "getSuportsByProductId"]),
 
     deleteSuport(id) {

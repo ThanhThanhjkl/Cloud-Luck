@@ -40,14 +40,14 @@
           href="https://www.kobunsha.com"
           target="_blank"
           class="footer-external"
-          >運営会社 <i class="mdi mdi-open-in-new"></i>
+          >Công ty vận hành <i class="mdi mdi-open-in-new"></i>
         </a>
       </div>
 
       <div class="footer-footer">
         <div class="footer-copyright">
-          <span>株式会社 光文社</span>
-          <span> Copyright © 2022 Kobunsha Co., Ltd. All Rights Reserved.</span>
+          <span>CloudFunding</span>
+          <span> Copyright © 2022 CloudFunding. All Rights Reserved.</span>
         </div>
       </div>
     </b-container>
@@ -80,18 +80,18 @@ export default {
   data() {
     return {
       menu: [
-        { id: 1, text: "利用規約", url: "/terms" },
-        { id: 2, text: "個人情報の取り扱いについて", url: "/privacy_policy" },
-        { id: 3, text: "特定商取引法に基づく表記", url: "/legal" },
-        { id: 4, text: "ヘルプセンター", url: "/privacy_policy" },
+        { id: 1, text: "Điều khoản sử dụng", url: "/terms" },
+        { id: 2, text: "Chính sách bảo mật thông tin", url: "/privacy_policy" },
+        { id: 3, text: "Thông tin giao dịch thương mại", url: "/legal" },
+        { id: 4, text: "Trung tâm hỗ trợ", url: "/privacy_policy" },
         {
           id: 5,
-          text: "お問合せ",
+          text: "Liên hệ",
           url: "/contact",
         },
         {
           id: 6,
-          text: "プライバシーポリシー ",
+          text: "Chính sách quyền riêng tư",
           url: "https://www.kobunsha.com/privacy/",
           target: "_blank",
         },

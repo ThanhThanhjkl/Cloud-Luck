@@ -38,53 +38,48 @@
 
     <div class="send-question">
       <b-button variant="primary" block
-        ><svg-mail></svg-mail>Send your questions</b-button
+        ><svg-mail></svg-mail>Gửi câu hỏi</b-button
       >
     </div>
 
     <a class="text-law cursor-pointer" @click="showPopUp = !showPopUp">
-      Description based on Specified Commercial Transactions Law
+      Thông tin theo Luật Giao dịch Thương mại
     </a>
 
     <b-modal id="modal-popup" v-model="showPopUp"
       ><div class="header-popup">
-        <h4>Description based on specified commercial transactions</h4>
+        <h4>Thông tin giao dịch thương mại</h4>
         <p>
-          Regarding the project
-          <span>Message function</span>
-          Please contact the project owner at.
+          Về dự án, vui lòng liên hệ chủ dự án qua
+          <span>chức năng nhắn tin</span>.
         </p>
       </div>
       <div class="body-popup mt-2">
         <div class="mb-4">
-          <p class="mb-0">Sales company name</p>
-          <span class="ml-3">AAsample Co., Ltd. </span>
+          <p class="mb-0">Tên công ty</p>
+          <span class="ml-3">Công ty TNHH Mẫu</span>
         </div>
         <div class="mb-4">
-          <p class="mb-0">
-            Name of representative or person in charge of mail order operations
-          </p>
-          <span class="ml-3">Taro Kobun</span>
+          <p class="mb-0">Người đại diện</p>
+          <span class="ml-3">Nguyễn Văn A</span>
         </div>
         <div class="mb-4">
-          <p class="mb-0">Business address/location</p>
+          <p class="mb-0">Địa chỉ kinh doanh</p>
+          <span class="ml-3">123 Đường ABC, Quận 1, TP.HCM</span>
+        </div>
+        <div class="mb-4">
+          <p class="mb-0">Số điện thoại</p>
+          <span class="ml-3">0123456789</span>
+        </div>
+        <div class="mb-4">
+          <p class="mb-0">Các yêu cầu khác ngoài thanh toán</p>
+          <span class="ml-3">Không có</span>
+        </div>
+        <div class="mb-4">
+          <p class="mb-0">Lưu ý khác</p>
           <span class="ml-3"
-            >Imperial Palace Sample Residential 101, 1-1-1 Chiyoda-ku, Tokyo
-          </span>
-        </div>
-        <div class="mb-4">
-          <p class="mb-0">Business phone number</p>
-          <span class="ml-3">0312345678 </span>
-        </div>
-        <div class="mb-4">
-          <p class="mb-0">Necessary requirements other than consideration</p>
-          <span class="ml-3">none </span>
-        </div>
-        <div class="mb-4">
-          <p class="mb-0">other noteworthy things</p>
-          <span class="ml-3"
-            >Please check the project page, return entry section, and sharing
-            entry section (http://camp-fire.jp/legal).
+            >Vui lòng kiểm tra trang dự án và phần gói hỗ trợ để biết thêm chi
+            tiết.
           </span>
         </div>
       </div>

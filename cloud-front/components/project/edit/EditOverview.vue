@@ -1,17 +1,17 @@
 <template>
   <section class="edit-overview-page">
-    <div class="head-colapse text-center">Tell us about your project</div>
+    <div class="head-colapse text-center">Giới thiệu về dự án của bạn</div>
     <b-card>
       <form>
         <b-form-group>
-          <FormValidator class="mt-3" label="Title" text-required>
+          <FormValidator class="mt-3" label="Tiêu đề" text-required>
             <div class="input-title d-flex">
               <b-form-textarea
                 id="textarea-small"
                 v-model="title"
                 maxlength="40"
                 size="lg"
-                placeholder="Please set a title"
+                placeholder="Vui lòng đặt tiêu đề"
               ></b-form-textarea>
               <MaxLengthIndicator
                 class="quatily"
@@ -20,22 +20,20 @@
               ></MaxLengthIndicator>
             </div>
             <span class="sub-title"
-              >※When you search by region, it will be displayed as a project for
-              the prefecture you set. ※The prefecture you set will be displayed
-              on the project page.</span
+              >※Tiêu đề sẽ được hiển thị trên trang dự án.</span
             >
           </FormValidator>
         </b-form-group>
         <hr />
         <b-form-group>
-          <FormValidator class="mt-3" label="Name" text-required>
+          <FormValidator class="mt-3" label="Tên dự án" text-required>
             <div class="input-title d-flex">
               <b-form-textarea
                 id="textarea-small"
                 v-model="name"
                 maxlength="150"
                 size="lg"
-                placeholder="Please fill in the name"
+                placeholder="Vui lòng nhập tên dự án"
                 rows="5"
               ></b-form-textarea>
               <MaxLengthIndicator
@@ -45,9 +43,7 @@
               ></MaxLengthIndicator>
             </div>
             <span class="sub-title"
-              >※When you search by region, it will be displayed as a project for
-              the prefecture you set. ※The prefecture you set will be displayed
-              on the project page.</span
+              >※Tên dự án sẽ được hiển thị trên trang dự án.</span
             >
           </FormValidator>
         </b-form-group>

@@ -7,14 +7,14 @@
 
       <b-row class="price target">
         <b-col>
-          <label class="d-block">Current support amount</label>
+          <label class="d-block">Số tiền hỗ trợ hiện tại</label>
           <strong class="current-amount amount">{{
             (product.sale_cost || 0) | japanMoney
           }}</strong>
         </b-col>
 
         <b-col class="d-md-none">
-          <label class="d-block">Target amount</label>
+          <label class="d-block">Số tiền mục tiêu</label>
           <strong class="target-amount-sp">{{
             (product.cost || 0) | japanMoney
           }}</strong>
@@ -23,7 +23,7 @@
 
       <b-row class="percent-progress position-relative">
         <b-col>
-          <label class="mb-2">Achievement rate</label>
+          <label class="mb-2">Tỷ lệ đạt được</label>
           <div class="position-relative">
             <b-progress
               :value="
@@ -48,7 +48,7 @@
 
       <b-row class="price current">
         <b-col class="d-none d-md-flex align-items-center">
-          <label>Target amount</label>
+          <label>Số tiền mục tiêu</label>
           <strong class="target-amount">{{
             (product.cost || 0) | japanMoney
           }}</strong>
@@ -59,17 +59,17 @@
         <b-col class="sub-summary mb-0">
           <div class="d-flex align-items-center remain-date">
             <SvgClock></SvgClock>
-            <label>Remaining until recruitment ends</label>
+            <label>Thời gian còn lại</label>
             <strong class="remain-detail-date"
-              >{{ product.date | remainDate }}日</strong
+              >{{ product.date | remainDate }} ngày</strong
             >
           </div>
           <div class="d-flex d-md-none align-items-center card-info sp">
             <label class="supporter">
               <svg-users></svg-users>
-              <span>Number of supporters</span>
+              <span>Số người hỗ trợ</span>
             </label>
-            <strong class="supporters-sp"> {{ product.sold }}人 </strong>
+            <strong class="supporters-sp"> {{ product.sold }} người </strong>
           </div>
         </b-col>
       </b-row>
@@ -79,9 +79,9 @@
           <div class="d-flex align-items-center">
             <label class="supporter">
               <svg-users></svg-users>
-              <span>Number of supporters</span>
+              <span>Số người hỗ trợ</span>
             </label>
-            <strong class="supporters"> {{ product.sold }}人 </strong>
+            <strong class="supporters"> {{ product.sold }} người </strong>
           </div>
         </b-col>
       </b-row>

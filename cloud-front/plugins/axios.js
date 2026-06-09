@@ -11,27 +11,14 @@ export default function ({ $axios, store, app }, inject) {
     if (!keepError) {
       store.dispatch("global/setValidationErrors", {});
     }
-    const hideLoading = config.hideLoading;
-
-    if (!hideLoading && store._vm.$nuxt) {
-      store._vm.$nuxt.$loading.start();
-    }
 
     return config;
   });
   authApi.onResponse((response) => {
-    if (!response.config.hideLoading && store._vm.$nuxt) {
-      store._vm.$nuxt.$loading.finish();
-    }
-
     return response.data;
   });
 
   authApi.onError((error) => {
-    if (store._vm.$nuxt) {
-      store._vm.$nuxt.$loading.finish();
-    }
-
     if (!error.response) {
       app.$toast.error("Không thể kết nối đến máy chủ.");
       return false;
@@ -74,26 +61,13 @@ export default function ({ $axios, store, app }, inject) {
       store.dispatch("global/setValidationErrors", {});
     }
 
-    const hideLoading = config.hideLoading;
-
-    if (!hideLoading && store._vm.$nuxt) {
-      store._vm.$nuxt.$loading.start();
-    }
-
     return config;
   });
   consumerApi.onResponse((response) => {
-    if (!response.config.hideLoading && store._vm.$nuxt) {
-      store._vm.$nuxt.$loading.finish();
-    }
     return response.data;
   });
 
   consumerApi.onError((error) => {
-    if (store._vm.$nuxt) {
-      store._vm.$nuxt.$loading.finish();
-    }
-
     if (error.response) {
       if (error.response.status === 422) {
         const message = error.response.data && error.response.data.message;

@@ -1,48 +1,52 @@
 <template>
   <section class="edit-establish-page">
-    <div class="head-colapse text-center">Set the desired target amount</div>
+    <div class="head-colapse text-center">Đặt số tiền mục tiêu</div>
     <b-card>
       <form>
         <b-form-group>
           <FormValidator
             class="col-md-6 col-12 mt-3 p-0"
-            label="Target amount"
+            label="Số tiền mục tiêu"
             text-required
           >
             <div class="input-money d-flex">
               <b-input
                 v-model="cost"
                 type="text"
-                placeholder="（例）100,000"
+                placeholder="（Ví dụ）100,000"
                 required
               ></b-input>
-              <span>円</span>
+              <span>VNĐ</span>
             </div>
 
-            <span>※Please enter a target amount of 100,000 yen or more.</span>
+            <span>※Vui lòng nhập số tiền mục tiêu từ 100,000 trở lên.</span>
           </FormValidator>
 
           <FormValidator
             class="col-md-6 col-12 mt-3 p-0"
-            label="Funding amount"
+            label="Số tiền đã huy động"
             text-required
           >
             <div class="input-money d-flex">
               <b-input
                 v-model="sale_cost"
                 type="text"
-                placeholder="（例）100,000"
+                placeholder="（Ví dụ）100,000"
                 required
               ></b-input>
-              <span>円</span>
+              <span>VNĐ</span>
             </div>
 
-            <span>※Please enter a target amount of 100,000 yen or more.</span>
+            <span>※Vui lòng nhập số tiền từ 100,000 trở lên.</span>
           </FormValidator>
         </b-form-group>
         <hr />
         <b-form-group>
-          <FormValidator class="mt-3" label="Recruitment method" text-required>
+          <FormValidator
+            class="mt-3"
+            label="Phương thức huy động"
+            text-required
+          >
             <b-form-radio
               v-model="methods"
               value="all_in"
@@ -53,13 +57,12 @@
               ><div class="right-content">
                 <div class="head-box">All-In</div>
                 <div class="description">
-                  Even if the target amount is not achieved, You can receive the
-                  support money until the end date.
+                  Dù không đạt mục tiêu, bạn vẫn nhận được số tiền hỗ trợ đến
+                  ngày kết thúc.
                 </div>
                 <span class="p-0">
                   <SvgWaringAlert class="mr-2" />
-                  Return performance obligation arises from one person's
-                  support.
+                  Nghĩa vụ hoàn trả phát sinh từ 1 người hỗ trợ.
                 </span>
               </div></b-form-radio
             >
@@ -73,13 +76,12 @@
               ><div class="right-content">
                 <div class="head-box">All-or-Nothing</div>
                 <div class="description">
-                  If you reach the target amount within the period, you will
-                  receive the support money.
+                  Nếu đạt mục tiêu trong thời hạn, bạn sẽ nhận được số tiền hỗ
+                  trợ.
                 </div>
                 <span class="p-0">
                   <SvgWaringAlert class="mr-2" />
-                  Return performance obligation will occur after the target
-                  amount is achieved.
+                  Nghĩa vụ hoàn trả chỉ phát sinh sau khi đạt mục tiêu.
                 </span>
               </div>
             </b-form-radio>
@@ -89,7 +91,7 @@
         <b-form-group>
           <FormValidator
             class="col-md-5 col-8 mt-3 p-0"
-            label="Recruitment end date"
+            label="Ngày kết thúc huy động"
             text-required
           >
             <date-picker
@@ -97,7 +99,7 @@
               class="date-picker"
               type="date"
               format="YYYY-MM-DD"
-              placeholder="----year--month--day"
+              placeholder="Chọn ngày"
             >
             </date-picker>
           </FormValidator>

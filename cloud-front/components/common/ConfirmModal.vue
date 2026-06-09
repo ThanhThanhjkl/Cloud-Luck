@@ -2,14 +2,14 @@
   <b-modal
     ref="modal"
     hide-header
-    ok-title="delete"
-    cancel-title="cancel"
+    ok-title="Xóa"
+    cancel-title="Hủy"
     ok-variant="danger"
     @ok="submit"
   >
-    Do you really want to delete this?
+    Bạn có chắc chắn muốn xóa không?
     <br />
-    Deleted information cannot be recovered again.
+    Thông tin đã xóa sẽ không thể khôi phục.
   </b-modal>
 </template>
 <script>

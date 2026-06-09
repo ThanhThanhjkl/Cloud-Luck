@@ -1,17 +1,16 @@
 <template>
   <div>
     <b-card class="forgot-pass-form">
-      <div class="form-title text-center">Resetting a password</div>
+      <div class="form-title text-center">Đặt lại mật khẩu</div>
       <form @submit.prevent="submitForgot">
         <div id class="note-description">
-          We will send you a password reset URL, so please enter your registered
-          email address and press the "Send" button.
+          Vui lòng nhập email đã đăng ký và mật khẩu mới để đặt lại mật khẩu.
         </div>
         <FormValidator>
           <b-input
             v-model="email"
             type="email"
-            placeholder="Please enter your e-mail address."
+            placeholder="Vui lòng nhập địa chỉ email."
             required
           ></b-input>
         </FormValidator>
@@ -20,7 +19,7 @@
           <b-input
             v-model="password"
             type="password"
-            placeholder="Please enter your password"
+            placeholder="Vui lòng nhập mật khẩu mới."
             required
           ></b-input>
         </FormValidator>
@@ -29,7 +28,7 @@
           <b-input
             v-model="confirmPassword"
             type="password"
-            placeholder="Please enter your password confirmation"
+            placeholder="Vui lòng nhập lại mật khẩu."
             required
           ></b-input>
         </FormValidator>
@@ -43,7 +42,7 @@
           class="btn-login"
           :disabled="!email"
           @click="submitForgot"
-          >Reset</b-button
+          >Đặt lại</b-button
         >
       </div>
     </b-card>

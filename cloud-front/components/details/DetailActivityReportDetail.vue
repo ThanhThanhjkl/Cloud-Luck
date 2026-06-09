@@ -3,9 +3,9 @@
     <b-card :class="{ 'last-article': index == 2 }" class="detail-article">
       <template #header>
         <b-card-title>
-          {{ rating.productId }}
+          {{ name || "Người dùng" }}
         </b-card-title>
-        <div class="date">{{ rating.accountId | fullDateTime }}</div>
+        <div class="date">{{ rating.date | fullDateTime }}</div>
         <button
           v-if="Number(accountId) === rating.accountId"
           type="button"
@@ -41,18 +41,23 @@ export default {
       type: String,
       default: "",
     },
+
+    accountInfo: {
+      type: Object,
+      default: null,
+    },
   },
 
-  data() {
-    return {};
-  },
   computed: {
     ...mapState(["CampaignNote"]),
+    name() {
+      return this.accountInfo ? this.accountInfo.name : "Người dùng";
+    },
     campaignId() {
       return this.$route.params.id;
     },
   },
-  mounted() {},
+
   methods: {
     ...mapActions(["getRatingByProductId", "deleteRatingById"]),
 

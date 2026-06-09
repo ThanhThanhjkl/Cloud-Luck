@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="head-edit form-title text-center">Edit project</div>
+    <div class="head-edit form-title text-center">Chỉnh sửa dự án</div>
     <b-card class="edit-info">
       <div class="edit-info-form">
         <div class="group-btn-1 d-flex flex-wrap justify-content-between">

@@ -20,9 +20,9 @@
           :accept="fileAccept"
           @change="selectImgFile"
         />
-        <h4 class="card-title cursor-pointer">Drag and Drop</h4>
+        <h4 class="card-title cursor-pointer">Kéo và thả</h4>
         <b-button variant="primary" type="button" class="card-title mt-1"
-          >select</b-button
+          >Chọn tệp</b-button
         >
       </div>
     </div>

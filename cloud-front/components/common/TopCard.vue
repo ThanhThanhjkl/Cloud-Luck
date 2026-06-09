@@ -18,7 +18,7 @@
       <b-row class="py-5px">
         <b-col class="d-flex justify-content-between">
           <div class="align-items-center d-flex">
-            <label class="current-amount">Amount</label>
+            <label class="current-amount">Giá</label>
             <strong class="price">{{ item.sale_cost | japanMoney }} </strong>
           </div>
           <strong style="text-decoration-line: line-through" class="price"
@@ -32,7 +32,7 @@
           <span class="divider">/</span>
           <label class="supporter">
             <svg-users></svg-users>
-            <span>{{ item.sold }} supporters</span>
+            <span>{{ item.sold }} người hỗ trợ</span>
           </label>
           <b-col class="author d-none d-lg-block">
             <label class="mr-0">

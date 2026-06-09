@@ -1,10 +1,10 @@
 <template>
   <section class="edit-intuitive-page">
-    <div class="head-colapse text-center">Set a catchy image</div>
+    <div class="head-colapse text-center">Đặt hình ảnh thu hút</div>
     <b-card>
       <form>
         <b-form-group>
-          <FormValidator class="mt-3" label="Main image" text-required>
+          <FormValidator class="mt-3" label="Hình ảnh chính" text-required>
             <FileUpload
               class="card-upload-big"
               :image-id="mainImage"
@@ -12,10 +12,10 @@
               @destroy="onDestroyMainImage"
             ></FileUpload>
             <span class="sub-about"
-              >About image files <br />
-              ※The recommended size is 1200 pixels wide x 800 pixels tall.<br />
-              ※Setting the ratio to 3:2 will display it beautifully.<br />
-              ※The only file formats that can be uploaded are PNG/JPG/JPEG/GIF.
+              >Về tệp hình ảnh <br />
+              ※Kích thước khuyến nghị: 1200px rộng x 800px cao.<br />
+              ※Tỷ lệ 3:2 sẽ hiển thị đẹp nhất.<br />
+              ※Chỉ hỗ trợ định dạng PNG/JPG/JPEG/GIF.
             </span>
           </FormValidator>
         </b-form-group>

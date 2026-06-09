@@ -108,46 +108,30 @@ import SkeletonBox from "@/components/common/SkeletonBox.vue";
 
 const DetailSummarySkeleton = {
   components: { SkeletonBox },
-  template: `
-    <b-card class="card-infor">
-      <div class="mb-3 d-block d-md-none">
-        <SkeletonBox width="70%" height="20px" />
-      </div>
-      <div class="mb-3">
-        <SkeletonBox width="140px" height="12px" class="mb-1" />
-        <SkeletonBox width="180px" height="32px" />
-      </div>
-      <div class="mb-3">
-        <SkeletonBox width="100px" height="12px" class="mb-1" />
-        <SkeletonBox width="100%" height="20px" radius="10px" />
-      </div>
-      <div class="mb-3">
-        <SkeletonBox width="100px" height="12px" class="mb-1" />
-        <SkeletonBox width="120px" height="28px" />
-      </div>
-      <div class="mb-3">
-        <SkeletonBox width="160px" height="14px" class="mb-1" />
-        <SkeletonBox width="80px" height="28px" />
-      </div>
-      <div>
-        <SkeletonBox width="150px" height="14px" />
-      </div>
-    </b-card>
-  `,
+  render(h) {
+    return h("b-card", { class: "card-infor" }, [
+      h(SkeletonBox, {
+        class: "mb-3",
+        props: { width: "60%", height: "28px" },
+      }),
+      h(SkeletonBox, {
+        props: { width: "100%", height: "20px", radius: "10px" },
+      }),
+    ]);
+  },
 };
 
 const ReturnPlanSkeleton = {
   components: { SkeletonBox },
-  template: `
-    <b-card class="return-plan-card">
-      <SkeletonBox width="100%" height="160px" radius="8px" class="mb-3" />
-      <SkeletonBox width="60%" height="18px" class="mb-2" />
-      <SkeletonBox width="100px" height="22px" class="mb-3" />
-      <SkeletonBox width="100%" height="38px" radius="4px" class="mb-3" />
-      <SkeletonBox width="100%" height="14px" class="mb-1" />
-      <SkeletonBox width="80%" height="14px" />
-    </b-card>
-  `,
+  render(h) {
+    return h("b-card", { class: "return-plan-card" }, [
+      h(SkeletonBox, {
+        class: "mb-3",
+        props: { width: "100%", height: "160px", radius: "8px" },
+      }),
+      h(SkeletonBox, { props: { width: "60%", height: "18px" } }),
+    ]);
+  },
 };
 
 export default {

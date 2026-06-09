@@ -5,21 +5,21 @@
       class="new-address"
     >
       <div class="form-title text-center">
-        {{ address ? "Edit delivery address" : "Shipping Address" }}
+        {{ address ? "Chỉnh sửa địa chỉ" : "Địa chỉ nhận hàng" }}
       </div>
       <form>
-        <FormValidator label="Full Name" text-required>
+        <FormValidator label="Họ và tên" text-required>
           <b-input
             v-model="name"
             type="text"
-            placeholder="First and last name"
+            placeholder="Nhập họ và tên"
             text-required
           ></b-input>
         </FormValidator>
 
         <FormValidator
           class="col-md-5 col-12 p-0"
-          label="Post Code"
+          label="Mã bưu điện"
           text-required
         >
           <b-input
@@ -28,14 +28,13 @@
             text-required
           ></b-input>
           <div class="pass-note">
-            ※"-" does not need to be entered. Please enter in half-width
-            alphanumeric characters.
+            ※Không cần nhập dấu "-". Vui lòng nhập bằng số.
           </div>
         </FormValidator>
 
         <FormValidator
           class="col-md-5 col-12 p-0"
-          label="Prefectures"
+          label="Tỉnh/Thành phố"
           text-required
         >
           <b-form-select
@@ -45,35 +44,35 @@
           >
             <template #first>
               <b-form-select-option :value="null" disabled>
-                choice
+                Chọn
               </b-form-select-option>
             </template>
           </b-form-select>
         </FormValidator>
 
-        <FormValidator label="District" text-required>
+        <FormValidator label="Quận/Huyện" text-required>
           <b-input
             v-model="district"
             type="text"
-            placeholder="(Example) Cau Giay"
+            placeholder="(Ví dụ) Cầu Giấy"
             required
           ></b-input>
         </FormValidator>
 
-        <FormValidator label="address building name" text-required>
+        <FormValidator label="Địa chỉ chi tiết" text-required>
           <b-input
             v-model="street"
             type="text"
-            placeholder="(Example) 1-16-6 Kobunsha Building 9F"
+            placeholder="(Ví dụ) Số 1, Ngõ 16, Đường ABC"
             text-required
           ></b-input>
         </FormValidator>
 
-        <FormValidator label="telephone number" text-required>
+        <FormValidator label="Số điện thoại" text-required>
           <b-input
             v-model="phone"
             type="text"
-            placeholder="Please enter your phone number"
+            placeholder="Vui lòng nhập số điện thoại"
             text-required
           ></b-input>
         </FormValidator>
@@ -87,7 +86,7 @@
           block
           @click.prevent="submit"
         >
-          {{ address ? "Update" : "Create" }}
+          {{ address ? "Cập nhật" : "Tạo mới" }}
         </b-button>
       </div>
     </b-card>

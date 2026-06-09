@@ -23,7 +23,7 @@
             class="w-100 btn btn-crimson"
             @click="choseReturnPlan(returnPlan.id)"
           >
-            BUY
+            MUA
           </a>
         </div>
 
@@ -33,27 +33,25 @@
     <b-modal
       v-model="showConfirmModal"
       size="xl"
-      title="Confirmation Funded Project"
-      ok-title="Buy"
-      cancel-title="Cancel"
+      title="Xác nhận mua dự án"
+      ok-title="Mua"
+      cancel-title="Hủy"
       ok-variant="danger"
       @ok="submitBuy"
     >
-      <p>Are you sure to buy this project?</p></b-modal
+      <p>Bạn có chắc chắn muốn mua dự án này?</p></b-modal
     >
 
     <b-modal
       v-model="showModalNeedAddress"
       size="xl"
-      title="Your Account has no address !"
-      ok-title="Add New Address"
-      cancel-title="Cancel"
+      title="Tài khoản chưa có địa chỉ!"
+      ok-title="Thêm địa chỉ mới"
+      cancel-title="Hủy"
       ok-variant="danger"
       @ok="submitToAddNewAddress"
     >
-      <p>
-        You may be able to add a new address, then try to buy it again
-      </p></b-modal
+      <p>Bạn cần thêm địa chỉ giao hàng trước khi mua.</p></b-modal
     >
   </div>
 </template>

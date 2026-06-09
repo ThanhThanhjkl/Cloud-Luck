@@ -7,12 +7,12 @@
     </div>
     <div class="col-6 product-item">
       <div>
-        Funded ID:<span>{{ funded.id }}</span>
+        Mã đơn:<span>{{ funded.id }}</span>
       </div>
       <div>
-        Amount of money:<span>{{ ammount | japanMoney }}</span>
+        Số tiền:<span>{{ ammount | japanMoney }}</span>
       </div>
-      <div>Project name :</div>
+      <div>Tên dự án:</div>
       <div class="product-title">
         {{ title }}
       </div>
@@ -29,13 +29,13 @@
               email: <span class="text-secondary">{{ email }}</span>
             </div>
             <div class="profile-date">
-              receiver: <span class="text-secondary">{{ receiver }}</span>
+              Người nhận: <span class="text-secondary">{{ receiver }}</span>
             </div>
             <div class="profile-date">
-              address: <span class="text-secondary">{{ address }}</span>
+              Địa chỉ: <span class="text-secondary">{{ address }}</span>
             </div>
             <div class="profile-date">
-              phone: <span class="text-secondary">{{ phone }}</span>
+              Điện thoại: <span class="text-secondary">{{ phone }}</span>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
         class="funded-btn mt-3"
         @click="deleteFunded"
       >
-        Delete this funded
+        Xóa đơn hỗ trợ này
       </div>
     </div>
   </div>

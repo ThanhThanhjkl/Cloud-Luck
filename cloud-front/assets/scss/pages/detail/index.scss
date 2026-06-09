@@ -9,16 +9,22 @@
 @import "./Detailprofile.scss";
 
 .page-detail {
+  overflow: hidden;
+
   .page-detail-content {
     display: grid;
     grid-template-columns: 59.37% calc(40.63% - 32px);
     grid-column-gap: 32px;
+    overflow: hidden;
 
     @include max-width(md) {
       grid-template-columns: 1fr;
     }
 
     .left-content {
+      min-width: 0;
+      overflow: hidden;
+
       .nav-tabs {
         .nav-item {
           a {
@@ -47,6 +53,9 @@
     }
 
     .right-content {
+      min-width: 0;
+      overflow: hidden;
+
       .return-plan {
         .section-header {
           @include max-width(md) {
@@ -63,6 +72,7 @@
         margin-top: 0;
         margin-bottom: 30px;
         height: fit-content;
+        overflow: hidden;
 
         .col {
           margin-bottom: 7px;
@@ -111,9 +121,10 @@
 
         strong {
           color: #000000;
-          white-space: nowrap;
+          word-break: break-all;
           @include max-width(md) {
             font-size: 20px;
+            white-space: normal;
           }
         }
 
@@ -200,6 +211,8 @@
   .campaign-body-list-tab {
     .nav {
       flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .nav-item {
       white-space: nowrap;
@@ -278,13 +291,20 @@
       text-align: center;
       margin-top: 20px;
       position: relative;
+      @include max-width(md) {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+      }
       .about-comment-btn {
         font-size: 10px;
         bottom: 0;
         position: absolute;
         right: 0;
         @include max-width(md) {
-          right: calc(50% - 170px);
+          position: static;
         }
       }
       button {
@@ -295,7 +315,8 @@
         padding: 15px 26px;
         color: white;
         @include max-width(md) {
-          padding: 15px 20px;
+          padding: 10px 16px;
+          font-size: 13px;
         }
       }
     }
@@ -604,17 +625,6 @@
 
         li.nav-item {
           position: relative;
-          &:nth-child(3) {
-            @include max-width(sm) {
-              white-space: pre-wrap;
-              display: inline-block;
-              text-align: left;
-              .title-tab {
-                line-height: unset;
-                font-size: 9px;
-              }
-            }
-          }
           a {
             font-size: 13px;
             font-weight: bold;

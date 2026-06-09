@@ -1,8 +1,8 @@
 <template>
   <b-card>
     <div class="title-card">
-      <div class="warning">Check</div>
-      <span>You can now publish your project!</span>
+      <div class="warning">Kiểm tra</div>
+      <span>Bạn có thể xuất bản dự án ngay bây giờ!</span>
     </div>
     <div class="contents">
       <div v-for="item in contents" :key="item.id" class="item">
@@ -17,19 +17,17 @@
     </div>
 
     <div class="publish">
-      <div class="publish-title">Published soon</div>
+      <div class="publish-title">Xuất bản ngay</div>
       <b-button
         variant="primary"
         class="w-100"
         @click="releasingProject('immediately')"
-        ><SvgPublish class="mr-2"></SvgPublish> Publish now
+        ><SvgPublish class="mr-2"></SvgPublish> Xuất bản
       </b-button>
     </div>
     <div class="publish publish-settings">
-      <div class="publish-title">Release at a specified date and time</div>
-      <div class="text-center text-primary">
-        Setting the publication date and time
-      </div>
+      <div class="publish-title">Đặt lịch xuất bản</div>
+      <div class="text-center text-primary">Cài đặt ngày giờ xuất bản</div>
       <FormValidator name="campaignReleaseRequest.releaseDateTime">
         <b-input
           v-model="releaseDateTime"
@@ -39,13 +37,13 @@
         ></b-input>
       </FormValidator>
       <div class="text-muted text-center mb-3">
-        ※ Scheduled release can be set in 5-minute increments.
+        ※ Có thể đặt lịch xuất bản theo từng 5 phút.
       </div>
       <b-button
         variant="primary"
         class="w-100"
         @click="releasingProject('specified')"
-        ><SvgClock class="mr-2"></SvgClock>make a reservation
+        ><SvgClock class="mr-2"></SvgClock>Đặt lịch
       </b-button>
     </div>
   </b-card>

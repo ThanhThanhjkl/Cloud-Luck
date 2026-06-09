@@ -8,48 +8,48 @@
         class="password-setting"
       >
         <b-card>
-          <div class="form-title text-center">Password setting</div>
+          <div class="form-title text-center">Cài đặt mật khẩu</div>
           <form @submit.prevent="submitForm">
-            <FormValidator label="Password" class="mb-1" required>
+            <FormValidator label="Mật khẩu hiện tại" class="mb-1" required>
               <b-input
                 v-model="password"
                 type="password"
-                placeholder="Please enter your current password"
+                placeholder="Vui lòng nhập mật khẩu hiện tại"
                 required
               >
               </b-input>
               <div class="pass-note mb-2">
-                ※Half-width alphanumeric characters (8 digits or more)
+                ※Mật khẩu gồm chữ/số, tối thiểu 8 ký tự
               </div>
             </FormValidator>
 
-            <FormValidator class="mb-1" label="New Password" required>
+            <FormValidator class="mb-1" label="Mật khẩu mới" required>
               <b-input
                 v-model="newPassword"
                 type="password"
-                placeholder="New password"
+                placeholder="Nhập mật khẩu mới"
                 required
               ></b-input>
               <div class="pass-note">
-                ※Half-width alphanumeric characters (8 digits or more)
+                ※Mật khẩu gồm chữ/số, tối thiểu 8 ký tự
               </div>
             </FormValidator>
 
-            <FormValidator label="Confirm Password" required>
+            <FormValidator label="Xác nhận mật khẩu" required>
               <b-input
                 v-model="passwordConfirmation"
                 type="password"
-                placeholder="New password (for confirmation)"
+                placeholder="Nhập lại mật khẩu mới"
                 class="mt-3"
                 required
                 :class="{ 'border border-danger': !error }"
               ></b-input>
               <div class="pass-note mb-4">
-                ※Half-width alphanumeric characters (8 digits or more)
+                ※Mật khẩu gồm chữ/số, tối thiểu 8 ký tự
               </div>
 
               <p v-if="!error" class="text-danger">
-                New password and reconfirm password do not match
+                Mật khẩu mới và mật khẩu xác nhận không khớp
               </p>
             </FormValidator>
           </form>
@@ -61,7 +61,7 @@
               block
               :disabled="!clickable"
               @click="submitChangePassword"
-              >更新する</b-button
+              >Cập nhật</b-button
             >
           </div>
         </b-card>
@@ -132,10 +132,10 @@ export default {
             this.password = "";
             this.passwordConfirmation = "";
             this.newPassword = "";
-            this.$toast.success("Password updated successfully");
+            this.$toast.success("Cập nhật mật khẩu thành công");
           });
         } else {
-          this.$toast.error("Error");
+          this.$toast.error("Lỗi");
         }
       } catch (e) {
         alert(e.message);

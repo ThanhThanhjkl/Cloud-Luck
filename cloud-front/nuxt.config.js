@@ -94,7 +94,7 @@ export default {
     iconPack: "material",
   },
 
-  loading: "@/components/shared/Loading.vue",
+  loading: false,
 
   env: {
     authApiUrl:

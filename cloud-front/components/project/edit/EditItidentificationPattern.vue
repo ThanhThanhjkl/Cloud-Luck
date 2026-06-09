@@ -1,6 +1,6 @@
 <template>
   <section class="edit-verification-page">
-    <div class="head-colapse text-center">Finally your information</div>
+    <div class="head-colapse text-center">Thông tin cá nhân của bạn</div>
     <PublishItidentification></PublishItidentification>
   </section>
 </template>

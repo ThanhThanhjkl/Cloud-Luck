@@ -28,7 +28,7 @@ export default {
       try {
         address.accountId = this.accountId;
         await this.createAccountAddress(address);
-        this.$toast.success("成功");
+        this.$toast.success("Thêm thành công");
         this.$router.push(`/account/${this.accountId}/address`);
       } catch (error) {
         this.$toast.error(error.message);

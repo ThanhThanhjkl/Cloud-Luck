@@ -3,13 +3,13 @@
     <div class="mx-lg-5">
       <div id="register-setting-0" class="profile-setting">
         <b-card>
-          <div class="form-title text-center">Edit profile</div>
+          <div class="form-title text-center">Chỉnh sửa hồ sơ</div>
           <form>
-            <FormValidator label="Acount Name" required>
+            <FormValidator label="Tên tài khoản" required>
               <b-input
                 v-model="name"
                 type="text"
-                placeholder="exampleexampleexample"
+                placeholder="Nhập tên tài khoản"
                 required
               ></b-input>
             </FormValidator>
@@ -22,7 +22,7 @@
               >
               </b-input>
             </FormValidator>
-            <FormValidator class="mb-0" label="Avatar">
+            <FormValidator class="mb-0" label="Ảnh đại diện">
               <div class="iframe-avatar text-center">
                 <div class="d-flex justify-content-center uploading-image">
                   <b-img fluid :src="avatar" />
@@ -39,11 +39,9 @@
                       @drop="drop"
                     >
                       <svg-avatar></svg-avatar>
-                      Upload an image
+                      Tải ảnh lên
                     </div>
-                    <div>
-                      Image with aspect ratio of 200px*200px or more recommended
-                    </div>
+                    <div>Khuyến nghị ảnh có tỷ lệ 200px*200px trở lên</div>
                   </label>
                   <input
                     id="files"
@@ -55,8 +53,7 @@
                     @change="onUploadAvatar"
                   />
                   <div class="sub-note">
-                    ※The only file formats that can be uploaded are
-                    PNG/JPG/JPEG/GIF.
+                    ※Chỉ hỗ trợ định dạng PNG/JPG/JPEG/GIF.
                   </div>
                 </div>
               </div>
@@ -65,22 +62,22 @@
         </b-card>
 
         <b-card class="card-about-person">
-          <div class="form-title text-center">About the author</div>
+          <div class="form-title text-center">Giới thiệu bản thân</div>
           <form class="mx-auto">
-            <FormValidator class="mt-3" label="URL of homepage, blog, etc.">
+            <FormValidator class="mt-3" label="URL trang web, blog, v.v.">
               <b-input
                 v-model="url"
                 type="text"
-                placeholder="（例）https://www.kobunsha.com/"
+                placeholder="（Ví dụ）https://www.example.com/"
                 class="form-control"
               ></b-input>
             </FormValidator>
 
-            <FormValidator class="mt-3" label="Text">
+            <FormValidator class="mt-3" label="Mô tả">
               <textarea
                 v-model="about"
                 type="text"
-                placeholder="Please enter your self-introduction etc."
+                placeholder="Vui lòng nhập giới thiệu bản thân."
                 class="form-control"
               />
             </FormValidator>
@@ -92,7 +89,7 @@
             class="btn-changeinfo-profile"
             block
             @click="update"
-            >Update</b-button
+            >Cập nhật</b-button
           >
         </b-card>
       </div>
@@ -182,7 +179,7 @@ export default {
             role: this.role,
           };
           this.updateAccount(params);
-          this.$toast.success("updated successfully");
+          this.$toast.success("Cập nhật thành công");
         });
       } catch (error) {
         this.$toast.error(error);

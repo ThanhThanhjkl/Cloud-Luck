@@ -23,7 +23,7 @@
           class="btn-delete-comment mt-2"
           @click="deleteComment(comment.id)"
         >
-          Delete
+          Xóa
         </button>
       </div>
     </div>
@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
-const authMapper = createNamespacedHelpers("auth");
 export default {
   props: {
     comment: {
@@ -47,23 +45,21 @@ export default {
       type: String,
       default: "",
     },
+    accountInfo: {
+      type: Object,
+      default: null,
+    },
   },
 
-  data() {
-    return {
-      name: null,
-      avatar: null,
-    };
-  },
-
-  async mounted() {
-    const res = await this.getAccount(this.comment.accountId);
-    this.name = res.name;
-    this.avatar = "data:image/jpeg;base64," + res.avatar;
-  },
-
-  methods: {
-    ...authMapper.mapActions(["getAccount"]),
+  computed: {
+    name() {
+      return this.accountInfo ? this.accountInfo.name : null;
+    },
+    avatar() {
+      return this.accountInfo && this.accountInfo.avatar
+        ? "data:image/jpeg;base64," + this.accountInfo.avatar
+        : null;
+    },
   },
 };
 </script>

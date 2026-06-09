@@ -6,10 +6,10 @@ function formatNumber(number) {
 }
 
 function japanMoney(number) {
-  if (!number) return "￥0";
-  const formatter = new Intl.NumberFormat("ja-JP", {
+  if (!number) return "0 ₫";
+  const formatter = new Intl.NumberFormat("vi-VN", {
     style: "currency",
-    currency: "JPY",
+    currency: "VND",
   });
 
   return formatter.format(number);

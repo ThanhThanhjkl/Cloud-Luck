@@ -23,7 +23,22 @@
       </section>
 
       <section class="section-recommend">
-        <div v-if="products.length > 0" class="top-list-card">
+        <!-- Skeleton loading -->
+        <div v-if="loading" class="top-list-card">
+          <div class="top-1">
+            <SkeletonBox width="100%" height="320px" radius="8px" />
+          </div>
+          <div class="top-5">
+            <div v-for="i in 4" :key="i" class="skeleton-card-item">
+              <SkeletonBox width="100%" height="180px" radius="8px" />
+              <SkeletonBox width="70%" height="16px" class="mt-2" />
+              <SkeletonBox width="40%" height="14px" class="mt-1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div v-else-if="products.length > 0" class="top-list-card">
           <div class="top-1">
             <TopCard
               v-for="(item, index) in products.slice(0, 1)"
@@ -61,7 +76,7 @@
 
       <div class="view-all">
         <b-button variant="primary" @click="seeAllProjects"
-          >See all projects</b-button
+          >Xem tất cả dự án</b-button
         >
       </div>
     </b-container>
@@ -71,12 +86,14 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 import TopCard from "@/components/common/TopCard.vue";
+import SkeletonBox from "@/components/common/SkeletonBox.vue";
 
 const { mapState, mapActions } = createNamespacedHelpers("home");
 const authMapper = createNamespacedHelpers("auth");
 export default {
   components: {
     TopCard,
+    SkeletonBox,
   },
 
   data() {
@@ -89,6 +106,7 @@ export default {
       ],
       sortCampaign: 1,
       showMore: false,
+      loading: true,
     };
   },
 
@@ -109,8 +127,10 @@ export default {
     },
   },
 
-  mounted() {
-    this.getProducts({ keyword: null });
+  async mounted() {
+    this.loading = true;
+    await this.getProducts({ keyword: null });
+    this.loading = false;
   },
 
   methods: {
@@ -124,5 +144,14 @@ export default {
 <style lang="scss" scoped>
 .section-header {
   padding-top: 20px;
+}
+.skeleton-card-item {
+  padding: 10px;
+}
+.mt-2 {
+  margin-top: 8px;
+}
+.mt-1 {
+  margin-top: 4px;
 }
 </style>
