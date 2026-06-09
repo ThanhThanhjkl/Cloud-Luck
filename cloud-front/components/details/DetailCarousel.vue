@@ -1,7 +1,19 @@
 <template>
   <b-card class="detail-carousel">
     <div>
-      <b-carousel controls indicators>
+      <!-- Chỉ có 1 ảnh: hiển thị ảnh đơn, không carousel -->
+      <div v-if="validImages.length === 0">
+        <img
+          class="d-block img-fluid w-100"
+          width="1024"
+          height="480"
+          :src="mainImage"
+          alt="image slot"
+        />
+      </div>
+
+      <!-- Nhiều ảnh: hiển thị carousel -->
+      <b-carousel v-else controls indicators>
         <b-carousel-slide>
           <template #img>
             <img
@@ -14,7 +26,7 @@
           </template>
         </b-carousel-slide>
         <b-carousel-slide
-          v-for="(item, imageIndex) in images"
+          v-for="(item, imageIndex) in validImages"
           :key="imageIndex"
         >
           <template #img>
@@ -22,7 +34,7 @@
               class="d-block img-fluid w-100"
               width="1024"
               height="480"
-              :src="'data:image/jpeg;base64,' + item"
+              :src="formatImage(item)"
               alt="image slot"
             />
           </template>
@@ -56,11 +68,29 @@ export default {
     return {};
   },
 
-  computed: {},
+  computed: {
+    validImages() {
+      if (!this.images) return [];
+      return this.images.filter((item) => {
+        if (!item) return false;
+        // Loại bỏ item chỉ là prefix rỗng như "data:image/png;base64" không có data
+        const stripped = item.replace(/^data:image\/[a-z]+;base64,?/, "");
+        return stripped.length > 0;
+      });
+    },
+  },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    formatImage(item) {
+      if (!item) return "";
+      if (item.startsWith("data:image")) {
+        return item;
+      }
+      return "data:image/jpeg;base64," + item;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
